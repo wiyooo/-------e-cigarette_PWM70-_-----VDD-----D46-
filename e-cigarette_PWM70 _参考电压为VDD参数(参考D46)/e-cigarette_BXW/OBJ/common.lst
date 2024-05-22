@@ -1,0 +1,518 @@
+
+                    Nyquest Technology Co., Ltd.
+
+NYASM 2.37
+
+    ADDR  OPCODE/VALUE              LINE   TAG  SOURCE                   STATEMENT    
+
+                                    1-    1     ;--------------------------------------------------------
+                                    1-    2     ; File Created by SDCC : free open source ISO C Compiler 
+                                    1-    3     ; Version 4.2.2 #0 (MSVC)
+                                    1-    4     ;--------------------------------------------------------
+                                    1-    5     ; NY8A port
+                                    1-    6     ;--------------------------------------------------------
+                                    1-    7     	.file	"common.c"
+                                    1-    8     	list	p=NY8B062F,c=on
+                                    1-    9     	#include "ny8b062f.inc"
+                                    2-    2     #include "common.inc"
+                                    3-    1     ;; header file for 8 bit series assembly -*- mode:asm; coding:utf-8; -*-
+                                    3-    2     ;; author    Ting
+                                    3-    3     ;; date      2020-12-24
+                                    3-    4     ;;
+                                    3-    5     ;; # constant definition
+                                    3-    6     ;;
+                                    3-    7     ;; ## instruction result store destination
+                                    3-    8     ;;  - W: the result is stored in the ACC.
+                                    3-    9     ;;  - F: the result is stored back in register.
+                                    3-   10     ;; ## flag name in STATUS register
+                                    3-   11     ;;  - C, DC, Z
+                                    3-   12     ;;
+                                    3-   13     ;; # macro define
+                                    3-   14     ;;
+                                    3-   15     ;; ## RETURN, used by C compiler, end of function
+                                    3-   16     ;; ## PAGESEL, empty macro, maybe used by C compiler (bug?)
+                                    3-   17     ;; ## BANKSEL, replace by .banksel pseudo command, empty if disable bank.
+                                    3-   18     ;; ## MGOTO, replace by LGOTO (ic<=2K word) or FGOTO (ic>2K word)
+                                    3-   19     ;; ## MCALL, same as above
+                                    3-   20     ;;
+                                    3-   21     W       EQU 0
+                                    3-   21     ;W = 0
+                                    3-   22     F       EQU 1
+                                    3-   22     ;F = 1
+                                    3-   23     C		EQU	0
+                                    3-   23     ;C = 0
+                                    3-   24     DC		EQU	1
+                                    3-   24     ;DC = 1
+                                    3-   25     Z		EQU	2
+                                    3-   25     ;Z = 2
+                                    3-   28     ;; common register for all series
+                                    3-   29     INDF    EQU 0x00
+                                    3-   29     ;INDF = 0
+                                    3-   30     PCL     EQU 0x02
+                                    3-   30     ;PCL = 2
+                                    3-   31     STATUS  EQU 0x03
+                                    3-   31     ;STATUS = 3
+                                    3-   32     FSR     EQU 0x04
+                                    3-   32     ;FSR = 4
+                                    3-   33     PCHBUF  EQU 0x0A
+                                    3-   33     ;PCHBUF = 10
+                                    1-   11     ;--------------------------------------------------------
+                                    1-   12     ; external declarations
+                                    1-   13     ;--------------------------------------------------------
+                                    1-   14     	extern	_charge_check_by_IO
+                                    1-   15     	extern	_ledRun
+                                    1-   16     	extern	_Detect_OverCurrent_ByAD
+                                    1-   17     	extern	_BaseBatSetPWMValue
+                                    1-   18     	extern	_ADC_Convert_Pre
+                                    1-   19     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   20     	extern	_Ledbreathing
+                                    1-   21     	extern	_LedOff
+                                    1-   22     	extern	_SetLedColorNormallyOn
+                                    1-   23     	extern	_SetLedBreathingParameters
+                                    1-   24     	extern	_SetLedBreathingParameters2
+                                    1-   25     	extern	_SetLedFlashParameters
+                                    1-   26     	extern	_Set_ADVREFH_2V
+                                    1-   27     	extern	_Set_ADVREFH_5V
+                                    1-   28     	extern	_adc_get
+                                    1-   29     	extern	_F_wait_eoc
+                                    1-   30     	extern	_adc3_init
+                                    1-   31     	extern	_adc2_init
+                                    1-   32     	extern	_adc_init
+                                    1-   33     	extern	_sleep_handle
+                                    1-   34     	extern	_sleep_param_init
+                                    1-   35     	extern	_led_handle
+                                    1-   36     	extern	_led_param_init
+                                    1-   37     	extern	_battery_check
+                                    1-   38     	extern	_battery_param_init
+                                    1-   39     	extern	_SmokeFun
+                                    1-   40     	extern	_detect_param_init
+                                    1-   41     	extern	_msg_handle
+                                    1-   42     	extern	_MicScan
+                                    1-   43     	extern	_KeyScan
+                                    1-   44     	extern	_key_param_init
+                                    1-   45     	extern	_isr_param_init
+                                    1-   46     	extern	_gpio_init
+                                    1-   47     	extern	_sleep_init
+                                    1-   48     	extern	_system_init
+                                    1-   49     	extern	_multi_16b
+                                    1-   50     	extern	_T0MD
+                                    1-   51     	extern	_PCON1
+                                    1-   52     	extern	_CMPCR
+                                    1-   53     	extern	_BODCON
+                                    1-   54     	extern	_PS0CV
+                                    1-   55     	extern	_APHCON
+                                    1-   56     	extern	_IOSTB
+                                    1-   57     	extern	_IOSTA
+                                    1-   58     	extern	_PWM4DUTY
+                                    1-   59     	extern	_P4CR1
+                                    1-   60     	extern	_BZ3CR
+                                    1-   61     	extern	_PS3CV
+                                    1-   62     	extern	_PWM3DUTY
+                                    1-   63     	extern	_T3CR2
+                                    1-   64     	extern	_T3CR1
+                                    1-   65     	extern	_TMR3
+                                    1-   66     	extern	_OSCCR
+                                    1-   67     	extern	_BZ2CR
+                                    1-   68     	extern	_PS2CV
+                                    1-   69     	extern	_PWM2DUTY
+                                    1-   70     	extern	_T2CR2
+                                    1-   71     	extern	_T2CR1
+                                    1-   72     	extern	_TMR2
+                                    1-   73     	extern	_TBHD
+                                    1-   74     	extern	_TBHP
+                                    1-   75     	extern	_IRCR
+                                    1-   76     	extern	_BZ1CR
+                                    1-   77     	extern	_PS1CV
+                                    1-   78     	extern	_PWM1DUTY
+                                    1-   79     	extern	_T1CR2
+                                    1-   80     	extern	_T1CR1
+                                    1-   81     	extern	_TMR1
+                                    1-   82     	extern	_ADD
+                                    1-   83     	extern	_PCHBUF
+                                    1-   84     	extern	_FSR
+                                    1-   85     	extern	_STATUS
+                                    1-   86     	extern	_PCL
+                                    1-   87     	extern	_TMR0
+                                    1-   88     	extern	_INDF
+                                    1-   89     	extern	_temptimecount
+                                    1-   90     	extern	_sleep_delay_keep_time
+                                    1-   91     	extern	_running_keep_time
+                                    1-   92     	extern	_battery_low_cnt
+                                    1-   93     	extern	_usb_flag
+                                    1-   94     	extern	_HeatPlugInsert_flag
+                                    1-   95     	extern	_HeatPlugInsertTimeCount
+                                    1-   96     	extern	_HeatCount
+                                    1-   97     	extern	_SmokingKeepTime
+                                    1-   98     	extern	_HeatingKeepTime
+                                    1-   99     	extern	_KeyDowmTimeCount
+                                    1-  100     	extern	_VolTypeIndex
+                                    1-  101     	extern	_SmokeState
+                                    1-  102     	extern	_BatVolLevel
+                                    1-  103     	extern	_SaveHeaterIOStatus
+                                    1-  104     	extern	_MotorDutySet
+                                    1-  105     	extern	_NowMotorDuty
+                                    1-  106     	extern	_TargetMotorDuty
+                                    1-  107     	extern	_gAdcDataValue
+                                    1-  108     	extern	_OverCurrent_adc_value
+                                    1-  109     	extern	_OverCurrent_check_cnt
+                                    1-  110     	extern	_BuleLed_delay_keep_time
+                                    1-  111     	extern	_OverCurrentCount
+                                    1-  112     	extern	_OverCurrentDelayTime
+                                    1-  113     	extern	_led_delay_keep_time
+                                    1-  114     	extern	_led_flash_count
+                                    1-  115     	extern	_led_flash_flag
+                                    1-  116     	extern	_percent_nun
+                                    1-  117     	extern	_PwmCycleCount
+                                    1-  118     	extern	_sleepCnt
+                                    1-  119     	extern	_Led_Breathe_count
+                                    1-  120     	extern	_LedShowKeepTime
+                                    1-  121     	extern	_LedShowStep
+                                    1-  122     	extern	_GroupColourIndex
+                                    1-  123     	extern	_ledRunStarStep
+                                    1-  124     	extern	_ledRunStep
+                                    1-  125     	extern	_nowLedMode
+                                    1-  126     	extern	_msg
+                                    1-  127     	extern	_INTE2bits
+                                    1-  128     	extern	_TM3RHbits
+                                    1-  129     	extern	_RFCbits
+                                    1-  130     	extern	_ANAENbits
+                                    1-  131     	extern	_TMRHbits
+                                    1-  132     	extern	_INTEDGbits
+                                    1-  133     	extern	_ADJMDbits
+                                    1-  134     	extern	_PACONbits
+                                    1-  135     	extern	_AWUCONbits
+                                    1-  136     	extern	_ADCRbits
+                                    1-  137     	extern	_ADVREFHbits
+                                    1-  138     	extern	_ADRbits
+                                    1-  139     	extern	_ADMDbits
+                                    1-  140     	extern	_INTFbits
+                                    1-  141     	extern	_INTEbits
+                                    1-  142     	extern	_BPHCONbits
+                                    1-  143     	extern	_ABPLCONbits
+                                    1-  144     	extern	_BWUCONbits
+                                    1-  145     	extern	_PCONbits
+                                    1-  146     	extern	_PORTBbits
+                                    1-  147     	extern	_PORTAbits
+                                    1-  149     	extern PSAVE
+                                    1-  150     	extern SSAVE
+                                    1-  151     	extern WSAVE
+                                    1-  152     	extern STK12
+                                    1-  153     	extern STK11
+                                    1-  154     	extern STK10
+                                    1-  155     	extern STK09
+                                    1-  156     	extern STK08
+                                    1-  157     	extern STK07
+                                    1-  158     	extern STK06
+                                    1-  159     	extern STK05
+                                    1-  160     	extern STK04
+                                    1-  161     	extern STK03
+                                    1-  162     	extern STK02
+                                    1-  163     	extern STK01
+                                    1-  164     	extern STK00
+                                    1-  165     ;--------------------------------------------------------
+                                    1-  166     ; global declarations
+                                    1-  167     ;--------------------------------------------------------
+                                    1-  168     	extern	_INTE2
+                                    1-  169     	extern	_TM3RH
+                                    1-  170     	extern	_RFC
+                                    1-  171     	extern	_ANAEN
+                                    1-  172     	extern	_TMRH
+                                    1-  173     	extern	_INTEDG
+                                    1-  174     	extern	_ADJMD
+                                    1-  175     	extern	_PACON
+                                    1-  176     	extern	_AWUCON
+                                    1-  177     	extern	_ADCR
+                                    1-  178     	extern	_ADVREFH
+                                    1-  179     	extern	_ADR
+                                    1-  180     	extern	_ADMD
+                                    1-  181     	extern	_INTF
+                                    1-  182     	extern	_INTE
+                                    1-  183     	extern	_BPHCON
+                                    1-  184     	extern	_ABPLCON
+                                    1-  185     	extern	_BWUCON
+                                    1-  186     	extern	_PCON
+                                    1-  187     	extern	_PORTB
+                                    1-  188     	extern	_PORTA
+                                    1-  189     	extern	_CodeSwitchIndex
+                                    1-  190     	extern	_sys_flag_3
+                                    1-  191     	extern	_sys_flag_2
+                                    1-  192     	extern	_sys_flag_1
+                                    1-  193     	extern	_sys_flag_0
+                                    1-  194     	extern	_common_param_init
+                                    1-  195     	extern	_delay
+                                    1-  196     	extern	_Delay_N1ms_16bit
+                                    1-  198     ;--------------------------------------------------------
+                                    1-  199     ; global definitions
+                                    1-  200     ;--------------------------------------------------------
+                                    1-  201     .segment "uninit"
+     0000                           1-  202     _sys_flag_0:
+                                    1-  203     	.res 1
+                                    1-  206     .segment "uninit"
+     0000                           1-  207     _sys_flag_1:
+                                    1-  208     	.res 1
+                                    1-  211     .segment "uninit"
+     0000                           1-  212     _sys_flag_2:
+                                    1-  213     	.res 1
+                                    1-  216     .segment "uninit"
+     0000                           1-  217     _sys_flag_3:
+                                    1-  218     	.res 1
+                                    1-  221     .segment "uninit"
+     0000                           1-  222     _CodeSwitchIndex:
+                                    1-  223     	.res 1
+                                    1-  226     ;--------------------------------------------------------
+                                    1-  227     ; absolute symbol definitions
+                                    1-  228     ;--------------------------------------------------------
+                                    1-  229     ;--------------------------------------------------------
+                                    1-  230     ; compiler-defined variables
+                                    1-  231     ;--------------------------------------------------------
+                                    1-  232     .segment "uninit"
+     0000                           1-  233     r0x100A:
+                                    1-  234     	.res	1
+                                    1-  235     .segment "uninit"
+     0000                           1-  236     r0x1009:
+                                    1-  237     	.res	1
+                                    1-  238     .segment "uninit"
+     0000                           1-  239     r0x100B:
+                                    1-  240     	.res	1
+                                    1-  241     .segment "uninit"
+     0000                           1-  242     r0x100C:
+                                    1-  243     	.res	1
+                                    1-  244     .segment "uninit"
+     0000                           1-  245     r0x1007:
+                                    1-  246     	.res	1
+                                    1-  247     .segment "uninit"
+     0000                           1-  248     r0x1006:
+                                    1-  249     	.res	1
+                                    1-  250     .segment "uninit"
+     0000                           1-  251     r0x1008:
+                                    1-  252     	.res	1
+                                    1-  253     ;--------------------------------------------------------
+                                    1-  254     ; initialized data
+                                    1-  255     ;--------------------------------------------------------
+                                    1-  256     ;--------------------------------------------------------
+                                    1-  257     ; initialized absolute data
+                                    1-  258     ;--------------------------------------------------------
+                                    1-  259     ;--------------------------------------------------------
+                                    1-  260     ; overlayable items in internal ram 
+                                    1-  261     ;--------------------------------------------------------
+                                    1-  262     ;	udata_ovr
+                                    1-  263     ;--------------------------------------------------------
+                                    1-  264     ; code
+                                    1-  265     ;--------------------------------------------------------
+                                    1-  266     ; code_common	code
+                                    1-  267     ;***
+                                    1-  268     ;  pBlock Stats: dbName = C
+                                    1-  269     ;***
+                                    1-  270     ;has an exit
+                                    1-  271     ;4 compiler assigned registers:
+                                    1-  272     ;   r0x1006
+                                    1-  273     ;   STK00
+                                    1-  274     ;   r0x1007
+                                    1-  275     ;   r0x1008
+                                    1-  276     ;; Starting pCode block
+                                    1-  277     .segment "code"; module=common, function=_Delay_N1ms_16bit
+                                    1-  279     ;local variable name mapping:
+     0000                           1-  281     _Delay_N1ms_16bit:
+                                    1-  282     ; 2 exit points
+                                    1-  283     	.line	53, "common.c"; 	void Delay_N1ms_16bit(u16 N)		// 经过示波器矫正
+                                    1-  284     	BANKSEL	r0x1006
+     0000 rrrr                      3-  109 m1      .banksel ram_address
+     0001 00rr                      1-  285     	MOVAR	r0x1006
+     0002 01rr                      1-  286     	MOVR	STK00,W
+                                    1-  287     	BANKSEL	r0x1007
+     0003 rrrr                      3-  109 m1      .banksel ram_address
+     0004 00rr                      1-  288     	MOVAR	r0x1007
+     0005                           1-  289     _00124_DS_:
+                                    1-  290     	.line	56, "common.c"; 	for(;N !=0; N--)
+                                    1-  291     	BANKSEL	r0x1006
+     0005 rrrr                      3-  109 m1      .banksel ram_address
+     0006 01rr                      1-  292     	MOVR	r0x1006,W
+                                    1-  293     	BANKSEL	r0x1007
+     0007 rrrr                      3-  109 m1      .banksel ram_address
+     0008 11rr                      1-  294     	IORAR	r0x1007,W
+     0009 0D03                      1-  295     	BTRSC	STATUS,2
+                                    1-  296     	MGOTO	_00126_DS_
+     000A 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  297     	.line	72, "common.c"; 	for(i=0;i <255 ; i++)
+     000B 21FF                      1-  298     	MOVIA	0xff
+                                    1-  299     	BANKSEL	r0x1008
+     000C rrrr                      3-  109 m1      .banksel ram_address
+     000D 00rr                      1-  300     	MOVAR	r0x1008
+     000E                           1-  301     _00122_DS_:
+                                    1-  302     	.line	74, "common.c"; 	NOP();
+     000E 0000                      1-  303     	nop
+                                    1-  304     	.line	75, "common.c"; 	NOP();
+     000F 0000                      1-  305     	nop
+                                    1-  306     	.line	76, "common.c"; 	NOP();
+     0010 0000                      1-  307     	nop
+                                    1-  308     	.line	77, "common.c"; 	NOP();
+     0011 0000                      1-  309     	nop
+                                    1-  310     	.line	78, "common.c"; 	NOP();
+     0012 0000                      1-  311     	nop
+                                    1-  312     	.line	79, "common.c"; 	NOP();
+     0013 0000                      1-  313     	nop
+                                    1-  314     	.line	80, "common.c"; 	NOP();
+     0014 0000                      1-  315     	nop
+                                    1-  316     	.line	81, "common.c"; 	NOP();
+     0015 0000                      1-  317     	nop
+                                    1-  318     	.line	82, "common.c"; 	NOP();
+     0016 0000                      1-  319     	nop
+                                    1-  320     	BANKSEL	r0x1008
+     0017 rrrr                      3-  109 m1      .banksel ram_address
+     0018 17rr                      1-  321     	DECRSZ	r0x1008,F
+                                    1-  322     	.line	72, "common.c"; 	for(i=0;i <255 ; i++)
+                                    1-  323     	MGOTO	_00122_DS_
+     0019 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  324     	.line	56, "common.c"; 	for(;N !=0; N--)
+     001A 21FF                      1-  325     	MOVIA	0xff
+                                    1-  326     	BANKSEL	r0x1007
+     001B rrrr                      3-  109 m1      .banksel ram_address
+     001C 03rr                      1-  327     	ADDAR	r0x1007,F
+     001D 21FF                      1-  328     	MOVIA	0xff
+                                    1-  329     	BANKSEL	r0x1006
+     001E rrrr                      3-  109 m1      .banksel ram_address
+     001F 34rr                      1-  330     	ADCAR	r0x1006,F
+                                    1-  331     	.line	56, "common.c"; 	{
+                                    1-  332     	MGOTO	_00124_DS_
+     0020 3rrr                      3-   62 m1      LGOTO rom_address
+     0021                           1-  333     _00126_DS_:
+                                    1-  334     	.line	86, "common.c"; 	}
+                                    1-  335     	RETURN	
+     0021 0010                      3-   39 m1      ret
+                                    1-  336     ; exit point of _Delay_N1ms_16bit
+                                    1-  338     ;***
+                                    1-  339     ;  pBlock Stats: dbName = C
+                                    1-  340     ;***
+                                    1-  341     ;has an exit
+                                    1-  342     ;5 compiler assigned registers:
+                                    1-  343     ;   r0x1009
+                                    1-  344     ;   STK00
+                                    1-  345     ;   r0x100A
+                                    1-  346     ;   r0x100B
+                                    1-  347     ;   r0x100C
+                                    1-  348     ;; Starting pCode block
+                                    1-  349     .segment "code"; module=common, function=_delay
+                                    1-  351     ;local variable name mapping:
+     0000                           1-  354     _delay:
+                                    1-  355     ; 2 exit points
+                                    1-  356     	.line	46, "common.c"; 	void delay(u16 count)
+                                    1-  357     	BANKSEL	r0x1009
+     0000 rrrr                      3-  109 m1      .banksel ram_address
+     0001 00rr                      1-  358     	MOVAR	r0x1009
+     0002 01rr                      1-  359     	MOVR	STK00,W
+                                    1-  360     	BANKSEL	r0x100A
+     0003 rrrr                      3-  109 m1      .banksel ram_address
+     0004 00rr                      1-  361     	MOVAR	r0x100A
+                                    1-  362     	.line	49, "common.c"; 	for(i=1;i<=count;i++)
+     0005 2101                      1-  363     	MOVIA	0x01
+                                    1-  364     	BANKSEL	r0x100B
+     0006 rrrr                      3-  109 m1      .banksel ram_address
+     0007 00rr                      1-  365     	MOVAR	r0x100B
+                                    1-  366     	BANKSEL	r0x100C
+     0008 rrrr                      3-  109 m1      .banksel ram_address
+     0009 02rr                      1-  367     	CLRR	r0x100C
+     000A                           1-  368     _00111_DS_:
+                                    1-  369     	BANKSEL	r0x100B
+     000A rrrr                      3-  109 m1      .banksel ram_address
+     000B 01rr                      1-  370     	MOVR	r0x100B,W
+                                    1-  371     	BANKSEL	r0x100A
+     000C rrrr                      3-  109 m1      .banksel ram_address
+     000D 04rr                      1-  372     	SUBAR	r0x100A,W
+                                    1-  373     	BANKSEL	r0x100C
+     000E rrrr                      3-  109 m1      .banksel ram_address
+     000F 01rr                      1-  374     	MOVR	r0x100C,W
+                                    1-  375     	BANKSEL	r0x1009
+     0010 rrrr                      3-  109 m1      .banksel ram_address
+     0011 35rr                      1-  376     	SBCAR	r0x1009,W
+     0012 0803                      1-  377     	BTRSS	STATUS,0
+                                    1-  378     	MGOTO	_00113_DS_
+     0013 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  379     	BANKSEL	r0x100B
+     0014 rrrr                      3-  109 m1      .banksel ram_address
+     0015 05rr                      1-  380     	INCR	r0x100B,F
+     0016 0903                      1-  381     	BTRSS	STATUS,2
+                                    1-  382     	MGOTO	_00001_DS_
+     0017 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  383     	BANKSEL	r0x100C
+     0018 rrrr                      3-  109 m1      .banksel ram_address
+     0019 05rr                      1-  384     	INCR	r0x100C,F
+     001A                           1-  385     _00001_DS_:
+                                    1-  386     	MGOTO	_00111_DS_
+     001A 3rrr                      3-   62 m1      LGOTO rom_address
+     001B                           1-  387     _00113_DS_:
+                                    1-  388     	.line	51, "common.c"; 	}
+                                    1-  389     	RETURN	
+     001B 0010                      3-   39 m1      ret
+                                    1-  390     ; exit point of _delay
+                                    1-  392     ;***
+                                    1-  393     ;  pBlock Stats: dbName = C
+                                    1-  394     ;***
+                                    1-  395     ;has an exit
+                                    1-  396     ;; Starting pCode block
+                                    1-  397     .segment "code"; module=common, function=_common_param_init
+     0000                           1-  399     _common_param_init:
+                                    1-  400     ; 2 exit points
+                                    1-  401     	.line	31, "common.c"; 	sys_flag_0 = 0;
+                                    1-  402     	BANKSEL	_sys_flag_0
+     0000 rrrr                      3-  109 m1      .banksel ram_address
+     0001 02rr                      1-  403     	CLRR	_sys_flag_0
+                                    1-  404     	.line	32, "common.c"; 	sys_flag_1 = 0;
+                                    1-  405     	BANKSEL	_sys_flag_1
+     0002 rrrr                      3-  109 m1      .banksel ram_address
+     0003 02rr                      1-  406     	CLRR	_sys_flag_1
+                                    1-  407     	.line	33, "common.c"; 	sys_flag_2 = 0;
+                                    1-  408     	BANKSEL	_sys_flag_2
+     0004 rrrr                      3-  109 m1      .banksel ram_address
+     0005 02rr                      1-  409     	CLRR	_sys_flag_2
+                                    1-  410     	.line	34, "common.c"; 	sys_flag_3 = 0;
+                                    1-  411     	BANKSEL	_sys_flag_3
+     0006 rrrr                      3-  109 m1      .banksel ram_address
+     0007 02rr                      1-  412     	CLRR	_sys_flag_3
+                                    1-  413     	.line	35, "common.c"; 	msg = 0;
+                                    1-  414     	BANKSEL	_msg
+     0008 rrrr                      3-  109 m1      .banksel ram_address
+     0009 02rr                      1-  415     	CLRR	_msg
+                                    1-  416     	.line	36, "common.c"; 	b_isPowerOn = 1;
+                                    1-  417     	BANKSEL	_sys_flag_0
+     000A rrrr                      3-  109 m1      .banksel ram_address
+     000B 18rr                      1-  418     	BSR	_sys_flag_0,0
+                                    1-  419     	.line	39, "common.c"; 	CodeSwitchIndex = 0;
+                                    1-  420     	BANKSEL	_CodeSwitchIndex
+     000C rrrr                      3-  109 m1      .banksel ram_address
+     000D 02rr                      1-  421     	CLRR	_CodeSwitchIndex
+                                    1-  422     	.line	40, "common.c"; 	}
+                                    1-  423     	RETURN	
+     000E 0010                      3-   39 m1      ret
+                                    1-  424     ; exit point of _common_param_init
+                                    1-  427     ;	code size estimation:
+                                    1-  428     ;	   43+   25 =    68 instructions (  186 byte)
+                                    1-  430     	end
+
+SYMBOL TABLE            TYPE     VALUE
+__pin_count__           Constant 0000000E
+__processor__           Constant 00810625
+C                       Constant 00000000
+DC                      Constant 00000001
+ENABLE_RAM_BANK         Constant 00000001
+F                       Constant 00000001
+FSR                     Constant 00000004
+INDF                    Constant 00000000
+PCHBUF                  Constant 0000000A
+PCL                     Constant 00000002
+STATUS                  Constant 00000003
+USEFGOTO                Constant 00000000
+W                       Constant 00000000
+Z                       Constant 00000002
+
+
+SOURCE FILE TABLE
+001 OBJ/common.s
+002 ny8b062f.inc
+003 common.inc
+004 common.c
+
+PROCESSOR    = NY8B062F (8 bits)
+PROGRAM ROM  = 0x00000000 - 0x000007FF
+DATA ROM     = 0x00000000 - 0x000007FF
+RESERVED MEM = 0x00000800 - 0x00000810
+SRAM / SFR   = 0x00000000 - 0x00000000

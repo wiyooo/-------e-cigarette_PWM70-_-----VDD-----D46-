@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup Condition="">
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>e-cigarette_BXW</AssemblyName>
+    <Bank0Only>False</Bank0Only>
+    <BankselOptLevel>2</BankselOptLevel>
+    <BuildCCompilerVersion>NYC_NY8 1.60 [Build: 230825.00]</BuildCCompilerVersion>
+    <BuildNYASMVersion>NYASM 2.41 [Build: 231121.00]</BuildNYASMVersion>
+    <BuildNYIDEVersion>NYIDE 5.20 [Build: 231130.00]</BuildNYIDEVersion>
+    <CCompilerInstallDir>C:\Nyquest\NYC_NY8</CCompilerInstallDir>
+    <ChipId>NY8B062F</ChipId>
+    <ClientName>STW</ClientName>
+    <Configuration>Debug</Configuration>
+    <GenAsmListFile>True</GenAsmListFile>
+    <GenListFile>True</GenListFile>
+    <GenMapFile>True</GenMapFile>
+    <InitializeBss>False</InitializeBss>
+    <IsBankselOpt>True</IsBankselOpt>
+    <NYASMInstallDir>C:\Nyquest\NYASM\</NYASMInstallDir>
+    <NYIDEInstallDir>C:\Nyquest\NYIDE\</NYIDEInstallDir>
+    <OutputType>bin</OutputType>
+    <Platform>CNy8</Platform>
+    <ProjectGuid>{683D93AD-692E-4C37-91F7-57EA01C6CD83}</ProjectGuid>
+    <ProjectOptionChanged>False</ProjectOptionChanged>
+    <ReservedInterruptRam>2</ReservedInterruptRam>
+    <ReservedRam>8</ReservedRam>
+    <RootNamespace>ADC_Interrupt</RootNamespace>
+    <TrimSetting>+ 0%</TrimSetting>
+    <WarningMsgCode0>112</WarningMsgCode0>
+    <WarningMsgCode1>84</WarningMsgCode1>
+    <WarningMsgCode10>94</WarningMsgCode10>
+    <WarningMsgCode11>126</WarningMsgCode11>
+    <WarningMsgCode12>126</WarningMsgCode12>
+    <WarningMsgCode13>126</WarningMsgCode13>
+    <WarningMsgCode14>126</WarningMsgCode14>
+    <WarningMsgCode2>84</WarningMsgCode2>
+    <WarningMsgCode3>84</WarningMsgCode3>
+    <WarningMsgCode4>126</WarningMsgCode4>
+    <WarningMsgCode5>94</WarningMsgCode5>
+    <WarningMsgCode6>126</WarningMsgCode6>
+    <WarningMsgCode7>126</WarningMsgCode7>
+    <WarningMsgCode8>126</WarningMsgCode8>
+    <WarningMsgCode9>126</WarningMsgCode9>
+    <WarningMsgCount>0</WarningMsgCount>
+    <WarningMsgFileName0>D:\2023-12-21\电子烟项目(TXZG-WD-LS010)\e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_BXW\main.c</WarningMsgFileName0>
+    <WarningMsgFileName1>D:\2023-12-21\电子烟项目(TXZG-WD-LS010)\e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_BXW\main.c</WarningMsgFileName1>
+    <WarningMsgFileName10>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName10>
+    <WarningMsgFileName11>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName11>
+    <WarningMsgFileName12>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName12>
+    <WarningMsgFileName13>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName13>
+    <WarningMsgFileName14>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName14>
+    <WarningMsgFileName2>D:\2023-04-03\电子烟项目(TXZG-YJW-D118B)\e-cigarette\e-cigarette_BXW\main.c</WarningMsgFileName2>
+    <WarningMsgFileName3>D:\2023-04-03\电子烟项目(TXZG-YJW-D118B)\e-cigarette\e-cigarette_BXW\main.c</WarningMsgFileName3>
+    <WarningMsgFileName4>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName4>
+    <WarningMsgFileName5>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName5>
+    <WarningMsgFileName6>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName6>
+    <WarningMsgFileName7>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName7>
+    <WarningMsgFileName8>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName8>
+    <WarningMsgFileName9>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName9>
+    <WarningMsgLineNumber0>138</WarningMsgLineNumber0>
+    <WarningMsgLineNumber1>138</WarningMsgLineNumber1>
+    <WarningMsgLineNumber10>249</WarningMsgLineNumber10>
+    <WarningMsgLineNumber11>251</WarningMsgLineNumber11>
+    <WarningMsgLineNumber12>252</WarningMsgLineNumber12>
+    <WarningMsgLineNumber13>253</WarningMsgLineNumber13>
+    <WarningMsgLineNumber14>254</WarningMsgLineNumber14>
+    <WarningMsgLineNumber2>339</WarningMsgLineNumber2>
+    <WarningMsgLineNumber3>367</WarningMsgLineNumber3>
+    <WarningMsgLineNumber4>69</WarningMsgLineNumber4>
+    <WarningMsgLineNumber5>90</WarningMsgLineNumber5>
+    <WarningMsgLineNumber6>92</WarningMsgLineNumber6>
+    <WarningMsgLineNumber7>93</WarningMsgLineNumber7>
+    <WarningMsgLineNumber8>94</WarningMsgLineNumber8>
+    <WarningMsgLineNumber9>95</WarningMsgLineNumber9>
+    <WarningMsgMessage0>main.c:138: warning 112: function 'bat_lvd_check' implicit declaration</WarningMsgMessage0>
+    <WarningMsgMessage1>main.c:138: warning 84: 'auto' variable 'bat_lvd_check' may be used before initialization</WarningMsgMessage1>
+    <WarningMsgMessage10>isr.c:249: warning 94: comparison is always false due to limited range of data type</WarningMsgMessage10>
+    <WarningMsgMessage11>isr.c:251: warning 126: unreachable code</WarningMsgMessage11>
+    <WarningMsgMessage12>isr.c:252: warning 126: unreachable code</WarningMsgMessage12>
+    <WarningMsgMessage13>isr.c:253: warning 126: unreachable code</WarningMsgMessage13>
+    <WarningMsgMessage14>isr.c:254: warning 126: unreachable code</WarningMsgMessage14>
+    <WarningMsgMessage2>main.c:339: warning 84: 'auto' variable 'adc4_init' may be used before initialization</WarningMsgMessage2>
+    <WarningMsgMessage3>main.c:367: warning 84: 'auto' variable 'adc4_init' may be used before initialization</WarningMsgMessage3>
+    <WarningMsgMessage4>isr.c:69: warning 126: unreachable code</WarningMsgMessage4>
+    <WarningMsgMessage5>isr.c:90: warning 94: comparison is always false due to limited range of data type</WarningMsgMessage5>
+    <WarningMsgMessage6>isr.c:92: warning 126: unreachable code</WarningMsgMessage6>
+    <WarningMsgMessage7>isr.c:93: warning 126: unreachable code</WarningMsgMessage7>
+    <WarningMsgMessage8>isr.c:94: warning 126: unreachable code</WarningMsgMessage8>
+    <WarningMsgMessage9>isr.c:95: warning 126: unreachable code</WarningMsgMessage9>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="detect.c" EntryPoint="false" MetaData="" />
+    <None Include="e-cigarette_BXW.cb" EntryPoint="false" MetaData="" />
+    <Compile Include="init.c" EntryPoint="false" MetaData="" />
+    <Compile Include="isr.c" EntryPoint="false" MetaData="" />
+    <Compile Include="key.c" EntryPoint="false" MetaData="" />
+    <Compile Include="led.c" EntryPoint="false" MetaData="" />
+    <Compile Include="main.c" EntryPoint="false" MetaData="" />
+    <Compile Include="sleep.c" EntryPoint="false" MetaData="" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Client: STW" EntryPoint="false" MetaData="" />
+    <Reference Include="Config Block: e-cigarette_BXW.cb" EntryPoint="false" MetaData="" />
+    <Reference Include="IC Body: NY8B062F" EntryPoint="false" MetaData="" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="..\..\..\..\..\..\Nyquest\NY8_Example_Code\include\NY8 C\NY8_constant.h" EntryPoint="false" MetaData="Dependency Files\NY8_constant.h" />
+    <ApplicationDefinition Include="..\..\..\..\..\..\Nyquest\NY8_Example_Code\include\NY8 C\ny8b062f_constant.h" EntryPoint="false" MetaData="Dependency Files\ny8b062f_constant.h" />
+    <ApplicationDefinition Include="..\..\..\..\..\..\Nyquest\NYC_NY8\include\ny8.h" EntryPoint="false" MetaData="Dependency Files\ny8.h" />
+    <ApplicationDefinition Include="..\..\..\..\..\..\Nyquest\NYC_NY8\include\ny8b062f.h" EntryPoint="false" MetaData="Dependency Files\ny8b062f.h" />
+    <ApplicationDefinition Include="..\..\..\..\..\..\Nyquest\NYC_NY8\include\ny8common.h" EntryPoint="false" MetaData="Dependency Files\ny8common.h" />
+    <ApplicationDefinition Include="common.h" EntryPoint="false" MetaData="Dependency Files\common.h" />
+    <Folder Include="Dependency Files" EntryPoint="false" MetaData="" />
+  </ItemGroup>
+  <Properties>
+    <Array name="ActionFiles" />
+    <Array name="bookmarks" />
+    <Array name="DisassemblyPadColumnWidthInfo">
+      <Element value="AddrWidth|60" />
+      <Element value="CodeWidth|140" />
+      <Element value="ArrowWidth|20" />
+    </Array>
+    <Array name="EEPROMOverwriteData" />
+    <Array name="ExternalResource" />
+    <Array name="files">
+      <Element value="main.c|False" />
+      <Element value="detect.c|True" />
+      <Element value="common.h|False" />
+      <Element value="isr.c|False" />
+      <Element value="sleep.c|False" />
+      <Element value="led.c|False" />
+      <Element value="key.c|False" />
+      <Element value="init.c|False" />
+      <Element value="C:/Nyquest/NY8_Example_Code/include/NY8 C/ny8b062f_constant.h|False" />
+    </Array>
+    <Array name="InstrumentFiles" />
+    <Array name="MelodyDatabaseFiles" />
+    <Array name="MusicFiles" />
+    <Array name="RegisterPadExpandInfo">
+      <Element value="0|True" />
+      <Element value="100|False" />
+      <Element value="101|False" />
+      <Element value="102|False" />
+      <Element value="103|False" />
+      <Element value="104|False" />
+      <Element value="105|True" />
+      <Element value="106|True" />
+      <Element value="107|False" />
+      <Element value="108|False" />
+      <Element value="109|False" />
+      <Element value="110|True" />
+      <Element value="111|True" />
+      <Element value="112|True" />
+      <Element value="113|False" />
+      <Element value="114|False" />
+      <Element value="115|False" />
+      <Element value="116|False" />
+      <Element value="117|False" />
+      <Element value="118|False" />
+      <Element value="119|False" />
+      <Element value="120|False" />
+      <Element value="121|False" />
+      <Element value="122|False" />
+      <Element value="123|False" />
+      <Element value="124|False" />
+      <Element value="125|False" />
+      <Element value="126|False" />
+      <Element value="127|False" />
+      <Element value="1|True" />
+      <Element value="200|True" />
+      <Element value="201|False" />
+      <Element value="202|True" />
+      <Element value="203|False" />
+      <Element value="204|False" />
+      <Element value="205|False" />
+      <Element value="206|False" />
+      <Element value="2|True" />
+      <Element value="300|False" />
+      <Element value="301|False" />
+      <Element value="302|False" />
+      <Element value="303|False" />
+      <Element value="304|False" />
+      <Element value="305|False" />
+      <Element value="306|False" />
+      <Element value="307|False" />
+      <Element value="308|False" />
+      <Element value="309|False" />
+      <Element value="310|False" />
+      <Element value="311|False" />
+      <Element value="312|False" />
+      <Element value="313|False" />
+      <Element value="314|False" />
+      <Element value="315|False" />
+      <Element value="316|False" />
+      <Element value="317|False" />
+      <Element value="318|False" />
+      <Element value="319|False" />
+      <Element value="320|False" />
+      <Element value="321|False" />
+      <Element value="322|False" />
+      <Element value="323|False" />
+    </Array>
+    <Array name="RegisterWindowExpandInfo">
+      <Element value="R-Page|False" />
+      <Element value="INDF@R-Page|False" />
+      <Element value="TMR0@R-Page|False" />
+      <Element value="PCL@R-Page|False" />
+      <Element value="STATUS@R-Page|False" />
+      <Element value="FSR@R-Page|False" />
+      <Element value="PORTA@R-Page|False" />
+      <Element value="PORTB@R-Page|False" />
+      <Element value="PCON@R-Page|False" />
+      <Element value="BWUCON@R-Page|False" />
+      <Element value="PCHBUF@R-Page|False" />
+      <Element value="ABPLCON@R-Page|False" />
+      <Element value="BPHCON@R-Page|False" />
+      <Element value="INTE@R-Page|False" />
+      <Element value="INTF@R-Page|False" />
+      <Element value="ADMD@R-Page|False" />
+      <Element value="ADR@R-Page|False" />
+      <Element value="ADD@R-Page|False" />
+      <Element value="ADVREFH@R-Page|False" />
+      <Element value="ADCR@R-Page|False" />
+      <Element value="AWUCON@R-Page|False" />
+      <Element value="PACON@R-Page|False" />
+      <Element value="ADJMD@R-Page|False" />
+      <Element value="INTEDG@R-Page|False" />
+      <Element value="TMRH@R-Page|False" />
+      <Element value="ANAEN@R-Page|False" />
+      <Element value="RFC@R-Page|False" />
+      <Element value="TM3RH@R-Page|False" />
+      <Element value="INTE2@R-Page|False" />
+      <Element value="F-Page|False" />
+      <Element value="IOSTA@F-Page|False" />
+      <Element value="IOSTB@F-Page|False" />
+      <Element value="APHCON@F-Page|False" />
+      <Element value="PS0CV@F-Page|False" />
+      <Element value="BODCON@F-Page|False" />
+      <Element value="CMPCR@F-Page|False" />
+      <Element value="PCON1@F-Page|False" />
+      <Element value="S-Page|False" />
+      <Element value="TMR1@S-Page|False" />
+      <Element value="T1CR1@S-Page|False" />
+      <Element value="T1CR2@S-Page|False" />
+      <Element value="PWM1DUTY@S-Page|False" />
+      <Element value="PS1CV@S-Page|False" />
+      <Element value="BZ1CR@S-Page|False" />
+      <Element value="IRCR@S-Page|False" />
+      <Element value="TBHP@S-Page|False" />
+      <Element value="TBHD@S-Page|False" />
+      <Element value="TMR2@S-Page|False" />
+      <Element value="T2CR1@S-Page|False" />
+      <Element value="T2CR2@S-Page|False" />
+      <Element value="PWM2DUTY@S-Page|False" />
+      <Element value="PS2CV@S-Page|False" />
+      <Element value="BZ2CR@S-Page|False" />
+      <Element value="OSCCR@S-Page|False" />
+      <Element value="TMR3@S-Page|False" />
+      <Element value="T3CR1@S-Page|False" />
+      <Element value="T3CR2@S-Page|False" />
+      <Element value="PWM3DUTY@S-Page|False" />
+      <Element value="PS3CV@S-Page|False" />
+      <Element value="BZ3CR@S-Page|False" />
+      <Element value="P4CR1@S-Page|False" />
+      <Element value="PWM4DUTY@S-Page|False" />
+    </Array>
+    <Array name="ResourceManager" />
+    <Array name="UpdateableResources" />
+    <Array name="VoiceFiles" />
+    <Array name="VRModule" />
+    <Array name="WatchItemInfo">
+      <Element value="sys_flag_2|0" />
+      <Element value="HeatCount|0" />
+      <Element value="sys_flag_3|0" />
+      <Element value="PwmCycleCount|0" />
+      <Element value="SmokeState|0" />
+      <Element value="percent_nun|0" />
+    </Array>
+    <Array name="WatchPadColumnWidthInfo">
+      <Element value="NameWidth|268" />
+      <Element value="AddrWidth|87" />
+      <Element value="ValWidth|161" />
+      <Element value="PageWidth|55" />
+    </Array>
+  </Properties>
+</Project>

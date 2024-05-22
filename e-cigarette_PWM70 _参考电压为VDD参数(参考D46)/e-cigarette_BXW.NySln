@@ -1,0 +1,17 @@
+﻿
+Nyquest IDE Solution File, Format Version 1.00
+# NYIDE 5.20.0.3526
+Project("{608D5F73-6C2E-489F-8ED6-C0FBCCEB586F}") = "e-cigarette_BXW", "e-cigarette_BXW\e-cigarette_BXW.naprj", "{3019BEB9-8650-46DD-BD66-AFBC7C919EAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any = Debug|Any
+		Release|Any = Release|Any
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3019BEB9-8650-46DD-BD66-AFBC7C919EAF}.Debug|Any.Build.0 = Debug|Any
+		{3019BEB9-8650-46DD-BD66-AFBC7C919EAF}.Debug|Any.ActiveCfg = Debug|Any
+		{3019BEB9-8650-46DD-BD66-AFBC7C919EAF}.Release|Any.Build.0 = Release|Any
+		{3019BEB9-8650-46DD-BD66-AFBC7C919EAF}.Release|Any.ActiveCfg = Release|Any
+	EndGlobalSection
+EndGlobal

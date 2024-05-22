@@ -1,0 +1,1018 @@
+
+                    Nyquest Technology Co., Ltd.
+
+NYASM 2.41
+
+    ADDR  OPCODE/VALUE              LINE   TAG  SOURCE                   STATEMENT    
+
+                                    1-    1     ;--------------------------------------------------------
+                                    1-    2     ; File Created by SDCC : free open source ISO C Compiler 
+                                    1-    3     ; Version 4.2.2 #0 (MSVC)
+                                    1-    4     ;--------------------------------------------------------
+                                    1-    5     ; NY8A port
+                                    1-    6     ;--------------------------------------------------------
+                                    1-    7     	.file	"init.c"
+                                    1-    8     	list	p=NY8B062F,c=on
+                                    1-    9     	#include "ny8b062f.inc"
+                                    2-    2     #include "common.inc"
+                                    3-    1     ;; header file for 8 bit series assembly -*- mode:asm; coding:utf-8; -*-
+                                    3-    2     ;; author    Ting
+                                    3-    3     ;; date      2020-12-24
+                                    3-    4     ;;
+                                    3-    5     ;; # constant definition
+                                    3-    6     ;;
+                                    3-    7     ;; ## instruction result store destination
+                                    3-    8     ;;  - W: the result is stored in the ACC.
+                                    3-    9     ;;  - F: the result is stored back in register.
+                                    3-   10     ;; ## flag name in STATUS register
+                                    3-   11     ;;  - C, DC, Z
+                                    3-   12     ;;
+                                    3-   13     ;; # macro define
+                                    3-   14     ;;
+                                    3-   15     ;; ## RETURN, used by C compiler, end of function
+                                    3-   16     ;; ## PAGESEL, empty macro, maybe used by C compiler (bug?)
+                                    3-   17     ;; ## BANKSEL, replace by .banksel pseudo command, empty if disable bank.
+                                    3-   18     ;; ## MGOTO, replace by LGOTO (ic<=2K word) or FGOTO (ic>2K word)
+                                    3-   19     ;; ## MCALL, same as above
+                                    3-   20     ;;
+                                    3-   21     W       EQU 0
+                                    3-   21     ;W = 0
+                                    3-   22     F       EQU 1
+                                    3-   22     ;F = 1
+                                    3-   23     C		EQU	0
+                                    3-   23     ;C = 0
+                                    3-   24     DC		EQU	1
+                                    3-   24     ;DC = 1
+                                    3-   25     Z		EQU	2
+                                    3-   25     ;Z = 2
+                                    3-   28     ;; common register for all series
+                                    3-   29     INDF    EQU 0x00
+                                    3-   29     ;INDF = 0
+                                    3-   30     PCL     EQU 0x02
+                                    3-   30     ;PCL = 2
+                                    3-   31     STATUS  EQU 0x03
+                                    3-   31     ;STATUS = 3
+                                    3-   32     FSR     EQU 0x04
+                                    3-   32     ;FSR = 4
+                                    3-   33     PCHBUF  EQU 0x0A
+                                    3-   33     ;PCHBUF = 10
+                                    1-   11     ;--------------------------------------------------------
+                                    1-   12     ; external declarations
+                                    1-   13     ;--------------------------------------------------------
+                                    1-   14     	extern	_charge_check_by_IO
+                                    1-   15     	extern	_ledRun
+                                    1-   16     	extern	_Detect_OverCurrent_ByAD
+                                    1-   17     	extern	_BaseBatSetPWMValue
+                                    1-   18     	extern	_ADC_Convert_Pre
+                                    1-   19     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   20     	extern	_Ledbreathing
+                                    1-   21     	extern	_LedOff
+                                    1-   22     	extern	_SetLedColorNormallyOn
+                                    1-   23     	extern	_SetLedBreathingParameters2
+                                    1-   24     	extern	_SetLedBreathingParameters
+                                    1-   25     	extern	_SetLedFlashParameters
+                                    1-   26     	extern	_adc_get
+                                    1-   27     	extern	_F_wait_eoc
+                                    1-   28     	extern	_Delay_N1ms_16bit
+                                    1-   29     	extern	_delay
+                                    1-   30     	extern	_sleep_handle
+                                    1-   31     	extern	_sleep_param_init
+                                    1-   32     	extern	_led_handle
+                                    1-   33     	extern	_led_param_init
+                                    1-   34     	extern	_bat_lvd_check
+                                    1-   35     	extern	_battery_check
+                                    1-   36     	extern	_battery_param_init
+                                    1-   37     	extern	_SmokeFun
+                                    1-   38     	extern	_detect_param_init
+                                    1-   39     	extern	_msg_handle
+                                    1-   40     	extern	_MicScan
+                                    1-   41     	extern	_KeyScan
+                                    1-   42     	extern	_key_param_init
+                                    1-   43     	extern	_isr_param_init
+                                    1-   44     	extern	_common_param_init
+                                    1-   45     	extern	_clear_ram
+                                    1-   46     	extern	_multi_16b
+                                    1-   47     	extern	_T0MD
+                                    1-   48     	extern	_PCON1
+                                    1-   49     	extern	_CMPCR
+                                    1-   50     	extern	_BODCON
+                                    1-   51     	extern	_PS0CV
+                                    1-   52     	extern	_APHCON
+                                    1-   53     	extern	_IOSTB
+                                    1-   54     	extern	_IOSTA
+                                    1-   55     	extern	_PWM4DUTY
+                                    1-   56     	extern	_P4CR1
+                                    1-   57     	extern	_BZ3CR
+                                    1-   58     	extern	_PS3CV
+                                    1-   59     	extern	_PWM3DUTY
+                                    1-   60     	extern	_T3CR2
+                                    1-   61     	extern	_T3CR1
+                                    1-   62     	extern	_TMR3
+                                    1-   63     	extern	_OSCCR
+                                    1-   64     	extern	_BZ2CR
+                                    1-   65     	extern	_PS2CV
+                                    1-   66     	extern	_PWM2DUTY
+                                    1-   67     	extern	_T2CR2
+                                    1-   68     	extern	_T2CR1
+                                    1-   69     	extern	_TMR2
+                                    1-   70     	extern	_TBHD
+                                    1-   71     	extern	_TBHP
+                                    1-   72     	extern	_IRCR
+                                    1-   73     	extern	_BZ1CR
+                                    1-   74     	extern	_PS1CV
+                                    1-   75     	extern	_PWM1DUTY
+                                    1-   76     	extern	_T1CR2
+                                    1-   77     	extern	_T1CR1
+                                    1-   78     	extern	_TMR1
+                                    1-   79     	extern	_ADD
+                                    1-   80     	extern	_PCHBUF
+                                    1-   81     	extern	_STATUS
+                                    1-   82     	extern	_PCL
+                                    1-   83     	extern	_TMR0
+                                    1-   84     	extern	_disp_delay_time_cnt
+                                    1-   85     	extern	_usb_check_ad_time_cnt
+                                    1-   86     	extern	_now_ch
+                                    1-   87     	extern	_temptimecount
+                                    1-   88     	extern	_sleep_delay_keep_time
+                                    1-   89     	extern	_running_keep_time
+                                    1-   90     	extern	_battery_low_cnt
+                                    1-   91     	extern	_usb_flag
+                                    1-   92     	extern	_HeatPlugInsert_flag
+                                    1-   93     	extern	_HeatPlugInsertTimeCount
+                                    1-   94     	extern	_HeatCount
+                                    1-   95     	extern	_SmokingKeepTime
+                                    1-   96     	extern	_HeatingKeepTime
+                                    1-   97     	extern	_KeyDowmTimeCount
+                                    1-   98     	extern	_VolTypeIndex
+                                    1-   99     	extern	_SmokeState
+                                    1-  100     	extern	_BatVolLevel
+                                    1-  101     	extern	_SaveHeaterIOStatus
+                                    1-  102     	extern	_MotorDutySet
+                                    1-  103     	extern	_NowMotorDuty
+                                    1-  104     	extern	_TargetMotorDuty
+                                    1-  105     	extern	_gAdcDataValue
+                                    1-  106     	extern	_OverCurrent_adc_value
+                                    1-  107     	extern	_OverCurrent_check_cnt
+                                    1-  108     	extern	_BuleLed_delay_keep_time
+                                    1-  109     	extern	_OverCurrentCount
+                                    1-  110     	extern	_OverCurrentDelayTime
+                                    1-  111     	extern	_led_delay_keep_time
+                                    1-  112     	extern	_led_flash_count
+                                    1-  113     	extern	_led_flash_flag
+                                    1-  114     	extern	_percent_nun
+                                    1-  115     	extern	_PwmCycleCount
+                                    1-  116     	extern	_sleepCnt
+                                    1-  117     	extern	_Led_Breathe_count
+                                    1-  118     	extern	_LedShowKeepTime
+                                    1-  119     	extern	_LedShowStep
+                                    1-  120     	extern	_GroupColourIndex
+                                    1-  121     	extern	_ledRunStarStep
+                                    1-  122     	extern	_ledRunStep
+                                    1-  123     	extern	_nowLedMode
+                                    1-  124     	extern	_CodeSwitchIndex
+                                    1-  125     	extern	_msg
+                                    1-  126     	extern	_INTE2bits
+                                    1-  127     	extern	_TM3RHbits
+                                    1-  128     	extern	_RFCbits
+                                    1-  129     	extern	_ANAENbits
+                                    1-  130     	extern	_TMRHbits
+                                    1-  131     	extern	_INTEDGbits
+                                    1-  132     	extern	_ADJMDbits
+                                    1-  133     	extern	_PACONbits
+                                    1-  134     	extern	_AWUCONbits
+                                    1-  135     	extern	_ADCRbits
+                                    1-  136     	extern	_ADVREFHbits
+                                    1-  137     	extern	_ADRbits
+                                    1-  138     	extern	_ADMDbits
+                                    1-  139     	extern	_INTFbits
+                                    1-  140     	extern	_INTEbits
+                                    1-  141     	extern	_BPHCONbits
+                                    1-  142     	extern	_ABPLCONbits
+                                    1-  143     	extern	_BWUCONbits
+                                    1-  144     	extern	_PCONbits
+                                    1-  145     	extern	_PORTBbits
+                                    1-  146     	extern	_PORTAbits
+                                    1-  148     	extern PSAVE
+                                    1-  149     	extern SSAVE
+                                    1-  150     	extern WSAVE
+                                    1-  151     	extern STK12
+                                    1-  152     	extern STK11
+                                    1-  153     	extern STK10
+                                    1-  154     	extern STK09
+                                    1-  155     	extern STK08
+                                    1-  156     	extern STK07
+                                    1-  157     	extern STK06
+                                    1-  158     	extern STK05
+                                    1-  159     	extern STK04
+                                    1-  160     	extern STK03
+                                    1-  161     	extern STK02
+                                    1-  162     	extern STK01
+                                    1-  163     	extern STK00
+                                    1-  164     ;--------------------------------------------------------
+                                    1-  165     ; global declarations
+                                    1-  166     ;--------------------------------------------------------
+                                    1-  167     	extern	_Set_ADVREFH_2V
+                                    1-  168     	extern	_Set_ADVREFH_5V
+                                    1-  169     	extern	_sys_flag_3
+                                    1-  170     	extern	_sys_flag_2
+                                    1-  171     	extern	_sys_flag_1
+                                    1-  172     	extern	_sys_flag_0
+                                    1-  173     	extern	_INTE2
+                                    1-  174     	extern	_TM3RH
+                                    1-  175     	extern	_RFC
+                                    1-  176     	extern	_ANAEN
+                                    1-  177     	extern	_TMRH
+                                    1-  178     	extern	_INTEDG
+                                    1-  179     	extern	_ADJMD
+                                    1-  180     	extern	_PACON
+                                    1-  181     	extern	_AWUCON
+                                    1-  182     	extern	_ADCR
+                                    1-  183     	extern	_ADVREFH
+                                    1-  184     	extern	_ADR
+                                    1-  185     	extern	_ADMD
+                                    1-  186     	extern	_INTF
+                                    1-  187     	extern	_INTE
+                                    1-  188     	extern	_BPHCON
+                                    1-  189     	extern	_ABPLCON
+                                    1-  190     	extern	_BWUCON
+                                    1-  191     	extern	_PCON
+                                    1-  192     	extern	_PORTB
+                                    1-  193     	extern	_PORTA
+                                    1-  194     	extern	_system_init
+                                    1-  195     	extern	_sleep_init
+                                    1-  196     	extern	_gpio_init
+                                    1-  197     	extern	_timer0_init
+                                    1-  198     	extern	_timer1_init
+                                    1-  199     	extern	_pwm1_init
+                                    1-  200     	extern	_pwm2_init
+                                    1-  201     	extern	_pwm3_init
+                                    1-  202     	extern	_adc_init
+                                    1-  203     	extern	_adc2_init
+                                    1-  204     	extern	_adc3_init
+                                    1-  205     	extern	_adc_init4
+                                    1-  206     	extern	_wdt_init
+                                    1-  207     	extern	_lvd_init
+                                    1-  208     	extern	_lvr_init
+                                    1-  209     	extern	_isr_init
+                                    1-  211     ;--------------------------------------------------------
+                                    1-  212     ; global definitions
+                                    1-  213     ;--------------------------------------------------------
+                                    1-  214     ;--------------------------------------------------------
+                                    1-  215     ; absolute symbol definitions
+                                    1-  216     ;--------------------------------------------------------
+                                    1-  217     ;--------------------------------------------------------
+                                    1-  218     ; compiler-defined variables
+                                    1-  219     ;--------------------------------------------------------
+                                    1-  220     .segment "uninit"
+     0000                           1-  221     r0x1007:
+                                    1-  222     	.res	1
+                                    1-  223     .segment "uninit"
+     0000                           1-  224     r0x1006:
+                                    1-  225     	.res	1
+                                    1-  226     .segment "uninit"
+     0000                           1-  227     r0x1005:
+                                    1-  228     	.res	1
+                                    1-  229     .segment "uninit"
+     0000                           1-  230     r0x1004:
+                                    1-  231     	.res	1
+                                    1-  232     .segment "uninit"
+     0000                           1-  233     r0x1003:
+                                    1-  234     	.res	1
+                                    1-  235     .segment "uninit"
+     0000                           1-  236     r0x1002:
+                                    1-  237     	.res	1
+                                    1-  238     .segment "uninit"
+     0000                           1-  239     r0x1001:
+                                    1-  240     	.res	1
+                                    1-  241     ;--------------------------------------------------------
+                                    1-  242     ; initialized data
+                                    1-  243     ;--------------------------------------------------------
+                                    1-  244     ;--------------------------------------------------------
+                                    1-  245     ; initialized absolute data
+                                    1-  246     ;--------------------------------------------------------
+                                    1-  247     ;--------------------------------------------------------
+                                    1-  248     ; overlayable items in internal ram 
+                                    1-  249     ;--------------------------------------------------------
+                                    1-  250     ;	udata_ovr
+                                    1-  251     ;--------------------------------------------------------
+                                    1-  252     ; code
+                                    1-  253     ;--------------------------------------------------------
+                                    1-  254     ; code_init	code
+                                    1-  255     ;***
+                                    1-  256     ;  pBlock Stats: dbName = C
+                                    1-  257     ;***
+                                    1-  258     ;has an exit
+                                    1-  259     ;; Starting pCode block
+                                    1-  260     .segment "code"; module=init, function=_isr_init
+     0000                           1-  262     _isr_init:
+                                    1-  263     ; 2 exit points
+                                    1-  264     	.line	830, "init.c"; 	INTEDG = 0x05;//
+     0000 2105                      1-  265     	MOVIA	0x05
+     0001 00rr                      1-  266     	MOVAR	_INTEDG
+                                    1-  267     	.line	831, "init.c"; 	INTE = 0x03|C_INT_TMR1;//|C_INT_WDT;
+     0002 210B                      1-  268     	MOVIA	0x0b
+     0003 00rr                      1-  269     	MOVAR	_INTE
+                                    1-  270     	.line	834, "init.c"; 	INTE2 = 0x00;
+     0004 02rr                      1-  271     	CLRR	_INTE2
+                                    1-  272     	.line	835, "init.c"; 	INTF = 0x00;
+     0005 02rr                      1-  273     	CLRR	_INTF
+                                    1-  274     	.line	836, "init.c"; 	}
+                                    1-  275     	RETURN	
+     0006 0010                      3-   39 m1      ret
+                                    1-  276     ; exit point of _isr_init
+                                    1-  278     ;***
+                                    1-  279     ;  pBlock Stats: dbName = C
+                                    1-  280     ;***
+                                    1-  281     ;has an exit
+                                    1-  282     ;; Starting pCode block
+                                    1-  283     .segment "code"; module=init, function=_lvr_init
+     0000                           1-  285     _lvr_init:
+                                    1-  286     ; 2 exit points
+                                    1-  287     	.line	819, "init.c"; 	PCONbits.LVREN = 1;	
+     0000 19rr                      1-  288     	BSR	_PCONbits,3
+                                    1-  289     	.line	820, "init.c"; 	}
+                                    1-  290     	RETURN	
+     0001 0010                      3-   39 m1      ret
+                                    1-  291     ; exit point of _lvr_init
+                                    1-  293     ;***
+                                    1-  294     ;  pBlock Stats: dbName = C
+                                    1-  295     ;***
+                                    1-  296     ;has an exit
+                                    1-  297     ;1 compiler assigned register :
+                                    1-  298     ;   r0x1001
+                                    1-  299     ;; Starting pCode block
+                                    1-  300     .segment "code"; module=init, function=_lvd_init
+     0000                           1-  302     _lvd_init:
+                                    1-  303     ; 2 exit points
+                                    1-  304     	.line	807, "init.c"; 	PCON |= C_LVD_En;						// 使能LVD功能
+     0000 1Arr                      1-  305     	BSR	_PCON,5
+                                    1-  306     	.line	808, "init.c"; 	PCON1 &= 0xe3;							// 1110 0011
+     0001 001r                      1-  307     	IOSTR	_PCON1
+                                    1-  308     	BANKSEL	r0x1001
+     0002 rrrr                      3-  109 m1      .banksel ram_address
+     0003 00rr                      1-  309     	MOVAR	r0x1001
+     0004 21E3                      1-  310     	MOVIA	0xe3
+     0005 10rr                      1-  311     	ANDAR	r0x1001,F
+     0006 01rr                      1-  312     	MOVR	r0x1001,W
+     0007 000r                      1-  313     	IOST	_PCON1
+                                    1-  314     	.line	809, "init.c"; 	PCON1 |= C_LVD_3P3V;					//		
+     0008 001r                      1-  315     	IOSTR	_PCON1
+     0009 00rr                      1-  316     	MOVAR	r0x1001
+     000A 2114                      1-  317     	MOVIA	0x14
+     000B 11rr                      1-  318     	IORAR	r0x1001,F
+     000C 01rr                      1-  319     	MOVR	r0x1001,W
+     000D 000r                      1-  320     	IOST	_PCON1
+                                    1-  321     	.line	810, "init.c"; 	}
+                                    1-  322     	RETURN	
+     000E 0010                      3-   39 m1      ret
+                                    1-  323     ; exit point of _lvd_init
+                                    1-  325     ;***
+                                    1-  326     ;  pBlock Stats: dbName = C
+                                    1-  327     ;***
+                                    1-  328     ;has an exit
+                                    1-  329     ;; Starting pCode block
+                                    1-  330     .segment "code"; module=init, function=_wdt_init
+     0000                           1-  332     _wdt_init:
+                                    1-  333     ; 2 exit points
+                                    1-  334     	.line	796, "init.c"; 	PCONbits.WDTEN = 1;			//250ms reset.
+     0000 1Brr                      1-  335     	BSR	_PCONbits,7
+                                    1-  336     	.line	797, "init.c"; 	}
+                                    1-  337     	RETURN	
+     0001 0010                      3-   39 m1      ret
+                                    1-  338     ; exit point of _wdt_init
+                                    1-  340     ;***
+                                    1-  341     ;  pBlock Stats: dbName = C
+                                    1-  342     ;***
+                                    1-  343     ;has an exit
+                                    1-  344     ;functions called:
+                                    1-  345     ;   _delay
+                                    1-  346     ;   _delay
+                                    1-  347     ;1 compiler assigned register :
+                                    1-  348     ;   STK00
+                                    1-  349     ;; Starting pCode block
+                                    1-  350     .segment "code"; module=init, function=_Set_ADVREFH_2V
+     0000                           1-  352     _Set_ADVREFH_2V:
+                                    1-  353     ; 2 exit points
+                                    1-  354     	.line	782, "init.c"; 	ADVREFH = C_Vrefh_2V;	//参考电压;	//2v
+     0000 02rr                      1-  355     	CLRR	_ADVREFH
+                                    1-  356     	.line	783, "init.c"; 	delay(50);
+     0001 2132                      1-  357     	MOVIA	0x32
+     0002 00rr                      1-  358     	MOVAR	STK00
+     0003 2100                      1-  359     	MOVIA	0x00
+                                    1-  360     	MCALL	_delay
+     0004 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  361     	.line	786, "init.c"; 	}
+                                    1-  362     	RETURN	
+     0005 0010                      3-   39 m1      ret
+                                    1-  363     ; exit point of _Set_ADVREFH_2V
+                                    1-  365     ;***
+                                    1-  366     ;  pBlock Stats: dbName = C
+                                    1-  367     ;***
+                                    1-  368     ;has an exit
+                                    1-  369     ;functions called:
+                                    1-  370     ;   _delay
+                                    1-  371     ;   _delay
+                                    1-  372     ;1 compiler assigned register :
+                                    1-  373     ;   STK00
+                                    1-  374     ;; Starting pCode block
+                                    1-  375     .segment "code"; module=init, function=_Set_ADVREFH_5V
+     0000                           1-  377     _Set_ADVREFH_5V:
+                                    1-  378     ; 2 exit points
+                                    1-  379     	.line	772, "init.c"; 	ADVREFH = C_Vrefh_VDD;	//参考电压;	//2v
+     0000 2103                      1-  380     	MOVIA	0x03
+     0001 00rr                      1-  381     	MOVAR	_ADVREFH
+                                    1-  382     	.line	773, "init.c"; 	delay(50);
+     0002 2132                      1-  383     	MOVIA	0x32
+     0003 00rr                      1-  384     	MOVAR	STK00
+     0004 2100                      1-  385     	MOVIA	0x00
+                                    1-  386     	MCALL	_delay
+     0005 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  387     	.line	776, "init.c"; 	}
+                                    1-  388     	RETURN	
+     0006 0010                      3-   39 m1      ret
+                                    1-  389     ; exit point of _Set_ADVREFH_5V
+                                    1-  391     ;***
+                                    1-  392     ;  pBlock Stats: dbName = C
+                                    1-  393     ;***
+                                    1-  394     ;has an exit
+                                    1-  395     ;1 compiler assigned register :
+                                    1-  396     ;   r0x1002
+                                    1-  397     ;; Starting pCode block
+                                    1-  398     .segment "code"; module=init, function=_adc_init4
+                                    1-  400     ;local variable name mapping:
+     0000                           1-  403     _adc_init4:
+                                    1-  404     ; 2 exit points
+                                    1-  405     	.line	689, "init.c"; 	void adc_init4(u8 ch)//
+                                    1-  406     	BANKSEL	r0x1002
+     0000 rrrr                      3-  109 m1      .banksel ram_address
+     0001 00rr                      1-  407     	MOVAR	r0x1002
+                                    1-  408     	.line	692, "init.c"; 	now_ch = ch;
+                                    1-  409     	BANKSEL	_now_ch
+     0002 rrrr                      3-  109 m1      .banksel ram_address
+     0003 00rr                      1-  410     	MOVAR	_now_ch
+                                    1-  411     	.line	693, "init.c"; 	PACON = C_PA0_AIN0;//通道设置
+     0004 2101                      1-  412     	MOVIA	0x01
+     0005 00rr                      1-  413     	MOVAR	_PACON
+                                    1-  414     	.line	694, "init.c"; 	if(ch == Quarter_VDD)
+                                    1-  415     	BANKSEL	r0x1002
+     0006 rrrr                      3-  109 m1      .banksel ram_address
+     0007 01rr                      1-  416     	MOVR	r0x1002,W
+     0008 2401                      1-  417     	XORIA	0x01
+     0009 0903                      1-  418     	BTRSS	STATUS,2
+                                    1-  419     	MGOTO	_02067_DS_
+     000A 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  420     	.line	696, "init.c"; 	ADVREFH = C_Vrefh_2V;	//参考电压
+     000B 02rr                      1-  421     	CLRR	_ADVREFH
+                                    1-  422     	.line	697, "init.c"; 	ADR	 = C_Ckl_Div8;	//时钟分频
+     000C 2110                      1-  423     	MOVIA	0x10
+     000D 00rr                      1-  424     	MOVAR	_ADR
+                                    1-  425     	.line	700, "init.c"; 	ADCR  = C_Sample_1clk | C_12BIT;//采样频率和采样位数
+     000E 2103                      1-  426     	MOVIA	0x03
+     000F 00rr                      1-  427     	MOVAR	_ADCR
+                                    1-  428     	.line	702, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_Quarter_VDD;//C_ADC_CH_Dis
+     0010 219B                      1-  429     	MOVIA	0x9b
+     0011 00rr                      1-  430     	MOVAR	_ADMD
+                                    1-  431     	MGOTO	_02068_DS_
+     0012 3rrr                      3-   62 m1      LGOTO rom_address
+     0013                           1-  432     _02067_DS_:
+                                    1-  433     	.line	704, "init.c"; 	else if(ch == ADC_CHANNEL)
+                                    1-  434     	BANKSEL	r0x1002
+     0013 rrrr                      3-  109 m1      .banksel ram_address
+     0014 01rr                      1-  435     	MOVR	r0x1002,W
+     0015 2402                      1-  436     	XORIA	0x02
+     0016 0903                      1-  437     	BTRSS	STATUS,2
+                                    1-  438     	MGOTO	_02064_DS_
+     0017 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  439     	.line	706, "init.c"; 	ADVREFH = C_Vrefh_3V;	//参考电压
+     0018 2101                      1-  440     	MOVIA	0x01
+     0019 00rr                      1-  441     	MOVAR	_ADVREFH
+                                    1-  442     	.line	707, "init.c"; 	ADR	 = C_Ckl_Div8;	//时钟分频
+     001A 2110                      1-  443     	MOVIA	0x10
+     001B 00rr                      1-  444     	MOVAR	_ADR
+                                    1-  445     	.line	710, "init.c"; 	ADCR  = C_Sample_1clk | C_12BIT;//采样频率和采样位数
+     001C 2103                      1-  446     	MOVIA	0x03
+     001D 00rr                      1-  447     	MOVAR	_ADCR
+                                    1-  448     	.line	712, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_ADC_PA0;//C_ADC_CH_Dis
+     001E 2190                      1-  449     	MOVIA	0x90
+     001F 00rr                      1-  450     	MOVAR	_ADMD
+                                    1-  451     	MGOTO	_02068_DS_
+     0020 3rrr                      3-   62 m1      LGOTO rom_address
+     0021                           1-  452     _02064_DS_:
+                                    1-  453     	.line	714, "init.c"; 	else if(ch == ADC_CHANNEL2)
+                                    1-  454     	BANKSEL	r0x1002
+     0021 rrrr                      3-  109 m1      .banksel ram_address
+     0022 01rr                      1-  455     	MOVR	r0x1002,W
+     0023 2403                      1-  456     	XORIA	0x03
+     0024 0903                      1-  457     	BTRSS	STATUS,2
+                                    1-  458     	MGOTO	_02068_DS_
+     0025 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  459     	.line	718, "init.c"; 	ADVREFH = C_Vrefh_VDD;	//参考电压
+     0026 2103                      1-  460     	MOVIA	0x03
+     0027 00rr                      1-  461     	MOVAR	_ADVREFH
+                                    1-  462     	.line	720, "init.c"; 	ADR	 = C_Ckl_Div2;	//时钟分频
+     0028 2130                      1-  463     	MOVIA	0x30
+     0029 00rr                      1-  464     	MOVAR	_ADR
+                                    1-  465     	.line	722, "init.c"; 	ADCR  = C_Sample_8clk | C_12BIT;//采样频率和采样位数
+     002A 210F                      1-  466     	MOVIA	0x0f
+     002B 00rr                      1-  467     	MOVAR	_ADCR
+                                    1-  468     	.line	726, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_ADC_PA0;//C_ADC_CH_Dis
+     002C 2190                      1-  469     	MOVIA	0x90
+     002D 00rr                      1-  470     	MOVAR	_ADMD
+     002E                           1-  471     _02068_DS_:
+                                    1-  472     	.line	731, "init.c"; 	ADMDbits.GCHS = 1;						// Enable global ADC channel	(SFR "ADMD")
+     002E 1Arr                      1-  473     	BSR	_ADMDbits,4
+                                    1-  474     	.line	732, "init.c"; 	ADRbits.ADIF = 0;						// Clear adc interrupt flag bit
+     002F 1Frr                      1-  475     	BCR	_ADRbits,7
+                                    1-  476     	.line	733, "init.c"; 	ADRbits.ADIE = 0;						// Enable adc interrupt bit
+     0030 1Frr                      1-  477     	BCR	_ADRbits,6
+                                    1-  478     	.line	734, "init.c"; 	for(i=1;i<= 50;i++)
+     0031 2132                      1-  479     	MOVIA	0x32
+                                    1-  480     	BANKSEL	r0x1002
+     0032 rrrr                      3-  109 m1      .banksel ram_address
+     0033 00rr                      1-  481     	MOVAR	r0x1002
+     0034                           1-  482     _02072_DS_:
+                                    1-  483     	BANKSEL	r0x1002
+     0034 rrrr                      3-  109 m1      .banksel ram_address
+     0035 17rr                      1-  484     	DECRSZ	r0x1002,F
+                                    1-  485     	MGOTO	_02072_DS_
+     0036 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  486     	.line	736, "init.c"; 	ADMDbits.START = 0;	 
+     0037 1Frr                      1-  487     	BCR	_ADMDbits,6
+                                    1-  488     	.line	738, "init.c"; 	}
+                                    1-  489     	RETURN	
+     0038 0010                      3-   39 m1      ret
+                                    1-  490     ; exit point of _adc_init4
+                                    1-  492     ;***
+                                    1-  493     ;  pBlock Stats: dbName = C
+                                    1-  494     ;***
+                                    1-  495     ;has an exit
+                                    1-  496     ;1 compiler assigned register :
+                                    1-  497     ;   r0x1003
+                                    1-  498     ;; Starting pCode block
+                                    1-  499     .segment "code"; module=init, function=_adc3_init
+                                    1-  501     ;local variable name mapping:
+     0000                           1-  503     _adc3_init:
+                                    1-  504     ; 2 exit points
+                                    1-  505     	.line	668, "init.c"; 	ADVREFH = C_Vrefh_3V;	//参考电压
+     0000 2101                      1-  506     	MOVIA	0x01
+     0001 00rr                      1-  507     	MOVAR	_ADVREFH
+                                    1-  508     	.line	671, "init.c"; 	ADR	 = C_Ckl_Div2;	//时钟分频
+     0002 2130                      1-  509     	MOVIA	0x30
+     0003 00rr                      1-  510     	MOVAR	_ADR
+                                    1-  511     	.line	675, "init.c"; 	ADCR  = C_Sample_2clk | C_12BIT;//采样频率和采样位数
+     0004 2107                      1-  512     	MOVIA	0x07
+     0005 00rr                      1-  513     	MOVAR	_ADCR
+                                    1-  514     	.line	676, "init.c"; 	PACON = C_PA0_AIN0;//通道设置
+     0006 2101                      1-  515     	MOVIA	0x01
+     0007 00rr                      1-  516     	MOVAR	_PACON
+                                    1-  517     	.line	677, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_ADC_PA0;//C_ADC_CH_Dis
+     0008 2190                      1-  518     	MOVIA	0x90
+     0009 00rr                      1-  519     	MOVAR	_ADMD
+                                    1-  520     	.line	678, "init.c"; 	ADMDbits.GCHS = 1;						// Enable global ADC channel	(SFR "ADMD")
+     000A 1Arr                      1-  521     	BSR	_ADMDbits,4
+                                    1-  522     	.line	679, "init.c"; 	ADRbits.ADIF = 0;						// Clear adc interrupt flag bit
+     000B 1Frr                      1-  523     	BCR	_ADRbits,7
+                                    1-  524     	.line	680, "init.c"; 	ADRbits.ADIE = 0;						// Enable adc interrupt bit
+     000C 1Frr                      1-  525     	BCR	_ADRbits,6
+                                    1-  526     	.line	683, "init.c"; 	for(i=1;i<= 50;i++)
+     000D 2132                      1-  527     	MOVIA	0x32
+                                    1-  528     	BANKSEL	r0x1003
+     000E rrrr                      3-  109 m1      .banksel ram_address
+     000F 00rr                      1-  529     	MOVAR	r0x1003
+     0010                           1-  530     _02056_DS_:
+                                    1-  531     	BANKSEL	r0x1003
+     0010 rrrr                      3-  109 m1      .banksel ram_address
+     0011 17rr                      1-  532     	DECRSZ	r0x1003,F
+                                    1-  533     	MGOTO	_02056_DS_
+     0012 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  534     	.line	685, "init.c"; 	ADMDbits.START = 0;	  
+     0013 1Frr                      1-  535     	BCR	_ADMDbits,6
+                                    1-  536     	.line	686, "init.c"; 	CLRWDT();
+     0014 0002                      1-  537     	clrwdt
+                                    1-  538     	.line	687, "init.c"; 	}
+                                    1-  539     	RETURN	
+     0015 0010                      3-   39 m1      ret
+                                    1-  540     ; exit point of _adc3_init
+                                    1-  542     ;***
+                                    1-  543     ;  pBlock Stats: dbName = C
+                                    1-  544     ;***
+                                    1-  545     ;has an exit
+                                    1-  546     ;1 compiler assigned register :
+                                    1-  547     ;   r0x1004
+                                    1-  548     ;; Starting pCode block
+                                    1-  549     .segment "code"; module=init, function=_adc2_init
+                                    1-  551     ;local variable name mapping:
+     0000                           1-  553     _adc2_init:
+                                    1-  554     ; 2 exit points
+                                    1-  555     	.line	639, "init.c"; 	ADVREFH = C_Vrefh_2V;	//参考电压
+     0000 02rr                      1-  556     	CLRR	_ADVREFH
+                                    1-  557     	.line	640, "init.c"; 	ADR	 = C_Ckl_Div8;	//时钟分频
+     0001 2110                      1-  558     	MOVIA	0x10
+     0002 00rr                      1-  559     	MOVAR	_ADR
+                                    1-  560     	.line	641, "init.c"; 	ADCR  = C_Sample_8clk | C_12BIT;//采样频率和采样位数
+     0003 210F                      1-  561     	MOVIA	0x0f
+     0004 00rr                      1-  562     	MOVAR	_ADCR
+                                    1-  563     	.line	642, "init.c"; 	PACON = C_PA0_AIN0;//通道设置
+     0005 2101                      1-  564     	MOVIA	0x01
+     0006 00rr                      1-  565     	MOVAR	_PACON
+                                    1-  566     	.line	643, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_Quarter_VDD;//C_ADC_CH_Dis
+     0007 219B                      1-  567     	MOVIA	0x9b
+     0008 00rr                      1-  568     	MOVAR	_ADMD
+                                    1-  569     	.line	644, "init.c"; 	ADMDbits.GCHS = 1;						// Enable global ADC channel	(SFR "ADMD")
+     0009 1Arr                      1-  570     	BSR	_ADMDbits,4
+                                    1-  571     	.line	645, "init.c"; 	ADRbits.ADIF = 0;						// Clear adc interrupt flag bit
+     000A 1Frr                      1-  572     	BCR	_ADRbits,7
+                                    1-  573     	.line	646, "init.c"; 	ADRbits.ADIE = 0;						// Enable adc interrupt bit
+     000B 1Frr                      1-  574     	BCR	_ADRbits,6
+                                    1-  575     	.line	649, "init.c"; 	for(i=1;i<= 50;i++)
+     000C 2132                      1-  576     	MOVIA	0x32
+                                    1-  577     	BANKSEL	r0x1004
+     000D rrrr                      3-  109 m1      .banksel ram_address
+     000E 00rr                      1-  578     	MOVAR	r0x1004
+     000F                           1-  579     _02048_DS_:
+                                    1-  580     	BANKSEL	r0x1004
+     000F rrrr                      3-  109 m1      .banksel ram_address
+     0010 17rr                      1-  581     	DECRSZ	r0x1004,F
+                                    1-  582     	MGOTO	_02048_DS_
+     0011 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  583     	.line	651, "init.c"; 	ADMDbits.START = 0;	 
+     0012 1Frr                      1-  584     	BCR	_ADMDbits,6
+                                    1-  585     	.line	652, "init.c"; 	CLRWDT();
+     0013 0002                      1-  586     	clrwdt
+                                    1-  587     	.line	653, "init.c"; 	}
+                                    1-  588     	RETURN	
+     0014 0010                      3-   39 m1      ret
+                                    1-  589     ; exit point of _adc2_init
+                                    1-  591     ;***
+                                    1-  592     ;  pBlock Stats: dbName = C
+                                    1-  593     ;***
+                                    1-  594     ;has an exit
+                                    1-  595     ;1 compiler assigned register :
+                                    1-  596     ;   r0x1005
+                                    1-  597     ;; Starting pCode block
+                                    1-  598     .segment "code"; module=init, function=_adc_init
+                                    1-  600     ;local variable name mapping:
+     0000                           1-  602     _adc_init:
+                                    1-  603     ; 2 exit points
+                                    1-  604     	.line	609, "init.c"; 	ADVREFH = C_Vrefh_VDD;	//参考电压
+     0000 2103                      1-  605     	MOVIA	0x03
+     0001 00rr                      1-  606     	MOVAR	_ADVREFH
+                                    1-  607     	.line	611, "init.c"; 	ADR	 = C_Ckl_Div2;	//时钟分频
+     0002 2130                      1-  608     	MOVIA	0x30
+     0003 00rr                      1-  609     	MOVAR	_ADR
+                                    1-  610     	.line	612, "init.c"; 	ADCR  = C_Sample_8clk | C_12BIT;//采样频率和采样位数
+     0004 210F                      1-  611     	MOVIA	0x0f
+     0005 00rr                      1-  612     	MOVAR	_ADCR
+                                    1-  613     	.line	614, "init.c"; 	PACON = C_PA0_AIN0;//通道设置
+     0006 2101                      1-  614     	MOVIA	0x01
+     0007 00rr                      1-  615     	MOVAR	_PACON
+                                    1-  616     	.line	615, "init.c"; 	ADMD  = C_ADC_En | C_ADC_CH_En |C_ADC_PA0;//C_ADC_CH_Dis
+     0008 2190                      1-  617     	MOVIA	0x90
+     0009 00rr                      1-  618     	MOVAR	_ADMD
+                                    1-  619     	.line	616, "init.c"; 	ADMDbits.GCHS = 1;						// Enable global ADC channel	(SFR "ADMD")
+     000A 1Arr                      1-  620     	BSR	_ADMDbits,4
+                                    1-  621     	.line	617, "init.c"; 	ADRbits.ADIF = 0;						// Clear adc interrupt flag bit
+     000B 1Frr                      1-  622     	BCR	_ADRbits,7
+                                    1-  623     	.line	618, "init.c"; 	ADRbits.ADIE = 0;						// Enable adc interrupt bit
+     000C 1Frr                      1-  624     	BCR	_ADRbits,6
+                                    1-  625     	.line	621, "init.c"; 	for(i=1;i<= 50;i++)
+     000D 2132                      1-  626     	MOVIA	0x32
+                                    1-  627     	BANKSEL	r0x1005
+     000E rrrr                      3-  109 m1      .banksel ram_address
+     000F 00rr                      1-  628     	MOVAR	r0x1005
+     0010                           1-  629     _02040_DS_:
+                                    1-  630     	BANKSEL	r0x1005
+     0010 rrrr                      3-  109 m1      .banksel ram_address
+     0011 17rr                      1-  631     	DECRSZ	r0x1005,F
+                                    1-  632     	MGOTO	_02040_DS_
+     0012 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  633     	.line	623, "init.c"; 	ADMDbits.START = 0;	  
+     0013 1Frr                      1-  634     	BCR	_ADMDbits,6
+                                    1-  635     	.line	624, "init.c"; 	CLRWDT();
+     0014 0002                      1-  636     	clrwdt
+                                    1-  637     	.line	625, "init.c"; 	}
+                                    1-  638     	RETURN	
+     0015 0010                      3-   39 m1      ret
+                                    1-  639     ; exit point of _adc_init
+                                    1-  641     ;***
+                                    1-  642     ;  pBlock Stats: dbName = C
+                                    1-  643     ;***
+                                    1-  644     ;has an exit
+                                    1-  645     ;; Starting pCode block
+                                    1-  646     .segment "code"; module=init, function=_pwm3_init
+     0000                           1-  648     _pwm3_init:
+                                    1-  649     ; 2 exit points
+                                    1-  650     	.line	567, "init.c"; 	T3CR1 = C_PWM3_Active_Hi|C_TMR3_Reload|C_TMR3_En;
+     0000 2103                      1-  651     	MOVIA	0x03
+     0001 00rr                      1-  652     	SFUN	_T3CR1
+                                    1-  653     	.line	576, "init.c"; 	T3CR2 = C_TMR3_ClkSrc_Inst|C_TMR3_ExtRising|C_PS3_EN|C_PS3_Div32;//0x08;
+     0002 2104                      1-  654     	MOVIA	0x04
+     0003 00rr                      1-  655     	SFUN	_T3CR2
+                                    1-  656     	.line	579, "init.c"; 	TM3RH = 0x00;
+     0004 02rr                      1-  657     	CLRR	_TM3RH
+                                    1-  658     	.line	584, "init.c"; 	TMR3 = 45;
+     0005 212D                      1-  659     	MOVIA	0x2d
+     0006 00rr                      1-  660     	SFUN	_TMR3
+                                    1-  661     	.line	587, "init.c"; 	PWM3DUTY = 23;//11;//23;	// = PWM3DUTY = TMR3*50% = 45*50% = 23
+     0007 2117                      1-  662     	MOVIA	0x17
+     0008 00rr                      1-  663     	SFUN	_PWM3DUTY
+                                    1-  664     	.line	588, "init.c"; 	}
+                                    1-  665     	RETURN	
+     0009 0010                      3-   39 m1      ret
+                                    1-  666     ; exit point of _pwm3_init
+                                    1-  668     ;***
+                                    1-  669     ;  pBlock Stats: dbName = C
+                                    1-  670     ;***
+                                    1-  671     ;has an exit
+                                    1-  672     ;; Starting pCode block
+                                    1-  673     .segment "code"; module=init, function=_pwm2_init
+     0000                           1-  675     _pwm2_init:
+                                    1-  676     ; 2 exit points
+                                    1-  677     	.line	469, "init.c"; 	T2CR1 = 0x82;
+     0000 2182                      1-  678     	MOVIA	0x82
+     0001 00rr                      1-  679     	SFUN	_T2CR1
+                                    1-  680     	.line	480, "init.c"; 	T2CR1 = C_PWM2_En|C_PWM2_Active_Lo|C_TMR2_Reload|C_TMR2_En;//0x83;	
+     0002 21C3                      1-  681     	MOVIA	0xc3
+     0003 00rr                      1-  682     	SFUN	_T2CR1
+                                    1-  683     	.line	491, "init.c"; 	T2CR2 = C_TMR2_ClkSrc_Inst|C_TMR2_ExtRising|C_PS2_EN|C_PS2_Div2;//0x08;
+     0004 0200                      1-  684     	CLRA	
+     0005 00rr                      1-  685     	SFUN	_T2CR2
+                                    1-  686     	.line	496, "init.c"; 	TMRH = 0x00;
+     0006 02rr                      1-  687     	CLRR	_TMRH
+                                    1-  688     	.line	502, "init.c"; 	TMR2 = 99;
+     0007 2163                      1-  689     	MOVIA	0x63
+     0008 00rr                      1-  690     	SFUN	_TMR2
+                                    1-  691     	.line	505, "init.c"; 	PWM2DUTY = 0;
+     0009 0200                      1-  692     	CLRA	
+     000A 00rr                      1-  693     	SFUN	_PWM2DUTY
+                                    1-  694     	.line	506, "init.c"; 	}
+                                    1-  695     	RETURN	
+     000B 0010                      3-   39 m1      ret
+                                    1-  696     ; exit point of _pwm2_init
+                                    1-  698     ;***
+                                    1-  699     ;  pBlock Stats: dbName = C
+                                    1-  700     ;***
+                                    1-  701     ;has an exit
+                                    1-  702     ;; Starting pCode block
+                                    1-  703     .segment "code"; module=init, function=_pwm1_init
+     0000                           1-  705     _pwm1_init:
+                                    1-  706     ; 2 exit points
+                                    1-  707     	.line	402, "init.c"; 	T1CR1 = C_PWM1_En|C_PWM1_Active_Lo|C_TMR1_Reload|C_TMR1_En;//0x83;	
+     0000 21C3                      1-  708     	MOVIA	0xc3
+     0001 00rr                      1-  709     	SFUN	_T1CR1
+                                    1-  710     	.line	412, "init.c"; 	T1CR2 = C_TMR1_ClkSrc_Inst|C_TMR1_ExtRising|C_PS1_EN|C_PS1_Div2;//0x08;
+     0002 0200                      1-  711     	CLRA	
+     0003 00rr                      1-  712     	SFUN	_T1CR2
+                                    1-  713     	.line	416, "init.c"; 	TMRH = 0x00;
+     0004 02rr                      1-  714     	CLRR	_TMRH
+                                    1-  715     	.line	422, "init.c"; 	TMR1 = 99;
+     0005 2163                      1-  716     	MOVIA	0x63
+     0006 00rr                      1-  717     	SFUN	_TMR1
+                                    1-  718     	.line	425, "init.c"; 	PWM1DUTY = 0;//PWM1DUTY = TMR1*70%=139
+     0007 0200                      1-  719     	CLRA	
+     0008 00rr                      1-  720     	SFUN	_PWM1DUTY
+                                    1-  721     	.line	426, "init.c"; 	}
+                                    1-  722     	RETURN	
+     0009 0010                      3-   39 m1      ret
+                                    1-  723     ; exit point of _pwm1_init
+                                    1-  725     ;***
+                                    1-  726     ;  pBlock Stats: dbName = C
+                                    1-  727     ;***
+                                    1-  728     ;has an exit
+                                    1-  729     ;; Starting pCode block
+                                    1-  730     .segment "code"; module=init, function=_timer1_init
+     0000                           1-  732     _timer1_init:
+                                    1-  733     ; 2 exit points
+                                    1-  734     	.line	373, "init.c"; 	T1CR1 = C_TMR1_Dis; // Disable Timer1
+     0000 0200                      1-  735     	CLRA	
+     0001 00rr                      1-  736     	SFUN	_T1CR1
+                                    1-  737     	.line	374, "init.c"; 	T1CR2 = C_TMR1_ClkSrc_Inst|C_TMR1_ExtRising|C_PS1_Dis;//|C_PS1_EN| C_PS1_Div2;//|C_PS1_Dis
+     0002 2108                      1-  738     	MOVIA	0x08
+     0003 00rr                      1-  739     	SFUN	_T1CR2
+                                    1-  740     	.line	376, "init.c"; 	TMRH = 0x00;
+     0004 02rr                      1-  741     	CLRR	_TMRH
+                                    1-  742     	.line	379, "init.c"; 	TMR1 = 49;
+     0005 2131                      1-  743     	MOVIA	0x31
+     0006 00rr                      1-  744     	SFUN	_TMR1
+                                    1-  745     	.line	380, "init.c"; 	T1CR1 = C_TMR1_En | C_TMR1_Reload;
+     0007 2103                      1-  746     	MOVIA	0x03
+     0008 00rr                      1-  747     	SFUN	_T1CR1
+                                    1-  748     	.line	381, "init.c"; 	INTE |= C_INT_TMR1;
+     0009 19rr                      1-  749     	BSR	_INTE,3
+                                    1-  750     	.line	382, "init.c"; 	}
+                                    1-  751     	RETURN	
+     000A 0010                      3-   39 m1      ret
+                                    1-  752     ; exit point of _timer1_init
+                                    1-  754     ;***
+                                    1-  755     ;  pBlock Stats: dbName = C
+                                    1-  756     ;***
+                                    1-  757     ;has an exit
+                                    1-  758     ;1 compiler assigned register :
+                                    1-  759     ;   r0x1006
+                                    1-  760     ;; Starting pCode block
+                                    1-  761     .segment "code"; module=init, function=_timer0_init
+     0000                           1-  763     _timer0_init:
+                                    1-  764     ; 2 exit points
+                                    1-  765     	.line	241, "init.c"; 	PCON1 &= ~0x01;						//disable timer0
+     0000 001r                      1-  766     	IOSTR	_PCON1
+                                    1-  767     	BANKSEL	r0x1006
+     0001 rrrr                      3-  109 m1      .banksel ram_address
+     0002 00rr                      1-  768     	MOVAR	r0x1006
+     0003 1Crr                      1-  769     	BCR	r0x1006,0
+     0004 01rr                      1-  770     	MOVR	r0x1006,W
+     0005 000r                      1-  771     	IOST	_PCON1
+                                    1-  772     	.line	278, "init.c"; 	TMR0 = 163;//156;			// (256-X)/(4MM/4) = 1/10K -> (256-X)/1KK = 1/10K -> X = 256-100 = 156;
+     0006 21A3                      1-  773     	MOVIA	0xa3
+     0007 00rr                      1-  774     	MOVAR	_TMR0
+                                    1-  775     	.line	294, "init.c"; 	T0MD = C_PS0_TMR0 | C_PS0_Div2 ;
+     0008 0200                      1-  776     	CLRA	
+     0009 0003                      1-  777     	T0MD	
+                                    1-  778     	.line	299, "init.c"; 	PCON1 |= 0x01;						//enable timer0.
+     000A 001r                      1-  779     	IOSTR	_PCON1
+     000B 00rr                      1-  780     	MOVAR	r0x1006
+     000C 18rr                      1-  781     	BSR	r0x1006,0
+     000D 01rr                      1-  782     	MOVR	r0x1006,W
+     000E 000r                      1-  783     	IOST	_PCON1
+                                    1-  784     	.line	300, "init.c"; 	}
+                                    1-  785     	RETURN	
+     000F 0010                      3-   39 m1      ret
+                                    1-  786     ; exit point of _timer0_init
+                                    1-  788     ;***
+                                    1-  789     ;  pBlock Stats: dbName = C
+                                    1-  790     ;***
+                                    1-  791     ;has an exit
+                                    1-  792     ;; Starting pCode block
+                                    1-  793     .segment "code"; module=init, function=_gpio_init
+     0000                           1-  795     _gpio_init:
+                                    1-  796     ; 2 exit points
+                                    1-  797     	.line	113, "init.c"; 	PORTA = 0x80;
+     0000 2180                      1-  798     	MOVIA	0x80
+     0001 00rr                      1-  799     	MOVAR	_PORTA
+                                    1-  800     	.line	122, "init.c"; 	PORTB = 0x0c;
+     0002 210C                      1-  801     	MOVIA	0x0c
+     0003 00rr                      1-  802     	MOVAR	_PORTB
+                                    1-  803     	.line	135, "init.c"; 	IOSTA = 0x15;
+     0004 2115                      1-  804     	MOVIA	0x15
+     0005 000r                      1-  805     	IOST	_IOSTA
+                                    1-  806     	.line	144, "init.c"; 	IOSTB = 0x01;
+     0006 2101                      1-  807     	MOVIA	0x01
+     0007 000r                      1-  808     	IOST	_IOSTB
+                                    1-  809     	.line	157, "init.c"; 	APHCON = 0xfb;
+     0008 21FB                      1-  810     	MOVIA	0xfb
+     0009 000r                      1-  811     	IOST	_APHCON
+                                    1-  812     	.line	160, "init.c"; 	PCONbits.PHPA5 = 1;	
+     000A 1Arr                      1-  813     	BSR	_PCONbits,4
+                                    1-  814     	.line	170, "init.c"; 	BPHCON = 0x3F;
+     000B 213F                      1-  815     	MOVIA	0x3f
+     000C 00rr                      1-  816     	MOVAR	_BPHCON
+                                    1-  817     	.line	184, "init.c"; 	ABPLCON = 0xff;
+     000D 21FF                      1-  818     	MOVIA	0xff
+     000E 00rr                      1-  819     	MOVAR	_ABPLCON
+                                    1-  820     	.line	196, "init.c"; 	AWUCON = C_PA4_Wakeup;//C_PA0_Wakeup|C_PA2_Wakeup|C_PA5_Wakeup;
+     000F 2110                      1-  821     	MOVIA	0x10
+     0010 00rr                      1-  822     	MOVAR	_AWUCON
+                                    1-  823     	.line	205, "init.c"; 	BWUCON = C_PB0_Wakeup;
+     0011 2101                      1-  824     	MOVIA	0x01
+     0012 00rr                      1-  825     	MOVAR	_BWUCON
+                                    1-  826     	.line	218, "init.c"; 	PACON = 0;//C_PA0_AIN0;
+     0013 02rr                      1-  827     	CLRR	_PACON
+                                    1-  828     	.line	220, "init.c"; 	ADCRbits.PBCON5 = 0; 
+     0014 1Frr                      1-  829     	BCR	_ADCRbits,6
+                                    1-  830     	.line	222, "init.c"; 	ADCRbits.PBCON4 = 0;
+     0015 1Err                      1-  831     	BCR	_ADCRbits,5
+                                    1-  832     	.line	224, "init.c"; 	ADCRbits.PBCON3 = 0;
+     0016 1Err                      1-  833     	BCR	_ADCRbits,4
+                                    1-  834     	.line	230, "init.c"; 	BODCON = 0x00;
+     0017 0200                      1-  835     	CLRA	
+     0018 000r                      1-  836     	IOST	_BODCON
+                                    1-  837     	.line	231, "init.c"; 	}
+                                    1-  838     	RETURN	
+     0019 0010                      3-   39 m1      ret
+                                    1-  839     ; exit point of _gpio_init
+                                    1-  841     ;***
+                                    1-  842     ;  pBlock Stats: dbName = C
+                                    1-  843     ;***
+                                    1-  844     ;has an exit
+                                    1-  845     ;functions called:
+                                    1-  846     ;   _gpio_init
+                                    1-  847     ;   _gpio_init
+                                    1-  848     ;1 compiler assigned register :
+                                    1-  849     ;   r0x1007
+                                    1-  850     ;; Starting pCode block
+                                    1-  851     .segment "code"; module=init, function=_sleep_init
+     0000                           1-  853     _sleep_init:
+                                    1-  854     ; 2 exit points
+                                    1-  855     	.line	73, "init.c"; 	DISI();
+     0000 0013                      1-  856     	DISI
+                                    1-  857     	.line	75, "init.c"; 	gpio_init();
+                                    1-  858     	MCALL	_gpio_init
+     0001 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  859     	.line	76, "init.c"; 	PCON1 &= ~0x01;			//disable timer0
+     0002 001r                      1-  860     	IOSTR	_PCON1
+                                    1-  861     	BANKSEL	r0x1007
+     0003 rrrr                      3-  109 m1      .banksel ram_address
+     0004 00rr                      1-  862     	MOVAR	r0x1007
+     0005 1Crr                      1-  863     	BCR	r0x1007,0
+     0006 01rr                      1-  864     	MOVR	r0x1007,W
+     0007 000r                      1-  865     	IOST	_PCON1
+                                    1-  866     	.line	81, "init.c"; 	ADMD = 0x00;			//disable adc
+     0008 02rr                      1-  867     	CLRR	_ADMD
+                                    1-  868     	.line	83, "init.c"; 	PCONbits.WDTEN = 0;		//enable watchdog
+     0009 1Frr                      1-  869     	BCR	_PCONbits,7
+                                    1-  870     	.line	85, "init.c"; 	PCONbits.LVREN = 1;		//enable lvr
+     000A 19rr                      1-  871     	BSR	_PCONbits,3
+                                    1-  872     	.line	87, "init.c"; 	INTE = C_INT_PABKey;//0x42;//0100 0010b -bit1-C_INT_PABKey bit6-C_INT_WDT
+     000B 2102                      1-  873     	MOVIA	0x02
+     000C 00rr                      1-  874     	MOVAR	_INTE
+                                    1-  875     	.line	88, "init.c"; 	INTF = 0x00;
+     000D 02rr                      1-  876     	CLRR	_INTF
+                                    1-  877     	.line	91, "init.c"; 	ENI();
+     000E 0004                      1-  878     	ENI
+                                    1-  879     	.line	92, "init.c"; 	}
+                                    1-  880     	RETURN	
+     000F 0010                      3-   39 m1      ret
+                                    1-  881     ; exit point of _sleep_init
+                                    1-  883     ;***
+                                    1-  884     ;  pBlock Stats: dbName = C
+                                    1-  885     ;***
+                                    1-  886     ;has an exit
+                                    1-  887     ;functions called:
+                                    1-  888     ;   _gpio_init
+                                    1-  889     ;   _timer0_init
+                                    1-  890     ;   _timer1_init
+                                    1-  891     ;   _wdt_init
+                                    1-  892     ;   _lvd_init
+                                    1-  893     ;   _lvr_init
+                                    1-  894     ;   _isr_init
+                                    1-  895     ;   _gpio_init
+                                    1-  896     ;   _timer0_init
+                                    1-  897     ;   _timer1_init
+                                    1-  898     ;   _wdt_init
+                                    1-  899     ;   _lvd_init
+                                    1-  900     ;   _lvr_init
+                                    1-  901     ;   _isr_init
+                                    1-  902     ;; Starting pCode block
+                                    1-  903     .segment "code"; module=init, function=_system_init
+     0000                           1-  905     _system_init:
+                                    1-  906     ; 2 exit points
+                                    1-  907     	.line	44, "init.c"; 	DISI();
+     0000 0013                      1-  908     	DISI
+                                    1-  909     	.line	46, "init.c"; 	gpio_init();
+                                    1-  910     	MCALL	_gpio_init
+     0001 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  911     	.line	47, "init.c"; 	timer0_init();
+                                    1-  912     	MCALL	_timer0_init
+     0002 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  913     	.line	48, "init.c"; 	timer1_init();
+                                    1-  914     	MCALL	_timer1_init
+     0003 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  915     	.line	55, "init.c"; 	wdt_init();
+                                    1-  916     	MCALL	_wdt_init
+     0004 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  917     	.line	56, "init.c"; 	lvd_init();
+                                    1-  918     	MCALL	_lvd_init
+     0005 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  919     	.line	57, "init.c"; 	lvr_init();
+                                    1-  920     	MCALL	_lvr_init
+     0006 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  921     	.line	58, "init.c"; 	isr_init();
+                                    1-  922     	MCALL	_isr_init
+     0007 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  923     	.line	61, "init.c"; 	ENI();
+     0008 0004                      1-  924     	ENI
+                                    1-  925     	.line	62, "init.c"; 	}
+                                    1-  926     	RETURN	
+     0009 0010                      3-   39 m1      ret
+                                    1-  927     ; exit point of _system_init
+                                    1-  930     ;	code size estimation:
+                                    1-  931     ;	  249+   16 =   265 instructions (  562 byte)
+                                    1-  933     	end
+
+SYMBOL TABLE            TYPE     VALUE
+__pin_count__           Constant 0000000E
+__processor__           Constant 00810625
+C                       Constant 00000000
+DC                      Constant 00000001
+ENABLE_RAM_BANK         Constant 00000001
+F                       Constant 00000001
+FSR                     Constant 00000004
+INDF                    Constant 00000000
+PCHBUF                  Constant 0000000A
+PCL                     Constant 00000002
+STATUS                  Constant 00000003
+USEFGOTO                Constant 00000000
+W                       Constant 00000000
+Z                       Constant 00000002
+
+
+SOURCE FILE TABLE
+001 OBJ/init.s
+002 ny8b062f.inc
+003 common.inc
+004 init.c
+
+PROCESSOR    = NY8B062F (8 bits)
+PROGRAM ROM  = 0x00000000 - 0x000007FF
+DATA ROM     = 0x00000000 - 0x000007FF
+RESERVED MEM = 0x00000800 - 0x00000810
+SRAM / SFR   = 0x00000000 - 0x00000000

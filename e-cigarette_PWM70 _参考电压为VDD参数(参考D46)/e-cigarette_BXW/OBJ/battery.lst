@@ -1,0 +1,425 @@
+
+                    Nyquest Technology Co., Ltd.
+
+NYASM 2.37
+
+    ADDR  OPCODE/VALUE              LINE   TAG  SOURCE                   STATEMENT    
+
+                                    1-    1     ;--------------------------------------------------------
+                                    1-    2     ; File Created by SDCC : free open source ISO C Compiler 
+                                    1-    3     ; Version 4.2.2 #0 (MSVC)
+                                    1-    4     ;--------------------------------------------------------
+                                    1-    5     ; NY8A port
+                                    1-    6     ;--------------------------------------------------------
+                                    1-    7     	.file	"battery.c"
+                                    1-    8     	list	p=NY8B062E,c=on
+                                    1-    9     	#include "ny8b062e.inc"
+                                    2-    2     #include "common.inc"
+                                    3-    1     ;; header file for 8 bit series assembly -*- mode:asm; coding:utf-8; -*-
+                                    3-    2     ;; author    Ting
+                                    3-    3     ;; date      2020-12-24
+                                    3-    4     ;;
+                                    3-    5     ;; # constant definition
+                                    3-    6     ;;
+                                    3-    7     ;; ## instruction result store destination
+                                    3-    8     ;;  - W: the result is stored in the ACC.
+                                    3-    9     ;;  - F: the result is stored back in register.
+                                    3-   10     ;; ## flag name in STATUS register
+                                    3-   11     ;;  - C, DC, Z
+                                    3-   12     ;;
+                                    3-   13     ;; # macro define
+                                    3-   14     ;;
+                                    3-   15     ;; ## RETURN, used by C compiler, end of function
+                                    3-   16     ;; ## PAGESEL, empty macro, maybe used by C compiler (bug?)
+                                    3-   17     ;; ## BANKSEL, replace by .banksel pseudo command, empty if disable bank.
+                                    3-   18     ;; ## MGOTO, replace by LGOTO (ic<=2K word) or FGOTO (ic>2K word)
+                                    3-   19     ;; ## MCALL, same as above
+                                    3-   20     ;;
+                                    3-   21     W       EQU 0
+                                    3-   21     ;W = 0
+                                    3-   22     F       EQU 1
+                                    3-   22     ;F = 1
+                                    3-   23     C		EQU	0
+                                    3-   23     ;C = 0
+                                    3-   24     DC		EQU	1
+                                    3-   24     ;DC = 1
+                                    3-   25     Z		EQU	2
+                                    3-   25     ;Z = 2
+                                    3-   28     ;; common register for all series
+                                    3-   29     INDF    EQU 0x00
+                                    3-   29     ;INDF = 0
+                                    3-   30     PCL     EQU 0x02
+                                    3-   30     ;PCL = 2
+                                    3-   31     STATUS  EQU 0x03
+                                    3-   31     ;STATUS = 3
+                                    3-   32     FSR     EQU 0x04
+                                    3-   32     ;FSR = 4
+                                    3-   33     PCHBUF  EQU 0x0A
+                                    3-   33     ;PCHBUF = 10
+                                    1-   11     ;--------------------------------------------------------
+                                    1-   12     ; external declarations
+                                    1-   13     ;--------------------------------------------------------
+                                    1-   14     	extern	_JudgeSmokingLightCountTimeoutOrNot
+                                    1-   15     	extern	_ledRun
+                                    1-   16     	extern	_Detect_OverCurrent_ByAD
+                                    1-   17     	extern	_BaseBatSetPWMValue
+                                    1-   18     	extern	_LedSharpflash
+                                    1-   19     	extern	_ShowLed
+                                    1-   20     	extern	_ShowLedSharpflashParameters
+                                    1-   21     	extern	_ShowLedParameters
+                                    1-   22     	extern	_ADC_Convert_Pre
+                                    1-   23     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   24     	extern	_Ledbreathing
+                                    1-   25     	extern	_LedOff
+                                    1-   26     	extern	_SetLedColorNormallyOn
+                                    1-   27     	extern	_SetLedBreathingParameters
+                                    1-   28     	extern	_SetLedBreathingParameters2
+                                    1-   29     	extern	_SetLedFlashParameters
+                                    1-   30     	extern	_Set_ADVREFH_2V
+                                    1-   31     	extern	_Set_ADVREFH_5V
+                                    1-   32     	extern	_adc_get
+                                    1-   33     	extern	_F_wait_eoc
+                                    1-   34     	extern	_adc4_init
+                                    1-   35     	extern	_adc3_init
+                                    1-   36     	extern	_adc2_init
+                                    1-   37     	extern	_adc_init
+                                    1-   38     	extern	_Delay_N1ms_16bit
+                                    1-   39     	extern	_delay
+                                    1-   40     	extern	_sleep_handle
+                                    1-   41     	extern	_sleep_param_init
+                                    1-   42     	extern	_led_handle
+                                    1-   43     	extern	_led_param_init
+                                    1-   44     	extern	_detect_handle
+                                    1-   45     	extern	_detect_param_init
+                                    1-   46     	extern	_msg_handle
+                                    1-   47     	extern	_MicScan
+                                    1-   48     	extern	_KeyScan
+                                    1-   49     	extern	_key_param_init
+                                    1-   50     	extern	_isr_param_init
+                                    1-   51     	extern	_common_param_init
+                                    1-   52     	extern	_gpio_init
+                                    1-   53     	extern	_sleep_init
+                                    1-   54     	extern	_system_init
+                                    1-   55     	extern	_multi_16b
+                                    1-   56     	extern	_T0MD
+                                    1-   57     	extern	_PCON1
+                                    1-   58     	extern	_CMPCR
+                                    1-   59     	extern	_BODCON
+                                    1-   60     	extern	_PS0CV
+                                    1-   61     	extern	_APHCON
+                                    1-   62     	extern	_IOSTB
+                                    1-   63     	extern	_IOSTA
+                                    1-   64     	extern	_PWM4DUTY
+                                    1-   65     	extern	_P4CR1
+                                    1-   66     	extern	_BZ3CR
+                                    1-   67     	extern	_PS3CV
+                                    1-   68     	extern	_PWM3DUTY
+                                    1-   69     	extern	_T3CR2
+                                    1-   70     	extern	_T3CR1
+                                    1-   71     	extern	_TMR3
+                                    1-   72     	extern	_OSCCR
+                                    1-   73     	extern	_BZ2CR
+                                    1-   74     	extern	_PS2CV
+                                    1-   75     	extern	_PWM2DUTY
+                                    1-   76     	extern	_T2CR2
+                                    1-   77     	extern	_T2CR1
+                                    1-   78     	extern	_TMR2
+                                    1-   79     	extern	_TBHD
+                                    1-   80     	extern	_TBHP
+                                    1-   81     	extern	_IRCR
+                                    1-   82     	extern	_BZ1CR
+                                    1-   83     	extern	_PS1CV
+                                    1-   84     	extern	_PWM1DUTY
+                                    1-   85     	extern	_T1CR2
+                                    1-   86     	extern	_T1CR1
+                                    1-   87     	extern	_TMR1
+                                    1-   88     	extern	_TM3RH
+                                    1-   89     	extern	_TMRH
+                                    1-   90     	extern	_ADD
+                                    1-   91     	extern	_PCHBUF
+                                    1-   92     	extern	_FSR
+                                    1-   93     	extern	_STATUS
+                                    1-   94     	extern	_PCL
+                                    1-   95     	extern	_TMR0
+                                    1-   96     	extern	_INDF
+                                    1-   97     	extern	_temptimecount
+                                    1-   98     	extern	_sleep_delay_keep_time
+                                    1-   99     	extern	_running_keep_time
+                                    1-  100     	extern	_usb_flag
+                                    1-  101     	extern	_HeatPlugInsert_flag
+                                    1-  102     	extern	_HeatPlugInsertTimeCount
+                                    1-  103     	extern	_HeatCount
+                                    1-  104     	extern	_SmokingKeepTime
+                                    1-  105     	extern	_HeatingKeepTime
+                                    1-  106     	extern	_KeyDowmTimeCount
+                                    1-  107     	extern	_VolTypeIndex
+                                    1-  108     	extern	_MsgType
+                                    1-  109     	extern	_SmokeState
+                                    1-  110     	extern	_BatVolLevel
+                                    1-  111     	extern	_SaveHeaterIOStatus
+                                    1-  112     	extern	_MotorDutySet
+                                    1-  113     	extern	_NowMotorDuty
+                                    1-  114     	extern	_TargetMotorDuty
+                                    1-  115     	extern	_gAdcDataValue
+                                    1-  116     	extern	_OverCurrent_adc_value
+                                    1-  117     	extern	_OverCurrent_check_cnt
+                                    1-  118     	extern	_AdcChannelIndex
+                                    1-  119     	extern	_BuleLed_delay_keep_time
+                                    1-  120     	extern	_OverCurrentCount
+                                    1-  121     	extern	_OverCurrentDelayTime
+                                    1-  122     	extern	_led_delay_keep_time
+                                    1-  123     	extern	_led_flash_count
+                                    1-  124     	extern	_led_flash_flag
+                                    1-  125     	extern	_percent_nun
+                                    1-  126     	extern	_PwmCycleCount
+                                    1-  127     	extern	_sleepCnt
+                                    1-  128     	extern	_Led_Breathe_count
+                                    1-  129     	extern	_LedShowKeepTime
+                                    1-  130     	extern	_LedShowStep
+                                    1-  131     	extern	_GroupColourIndex
+                                    1-  132     	extern	_ledRunStarStep
+                                    1-  133     	extern	_ledRunStep
+                                    1-  134     	extern	_nowLedMode
+                                    1-  135     	extern	_CodeSwitchIndex
+                                    1-  136     	extern	_msg
+                                    1-  137     	extern	_INTE2bits
+                                    1-  138     	extern	_RFCbits
+                                    1-  139     	extern	_ANAENbits
+                                    1-  140     	extern	_INTEDGbits
+                                    1-  141     	extern	_ADJMDbits
+                                    1-  142     	extern	_PACONbits
+                                    1-  143     	extern	_AWUCONbits
+                                    1-  144     	extern	_ADCRbits
+                                    1-  145     	extern	_ADVREFHbits
+                                    1-  146     	extern	_ADRbits
+                                    1-  147     	extern	_ADMDbits
+                                    1-  148     	extern	_INTFbits
+                                    1-  149     	extern	_INTEbits
+                                    1-  150     	extern	_BPHCONbits
+                                    1-  151     	extern	_ABPLCONbits
+                                    1-  152     	extern	_BWUCONbits
+                                    1-  153     	extern	_PCONbits
+                                    1-  154     	extern	_PORTBbits
+                                    1-  155     	extern	_PORTAbits
+                                    1-  157     	extern PSAVE
+                                    1-  158     	extern SSAVE
+                                    1-  159     	extern WSAVE
+                                    1-  160     	extern STK12
+                                    1-  161     	extern STK11
+                                    1-  162     	extern STK10
+                                    1-  163     	extern STK09
+                                    1-  164     	extern STK08
+                                    1-  165     	extern STK07
+                                    1-  166     	extern STK06
+                                    1-  167     	extern STK05
+                                    1-  168     	extern STK04
+                                    1-  169     	extern STK03
+                                    1-  170     	extern STK02
+                                    1-  171     	extern STK01
+                                    1-  172     	extern STK00
+                                    1-  173     ;--------------------------------------------------------
+                                    1-  174     ; global declarations
+                                    1-  175     ;--------------------------------------------------------
+                                    1-  176     	extern	_lvd_3P0V_init
+                                    1-  177     	extern	_lvd_3P3V_init
+                                    1-  178     	extern	_sys_flag_3
+                                    1-  179     	extern	_sys_flag_2
+                                    1-  180     	extern	_sys_flag_1
+                                    1-  181     	extern	_sys_flag_0
+                                    1-  182     	extern	_INTE2
+                                    1-  183     	extern	_RFC
+                                    1-  184     	extern	_ANAEN
+                                    1-  185     	extern	_INTEDG
+                                    1-  186     	extern	_ADJMD
+                                    1-  187     	extern	_PACON
+                                    1-  188     	extern	_AWUCON
+                                    1-  189     	extern	_ADCR
+                                    1-  190     	extern	_ADVREFH
+                                    1-  191     	extern	_ADR
+                                    1-  192     	extern	_ADMD
+                                    1-  193     	extern	_INTF
+                                    1-  194     	extern	_INTE
+                                    1-  195     	extern	_BPHCON
+                                    1-  196     	extern	_ABPLCON
+                                    1-  197     	extern	_BWUCON
+                                    1-  198     	extern	_PCON
+                                    1-  199     	extern	_PORTB
+                                    1-  200     	extern	_PORTA
+                                    1-  201     	extern	_battery_low_cnt
+                                    1-  202     	extern	_battery_param_init
+                                    1-  203     	extern	_battery_check
+                                    1-  205     ;--------------------------------------------------------
+                                    1-  206     ; global definitions
+                                    1-  207     ;--------------------------------------------------------
+                                    1-  208     .segment "uninit"
+     0000                           1-  209     _battery_low_cnt:
+                                    1-  210     	.res 1
+                                    1-  213     ;--------------------------------------------------------
+                                    1-  214     ; absolute symbol definitions
+                                    1-  215     ;--------------------------------------------------------
+                                    1-  216     ;--------------------------------------------------------
+                                    1-  217     ; compiler-defined variables
+                                    1-  218     ;--------------------------------------------------------
+                                    1-  219     .segment "uninit"
+     0000                           1-  220     r0x1002:
+                                    1-  221     	.res	1
+                                    1-  222     .segment "uninit"
+     0000                           1-  223     r0x1001:
+                                    1-  224     	.res	1
+                                    1-  225     ;--------------------------------------------------------
+                                    1-  226     ; initialized data
+                                    1-  227     ;--------------------------------------------------------
+                                    1-  228     ;--------------------------------------------------------
+                                    1-  229     ; initialized absolute data
+                                    1-  230     ;--------------------------------------------------------
+                                    1-  231     ;--------------------------------------------------------
+                                    1-  232     ; overlayable items in internal ram 
+                                    1-  233     ;--------------------------------------------------------
+                                    1-  234     ;	udata_ovr
+                                    1-  235     ;--------------------------------------------------------
+                                    1-  236     ; code
+                                    1-  237     ;--------------------------------------------------------
+                                    1-  238     ; code_battery	code
+                                    1-  239     ;***
+                                    1-  240     ;  pBlock Stats: dbName = C
+                                    1-  241     ;***
+                                    1-  242     ;has an exit
+                                    1-  243     ;; Starting pCode block
+                                    1-  244     .segment "code"; module=battery, function=_battery_check
+     0000                           1-  246     _battery_check:
+                                    1-  247     ; 2 exit points
+                                    1-  248     	.line	109, "battery.c"; 	}
+                                    1-  249     	RETURN	
+     0000 0010                      3-   39 m1      ret
+                                    1-  250     ; exit point of _battery_check
+                                    1-  252     ;***
+                                    1-  253     ;  pBlock Stats: dbName = C
+                                    1-  254     ;***
+                                    1-  255     ;has an exit
+                                    1-  256     ;1 compiler assigned register :
+                                    1-  257     ;   r0x1001
+                                    1-  258     ;; Starting pCode block
+                                    1-  259     .segment "code"; module=battery, function=_lvd_3P0V_init
+     0000                           1-  261     _lvd_3P0V_init:
+                                    1-  262     ; 2 exit points
+                                    1-  263     	.line	53, "battery.c"; 	PCON1 &= 0xe3;							// 1100 0011
+     0000 001r                      1-  264     	IOSTR	_PCON1
+                                    1-  265     	BANKSEL	r0x1001
+     0001 rrrr                      3-  109 m1      .banksel ram_address
+     0002 00rr                      1-  266     	MOVAR	r0x1001
+     0003 21E3                      1-  267     	MOVIA	0xe3
+     0004 10rr                      1-  268     	ANDAR	r0x1001,F
+     0005 01rr                      1-  269     	MOVR	r0x1001,W
+     0006 000r                      1-  270     	IOST	_PCON1
+                                    1-  271     	.line	54, "battery.c"; 	PCON1 |= C_LVD_3P0V;					//
+     0007 001r                      1-  272     	IOSTR	_PCON1
+     0008 00rr                      1-  273     	MOVAR	r0x1001
+     0009 1Arr                      1-  274     	BSR	r0x1001,4
+     000A 01rr                      1-  275     	MOVR	r0x1001,W
+     000B 000r                      1-  276     	IOST	_PCON1
+                                    1-  277     	.line	55, "battery.c"; 	f_battery_low = 0;
+                                    1-  278     	BANKSEL	_sys_flag_0
+     000C rrrr                      3-  109 m1      .banksel ram_address
+     000D 1Err                      1-  279     	BCR	_sys_flag_0,5
+                                    1-  280     	.line	56, "battery.c"; 	battery_low_cnt = 0;
+                                    1-  281     	BANKSEL	_battery_low_cnt
+     000E rrrr                      3-  109 m1      .banksel ram_address
+     000F 02rr                      1-  282     	CLRR	_battery_low_cnt
+                                    1-  283     	.line	57, "battery.c"; 	}
+                                    1-  284     	RETURN	
+     0010 0010                      3-   39 m1      ret
+                                    1-  285     ; exit point of _lvd_3P0V_init
+                                    1-  287     ;***
+                                    1-  288     ;  pBlock Stats: dbName = C
+                                    1-  289     ;***
+                                    1-  290     ;has an exit
+                                    1-  291     ;1 compiler assigned register :
+                                    1-  292     ;   r0x1002
+                                    1-  293     ;; Starting pCode block
+                                    1-  294     .segment "code"; module=battery, function=_lvd_3P3V_init
+     0000                           1-  296     _lvd_3P3V_init:
+                                    1-  297     ; 2 exit points
+                                    1-  298     	.line	46, "battery.c"; 	PCON1 &= 0xe3;							// 1100 0011
+     0000 001r                      1-  299     	IOSTR	_PCON1
+                                    1-  300     	BANKSEL	r0x1002
+     0001 rrrr                      3-  109 m1      .banksel ram_address
+     0002 00rr                      1-  301     	MOVAR	r0x1002
+     0003 21E3                      1-  302     	MOVIA	0xe3
+     0004 10rr                      1-  303     	ANDAR	r0x1002,F
+     0005 01rr                      1-  304     	MOVR	r0x1002,W
+     0006 000r                      1-  305     	IOST	_PCON1
+                                    1-  306     	.line	47, "battery.c"; 	PCON1 |= C_LVD_3P3V;					//
+     0007 001r                      1-  307     	IOSTR	_PCON1
+     0008 00rr                      1-  308     	MOVAR	r0x1002
+     0009 2114                      1-  309     	MOVIA	0x14
+     000A 11rr                      1-  310     	IORAR	r0x1002,F
+     000B 01rr                      1-  311     	MOVR	r0x1002,W
+     000C 000r                      1-  312     	IOST	_PCON1
+                                    1-  313     	.line	48, "battery.c"; 	f_battery_low = 0;
+                                    1-  314     	BANKSEL	_sys_flag_0
+     000D rrrr                      3-  109 m1      .banksel ram_address
+     000E 1Err                      1-  315     	BCR	_sys_flag_0,5
+                                    1-  316     	.line	49, "battery.c"; 	battery_low_cnt = 0;
+                                    1-  317     	BANKSEL	_battery_low_cnt
+     000F rrrr                      3-  109 m1      .banksel ram_address
+     0010 02rr                      1-  318     	CLRR	_battery_low_cnt
+                                    1-  319     	.line	50, "battery.c"; 	}
+                                    1-  320     	RETURN	
+     0011 0010                      3-   39 m1      ret
+                                    1-  321     ; exit point of _lvd_3P3V_init
+                                    1-  323     ;***
+                                    1-  324     ;  pBlock Stats: dbName = C
+                                    1-  325     ;***
+                                    1-  326     ;has an exit
+                                    1-  327     ;; Starting pCode block
+                                    1-  328     .segment "code"; module=battery, function=_battery_param_init
+     0000                           1-  330     _battery_param_init:
+                                    1-  331     ; 2 exit points
+                                    1-  332     	.line	31, "battery.c"; 	f_battery_check = 0;
+                                    1-  333     	BANKSEL	_sys_flag_1
+     0000 rrrr                      3-  109 m1      .banksel ram_address
+     0001 1Crr                      1-  334     	BCR	_sys_flag_1,0
+                                    1-  335     	.line	34, "battery.c"; 	battery_low_cnt = 0;
+                                    1-  336     	BANKSEL	_battery_low_cnt
+     0002 rrrr                      3-  109 m1      .banksel ram_address
+     0003 02rr                      1-  337     	CLRR	_battery_low_cnt
+                                    1-  338     	.line	40, "battery.c"; 	f_battery_low = 0;
+                                    1-  339     	BANKSEL	_sys_flag_0
+     0004 rrrr                      3-  109 m1      .banksel ram_address
+     0005 1Err                      1-  340     	BCR	_sys_flag_0,5
+                                    1-  341     	.line	42, "battery.c"; 	}
+                                    1-  342     	RETURN	
+     0006 0010                      3-   39 m1      ret
+                                    1-  343     ; exit point of _battery_param_init
+                                    1-  346     ;	code size estimation:
+                                    1-  347     ;	   34+    9 =    43 instructions (  104 byte)
+                                    1-  349     	end
+
+SYMBOL TABLE            TYPE     VALUE
+__pin_count__           Constant 0000000E
+__processor__           Constant 00810624
+C                       Constant 00000000
+DC                      Constant 00000001
+ENABLE_RAM_BANK         Constant 00000001
+F                       Constant 00000001
+FSR                     Constant 00000004
+INDF                    Constant 00000000
+PCHBUF                  Constant 0000000A
+PCL                     Constant 00000002
+STATUS                  Constant 00000003
+USEFGOTO                Constant 00000000
+W                       Constant 00000000
+Z                       Constant 00000002
+
+
+SOURCE FILE TABLE
+001 OBJ/battery.s
+002 ny8b062e.inc
+003 common.inc
+004 battery.c
+
+PROCESSOR    = NY8B062E (8 bits)
+PROGRAM ROM  = 0x00000000 - 0x000007FF
+DATA ROM     = 0x00000000 - 0x000007FF
+RESERVED MEM = 0x00000800 - 0x00000810
+SRAM / SFR   = 0x00000000 - 0x00000000

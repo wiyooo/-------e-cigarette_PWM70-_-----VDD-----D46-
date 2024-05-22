@@ -1,0 +1,1043 @@
+# memory map file, output by NYASM 2.41 [Build: 231121.00] linker.
+#
+# address start from 0 is ROM
+# address start from 20000000 is RAM (R-page)
+# address start from 20800000 is RAM (F-page)
+# address start from 21000000 is RAM (S-page)
+# address start from 21800000 is RAM (T-page)
+# address = 0xFFFFFFFF means that there is no space to allocate.
+#
+
+Module list:
+------------
+detect.o:
+    .debug_line          offset:0x0        size:0x16b0 (5808)
+    .debug_info          offset:0x0        size:0x540 (1344)
+    .debug_abbrev        offset:0x0        size:0x24 (36)
+    .debug_ranges        offset:0x0        size:0x10c (268)
+    .debug_aranges       offset:0x0        size:0x114 (276)
+    uninit               offset:0x20000032 size:0x1
+    uninit               offset:0x20000033 size:0x1
+    uninit               offset:0x20000034 size:0x1
+    uninit               offset:0x20000020 size:0x2
+    uninit               offset:0x20000022 size:0x2
+    uninit               offset:0x20000024 size:0x2
+    uninit               offset:0x20000035 size:0x1
+    uninit               offset:0x20000036 size:0x1
+    uninit               offset:0x20000037 size:0x1
+    uninit               offset:0x20000026 size:0x2
+    uninit               offset:0x20000038 size:0x1
+    uninit               offset:0x20000039 size:0x1
+    uninit               offset:0x2000003a size:0x1
+    uninit               offset:0x2000003b size:0x1
+    uninit               offset:0x2000003c size:0x1
+    uninit               offset:0x2000003d size:0x1
+    uninit               offset:0x2000003e size:0x1
+    uninit               offset:0x2000003f size:0x1
+    idata                offset:0x200000a2 size:0x1
+    idata                offset:0x200000a3 size:0x1
+    idata                offset:0x20000076 size:0x2
+    idata                offset:0x20000078 size:0x2
+    idata                offset:0x200000a0 size:0x2
+    code                 offset:0x9        size:0xf9 (249)
+    code                 offset:0x6e5      size:0x20 (32)
+    code                 offset:0x671      size:0x2b (43)
+    code                 offset:0x423      size:0x54 (84)
+    code                 offset:0x26f      size:0x95 (149)
+    code                 offset:0x3        size:0x3
+    code                 offset:0x69c      size:0x26 (38)
+
+init.o:
+    .debug_line          offset:0x16b0     size:0x39d (925)
+    .debug_info          offset:0x540      size:0x142 (322)
+    .debug_abbrev        offset:0x24       size:0x24 (36)
+    .debug_ranges        offset:0x10c      size:0x68 (104)
+    .debug_aranges       offset:0x114      size:0x70 (112)
+    uninit               offset:0x20000040 size:0x1
+    uninit               offset:0x20000041 size:0x1
+    uninit               offset:0x20000042 size:0x1
+    uninit               offset:0x20000043 size:0x1
+    code                 offset:0x7f6      size:0x7
+    code                 offset:0x6        size:0x2
+    code                 offset:0x7a0      size:0xf (15)
+    code                 offset:0x803      size:0x2
+    code                 offset:0x5d0      size:0x39 (57)
+    code                 offset:0x7d7      size:0xb (11)
+    code                 offset:0x770      size:0x10 (16)
+    code                 offset:0x73d      size:0x1a (26)
+    code                 offset:0x780      size:0x10 (16)
+    code                 offset:0x7e2      size:0xa (10)
+
+isr.o:
+    .debug_line          offset:0x1a4d     size:0x39a (922)
+    .debug_info          offset:0x682      size:0x20b (523)
+    .debug_abbrev        offset:0x49       size:0x24 (36)
+    .debug_ranges        offset:0x174      size:0x50 (80)
+    .debug_aranges       offset:0x184      size:0x58 (88)
+    uninit               offset:0x20000044 size:0x1
+    uninit               offset:0x20000045 size:0x1
+    uninit               offset:0x20000046 size:0x1
+    uninit               offset:0x20000047 size:0x1
+    uninit               offset:0x20000048 size:0x1
+    uninit               offset:0x20000028 size:0x2
+    uninit               offset:0x20000049 size:0x1
+    uninit               offset:0x2000004a size:0x1
+    uninit               offset:0x2000004b size:0x1
+    uninit               offset:0x2000004c size:0x1
+    idata                offset:0x200000a4 size:0x1
+    idata                offset:0x200000a5 size:0x1
+    idata                offset:0x200000a6 size:0x1
+    .text                offset:0x8        size:0x1
+    code                 offset:0x1be      size:0xb1 (177)
+    code                 offset:0x7af      size:0xf (15)
+
+key.o:
+    .debug_line          offset:0x1de7     size:0x20e (526)
+    .debug_info          offset:0x88d      size:0x82 (130)
+    .debug_abbrev        offset:0x6d       size:0x24 (36)
+    .debug_ranges        offset:0x1c4      size:0x1c (28)
+    .debug_aranges       offset:0x1dc      size:0x24 (36)
+    uninit               offset:0x2000004d size:0x1
+    uninit               offset:0x2000004e size:0x1
+    uninit               offset:0x2000004f size:0x1
+    uninit               offset:0x20000050 size:0x1
+    code                 offset:0x477      size:0x4e (78)
+    code                 offset:0x7ec      size:0xa (10)
+
+led.o:
+    .debug_line          offset:0x1ff5     size:0x1543 (5443)
+    .debug_info          offset:0x90f      size:0x526 (1318)
+    .debug_abbrev        offset:0x92       size:0x2a (42)
+    .debug_ranges        offset:0x1e0      size:0xfc (252)
+    .debug_aranges       offset:0x200      size:0x104 (260)
+    uninit               offset:0x20000051 size:0x1
+    uninit               offset:0x20000052 size:0x1
+    uninit               offset:0x20000053 size:0x1
+    uninit               offset:0x20000054 size:0x1
+    uninit               offset:0x20000055 size:0x1
+    uninit               offset:0x20000056 size:0x1
+    uninit               offset:0x20000057 size:0x1
+    uninit               offset:0x20000058 size:0x1
+    uninit               offset:0x20000059 size:0x1
+    uninit               offset:0x2000005a size:0x1
+    uninit               offset:0x2000005b size:0x1
+    uninit               offset:0x2000005c size:0x1
+    uninit               offset:0x2000005d size:0x1
+    uninit               offset:0x2000005e size:0x1
+    uninit               offset:0x2000005f size:0x1
+    uninit               offset:0x20000060 size:0x1
+    uninit               offset:0x2000002a size:0x2
+    uninit               offset:0x20000061 size:0x1
+    uninit               offset:0x20000062 size:0x1
+    uninit               offset:0x2000002c size:0x2
+    uninit               offset:0x20000063 size:0x1
+    uninit               offset:0x2000002e size:0x2
+    uninit               offset:0x20000064 size:0x1
+    uninit               offset:0x20000065 size:0x1
+    uninit               offset:0x20000066 size:0x1
+    uninit               offset:0x20000067 size:0x1
+    uninit               offset:0x20000068 size:0x1
+    uninit               offset:0x20000069 size:0x1
+    uninit               offset:0x2000006a size:0x1
+    uninit               offset:0x2000006b size:0x1
+    uninit               offset:0x2000006c size:0x1
+    uninit               offset:0x2000006d size:0x1
+    uninit               offset:0x2000006e size:0x1
+    uninit               offset:0x2000006f size:0x1
+    idata                offset:0x200000a7 size:0x1
+    code                 offset:0x510      size:0x48 (72)
+    code                 offset:0x705      size:0x1d (29)
+    code                 offset:0x365      size:0x5f (95)
+    code                 offset:0x757      size:0x19 (25)
+    code                 offset:0x3c4      size:0x5f (95)
+    code                 offset:0x304      size:0x61 (97)
+    code                 offset:0x609      size:0x39 (57)
+    code                 offset:0x595      size:0x3b (59)
+    code                 offset:0x800      size:0x3
+    code                 offset:0x6c2      size:0x23 (35)
+    code                 offset:0x642      size:0x2f (47)
+    code                 offset:0x558      size:0x3d (61)
+
+main.o:
+    .debug_line          offset:0x3538     size:0x71a (1818)
+    .debug_info          offset:0xe35      size:0x103 (259)
+    .debug_abbrev        offset:0xbc       size:0x24 (36)
+    .debug_ranges        offset:0x2dc      size:0x88 (136)
+    .debug_aranges       offset:0x304      size:0x90 (144)
+    share_bank           offset:0x2000007f size:0x1
+    share_bank           offset:0x2000007e size:0x1
+    share_bank           offset:0x2000007d size:0x1
+    share_bank           offset:0x2000007c size:0x1
+    share_bank           offset:0x2000007b size:0x1
+    share_bank           offset:0x2000007a size:0x1
+    uninit               offset:0x20000070 size:0x1
+    uninit               offset:0x20000071 size:0x1
+    uninit               offset:0x20000072 size:0x1
+    uninit               offset:0x20000073 size:0x1
+    .text                offset:0x0        size:0x1
+    code                 offset:0x722      size:0x1b (27)
+    code                 offset:0x102      size:0xbc (188)
+    code                 offset:0x7be      size:0xd (13)
+
+sleep.o:
+    .debug_line          offset:0x3c52     size:0x262 (610)
+    .debug_info          offset:0xf38      size:0xa4 (164)
+    .debug_abbrev        offset:0xe1       size:0x24 (36)
+    .debug_ranges        offset:0x364      size:0x18 (24)
+    .debug_aranges       offset:0x394      size:0x20 (32)
+    uninit               offset:0x20000030 size:0x2
+    uninit               offset:0x20000074 size:0x1
+    uninit               offset:0x20000075 size:0x1
+    code                 offset:0x4c5      size:0x4b (75)
+    code                 offset:0x7cb      size:0xc (12)
+
+NY8B062F.a:
+    .debug_line          offset:0x3eb4     size:0x576 (1398)
+    .debug_info          offset:0xfdc      size:0x2d (45)
+    .debug_abbrev        offset:0x105      size:0xf (15)
+    .debug_ranges        offset:0x37c      size:0x284 (644)
+    .debug_aranges       offset:0x3b4      size:0x28c (652)
+    .text                offset:0x20000000 size:0x1
+    .text                offset:0x20000001 size:0x1
+    .text                offset:0x20000002 size:0x1
+    .text                offset:0x20000003 size:0x1
+    .text                offset:0x20000004 size:0x1
+    .text                offset:0x20000005 size:0x1
+    .text                offset:0x20000006 size:0x1
+    .text                offset:0x20000007 size:0x1
+    .text                offset:0x20000008 size:0x1
+    .text                offset:0x20000009 size:0x1
+    .text                offset:0x2000000a size:0x1
+    .text                offset:0x2000000b size:0x1
+    .text                offset:0x2000000c size:0x1
+    .text                offset:0x2000000d size:0x1
+    .text                offset:0x2000000e size:0x1
+    .text                offset:0x2000000f size:0x1
+    .text                offset:0x20000010 size:0x1
+    .text                offset:0x20000011 size:0x1
+    .text                offset:0x20000012 size:0x1
+    .text                offset:0x20000013 size:0x1
+    .text                offset:0x20000014 size:0x1
+    .text                offset:0x20000015 size:0x1
+    .text                offset:0x20000016 size:0x1
+    .text                offset:0x20000017 size:0x1
+    .text                offset:0x20000018 size:0x1
+    .text                offset:0x20000019 size:0x1
+    .text                offset:0x2000001a size:0x1
+    .text                offset:0x2000001b size:0x1
+    .text                offset:0x2000001c size:0x1
+    .text                offset:0x2000001d size:0x1
+    .text                offset:0x2000001e size:0x1
+    .text                offset:0x2000001f size:0x1
+    .text                offset:0x20000080 size:0x1
+    .text                offset:0x20000081 size:0x1
+    .text                offset:0x20000082 size:0x1
+    .text                offset:0x20000083 size:0x1
+    .text                offset:0x20000084 size:0x1
+    .text                offset:0x20000085 size:0x1
+    .text                offset:0x20000086 size:0x1
+    .text                offset:0x20000087 size:0x1
+    .text                offset:0x20000088 size:0x1
+    .text                offset:0x20000089 size:0x1
+    .text                offset:0x2000008a size:0x1
+    .text                offset:0x2000008b size:0x1
+    .text                offset:0x2000008c size:0x1
+    .text                offset:0x2000008d size:0x1
+    .text                offset:0x2000008e size:0x1
+    .text                offset:0x2000008f size:0x1
+    .text                offset:0x20000090 size:0x1
+    .text                offset:0x20000091 size:0x1
+    .text                offset:0x20000092 size:0x1
+    .text                offset:0x20000093 size:0x1
+    .text                offset:0x20000094 size:0x1
+    .text                offset:0x20000095 size:0x1
+    .text                offset:0x20000096 size:0x1
+    .text                offset:0x20000097 size:0x1
+    .text                offset:0x20000098 size:0x1
+    .text                offset:0x20000099 size:0x1
+    .text                offset:0x2000009a size:0x1
+    .text                offset:0x2000009b size:0x1
+    .text                offset:0x2000009c size:0x1
+    .text                offset:0x2000009d size:0x1
+    .text                offset:0x2000009e size:0x1
+    .text                offset:0x2000009f size:0x1
+    .text                offset:0x200000c0 size:0x1
+    .text                offset:0x200000c1 size:0x1
+    .text                offset:0x200000c2 size:0x1
+    .text                offset:0x200000c3 size:0x1
+    .text                offset:0x200000c4 size:0x1
+    .text                offset:0x200000c5 size:0x1
+    .text                offset:0x200000c6 size:0x1
+    .text                offset:0x200000c7 size:0x1
+    .text                offset:0x200000c8 size:0x1
+    .text                offset:0x200000c9 size:0x1
+    .text                offset:0x200000ca size:0x1
+    .text                offset:0x200000cb size:0x1
+    .text                offset:0x200000cc size:0x1
+    .text                offset:0x200000cd size:0x1
+    .text                offset:0x200000ce size:0x1
+    .text                offset:0x200000cf size:0x1
+    .text                offset:0x200000d0 size:0x1
+    .text                offset:0x200000d1 size:0x1
+    .text                offset:0x200000d2 size:0x1
+    .text                offset:0x200000d3 size:0x1
+    .text                offset:0x200000d4 size:0x1
+    .text                offset:0x200000d5 size:0x1
+    .text                offset:0x200000d6 size:0x1
+    .text                offset:0x200000d7 size:0x1
+    .text                offset:0x200000d8 size:0x1
+    .text                offset:0x200000d9 size:0x1
+    .text                offset:0x200000da size:0x1
+    .text                offset:0x200000db size:0x1
+    .text                offset:0x200000dc size:0x1
+    .text                offset:0x200000dd size:0x1
+    .text                offset:0x200000de size:0x1
+    .text                offset:0x200000df size:0x1
+    .text                offset:0x200000e0 size:0x1
+    .text                offset:0x200000e1 size:0x1
+    .text                offset:0x200000e2 size:0x1
+    .text                offset:0x200000e3 size:0x1
+    .text                offset:0x200000e4 size:0x1
+    .text                offset:0x200000e5 size:0x1
+    .text                offset:0x200000e6 size:0x1
+    .text                offset:0x200000e7 size:0x1
+    .text                offset:0x200000e8 size:0x1
+    .text                offset:0x200000e9 size:0x1
+    .text                offset:0x200000ea size:0x1
+    .text                offset:0x200000eb size:0x1
+    .text                offset:0x200000ec size:0x1
+    .text                offset:0x200000ed size:0x1
+    .text                offset:0x200000ee size:0x1
+    .text                offset:0x200000ef size:0x1
+    .text                offset:0x200000f0 size:0x1
+    .text                offset:0x200000f1 size:0x1
+    .text                offset:0x200000f2 size:0x1
+    .text                offset:0x200000f3 size:0x1
+    .text                offset:0x200000f4 size:0x1
+    .text                offset:0x200000f5 size:0x1
+    .text                offset:0x200000f6 size:0x1
+    .text                offset:0x200000f7 size:0x1
+    .text                offset:0x200000f8 size:0x1
+    .text                offset:0x200000f9 size:0x1
+    .text                offset:0x200000fa size:0x1
+    .text                offset:0x200000fb size:0x1
+    .text                offset:0x200000fc size:0x1
+    .text                offset:0x200000fd size:0x1
+    .text                offset:0x200000fe size:0x1
+    .text                offset:0x200000ff size:0x1
+    .text                offset:0x20800000 size:0x1
+    .text                offset:0x20800005 size:0x1
+    .text                offset:0x20800006 size:0x1
+    .text                offset:0x20800009 size:0x1
+    .text                offset:0x2080000a size:0x1
+    .text                offset:0x2080000c size:0x1
+    .text                offset:0x2080000e size:0x1
+    .text                offset:0x2080000f size:0x1
+    .text                offset:0x21000000 size:0x1
+    .text                offset:0x21000001 size:0x1
+    .text                offset:0x21000002 size:0x1
+    .text                offset:0x21000003 size:0x1
+    .text                offset:0x21000004 size:0x1
+    .text                offset:0x21000005 size:0x1
+    .text                offset:0x21000006 size:0x1
+    .text                offset:0x21000007 size:0x1
+    .text                offset:0x21000008 size:0x1
+    .text                offset:0x21000009 size:0x1
+    .text                offset:0x2100000a size:0x1
+    .text                offset:0x2100000b size:0x1
+    .text                offset:0x2100000c size:0x1
+    .text                offset:0x2100000d size:0x1
+    .text                offset:0x2100000e size:0x1
+    .text                offset:0x2100000f size:0x1
+    .text                offset:0x21000010 size:0x1
+    .text                offset:0x21000011 size:0x1
+    .text                offset:0x21000012 size:0x1
+    .text                offset:0x21000013 size:0x1
+    .text                offset:0x21000014 size:0x1
+    .text                offset:0x21000015 size:0x1
+    .text                offset:0x21000016 size:0x1
+    .text                offset:0x21000018 size:0x1
+
+libsdcc_bankram.a:
+
+bank2_8b.a:
+    .debug_line          offset:0x442b     size:0x3c (60)
+    .debug_info          offset:0x100a     size:0x2b (43)
+    .debug_abbrev        offset:0x115      size:0xf (15)
+    .debug_ranges        offset:0x600      size:0x8
+    .debug_aranges       offset:0x640      size:0x10 (16)
+    startup              offset:0x1        size:0x2
+
+cb_file:
+
+
+Segment list:
+Name                 Start      Size
+-----------------------------------
+.text                0x20000000 0x1
+.text                0x20000001 0x1
+.text                0x20000002 0x1
+.text                0x20000003 0x1
+.text                0x20000004 0x1
+.text                0x20000005 0x1
+.text                0x20000006 0x1
+.text                0x20000007 0x1
+.text                0x20000008 0x1
+.text                0x20000009 0x1
+.text                0x2000000a 0x1
+.text                0x2000000b 0x1
+.text                0x2000000c 0x1
+.text                0x2000000d 0x1
+.text                0x2000000e 0x1
+.text                0x2000000f 0x1
+.text                0x20000010 0x1
+.text                0x20000011 0x1
+.text                0x20000012 0x1
+.text                0x20000013 0x1
+.text                0x20000014 0x1
+.text                0x20000015 0x1
+.text                0x20000016 0x1
+.text                0x20000017 0x1
+.text                0x20000018 0x1
+.text                0x20000019 0x1
+.text                0x2000001a 0x1
+.text                0x2000001b 0x1
+.text                0x2000001c 0x1
+.text                0x2000001d 0x1
+.text                0x2000001e 0x1
+.text                0x2000001f 0x1
+uninit               0x20000020 0x2
+uninit               0x20000022 0x2
+uninit               0x20000024 0x2
+uninit               0x20000026 0x2
+uninit               0x20000028 0x2
+uninit               0x2000002a 0x2
+uninit               0x2000002c 0x2
+uninit               0x2000002e 0x2
+uninit               0x20000030 0x2
+uninit               0x20000032 0x1
+uninit               0x20000033 0x1
+uninit               0x20000034 0x1
+uninit               0x20000035 0x1
+uninit               0x20000036 0x1
+uninit               0x20000037 0x1
+uninit               0x20000038 0x1
+uninit               0x20000039 0x1
+uninit               0x2000003a 0x1
+uninit               0x2000003b 0x1
+uninit               0x2000003c 0x1
+uninit               0x2000003d 0x1
+uninit               0x2000003e 0x1
+uninit               0x2000003f 0x1
+uninit               0x20000040 0x1
+uninit               0x20000041 0x1
+uninit               0x20000042 0x1
+uninit               0x20000043 0x1
+uninit               0x20000044 0x1
+uninit               0x20000045 0x1
+uninit               0x20000046 0x1
+uninit               0x20000047 0x1
+uninit               0x20000048 0x1
+uninit               0x20000049 0x1
+uninit               0x2000004a 0x1
+uninit               0x2000004b 0x1
+uninit               0x2000004c 0x1
+uninit               0x2000004d 0x1
+uninit               0x2000004e 0x1
+uninit               0x2000004f 0x1
+uninit               0x20000050 0x1
+uninit               0x20000051 0x1
+uninit               0x20000052 0x1
+uninit               0x20000053 0x1
+uninit               0x20000054 0x1
+uninit               0x20000055 0x1
+uninit               0x20000056 0x1
+uninit               0x20000057 0x1
+uninit               0x20000058 0x1
+uninit               0x20000059 0x1
+uninit               0x2000005a 0x1
+uninit               0x2000005b 0x1
+uninit               0x2000005c 0x1
+uninit               0x2000005d 0x1
+uninit               0x2000005e 0x1
+uninit               0x2000005f 0x1
+uninit               0x20000060 0x1
+uninit               0x20000061 0x1
+uninit               0x20000062 0x1
+uninit               0x20000063 0x1
+uninit               0x20000064 0x1
+uninit               0x20000065 0x1
+uninit               0x20000066 0x1
+uninit               0x20000067 0x1
+uninit               0x20000068 0x1
+uninit               0x20000069 0x1
+uninit               0x2000006a 0x1
+uninit               0x2000006b 0x1
+uninit               0x2000006c 0x1
+uninit               0x2000006d 0x1
+uninit               0x2000006e 0x1
+uninit               0x2000006f 0x1
+uninit               0x20000070 0x1
+uninit               0x20000071 0x1
+uninit               0x20000072 0x1
+uninit               0x20000073 0x1
+uninit               0x20000074 0x1
+uninit               0x20000075 0x1
+idata                0x20000076 0x2
+idata                0x20000078 0x2
+share_bank           0x2000007a 0x1
+share_bank           0x2000007b 0x1
+share_bank           0x2000007c 0x1
+share_bank           0x2000007d 0x1
+share_bank           0x2000007e 0x1
+share_bank           0x2000007f 0x1
+.text                0x20000080 0x1
+.text                0x20000081 0x1
+.text                0x20000082 0x1
+.text                0x20000083 0x1
+.text                0x20000084 0x1
+.text                0x20000085 0x1
+.text                0x20000086 0x1
+.text                0x20000087 0x1
+.text                0x20000088 0x1
+.text                0x20000089 0x1
+.text                0x2000008a 0x1
+.text                0x2000008b 0x1
+.text                0x2000008c 0x1
+.text                0x2000008d 0x1
+.text                0x2000008e 0x1
+.text                0x2000008f 0x1
+.text                0x20000090 0x1
+.text                0x20000091 0x1
+.text                0x20000092 0x1
+.text                0x20000093 0x1
+.text                0x20000094 0x1
+.text                0x20000095 0x1
+.text                0x20000096 0x1
+.text                0x20000097 0x1
+.text                0x20000098 0x1
+.text                0x20000099 0x1
+.text                0x2000009a 0x1
+.text                0x2000009b 0x1
+.text                0x2000009c 0x1
+.text                0x2000009d 0x1
+.text                0x2000009e 0x1
+.text                0x2000009f 0x1
+idata                0x200000a0 0x2
+idata                0x200000a2 0x1
+idata                0x200000a3 0x1
+idata                0x200000a4 0x1
+idata                0x200000a5 0x1
+idata                0x200000a6 0x1
+idata                0x200000a7 0x1
+.text                0x200000c0 0x1
+.text                0x200000c1 0x1
+.text                0x200000c2 0x1
+.text                0x200000c3 0x1
+.text                0x200000c4 0x1
+.text                0x200000c5 0x1
+.text                0x200000c6 0x1
+.text                0x200000c7 0x1
+.text                0x200000c8 0x1
+.text                0x200000c9 0x1
+.text                0x200000ca 0x1
+.text                0x200000cb 0x1
+.text                0x200000cc 0x1
+.text                0x200000cd 0x1
+.text                0x200000ce 0x1
+.text                0x200000cf 0x1
+.text                0x200000d0 0x1
+.text                0x200000d1 0x1
+.text                0x200000d2 0x1
+.text                0x200000d3 0x1
+.text                0x200000d4 0x1
+.text                0x200000d5 0x1
+.text                0x200000d6 0x1
+.text                0x200000d7 0x1
+.text                0x200000d8 0x1
+.text                0x200000d9 0x1
+.text                0x200000da 0x1
+.text                0x200000db 0x1
+.text                0x200000dc 0x1
+.text                0x200000dd 0x1
+.text                0x200000de 0x1
+.text                0x200000df 0x1
+.text                0x200000e0 0x1
+.text                0x200000e1 0x1
+.text                0x200000e2 0x1
+.text                0x200000e3 0x1
+.text                0x200000e4 0x1
+.text                0x200000e5 0x1
+.text                0x200000e6 0x1
+.text                0x200000e7 0x1
+.text                0x200000e8 0x1
+.text                0x200000e9 0x1
+.text                0x200000ea 0x1
+.text                0x200000eb 0x1
+.text                0x200000ec 0x1
+.text                0x200000ed 0x1
+.text                0x200000ee 0x1
+.text                0x200000ef 0x1
+.text                0x200000f0 0x1
+.text                0x200000f1 0x1
+.text                0x200000f2 0x1
+.text                0x200000f3 0x1
+.text                0x200000f4 0x1
+.text                0x200000f5 0x1
+.text                0x200000f6 0x1
+.text                0x200000f7 0x1
+.text                0x200000f8 0x1
+.text                0x200000f9 0x1
+.text                0x200000fa 0x1
+.text                0x200000fb 0x1
+.text                0x200000fc 0x1
+.text                0x200000fd 0x1
+.text                0x200000fe 0x1
+.text                0x200000ff 0x1
+.text                0x20800000 0x1
+.text                0x20800005 0x1
+.text                0x20800006 0x1
+.text                0x20800009 0x1
+.text                0x2080000a 0x1
+.text                0x2080000c 0x1
+.text                0x2080000e 0x1
+.text                0x2080000f 0x1
+.text                0x21000000 0x1
+.text                0x21000001 0x1
+.text                0x21000002 0x1
+.text                0x21000003 0x1
+.text                0x21000004 0x1
+.text                0x21000005 0x1
+.text                0x21000006 0x1
+.text                0x21000007 0x1
+.text                0x21000008 0x1
+.text                0x21000009 0x1
+.text                0x2100000a 0x1
+.text                0x2100000b 0x1
+.text                0x2100000c 0x1
+.text                0x2100000d 0x1
+.text                0x2100000e 0x1
+.text                0x2100000f 0x1
+.text                0x21000010 0x1
+.text                0x21000011 0x1
+.text                0x21000012 0x1
+.text                0x21000013 0x1
+.text                0x21000014 0x1
+.text                0x21000015 0x1
+.text                0x21000016 0x1
+.text                0x21000018 0x1
+
+Symbol list by name:
+Name                      Value
+--------------------------------
+___cinit_load__           0x60e (1550)
+___cinit_run__            0x60e (1550)
+___cinit_size__           0x10 (16)
+___fs2schar               no used
+___fs2sint                no used
+___fs2slong               no used
+___fs2uchar               no used
+___fs2uint                no used
+___fs2ulong               no used
+___fsadd                  no used
+___fsdiv                  no used
+___fseq                   no used
+___fslt                   no used
+___fsmul                  no used
+___fsneq                  no used
+___fssub                  no used
+___math_temp_1            no used
+___math_temp_2            no used
+___math_temp_3            no used
+___math_temp_4            no used
+___math_temp_5            no used
+___math_temp_6            no used
+___math_temp_7            no used
+___math_temp_8            no used
+___math_temp_9            no used
+___reserved_0x0007        0x20000007
+___reserved_0x000D        0x2000000d
+___reserved_0x001D        0x2000001d
+___reserved_0x001E        0x2000001e
+___reserved_0x0080        0x20000080
+___reserved_0x0081        0x20000081
+___reserved_0x0082        0x20000082
+___reserved_0x0083        0x20000083
+___reserved_0x0084        0x20000084
+___reserved_0x0085        0x20000085
+___reserved_0x0086        0x20000086
+___reserved_0x0087        0x20000087
+___reserved_0x0088        0x20000088
+___reserved_0x0089        0x20000089
+___reserved_0x008A        0x2000008a
+___reserved_0x008B        0x2000008b
+___reserved_0x008C        0x2000008c
+___reserved_0x008D        0x2000008d
+___reserved_0x008E        0x2000008e
+___reserved_0x008F        0x2000008f
+___reserved_0x0090        0x20000090
+___reserved_0x0091        0x20000091
+___reserved_0x0092        0x20000092
+___reserved_0x0093        0x20000093
+___reserved_0x0094        0x20000094
+___reserved_0x0095        0x20000095
+___reserved_0x0096        0x20000096
+___reserved_0x0097        0x20000097
+___reserved_0x0098        0x20000098
+___reserved_0x0099        0x20000099
+___reserved_0x009A        0x2000009a
+___reserved_0x009B        0x2000009b
+___reserved_0x009C        0x2000009c
+___reserved_0x009D        0x2000009d
+___reserved_0x009E        0x2000009e
+___reserved_0x009F        0x2000009f
+___reserved_0x00C0        0x200000c0
+___reserved_0x00C1        0x200000c1
+___reserved_0x00C2        0x200000c2
+___reserved_0x00C3        0x200000c3
+___reserved_0x00C4        0x200000c4
+___reserved_0x00C5        0x200000c5
+___reserved_0x00C6        0x200000c6
+___reserved_0x00C7        0x200000c7
+___reserved_0x00C8        0x200000c8
+___reserved_0x00C9        0x200000c9
+___reserved_0x00CA        0x200000ca
+___reserved_0x00CB        0x200000cb
+___reserved_0x00CC        0x200000cc
+___reserved_0x00CD        0x200000cd
+___reserved_0x00CE        0x200000ce
+___reserved_0x00CF        0x200000cf
+___reserved_0x00D0        0x200000d0
+___reserved_0x00D1        0x200000d1
+___reserved_0x00D2        0x200000d2
+___reserved_0x00D3        0x200000d3
+___reserved_0x00D4        0x200000d4
+___reserved_0x00D5        0x200000d5
+___reserved_0x00D6        0x200000d6
+___reserved_0x00D7        0x200000d7
+___reserved_0x00D8        0x200000d8
+___reserved_0x00D9        0x200000d9
+___reserved_0x00DA        0x200000da
+___reserved_0x00DB        0x200000db
+___reserved_0x00DC        0x200000dc
+___reserved_0x00DD        0x200000dd
+___reserved_0x00DE        0x200000de
+___reserved_0x00DF        0x200000df
+___reserved_0x00E0        0x200000e0
+___reserved_0x00E1        0x200000e1
+___reserved_0x00E2        0x200000e2
+___reserved_0x00E3        0x200000e3
+___reserved_0x00E4        0x200000e4
+___reserved_0x00E5        0x200000e5
+___reserved_0x00E6        0x200000e6
+___reserved_0x00E7        0x200000e7
+___reserved_0x00E8        0x200000e8
+___reserved_0x00E9        0x200000e9
+___reserved_0x00EA        0x200000ea
+___reserved_0x00EB        0x200000eb
+___reserved_0x00EC        0x200000ec
+___reserved_0x00ED        0x200000ed
+___reserved_0x00EE        0x200000ee
+___reserved_0x00EF        0x200000ef
+___reserved_0x00F0        0x200000f0
+___reserved_0x00F1        0x200000f1
+___reserved_0x00F2        0x200000f2
+___reserved_0x00F3        0x200000f3
+___reserved_0x00F4        0x200000f4
+___reserved_0x00F5        0x200000f5
+___reserved_0x00F6        0x200000f6
+___reserved_0x00F7        0x200000f7
+___reserved_0x00F8        0x200000f8
+___reserved_0x00F9        0x200000f9
+___reserved_0x00FA        0x200000fa
+___reserved_0x00FB        0x200000fb
+___reserved_0x00FC        0x200000fc
+___reserved_0x00FD        0x200000fd
+___reserved_0x00FE        0x200000fe
+___reserved_0x00FF        0x200000ff
+___schar2fs               no used
+___sint2fs                no used
+___slong2fs               no used
+___uchar2fs               no used
+___uint2fs                no used
+___ulong2fs               no used
+__checksum                0x671 (1649)
+__CHECKSUM_ADDR__         0x671 (1649)
+__codeptrget1             no used
+__divschar                no used
+__divsint                 no used
+__divslong                no used
+__divsuchar               no used
+__divsuint                no used
+__divsulong               no used
+__divuchar                no used
+__divuint                 no used
+__divulong                no used
+__divuschar               no used
+__divusint                no used
+__divuslong               no used
+__gptrget                 no used
+__gptrget1                no used
+__gptrget2                no used
+__gptrget3                no used
+__gptrget4                no used
+__gptrput                 no used
+__gptrput1                no used
+__gptrput2                no used
+__gptrput3                no used
+__gptrput4                no used
+__idata_total_size__      0xc (12)
+__modschar                no used
+__modsint                 no used
+__modslong                no used
+__modsuchar               no used
+__modsuint                no used
+__modsulong               no used
+__moduchar                no used
+__moduint                 no used
+__modulong                no used
+__moduschar               no used
+__modusint                no used
+__moduslong               no used
+__mulchar                 no used
+__mulint                  no used
+__mullong                 no used
+__mulschar                no used
+__mulsuchar               no used
+__muluchar                no used
+__muluschar               no used
+__nyc_ny8_startup         0x1
+__share_bank_total_size__ 0x6
+__uninit_total_size__     0x56 (86)
+_ABPLCON                  0x2000000b
+_ABPLCONbits              0x2000000b
+_ad_start_flg             0x200000a4
+_ADC_Convert_Pre          no used
+_adc_get                  0x215 (533)
+_adc_init                 no used
+_adc_init4                0x4a4 (1188)
+_adc_value_tmp            0x20000028
+_adc2_init                no used
+_adc3_init                no used
+_ADCR                     0x20000014
+_ADCRbits                 0x20000014
+_ADD                      0x20000012
+_ADJMD                    0x20000017
+_ADJMDbits                0x20000017
+_AdjustHeatPwm            no used
+_ADMD                     0x20000010
+_ADMDbits                 0x20000010
+_ADR                      0x20000011
+_ADRbits                  0x20000011
+_ADVREFH                  0x20000013
+_ADVREFHbits              0x20000013
+_ANAEN                    0x2000001a
+_ANAENbits                0x2000001a
+_APHCON                   0x20800009
+_AWUCON                   0x20000015
+_AWUCONbits               0x20000015
+_BaseBatSetPWMValue       0x349 (841)
+_baseLedCounter           0x2000002c
+_Bat_adc_value            no used
+_Bat_check_cnt            no used
+_bat_lvd_check            0x57a (1402)
+_battery_low_cnt          0x20000039
+_BODCON                   0x2080000c
+_BPHCON                   0x2000000c
+_BPHCONbits               0x2000000c
+_breathingLedRunOnce_FirstToUp_AfterToDown 0x5d7 (1495)
+_breathingLedRunOnce_FirstToUp_AfterToDown2 no used
+_breathingLedRunOnce_ToDown 0x309 (777)
+_breathingLedRunOnce_ToUp 0x281 (641)
+_breathingLightLow        0x20000061
+_breathingLightReversal   0x20000062
+_breathingVar             0x20000063
+_BuleLed_delay_keep_time  no used
+_BWUCON                   0x20000009
+_BWUCONbits               0x20000009
+_BZ1CR                    0x21000005
+_BZ2CR                    0x2100000e
+_BZ3CR                    0x21000015
+_charge_check_by_IO       0x524 (1316)
+_Chrg_Off_time_count      no used
+_Chrg_On_time_count       0x20000032
+_ChrgFullTimeCount        0x20000020
+_clear_ram                no used
+_CMPCR                    0x2080000e
+_common_param_init        0x638 (1592)
+_delay                    no used
+_delay_keep_time          0x2000005c
+_Delay_N1ms_16bit         no used
+_detect_param_init        0x547 (1351)
+_disp_delay_time_cnt      0x200000a3
+_EnterbatteryLowFlag      0x2000005d
+_F_wait_eoc               0x3
+_FSR                      0x20000004
+_g_u16ADCvalue            no used
+_g_u8ReadAdcCount         no used
+_gAdcDataValue            0x20000022
+_gAdcDataValueBak         0x20000024
+_Get_adc_data             no used
+_Get_Bat_ChrgBat_ADCValue no used
+_getAbs                   no used
+_gpio_init                0x5bd (1469)
+_GroupColourIndex         0x2000005a
+_Heat_Off_time_count      0x20000034
+_Heat_On_time_count       0x20000033
+_HeatCount                no used
+_HeaterExistdetect        no used
+_HeatPlugInsert_flag      no used
+_HeatPlugInsertTimeCount  no used
+_INDF                     0x20000000
+_INTE                     0x2000000e
+_INTE2                    0x2000001f
+_INTE2bits                0x2000001f
+_INTEbits                 0x2000000e
+_INTEDG                   0x20000018
+_INTEDGbits               0x20000018
+_INTF                     0x2000000f
+_INTFbits                 0x2000000f
+_IOSTA                    0x20800005
+_IOSTB                    0x20800006
+_IRCR                     0x21000006
+_isr                      0x175 (373)
+_isr_init                 0x665 (1637)
+_isr_param_init           0x62d (1581)
+_key_param_init           0x65e (1630)
+_keyCnt                   0x2000004e
+_keylowcount              0x2000004f
+_Led_Breathe_count        0x2000005b
+_Led_Breathe_count_Total  no used
+_led_delay_keep_time      0x20000055
+_led_flash_count          0x20000053
+_led_flash_finish_return  0x20000054
+_led_flash_flag           0x20000052
+_led_handle               0x40a (1034)
+_led_on_keep_time         0x20000056
+_led_param_init           0x593 (1427)
+_LedFlash                 0x477 (1143)
+_LedOff                   0x66c (1644)
+_LedPwmCycleCount         0x2000005f
+_LedPwmDuty               0x2000005e
+_ledRun                   0x2c2 (706)
+_ledRunOnce               no used
+_ledRunStarStep           no used
+_ledRunStep               0x20000058
+_ledRunSup                0x20000059
+_LedShowKeepTime          0x2000002a
+_LedShowStep              0x20000060
+_ledstatusdata            0x20000051
+_lvd_init                 0x61e (1566)
+_lvr_init                 0x6
+_main                     0x5a3 (1443)
+_MicScan                  0x38c (908)
+_msg                      0x2000004d
+_msg_handle               0xda (218)
+_multi_16b                no used
+_NOP10_                   no used
+_now_ch                   0x200000a2
+_nowLedMode               0x20000057
+_OSCCR                    0x2100000f
+_OverCurrent_adc_value    no used
+_OverCurrent_check_cnt    0x20000035
+_P4CR1                    0x21000016
+_PACON                    0x20000016
+_PACONbits                0x20000016
+_PCHBUF                   0x2000000a
+_PCL                      0x20000002
+_PCON                     0x20000008
+_PCON1                    0x2080000f
+_PCONbits                 0x20000008
+_percent_nun              0x20000048
+_PORTA                    0x20000005
+_PORTAbits                0x20000005
+_PORTB                    0x20000006
+_PORTBbits                0x20000006
+_PS0CV                    0x2080000a
+_PS1CV                    0x21000004
+_PS2CV                    0x2100000d
+_PS3CV                    0x21000014
+_pwm1_init                no used
+_PWM1DUTY                 0x21000003
+_pwm2_init                no used
+_PWM2DUTY                 0x2100000c
+_pwm3_init                no used
+_PWM3DUTY                 0x21000013
+_PWM4DUTY                 0x21000018
+_PwmCycleCount            0x20000047
+_read_14bit_rom           no used
+_res                      0x200000a7
+_RFC                      0x2000001b
+_RFCbits                  0x2000001b
+_running_keep_time        0x20000030
+_Set_ADVREFH_2V           no used
+_Set_ADVREFH_5V           no used
+_SetLedBreathingParameters no used
+_SetLedBreathingParameters2 0x4d9 (1241)
+_SetLedColor              0x448 (1096)
+_SetLedColorNormallyOn    0x560 (1376)
+_SetLedFlashParameters    0x502 (1282)
+_SetLedGroup              no used
+_sleep_delay_keep_time    0x20000074
+_sleep_handle             0x3ca (970)
+_sleep_init               0x5fe (1534)
+_sleep_param_init         0x640 (1600)
+_sleepCnt                 0x20000075
+_SmokeFun                 0x9
+_SmokeState               0x20000038
+_SmokingKeepTime          0x20000026
+_StartColourIndex         no used
+_STATUS                   0x20000003
+_sys_flag_0               0x20000070
+_sys_flag_1               0x20000071
+_sys_flag_2               0x20000072
+_sys_flag_3               0x20000073
+_system_init              0x654 (1620)
+_T0MD                     0x20800000
+_T1CR1                    0x21000001
+_T1CR2                    0x21000002
+_T2CR1                    0x2100000a
+_T2CR2                    0x2100000b
+_T3CR1                    0x21000011
+_T3CR2                    0x21000012
+_TargetMotorDuty          0x20000037
+_TBHD                     0x21000008
+_TBHP                     0x21000007
+_temp                     no used
+_TempCount                no used
+_temptimecount            0x2000002e
+_time_base                0x20000046
+_time_base_100ms          no used
+_time_base_100us          no used
+_time_base_1s             0x20000045
+_time_base_250ms          0x20000044
+_timer0_init              0x5ee (1518)
+_timer1_init              0x649 (1609)
+_TM3RH                    0x2000001c
+_TM3RHbits                0x2000001c
+_TmpAdcDataValue          no used
+_TMR0                     0x20000001
+_TMR1                     0x21000000
+_TMR2                     0x21000009
+_TMR3                     0x21000010
+_TMRH                     0x20000019
+_TMRHbits                 0x20000019
+_usb_check_ad_time_cnt    0x20000036
+_wdt_init                 0x66f (1647)
+PSAVE                     0x2000007f
+SSAVE                     0x2000007e
+STK00                     0x2000007a
+STK01                     0x2000007b
+STK02                     0x2000007c
+STK03                     no used
+STK04                     no used
+STK05                     no used
+STK06                     no used
+STK07                     no used
+STK08                     no used
+STK09                     no used
+STK10                     no used
+STK11                     no used
+STK12                     no used
+WSAVE                     0x2000007d
+
