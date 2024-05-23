@@ -11,6 +11,8 @@
 ;--------------------------------------------------------
 ; external declarations
 ;--------------------------------------------------------
+	extern	_led_dis_loop_func
+	extern	_led_mode_set
 	extern	_charge_check_by_IO
 	extern	_ledRun
 	extern	_Detect_OverCurrent_ByAD
@@ -104,6 +106,7 @@
 	extern	_VolTypeIndex
 	extern	_SmokeState
 	extern	_BatVolLevel
+	extern	_led_mode_flag
 	extern	_SaveHeaterIOStatus
 	extern	_MotorDutySet
 	extern	_NowMotorDuty
@@ -261,9 +264,9 @@ _adc_value_tmp:
 ; compiler-defined variables
 ;--------------------------------------------------------
 .segment "uninit"
-_isr_sTime1MS_65536_44:
+_isr_sTime1MS_65536_46:
 	.res	1
-	.debuginfo complex-type (symbol "_isr_sTime1MS_65536_44" 1 global "" 0 (basetype 1 unsigned))
+	.debuginfo complex-type (symbol "_isr_sTime1MS_65536_46" 1 global "" 0 (basetype 1 unsigned))
 .segment "uninit"
 ___sdcc_saved_fsr:
 	.res	1
@@ -288,15 +291,15 @@ _ad_start_flg:
 
 
 .segment "idata"
-_isr_sTime10ms_65536_44:
-	.debuginfo complex-type (symbol "_isr_sTime10ms_65536_44" 1 local "isr.c" 57 (basetype 1 unsigned))
+_isr_sTime10ms_65536_46:
+	.debuginfo complex-type (symbol "_isr_sTime10ms_65536_46" 1 local "isr.c" 57 (basetype 1 unsigned))
 
 	dw	0x00	; 0
 
 
 .segment "idata"
-_isr_sTime100ms_65536_44:
-	.debuginfo complex-type (symbol "_isr_sTime100ms_65536_44" 1 local "isr.c" 58 (basetype 1 unsigned))
+_isr_sTime100ms_65536_46:
+	.debuginfo complex-type (symbol "_isr_sTime100ms_65536_46" 1 local "isr.c" 58 (basetype 1 unsigned))
 
 	dw	0x00	; 0
 
@@ -319,18 +322,18 @@ __sdcc_interrupt:
 ;  pBlock Stats: dbName = I
 ;***
 ;functions called:
-;   _ledRun
+;   _led_dis_loop_func
 ;   _F_wait_eoc
 ;   _F_wait_eoc
-;   _ledRun
+;   _led_dis_loop_func
 ;   _F_wait_eoc
 ;   _F_wait_eoc
 ;5 compiler assigned registers:
 ;   STK00
 ;   STK01
+;   r0x1017
 ;   r0x1018
 ;   r0x1019
-;   r0x101A
 ;; Starting pCode block
 _isr:
 ; 0 exit points
@@ -360,19 +363,17 @@ _isr:
 	.line	66, "isr.c"; 	TMR0 = 163;	//156;			// 156是计算值，163是用示波器矫正值
 	MOVIA	0xa3
 	MOVAR	_TMR0
-	.line	73, "isr.c"; 	ledRun();
-	MCALL	_ledRun
 	.line	74, "isr.c"; 	sTime1MS++;
-	BANKSEL	_isr_sTime1MS_65536_44
-	INCR	_isr_sTime1MS_65536_44,F
+	BANKSEL	_isr_sTime1MS_65536_46
+	INCR	_isr_sTime1MS_65536_46,F
 ;;unsigned compare: left < lit(0xA=10), size=1
 	.line	75, "isr.c"; 	if(sTime1MS >= 10)//1MS
 	MOVIA	0x0a
-	SUBAR	_isr_sTime1MS_65536_44,W
+	SUBAR	_isr_sTime1MS_65536_46,W
 	BTRSS	STATUS,0
 	MGOTO	_02026_DS_
 	.line	78, "isr.c"; 	sTime1MS = 0;
-	CLRR	_isr_sTime1MS_65536_44
+	CLRR	_isr_sTime1MS_65536_46
 	.line	79, "isr.c"; 	f_1ms_TimeOut = 1;
 	BANKSEL	_sys_flag_2
 	BSR	_sys_flag_2,4
@@ -401,115 +402,117 @@ _02010_DS_:
 	ADCAR	(_SmokingKeepTime + 1),F
 _02012_DS_:
 	.line	101, "isr.c"; 	sTime10ms++;
-	BANKSEL	_isr_sTime10ms_65536_44
-	INCR	_isr_sTime10ms_65536_44,F
+	BANKSEL	_isr_sTime10ms_65536_46
+	INCR	_isr_sTime10ms_65536_46,F
 ;;unsigned compare: left < lit(0x9=9), size=1
 	.line	102, "isr.c"; 	if(sTime10ms >= 9)//10ms
 	MOVIA	0x09
-	SUBAR	_isr_sTime10ms_65536_44,W
+	SUBAR	_isr_sTime10ms_65536_46,W
 	BTRSS	STATUS,0
 	MGOTO	_02026_DS_
 	.line	104, "isr.c"; 	sTime10ms = 0;
-	CLRR	_isr_sTime10ms_65536_44
-	.line	109, "isr.c"; 	f_10ms_TimeOut = 1;
+	CLRR	_isr_sTime10ms_65536_46
+	.line	105, "isr.c"; 	led_dis_loop_func();
+	MCALL	_led_dis_loop_func
+	.line	110, "isr.c"; 	f_10ms_TimeOut = 1;
 	BANKSEL	_sys_flag_3
 	BSR	_sys_flag_3,4
-	.line	110, "isr.c"; 	f_charge_check = 1;
+	.line	111, "isr.c"; 	f_charge_check = 1;
 	BANKSEL	_sys_flag_0
 	BSR	_sys_flag_0,3
-	.line	111, "isr.c"; 	f_bat_lvd_check = 1;
+	.line	112, "isr.c"; 	f_bat_lvd_check = 1;
 	BANKSEL	_sys_flag_3
 	BSR	_sys_flag_3,5
-	.line	112, "isr.c"; 	f_heat_check = 1;
+	.line	113, "isr.c"; 	f_heat_check = 1;
 	BSR	_sys_flag_3,1
-	.line	113, "isr.c"; 	f_sleep_check = 1;
+	.line	114, "isr.c"; 	f_sleep_check = 1;
 	BANKSEL	_sys_flag_1
 	BSR	_sys_flag_1,6
-	.line	114, "isr.c"; 	f_battery_check = 1;
+	.line	115, "isr.c"; 	f_battery_check = 1;
 	BSR	_sys_flag_1,0
-	.line	126, "isr.c"; 	if(LedShowKeepTime)
+	.line	127, "isr.c"; 	if(LedShowKeepTime)
 	BANKSEL	_LedShowKeepTime
 	MOVR	(_LedShowKeepTime + 1),W
 	IORAR	_LedShowKeepTime,W
 	BTRSC	STATUS,2
 	MGOTO	_02014_DS_
-	.line	127, "isr.c"; 	--LedShowKeepTime;	
+	.line	128, "isr.c"; 	--LedShowKeepTime;	
 	MOVIA	0xff
 	ADDAR	_LedShowKeepTime,F
 	MOVIA	0xff
 	ADCAR	(_LedShowKeepTime + 1),F
 _02014_DS_:
-	.line	129, "isr.c"; 	if(disp_delay_time_cnt)
+	.line	130, "isr.c"; 	if(disp_delay_time_cnt)
 	BANKSEL	_disp_delay_time_cnt
 	MOVR	_disp_delay_time_cnt,W
 	BTRSS	STATUS,2
-	.line	130, "isr.c"; 	disp_delay_time_cnt--;
+	.line	131, "isr.c"; 	disp_delay_time_cnt--;
 	DECR	_disp_delay_time_cnt,F
-	.line	134, "isr.c"; 	if(led_delay_keep_time)
+	.line	135, "isr.c"; 	if(led_delay_keep_time)
 	BANKSEL	_led_delay_keep_time
 	MOVR	_led_delay_keep_time,W
 	BTRSS	STATUS,2
-	.line	135, "isr.c"; 	--led_delay_keep_time;	
+	.line	136, "isr.c"; 	--led_delay_keep_time;	
 	DECR	_led_delay_keep_time,F
-	.line	137, "isr.c"; 	sTime100ms++;
-	BANKSEL	_isr_sTime100ms_65536_44
-	INCR	_isr_sTime100ms_65536_44,F
-	.line	138, "isr.c"; 	if(sTime100ms >= 10)//100ms
+	.line	138, "isr.c"; 	sTime100ms++;
+	BANKSEL	_isr_sTime100ms_65536_46
+	INCR	_isr_sTime100ms_65536_46,F
+	.line	139, "isr.c"; 	if(sTime100ms >= 10)//100ms
 	MOVIA	0x0a
-	SUBAR	_isr_sTime100ms_65536_44,W
+	SUBAR	_isr_sTime100ms_65536_46,W
 	BTRSS	STATUS,0
 	MGOTO	_02026_DS_
-	.line	140, "isr.c"; 	sTime100ms = 0;
-	CLRR	_isr_sTime100ms_65536_44
-	.line	142, "isr.c"; 	f_1s_chrg_TimeOut = 1;
+	.line	141, "isr.c"; 	sTime100ms = 0;
+	CLRR	_isr_sTime100ms_65536_46
+	.line	143, "isr.c"; 	f_1s_chrg_TimeOut = 1;
 	BANKSEL	_sys_flag_3
 	BSR	_sys_flag_3,7
 _02026_DS_:
-	.line	203, "isr.c"; 	if(INTFbits.T1IF)//25us
+	.line	204, "isr.c"; 	if(INTFbits.T1IF)//25us
 	BTRSS	_INTFbits,3
-	MGOTO	_02039_DS_
-	.line	205, "isr.c"; 	INTFbits.T1IF = 0;
+	MGOTO	_02037_DS_
+	.line	206, "isr.c"; 	INTFbits.T1IF = 0;
 	MOVIA	0xf7
 	MOVAR	(_INTFbits + 0)
-	.line	207, "isr.c"; 	if(SmokeState == STATE_SMOKING)//4
+	.line	208, "isr.c"; 	if(SmokeState == STATE_SMOKING)//4
 	BANKSEL	_SmokeState
 	MOVR	_SmokeState,W
 	XORIA	0x05
 	BTRSS	STATUS,2
-	MGOTO	_02035_DS_
-	.line	209, "isr.c"; 	PwmCycleCount++;
+	MGOTO	_02033_DS_
+	.line	210, "isr.c"; 	PwmCycleCount++;
 	BANKSEL	_PwmCycleCount
 	INCR	_PwmCycleCount,F
 ;;unsigned compare: left < lit(0x46=70), size=1
-	.line	210, "isr.c"; 	if(PwmCycleCount>= DUTY_ALL) 
+	.line	211, "isr.c"; 	if(PwmCycleCount>= DUTY_ALL) 
 	MOVIA	0x46
 	SUBAR	_PwmCycleCount,W
 	BTRSC	STATUS,0
-	.line	212, "isr.c"; 	PwmCycleCount = 0;
+	.line	213, "isr.c"; 	PwmCycleCount = 0;
 	CLRR	_PwmCycleCount
-	.line	214, "isr.c"; 	if(PwmCycleCount < percent_nun)
+	.line	215, "isr.c"; 	if(PwmCycleCount < percent_nun)
 	BANKSEL	_percent_nun
 	MOVR	_percent_nun,W
 	BANKSEL	_PwmCycleCount
 	SUBAR	_PwmCycleCount,W
 	BTRSC	STATUS,0
-	MGOTO	_02032_DS_
-	.line	216, "isr.c"; 	I0_PWM2 = MT_ON;
+	MGOTO	_02030_DS_
+	.line	217, "isr.c"; 	I0_PWM2 = MT_ON;
 	BCR	_PORTBbits,2
-	.line	270, "isr.c"; 	ADMDbits.START = 1;
+	.line	271, "isr.c"; 	ADMDbits.START = 1;
 	BSR	_ADMDbits,6
-	.line	271, "isr.c"; 	F_wait_eoc();
+	.line	272, "isr.c"; 	F_wait_eoc();
 	MCALL	_F_wait_eoc
-	.line	272, "isr.c"; 	ADMDbits.START = 1;
+	.line	273, "isr.c"; 	ADMDbits.START = 1;
 	BSR	_ADMDbits,6
-	.line	273, "isr.c"; 	F_wait_eoc();
+	.line	274, "isr.c"; 	F_wait_eoc();
 	MCALL	_F_wait_eoc
-	.line	274, "isr.c"; 	adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
+	.line	275, "isr.c"; 	adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
 	MOVR	_ADD,W
 	BANKSEL	_adc_value_tmp
 	MOVAR	_adc_value_tmp
 	CLRR	(_adc_value_tmp + 1)
-	.line	275, "isr.c"; 	adc_value_tmp = adc_value_tmp << 4;
+	.line	276, "isr.c"; 	adc_value_tmp = adc_value_tmp << 4;
 	SWAPR	(_adc_value_tmp + 1),W
 	ANDIA	0xf0
 	MOVAR	(_adc_value_tmp + 1)
@@ -518,53 +521,34 @@ _02026_DS_:
 	ANDIA	0x0f
 	IORAR	(_adc_value_tmp + 1),F
 	XORAR	_adc_value_tmp,F
-	.line	276, "isr.c"; 	adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
+	.line	277, "isr.c"; 	adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
 	MOVIA	0x0f
 	ANDAR	_ADR,W
+;;1	MOVAR	r0x1017
 ;;1	MOVAR	r0x1018
-;;1	MOVAR	r0x1019
 	IORAR	_adc_value_tmp,F
 	MOVIA	0x00
 	IORAR	(_adc_value_tmp + 1),F
-;;unsigned compare: left < lit(0xED8=3800), size=2
-	.line	277, "isr.c"; 	if(adc_value_tmp < 3800)//3820//3600//3700
-	MOVIA	0xd8
-	SUBAR	_adc_value_tmp,W
-	MOVIA	0x0e
-	SBCAR	(_adc_value_tmp + 1),W
-	BTRSC	STATUS,0
-	MGOTO	_02039_DS_
-	.line	280, "isr.c"; 	I0_PWM2 = MT_OF;
+	.line	277, "isr.c"; 	// if(adc_value_tmp < 3800)//3820//3600//3700
+	MGOTO	_02037_DS_
+_02030_DS_:
+	.line	292, "isr.c"; 	I0_PWM2 = MT_OF;
 	BSR	_PORTBbits,2
-	.line	281, "isr.c"; 	percent_nun = 0;
-	BANKSEL	_percent_nun
-	CLRR	_percent_nun
-	.line	283, "isr.c"; 	msg = MSG_CURRENT_OVER;
-	MOVIA	0x09
-	BANKSEL	_msg
-	MOVAR	_msg
-	.line	284, "isr.c"; 	SmokeState = STATE_SMOKE_IDLE;
-	BANKSEL	_SmokeState
-	CLRR	_SmokeState
-	MGOTO	_02039_DS_
-_02032_DS_:
-	.line	291, "isr.c"; 	I0_PWM2 = MT_OF;
-	BSR	_PORTBbits,2
-	.line	292, "isr.c"; 	ad_start_flg = 0;
+	.line	293, "isr.c"; 	ad_start_flg = 0;
 	BANKSEL	_ad_start_flg
 	CLRR	_ad_start_flg
-	MGOTO	_02039_DS_
-_02035_DS_:
-	.line	299, "isr.c"; 	percent_nun = 0;
+	MGOTO	_02037_DS_
+_02033_DS_:
+	.line	300, "isr.c"; 	percent_nun = 0;
 	BANKSEL	_percent_nun
 	CLRR	_percent_nun
-	.line	300, "isr.c"; 	I0_PWM2 = MT_OF;
+	.line	301, "isr.c"; 	I0_PWM2 = MT_OF;
 	BSR	_PORTBbits,2
-	.line	301, "isr.c"; 	ad_start_flg = 0;
+	.line	302, "isr.c"; 	ad_start_flg = 0;
 	BANKSEL	_ad_start_flg
 	CLRR	_ad_start_flg
-_02039_DS_:
-	.line	346, "isr.c"; 	}
+_02037_DS_:
+	.line	306, "isr.c"; 	}
 	BANKSEL	___sdcc_saved_stk01
 	MOVR	___sdcc_saved_stk01,W
 	MOVAR	STK01
@@ -623,6 +607,6 @@ _isr_param_init:
 
 
 ;	code size estimation:
-;	  155+   37 =   192 instructions (  458 byte)
+;	  144+   34 =   178 instructions (  424 byte)
 
 	end

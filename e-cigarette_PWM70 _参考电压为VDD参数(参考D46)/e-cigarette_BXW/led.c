@@ -61,6 +61,8 @@ u8 BuleLed_delay_keep_time;
 u8 TempCount;
 u8 StartColourIndex;
 u16 temptimecount;
+
+u8 led_mode_flag = 0;
 //==============================================================================
 //	Function Declaration
 //==============================================================================
@@ -1411,7 +1413,7 @@ void led_handle(void)
 			}
 			else if(LedShowKeepTime == 0)
 			{
-				LedOff();//灯熄灭
+				// LedOff();//灯熄灭
 				nowLedMode = 0;
 			}
 			break;
@@ -1472,3 +1474,114 @@ void led_handle(void)
 	flashresult = 0;
 }
 
+u16 led_dis_cnt = 0;	//用于统计led显示计时的cnt
+u8  led_flash_cnt = 0; 	//led闪烁次数
+
+//10ms loop 
+void led_dis_loop_func(void)
+{
+	switch (led_mode_flag)
+	{
+	case 1: //上电闪一下
+		if(led_dis_cnt)
+		{
+			PIN_LED = LED_ON;
+			if(--led_dis_cnt == 0)
+			{
+				PIN_LED = LED_OFF;
+				led_mode_flag = 0;
+			}
+		}
+		break;
+	case 4:		//超时
+	case 5:		//低压
+	case 10:		//空载
+		led_dis_cnt--;
+		if (led_dis_cnt >= 25)
+		{
+			PIN_LED = LED_OFF;
+		}
+		else if (led_dis_cnt > 0)
+		{
+			PIN_LED = LED_ON;
+		}
+		else if(led_dis_cnt == 0)
+		{
+			if(led_flash_cnt)
+			{
+				led_flash_cnt--;
+				if(led_flash_cnt != 0)
+				{
+					led_dis_cnt = 50;
+				}
+				else if(led_flash_cnt == 0)
+				{
+					led_dis_cnt = 0;
+					PIN_LED = LED_OFF;
+					led_mode_flag = 0;
+				}
+			}
+		}
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void led_mode_set(u8 mode)
+{
+	switch (mode)
+	{
+	case 1:  //上电
+		//上电闪一下
+		led_mode_flag = mode;
+		led_dis_cnt = 100;
+		break;
+	case 2:  //抽烟
+		led_mode_flag = mode;
+		PIN_LED = LED_ON;
+		break;
+	case 3:	 //抽烟结束
+		led_mode_flag = mode;
+		PIN_LED = LED_OFF;
+		break;
+	case 4:  //吸烟超时
+		led_mode_flag = mode;
+		led_dis_cnt = 50;
+		led_flash_cnt = 2;
+		break;
+	case 5:	//低压
+		led_mode_flag = mode;
+		led_dis_cnt = 50;
+		led_flash_cnt = 10;
+		break;
+	case 6:  //	吸烟超时
+		led_mode_flag = mode;
+		led_dis_cnt = 50;
+		led_flash_cnt = 2;
+		break;
+	case 7:  //	充电
+		led_mode_flag = mode;
+		PIN_LED = LED_ON;
+		break;
+	case 8:  //	充电满
+		led_mode_flag = mode;
+		PIN_LED = LED_OFF;
+		break;
+	case 9:  //	充电拔出
+		led_mode_flag = mode;
+		PIN_LED = LED_OFF;
+		break;
+	case 10:  //空载
+		led_mode_flag = mode;
+		led_dis_cnt = 50;
+		led_flash_cnt = 5;
+		break;
+	default:
+		led_mode_flag = 0;
+		PIN_LED = LED_OFF;
+		break;
+	}	
+}

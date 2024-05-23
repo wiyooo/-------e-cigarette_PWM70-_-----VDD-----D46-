@@ -13,6 +13,8 @@
 ;--------------------------------------------------------
 	extern	_Detect_OverCurrent_ByIO
 	extern	_Get_ADC_Value
+	extern	_led_dis_loop_func
+	extern	_led_mode_set
 	extern	_ledRun
 	extern	_Detect_OverCurrent_ByAD
 	extern	_Get_Onetime_Bat_ADCValue
@@ -90,6 +92,7 @@
 	extern	_KeyDowmTimeCount
 	extern	_VolTypeIndex
 	extern	_BatVolLevel
+	extern	_led_mode_flag
 	extern	_SaveHeaterIOStatus
 	extern	_MotorDutySet
 	extern	_NowMotorDuty
@@ -476,9 +479,8 @@ _s_u16Sum:
 ;   _adc_init4
 ;   _adc_get
 ;   _BaseBatSetPWMValue
-;   _SetLedBreathingParameters2
-;   _LedOff
 ;   _BaseBatSetPWMValue
+;   _led_mode_set
 ;   _adc_init4
 ;   _adc_get
 ;   _adc_init4
@@ -487,9 +489,8 @@ _s_u16Sum:
 ;   _adc_init4
 ;   _adc_get
 ;   _BaseBatSetPWMValue
-;   _SetLedBreathingParameters2
-;   _LedOff
 ;   _BaseBatSetPWMValue
+;   _led_mode_set
 ;1 compiler assigned register :
 ;   STK00
 ;; Starting pCode block
@@ -517,12 +518,12 @@ _SmokeFun:
 	MOVR	_SmokeState,W
 	XORIA	0x04
 	BTRSC	STATUS,2
-	MGOTO	_02328_DS_
+	MGOTO	_02325_DS_
 	MOVR	_SmokeState,W
 	XORIA	0x05
 	BTRSC	STATUS,2
-	MGOTO	_02336_DS_
-	MGOTO	_02343_DS_
+	MGOTO	_02333_DS_
+	MGOTO	_02340_DS_
 _02292_DS_:
 	.line	998, "detect.c"; 	if(b_pause_chrg)
 	BANKSEL	_sys_flag_2
@@ -531,25 +532,25 @@ _02292_DS_:
 	.line	1000, "detect.c"; 	b_pause_chrg = 0;
 	BCR	_sys_flag_2,7
 	.line	1001, "detect.c"; 	EN_RESUME_CHRG;//充电状态下吸烟停止时恢复充电电流
-	BCR	_PORTAbits,5
+	BCR	_PORTAbits,4
 _02294_DS_:
 	.line	1003, "detect.c"; 	if(b_smoking)
 	BANKSEL	_sys_flag_1
 	BTRSC	_sys_flag_1,1
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1005, "detect.c"; 	if(f_charging)
 	BANKSEL	_sys_flag_0
 	BTRSS	_sys_flag_0,6
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1007, "detect.c"; 	f_battery_low = 0;
 	BCR	_sys_flag_0,5
 	.line	1009, "detect.c"; 	if(f_charge_full)
 	BTRSC	_sys_flag_0,4
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1013, "detect.c"; 	if(f_1s_chrg_TimeOut)//100ms
 	BANKSEL	_sys_flag_3
 	BTRSS	_sys_flag_3,7
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1015, "detect.c"; 	f_1s_chrg_TimeOut = 0;
 	BCR	_sys_flag_3,7
 	.line	1016, "detect.c"; 	if(now_ch != Quarter_VDD)
@@ -592,7 +593,7 @@ _02300_DS_:
 	MOVIA	0x00
 	SBCAR	(_ChrgFullTimeCount + 1),W
 	BTRSS	STATUS,0
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1028, "detect.c"; 	ChrgFullTimeCount = 0;
 	CLRR	_ChrgFullTimeCount
 	CLRR	(_ChrgFullTimeCount + 1)
@@ -603,7 +604,7 @@ _02300_DS_:
 	MOVIA	0x07
 	BANKSEL	_msg
 	MOVAR	_msg
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 _02308_DS_:
 	.line	1035, "detect.c"; 	ChrgFullTimeCount = 0;
 	BANKSEL	_ChrgFullTimeCount
@@ -618,13 +619,13 @@ _02308_DS_:
 	MOVIA	0x15
 	SUBAR	_usb_check_ad_time_cnt,W
 	BTRSS	STATUS,0
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1039, "detect.c"; 	usb_check_ad_time_cnt = 0;
 	CLRR	_usb_check_ad_time_cnt
 	.line	1040, "detect.c"; 	if(f_charge_full)
 	BANKSEL	_sys_flag_0
 	BTRSS	_sys_flag_0,4
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 	.line	1042, "detect.c"; 	f_charge_full = 0;
 	BCR	_sys_flag_0,4
 	.line	1043, "detect.c"; 	msg = MSG_CHRG;//插入USB充电
@@ -632,7 +633,7 @@ _02308_DS_:
 	BANKSEL	_msg
 	MOVAR	_msg
 	.line	1050, "detect.c"; 	break;
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 _02314_DS_:
 	.line	1053, "detect.c"; 	b_heater_detect_mask = 1;
 	BANKSEL	_sys_flag_2
@@ -645,7 +646,7 @@ _02314_DS_:
 	BANKSEL	_SmokeState
 	MOVAR	_SmokeState
 	.line	1057, "detect.c"; 	break;
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 ;;unsigned compare: left < lit(0x14=20), size=1
 _02315_DS_:
 	.line	1060, "detect.c"; 	if(disp_delay_time_cnt < 20)
@@ -676,7 +677,7 @@ _02317_DS_:
 	BANKSEL	_SmokeState
 	MOVAR	_SmokeState
 	.line	1068, "detect.c"; 	break;
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 ;;unsigned compare: left < lit(0x6E6=1766), size=2
 _02319_DS_:
 	.line	1074, "detect.c"; 	if((gAdcDataValueBak < BAT_VOL3P45_ADC_VALUE)||f_battery_low)//BAT_VOL3P40_ADC_VALUE
@@ -698,14 +699,14 @@ _02320_DS_:
 	.line	1079, "detect.c"; 	b_smoke_init = 0;
 	BANKSEL	_sys_flag_0
 	BCR	_sys_flag_0,1
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 _02321_DS_:
 	.line	1084, "detect.c"; 	SmokeState = STATE_SMOKE_CHECK_OC;
 	MOVIA	0x03
 	BANKSEL	_SmokeState
 	MOVAR	_SmokeState
 	.line	1089, "detect.c"; 	break;
-	MGOTO	_02343_DS_
+	MGOTO	_02340_DS_
 _02324_DS_:
 	.line	1092, "detect.c"; 	b_heater_detect_mask = 1;
 	BANKSEL	_sys_flag_2
@@ -720,31 +721,13 @@ _02324_DS_:
 	.line	1094, "detect.c"; 	b_heater_detect_mask = 0;
 	BANKSEL	_sys_flag_2
 	BCR	_sys_flag_2,5
-;;unsigned compare: left < lit(0xBB8=3000), size=2
-	.line	1097, "detect.c"; 	if(gAdcDataValue >= 3000)//4000
-	MOVIA	0xb8
-	BANKSEL	_gAdcDataValue
-	SUBAR	_gAdcDataValue,W
-	MOVIA	0x0b
-	SBCAR	(_gAdcDataValue + 1),W
-	BTRSS	STATUS,0
-	MGOTO	_02326_DS_
-	.line	1101, "detect.c"; 	msg = MSG_CURRENT_OVER;
-	MOVIA	0x09
-	BANKSEL	_msg
-	MOVAR	_msg
-	.line	1102, "detect.c"; 	b_smoke_init = 0;
-	BANKSEL	_sys_flag_0
-	BCR	_sys_flag_0,1
-	MGOTO	_02343_DS_
-_02326_DS_:
 	.line	1106, "detect.c"; 	SmokeState = STATE_SMOKE_PARAM_SET;
 	MOVIA	0x04
 	BANKSEL	_SmokeState
 	MOVAR	_SmokeState
 	.line	1111, "detect.c"; 	break;
-	MGOTO	_02343_DS_
-_02328_DS_:
+	MGOTO	_02340_DS_
+_02325_DS_:
 	.line	1117, "detect.c"; 	adc_init4(ADC_CHANNEL2);
 	MOVIA	0x03
 	MCALL	_adc_init4
@@ -770,29 +753,24 @@ _02328_DS_:
 	CLRR	(_SmokingKeepTime + 1)
 	.line	1124, "detect.c"; 	BaseBatSetPWMValue();
 	MCALL	_BaseBatSetPWMValue
-	.line	1126, "detect.c"; 	SetLedBreathingParameters2(COLOR_GREEN);//开始白灯呼吸效果
-	MOVIA	0x02
-	MCALL	_SetLedBreathingParameters2
-	.line	1127, "detect.c"; 	LedOff();	
-	MCALL	_LedOff
 	.line	1128, "detect.c"; 	PwmCycleCount = 0;
 	BANKSEL	_PwmCycleCount
 	CLRR	_PwmCycleCount
 	.line	1129, "detect.c"; 	if(f_charging||(C_IO_CHRG == 0)||C_IO_USB_DEC)
 	BANKSEL	_sys_flag_0
 	BTRSC	_sys_flag_0,6
-	MGOTO	_02329_DS_
+	MGOTO	_02326_DS_
+	BTRSS	_PORTAbits,5
+	MGOTO	_02326_DS_
 	BTRSS	_PORTAbits,2
-	MGOTO	_02329_DS_
-	BTRSS	_PORTAbits,4
-	MGOTO	_02330_DS_
-_02329_DS_:
+	MGOTO	_02327_DS_
+_02326_DS_:
 	.line	1131, "detect.c"; 	b_pause_chrg = 1;
 	BANKSEL	_sys_flag_2
 	BSR	_sys_flag_2,7
 	.line	1132, "detect.c"; 	EN_PAUSE_CHRG;//充电状态下吸烟时临时关闭充电电流
-	BSR	_PORTAbits,5
-_02330_DS_:
+	BSR	_PORTAbits,4
+_02327_DS_:
 	.line	1135, "detect.c"; 	SmokeState = STATE_SMOKING;
 	MOVIA	0x05
 	BANKSEL	_SmokeState
@@ -805,38 +783,38 @@ _02330_DS_:
 	MOVIA	0x07
 	SBCAR	(_gAdcDataValueBak + 1),W
 	BTRSS	STATUS,0
-	MGOTO	_02334_DS_
+	MGOTO	_02331_DS_
 	.line	1139, "detect.c"; 	percent_nun = TargetMotorDuty;
 	BANKSEL	_TargetMotorDuty
 	MOVR	_TargetMotorDuty,W
 	BANKSEL	_percent_nun
 	MOVAR	_percent_nun
-	MGOTO	_02335_DS_
-_02334_DS_:
+	MGOTO	_02332_DS_
+_02331_DS_:
 	.line	1143, "detect.c"; 	percent_nun = DUTY_ALL;
 	MOVIA	0x46
 	BANKSEL	_percent_nun
 	MOVAR	_percent_nun
-_02335_DS_:
+_02332_DS_:
 	.line	1145, "detect.c"; 	temp_flag = 0;
 	BANKSEL	_sys_flag_2
 	BCR	_sys_flag_2,0
 	.line	1146, "detect.c"; 	break;
-	MGOTO	_02343_DS_
-_02336_DS_:
+	MGOTO	_02340_DS_
+_02333_DS_:
 	.line	1149, "detect.c"; 	if(b_smoking)
 	BANKSEL	_sys_flag_1
 	BTRSS	_sys_flag_1,1
-	MGOTO	_02343_DS_
+	MGOTO	_02338_DS_
 	.line	1151, "detect.c"; 	if((SmokingKeepTime == 0)&&!temp_flag)
 	BANKSEL	_SmokingKeepTime
 	MOVR	(_SmokingKeepTime + 1),W
 	IORAR	_SmokingKeepTime,W
 	BTRSS	STATUS,2
-	MGOTO	_02343_DS_
+	MGOTO	_02338_DS_
 	BANKSEL	_sys_flag_2
 	BTRSC	_sys_flag_2,0
-	MGOTO	_02343_DS_
+	MGOTO	_02338_DS_
 	.line	1154, "detect.c"; 	temp_flag = 1;
 	BSR	_sys_flag_2,0
 	.line	1155, "detect.c"; 	BaseBatSetPWMValue();
@@ -846,8 +824,12 @@ _02336_DS_:
 	MOVR	_TargetMotorDuty,W
 	BANKSEL	_percent_nun
 	MOVAR	_percent_nun
-_02343_DS_:
-	.line	1162, "detect.c"; 	}
+_02338_DS_:
+	.line	1159, "detect.c"; 	led_mode_set(2);
+	MOVIA	0x02
+	MCALL	_led_mode_set
+_02340_DS_:
+	.line	1163, "detect.c"; 	}
 	RETURN	
 ; exit point of _SmokeFun
 
@@ -943,7 +925,7 @@ _02208_DS_:
 	.line	843, "detect.c"; 	f_charge_check = 0;
 	BCR	_sys_flag_0,3
 	.line	844, "detect.c"; 	if(C_IO_USB_DEC)//USB检测
-	BTRSS	_PORTAbits,4
+	BTRSS	_PORTAbits,2
 	MGOTO	_02221_DS_
 	.line	846, "detect.c"; 	if(!f_charging)
 	BTRSC	_sys_flag_0,6
@@ -2094,6 +2076,6 @@ _detect_param_init:
 
 
 ;	code size estimation:
-;	  720+  277 =   997 instructions ( 2548 byte)
+;	  709+  274 =   983 instructions ( 2514 byte)
 
 	end

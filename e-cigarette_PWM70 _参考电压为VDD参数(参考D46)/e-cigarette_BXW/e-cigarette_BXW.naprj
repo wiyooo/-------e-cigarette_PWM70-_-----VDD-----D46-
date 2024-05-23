@@ -27,7 +27,7 @@
     <ReservedRam>8</ReservedRam>
     <RootNamespace>ADC_Interrupt</RootNamespace>
     <TrimSetting>+ 0%</TrimSetting>
-    <WarningMsgCode0>112</WarningMsgCode0>
+    <WarningMsgCode0>110</WarningMsgCode0>
     <WarningMsgCode1>84</WarningMsgCode1>
     <WarningMsgCode10>94</WarningMsgCode10>
     <WarningMsgCode11>126</WarningMsgCode11>
@@ -43,7 +43,7 @@
     <WarningMsgCode8>126</WarningMsgCode8>
     <WarningMsgCode9>126</WarningMsgCode9>
     <WarningMsgCount>0</WarningMsgCount>
-    <WarningMsgFileName0>D:\2023-12-21\电子烟项目(TXZG-WD-LS010)\e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_BXW\main.c</WarningMsgFileName0>
+    <WarningMsgFileName0>C:\Users\PC1\Desktop\唐工九齐电子烟e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_BXW\main.c</WarningMsgFileName0>
     <WarningMsgFileName1>D:\2023-12-21\电子烟项目(TXZG-WD-LS010)\e-cigarette_PWM70 _参考电压为VDD参数(参考D46)\e-cigarette_BXW\main.c</WarningMsgFileName1>
     <WarningMsgFileName10>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName10>
     <WarningMsgFileName11>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName11>
@@ -58,7 +58,7 @@
     <WarningMsgFileName7>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName7>
     <WarningMsgFileName8>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName8>
     <WarningMsgFileName9>D:\工程项目\单片机项目\电子烟项目\电子烟项目(TXZG-XML-XY51)\e-cigarette_no_AD_int _test_pwm20k_new_IO_PWM\e-cigarette_BXW\isr.c</WarningMsgFileName9>
-    <WarningMsgLineNumber0>138</WarningMsgLineNumber0>
+    <WarningMsgLineNumber0>241</WarningMsgLineNumber0>
     <WarningMsgLineNumber1>138</WarningMsgLineNumber1>
     <WarningMsgLineNumber10>249</WarningMsgLineNumber10>
     <WarningMsgLineNumber11>251</WarningMsgLineNumber11>
@@ -73,7 +73,7 @@
     <WarningMsgLineNumber7>93</WarningMsgLineNumber7>
     <WarningMsgLineNumber8>94</WarningMsgLineNumber8>
     <WarningMsgLineNumber9>95</WarningMsgLineNumber9>
-    <WarningMsgMessage0>main.c:138: warning 112: function 'bat_lvd_check' implicit declaration</WarningMsgMessage0>
+    <WarningMsgMessage0>main.c:241: warning 110: conditional flow changed by optimizer.</WarningMsgMessage0>
     <WarningMsgMessage1>main.c:138: warning 84: 'auto' variable 'bat_lvd_check' may be used before initialization</WarningMsgMessage1>
     <WarningMsgMessage10>isr.c:249: warning 94: comparison is always false due to limited range of data type</WarningMsgMessage10>
     <WarningMsgMessage11>isr.c:251: warning 126: unreachable code</WarningMsgMessage11>
@@ -139,12 +139,12 @@
       <Element value="main.c|False" />
       <Element value="detect.c|True" />
       <Element value="common.h|False" />
-      <Element value="isr.c|False" />
+      <Element value="isr.c|True" />
       <Element value="sleep.c|False" />
       <Element value="led.c|False" />
       <Element value="key.c|False" />
       <Element value="init.c|False" />
-      <Element value="C:/Nyquest/NY8_Example_Code/include/NY8 C/ny8b062f_constant.h|False" />
+      <Element value="../../../../../../Nyquest/NY8_Example_Code/include/NY8 C/ny8b062f_constant.h|False" />
     </Array>
     <Array name="InstrumentFiles" />
     <Array name="MelodyDatabaseFiles" />
@@ -214,14 +214,14 @@
       <Element value="323|False" />
     </Array>
     <Array name="RegisterWindowExpandInfo">
-      <Element value="R-Page|False" />
+      <Element value="R-Page|True" />
       <Element value="INDF@R-Page|False" />
       <Element value="TMR0@R-Page|False" />
       <Element value="PCL@R-Page|False" />
       <Element value="STATUS@R-Page|False" />
       <Element value="FSR@R-Page|False" />
-      <Element value="PORTA@R-Page|False" />
-      <Element value="PORTB@R-Page|False" />
+      <Element value="PORTA@R-Page|True" />
+      <Element value="PORTB@R-Page|True" />
       <Element value="PCON@R-Page|False" />
       <Element value="BWUCON@R-Page|False" />
       <Element value="PCHBUF@R-Page|False" />
@@ -243,6 +243,190 @@
       <Element value="RFC@R-Page|False" />
       <Element value="TM3RH@R-Page|False" />
       <Element value="INTE2@R-Page|False" />
+      <Element value="INDF|False" />
+      <Element value="TMR0|False" />
+      <Element value="PCL|False" />
+      <Element value="STATUS|False" />
+      <Element value="BK@STATUS|False" />
+      <Element value="GP5@STATUS|False" />
+      <Element value="/TO@STATUS|False" />
+      <Element value="/PD@STATUS|False" />
+      <Element value="Z@STATUS|False" />
+      <Element value="DC@STATUS|False" />
+      <Element value="C@STATUS|False" />
+      <Element value="FSR|False" />
+      <Element value="PORTA|True" />
+      <Element value="PA7@PORTA|False" />
+      <Element value="PA6@PORTA|False" />
+      <Element value="PA5@PORTA|False" />
+      <Element value="PA4@PORTA|False" />
+      <Element value="PA3@PORTA|False" />
+      <Element value="PA2@PORTA|False" />
+      <Element value="PA1@PORTA|False" />
+      <Element value="PA0@PORTA|False" />
+      <Element value="PA7|False" />
+      <Element value="PA6|False" />
+      <Element value="PA5|False" />
+      <Element value="PA4|False" />
+      <Element value="PA3|False" />
+      <Element value="PA2|False" />
+      <Element value="PA1|False" />
+      <Element value="PA0|False" />
+      <Element value="PORTB|True" />
+      <Element value="GP7@PORTB|False" />
+      <Element value="GP6@PORTB|False" />
+      <Element value="PB5@PORTB|False" />
+      <Element value="PB4@PORTB|False" />
+      <Element value="PB3@PORTB|False" />
+      <Element value="PB2@PORTB|False" />
+      <Element value="PB1@PORTB|False" />
+      <Element value="PB0@PORTB|False" />
+      <Element value="GP7|False" />
+      <Element value="GP6|False" />
+      <Element value="PB5|False" />
+      <Element value="PB4|False" />
+      <Element value="PB3|False" />
+      <Element value="PB2|False" />
+      <Element value="PB1|False" />
+      <Element value="PB0|False" />
+      <Element value="PCON|False" />
+      <Element value="WDTEN@PCON|False" />
+      <Element value="GP6@PCON|False" />
+      <Element value="LVDEN@PCON|False" />
+      <Element value="/PHPA5@PCON|False" />
+      <Element value="LVREN@PCON|False" />
+      <Element value="GP2@PCON|False" />
+      <Element value="GP1@PCON|False" />
+      <Element value="GP0@PCON|False" />
+      <Element value="BWUCON|False" />
+      <Element value="WUPB5@BWUCON|False" />
+      <Element value="WUPB4@BWUCON|False" />
+      <Element value="WUPB3@BWUCON|False" />
+      <Element value="WUPB2@BWUCON|False" />
+      <Element value="WUPB1@BWUCON|False" />
+      <Element value="WUPB0@BWUCON|False" />
+      <Element value="PCHBUF|False" />
+      <Element value="XSPD_STP@PCHBUF|False" />
+      <Element value="PCHBUF@PCHBUF|False" />
+      <Element value="ABPLCON|False" />
+      <Element value="/PLPB3@ABPLCON|False" />
+      <Element value="/PLPB2@ABPLCON|False" />
+      <Element value="/PLPB1@ABPLCON|False" />
+      <Element value="/PLPB0@ABPLCON|False" />
+      <Element value="/PLPA3@ABPLCON|False" />
+      <Element value="/PLPA2@ABPLCON|False" />
+      <Element value="/PLPA1@ABPLCON|False" />
+      <Element value="/PLPA0@ABPLCON|False" />
+      <Element value="BPHCON|False" />
+      <Element value="/PHPB5@BPHCON|False" />
+      <Element value="/PHPB4@BPHCON|False" />
+      <Element value="/PHPB3@BPHCON|False" />
+      <Element value="/PHPB2@BPHCON|False" />
+      <Element value="/PHPB1@BPHCON|False" />
+      <Element value="/PHPB0@BPHCON|False" />
+      <Element value="INTE|False" />
+      <Element value="INT1IE@INTE|False" />
+      <Element value="WDTIE@INTE|False" />
+      <Element value="T2IE@INTE|False" />
+      <Element value="LVDIE@INTE|False" />
+      <Element value="T1IE@INTE|False" />
+      <Element value="INT0IE@INTE|False" />
+      <Element value="PABIE@INTE|False" />
+      <Element value="T0IE@INTE|False" />
+      <Element value="INTF|False" />
+      <Element value="INT1IF@INTF|False" />
+      <Element value="WDTIF@INTF|False" />
+      <Element value="T2IF@INTF|False" />
+      <Element value="LVDIF@INTF|False" />
+      <Element value="T1IF@INTF|False" />
+      <Element value="INT0IF@INTF|False" />
+      <Element value="PABIF@INTF|False" />
+      <Element value="T0IF@INTF|False" />
+      <Element value="ADMD|False" />
+      <Element value="ADEN@ADMD|False" />
+      <Element value="START@ADMD|False" />
+      <Element value="EOC@ADMD|False" />
+      <Element value="GCHS@ADMD|False" />
+      <Element value="CHS@ADMD|False" />
+      <Element value="ADR|False" />
+      <Element value="ADIF@ADR|False" />
+      <Element value="ADIE@ADR|False" />
+      <Element value="ADCK@ADR|False" />
+      <Element value="AD3@ADR|False" />
+      <Element value="AD2@ADR|False" />
+      <Element value="AD1@ADR|False" />
+      <Element value="AD0@ADR|False" />
+      <Element value="ADD|False" />
+      <Element value="AD11@ADD|False" />
+      <Element value="AD10@ADD|False" />
+      <Element value="AD9@ADD|False" />
+      <Element value="AD8@ADD|False" />
+      <Element value="AD7@ADD|False" />
+      <Element value="AD6@ADD|False" />
+      <Element value="AD5@ADD|False" />
+      <Element value="AD4@ADD|False" />
+      <Element value="ADVREFH|False" />
+      <Element value="EVHENB@ADVREFH|False" />
+      <Element value="VHS@ADVREFH|False" />
+      <Element value="ADCR|False" />
+      <Element value="PBCON5@ADCR|False" />
+      <Element value="PBCON4@ADCR|False" />
+      <Element value="PBCON3@ADCR|False" />
+      <Element value="SHCK@ADCR|False" />
+      <Element value="ADCR@ADCR|False" />
+      <Element value="AWUCON|False" />
+      <Element value="WUPA7@AWUCON|False" />
+      <Element value="WUPA6@AWUCON|False" />
+      <Element value="WUPA5@AWUCON|False" />
+      <Element value="WUPA4@AWUCON|False" />
+      <Element value="WUPA3@AWUCON|False" />
+      <Element value="WUPA2@AWUCON|False" />
+      <Element value="WUPA1@AWUCON|False" />
+      <Element value="WUPA0@AWUCON|False" />
+      <Element value="PACON|False" />
+      <Element value="PBCON2@PACON|False" />
+      <Element value="PBCON1@PACON|False" />
+      <Element value="PBCON0@PACON|False" />
+      <Element value="PACON4@PACON|False" />
+      <Element value="PACON3@PACON|False" />
+      <Element value="PACON2@PACON|False" />
+      <Element value="PACON1@PACON|False" />
+      <Element value="PACON0@PACON|False" />
+      <Element value="ADJMD|False" />
+      <Element value="ADJ_SIGN@ADJMD|False" />
+      <Element value="ADJ4@ADJMD|False" />
+      <Element value="ADJ3@ADJMD|False" />
+      <Element value="ADJ2@ADJMD|False" />
+      <Element value="ADJ1@ADJMD|False" />
+      <Element value="ADJ0@ADJMD|False" />
+      <Element value="INTEDG|False" />
+      <Element value="EIS@INTEDG|False" />
+      <Element value="INT1G@INTEDG|False" />
+      <Element value="INT0G@INTEDG|False" />
+      <Element value="TMRH|False" />
+      <Element value="TMR29@TMRH|False" />
+      <Element value="TMR28@TMRH|False" />
+      <Element value="TMR19@TMRH|False" />
+      <Element value="TMR18@TMRH|False" />
+      <Element value="PWM2DUTY9@TMRH|False" />
+      <Element value="PWM2DUTY8@TMRH|False" />
+      <Element value="PWM1DUTY9@TMRH|False" />
+      <Element value="PWM1DUTY8@TMRH|False" />
+      <Element value="ANAEN|False" />
+      <Element value="CMPEN@ANAEN|False" />
+      <Element value="RFC|False" />
+      <Element value="RFCEN@RFC|False" />
+      <Element value="PSEL@RFC|False" />
+      <Element value="TM3RH|False" />
+      <Element value="TMR39@TM3RH|False" />
+      <Element value="TMR38@TM3RH|False" />
+      <Element value="PWM4D9@TM3RH|False" />
+      <Element value="PWM4D8@TM3RH|False" />
+      <Element value="PWM3D9@TM3RH|False" />
+      <Element value="PWM3D8@TM3RH|False" />
+      <Element value="INTE2|False" />
+      <Element value="T3IF@INTE2|False" />
+      <Element value="T3IE@INTE2|False" />
       <Element value="F-Page|False" />
       <Element value="IOSTA@F-Page|False" />
       <Element value="IOSTB@F-Page|False" />
@@ -282,12 +466,11 @@
     <Array name="VoiceFiles" />
     <Array name="VRModule" />
     <Array name="WatchItemInfo">
-      <Element value="sys_flag_2|0" />
-      <Element value="HeatCount|0" />
-      <Element value="sys_flag_3|0" />
-      <Element value="PwmCycleCount|0" />
-      <Element value="SmokeState|0" />
-      <Element value="percent_nun|0" />
+      <Element value="led_flash_cnt|0" />
+      <Element value="msg|0" />
+      <Element value="gAdcDataValueBak|0" />
+      <Element value="gAdcDataValueBak|0" />
+      <Element value="gAdcDataValue|0" />
     </Array>
     <Array name="WatchPadColumnWidthInfo">
       <Element value="NameWidth|268" />

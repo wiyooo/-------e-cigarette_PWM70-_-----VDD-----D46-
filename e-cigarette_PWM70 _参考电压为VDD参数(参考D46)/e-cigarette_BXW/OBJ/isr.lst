@@ -59,634 +59,614 @@ NYASM 2.41
                                     1-   11     ;--------------------------------------------------------
                                     1-   12     ; external declarations
                                     1-   13     ;--------------------------------------------------------
-                                    1-   14     	extern	_charge_check_by_IO
-                                    1-   15     	extern	_ledRun
-                                    1-   16     	extern	_Detect_OverCurrent_ByAD
-                                    1-   17     	extern	_BaseBatSetPWMValue
-                                    1-   18     	extern	_ADC_Convert_Pre
-                                    1-   19     	extern	_Get_Onetime_Bat_ADCValue
-                                    1-   20     	extern	_Ledbreathing
-                                    1-   21     	extern	_LedOff
-                                    1-   22     	extern	_SetLedColorNormallyOn
-                                    1-   23     	extern	_SetLedBreathingParameters2
-                                    1-   24     	extern	_SetLedBreathingParameters
-                                    1-   25     	extern	_SetLedFlashParameters
-                                    1-   26     	extern	_adc_get
-                                    1-   27     	extern	_F_wait_eoc
-                                    1-   28     	extern	_adc_init4
-                                    1-   29     	extern	_adc3_init
-                                    1-   30     	extern	_adc2_init
-                                    1-   31     	extern	_adc_init
-                                    1-   32     	extern	_Delay_N1ms_16bit
-                                    1-   33     	extern	_delay
-                                    1-   34     	extern	_sleep_handle
-                                    1-   35     	extern	_sleep_param_init
-                                    1-   36     	extern	_led_handle
-                                    1-   37     	extern	_led_param_init
-                                    1-   38     	extern	_bat_lvd_check
-                                    1-   39     	extern	_battery_check
-                                    1-   40     	extern	_battery_param_init
-                                    1-   41     	extern	_SmokeFun
-                                    1-   42     	extern	_detect_param_init
-                                    1-   43     	extern	_msg_handle
-                                    1-   44     	extern	_MicScan
-                                    1-   45     	extern	_KeyScan
-                                    1-   46     	extern	_key_param_init
-                                    1-   47     	extern	_common_param_init
-                                    1-   48     	extern	_gpio_init
-                                    1-   49     	extern	_sleep_init
-                                    1-   50     	extern	_system_init
-                                    1-   51     	extern	_clear_ram
-                                    1-   52     	extern	_multi_16b
-                                    1-   53     	extern	_T0MD
-                                    1-   54     	extern	_PCON1
-                                    1-   55     	extern	_CMPCR
-                                    1-   56     	extern	_BODCON
-                                    1-   57     	extern	_PS0CV
-                                    1-   58     	extern	_APHCON
-                                    1-   59     	extern	_IOSTB
-                                    1-   60     	extern	_IOSTA
-                                    1-   61     	extern	_PWM4DUTY
-                                    1-   62     	extern	_P4CR1
-                                    1-   63     	extern	_BZ3CR
-                                    1-   64     	extern	_PS3CV
-                                    1-   65     	extern	_PWM3DUTY
-                                    1-   66     	extern	_T3CR2
-                                    1-   67     	extern	_T3CR1
-                                    1-   68     	extern	_TMR3
-                                    1-   69     	extern	_OSCCR
-                                    1-   70     	extern	_BZ2CR
-                                    1-   71     	extern	_PS2CV
-                                    1-   72     	extern	_PWM2DUTY
-                                    1-   73     	extern	_T2CR2
-                                    1-   74     	extern	_T2CR1
-                                    1-   75     	extern	_TMR2
-                                    1-   76     	extern	_TBHD
-                                    1-   77     	extern	_TBHP
-                                    1-   78     	extern	_IRCR
-                                    1-   79     	extern	_BZ1CR
-                                    1-   80     	extern	_PS1CV
-                                    1-   81     	extern	_PWM1DUTY
-                                    1-   82     	extern	_T1CR2
-                                    1-   83     	extern	_T1CR1
-                                    1-   84     	extern	_TMR1
-                                    1-   85     	extern	_ADD
-                                    1-   86     	extern	_PCHBUF
-                                    1-   87     	extern	_STATUS
-                                    1-   88     	extern	_PCL
-                                    1-   89     	extern	_TMR0
-                                    1-   90     	extern	_disp_delay_time_cnt
-                                    1-   91     	extern	_usb_check_ad_time_cnt
-                                    1-   92     	extern	_now_ch
-                                    1-   93     	extern	_temptimecount
-                                    1-   94     	extern	_sleep_delay_keep_time
-                                    1-   95     	extern	_running_keep_time
-                                    1-   96     	extern	_battery_low_cnt
-                                    1-   97     	extern	_usb_flag
-                                    1-   98     	extern	_HeatPlugInsert_flag
-                                    1-   99     	extern	_HeatPlugInsertTimeCount
-                                    1-  100     	extern	_HeatCount
-                                    1-  101     	extern	_SmokingKeepTime
-                                    1-  102     	extern	_HeatingKeepTime
-                                    1-  103     	extern	_KeyDowmTimeCount
-                                    1-  104     	extern	_VolTypeIndex
-                                    1-  105     	extern	_SmokeState
-                                    1-  106     	extern	_BatVolLevel
-                                    1-  107     	extern	_SaveHeaterIOStatus
-                                    1-  108     	extern	_MotorDutySet
-                                    1-  109     	extern	_NowMotorDuty
-                                    1-  110     	extern	_TargetMotorDuty
-                                    1-  111     	extern	_gAdcDataValue
-                                    1-  112     	extern	_OverCurrent_adc_value
-                                    1-  113     	extern	_OverCurrent_check_cnt
-                                    1-  114     	extern	_BuleLed_delay_keep_time
-                                    1-  115     	extern	_OverCurrentCount
-                                    1-  116     	extern	_OverCurrentDelayTime
-                                    1-  117     	extern	_led_delay_keep_time
-                                    1-  118     	extern	_led_flash_count
-                                    1-  119     	extern	_led_flash_flag
-                                    1-  120     	extern	_sleepCnt
-                                    1-  121     	extern	_Led_Breathe_count
-                                    1-  122     	extern	_LedShowKeepTime
-                                    1-  123     	extern	_LedShowStep
-                                    1-  124     	extern	_GroupColourIndex
-                                    1-  125     	extern	_ledRunStarStep
-                                    1-  126     	extern	_ledRunStep
-                                    1-  127     	extern	_nowLedMode
-                                    1-  128     	extern	_CodeSwitchIndex
-                                    1-  129     	extern	_msg
-                                    1-  130     	extern	_INTE2bits
-                                    1-  131     	extern	_TM3RHbits
-                                    1-  132     	extern	_RFCbits
-                                    1-  133     	extern	_ANAENbits
-                                    1-  134     	extern	_TMRHbits
-                                    1-  135     	extern	_INTEDGbits
-                                    1-  136     	extern	_ADJMDbits
-                                    1-  137     	extern	_PACONbits
-                                    1-  138     	extern	_AWUCONbits
-                                    1-  139     	extern	_ADCRbits
-                                    1-  140     	extern	_ADVREFHbits
-                                    1-  141     	extern	_ADRbits
-                                    1-  142     	extern	_ADMDbits
-                                    1-  143     	extern	_INTFbits
-                                    1-  144     	extern	_INTEbits
-                                    1-  145     	extern	_BPHCONbits
-                                    1-  146     	extern	_ABPLCONbits
-                                    1-  147     	extern	_BWUCONbits
-                                    1-  148     	extern	_PCONbits
-                                    1-  149     	extern	_PORTBbits
-                                    1-  150     	extern	_PORTAbits
-                                    1-  152     	extern PSAVE
-                                    1-  153     	extern SSAVE
-                                    1-  154     	extern WSAVE
-                                    1-  155     	extern STK12
-                                    1-  156     	extern STK11
-                                    1-  157     	extern STK10
-                                    1-  158     	extern STK09
-                                    1-  159     	extern STK08
-                                    1-  160     	extern STK07
-                                    1-  161     	extern STK06
-                                    1-  162     	extern STK05
-                                    1-  163     	extern STK04
-                                    1-  164     	extern STK03
-                                    1-  165     	extern STK02
-                                    1-  166     	extern STK01
-                                    1-  167     	extern STK00
-                                    1-  168     ;--------------------------------------------------------
-                                    1-  169     ; global declarations
-                                    1-  170     ;--------------------------------------------------------
-                                    1-  171     	extern	_isr
-                                    1-  172     	extern	_sys_flag_3
-                                    1-  173     	extern	_sys_flag_2
-                                    1-  174     	extern	_sys_flag_1
-                                    1-  175     	extern	_sys_flag_0
-                                    1-  176     	extern	_INTE2
-                                    1-  177     	extern	_TM3RH
-                                    1-  178     	extern	_RFC
-                                    1-  179     	extern	_ANAEN
-                                    1-  180     	extern	_TMRH
-                                    1-  181     	extern	_INTEDG
-                                    1-  182     	extern	_ADJMD
-                                    1-  183     	extern	_PACON
-                                    1-  184     	extern	_AWUCON
-                                    1-  185     	extern	_ADCR
-                                    1-  186     	extern	_ADVREFH
-                                    1-  187     	extern	_ADR
-                                    1-  188     	extern	_ADMD
-                                    1-  189     	extern	_INTF
-                                    1-  190     	extern	_INTE
-                                    1-  191     	extern	_BPHCON
-                                    1-  192     	extern	_ABPLCON
-                                    1-  193     	extern	_BWUCON
-                                    1-  194     	extern	_PCON
-                                    1-  195     	extern	_PORTB
-                                    1-  196     	extern	_PORTA
-                                    1-  197     	extern	_ad_start_flg
-                                    1-  198     	extern	_adc_value_tmp
-                                    1-  199     	extern	_percent_nun
-                                    1-  200     	extern	_PwmCycleCount
-                                    1-  201     	extern	_temp
-                                    1-  202     	extern	_time_base
-                                    1-  203     	extern	_time_base_1s
-                                    1-  204     	extern	_time_base_250ms
-                                    1-  205     	extern	_time_base_100ms
-                                    1-  206     	extern	_time_base_100us
-                                    1-  207     	extern	_isr_param_init
-                                    1-  209     ;--------------------------------------------------------
-                                    1-  210     ; global definitions
-                                    1-  211     ;--------------------------------------------------------
-                                    1-  212     .segment "uninit"
-     0000                           1-  213     _time_base_100us:
-                                    1-  214     	.res 1
-                                    1-  217     .segment "uninit"
-     0000                           1-  218     _time_base_100ms:
-                                    1-  219     	.res 1
-                                    1-  222     .segment "uninit"
-     0000                           1-  223     _time_base_250ms:
-                                    1-  224     	.res 1
-                                    1-  227     .segment "uninit"
-     0000                           1-  228     _time_base_1s:
-                                    1-  229     	.res 1
-                                    1-  232     .segment "uninit"
-     0000                           1-  233     _time_base:
-                                    1-  234     	.res 1
-                                    1-  237     .segment "uninit"
-     0000                           1-  238     _temp:
-                                    1-  239     	.res 1
-                                    1-  242     .segment "uninit"
-     0000                           1-  243     _PwmCycleCount:
-                                    1-  244     	.res 1
-                                    1-  247     .segment "uninit"
-     0000                           1-  248     _percent_nun:
-                                    1-  249     	.res 1
-                                    1-  252     .segment "uninit"
-     0000                           1-  253     _adc_value_tmp:
-                                    1-  254     	.res 2
-                                    1-  257     ;--------------------------------------------------------
-                                    1-  258     ; absolute symbol definitions
-                                    1-  259     ;--------------------------------------------------------
+                                    1-   14     	extern	_led_dis_loop_func
+                                    1-   15     	extern	_led_mode_set
+                                    1-   16     	extern	_charge_check_by_IO
+                                    1-   17     	extern	_ledRun
+                                    1-   18     	extern	_Detect_OverCurrent_ByAD
+                                    1-   19     	extern	_BaseBatSetPWMValue
+                                    1-   20     	extern	_ADC_Convert_Pre
+                                    1-   21     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   22     	extern	_Ledbreathing
+                                    1-   23     	extern	_LedOff
+                                    1-   24     	extern	_SetLedColorNormallyOn
+                                    1-   25     	extern	_SetLedBreathingParameters2
+                                    1-   26     	extern	_SetLedBreathingParameters
+                                    1-   27     	extern	_SetLedFlashParameters
+                                    1-   28     	extern	_adc_get
+                                    1-   29     	extern	_F_wait_eoc
+                                    1-   30     	extern	_adc_init4
+                                    1-   31     	extern	_adc3_init
+                                    1-   32     	extern	_adc2_init
+                                    1-   33     	extern	_adc_init
+                                    1-   34     	extern	_Delay_N1ms_16bit
+                                    1-   35     	extern	_delay
+                                    1-   36     	extern	_sleep_handle
+                                    1-   37     	extern	_sleep_param_init
+                                    1-   38     	extern	_led_handle
+                                    1-   39     	extern	_led_param_init
+                                    1-   40     	extern	_bat_lvd_check
+                                    1-   41     	extern	_battery_check
+                                    1-   42     	extern	_battery_param_init
+                                    1-   43     	extern	_SmokeFun
+                                    1-   44     	extern	_detect_param_init
+                                    1-   45     	extern	_msg_handle
+                                    1-   46     	extern	_MicScan
+                                    1-   47     	extern	_KeyScan
+                                    1-   48     	extern	_key_param_init
+                                    1-   49     	extern	_common_param_init
+                                    1-   50     	extern	_gpio_init
+                                    1-   51     	extern	_sleep_init
+                                    1-   52     	extern	_system_init
+                                    1-   53     	extern	_clear_ram
+                                    1-   54     	extern	_multi_16b
+                                    1-   55     	extern	_T0MD
+                                    1-   56     	extern	_PCON1
+                                    1-   57     	extern	_CMPCR
+                                    1-   58     	extern	_BODCON
+                                    1-   59     	extern	_PS0CV
+                                    1-   60     	extern	_APHCON
+                                    1-   61     	extern	_IOSTB
+                                    1-   62     	extern	_IOSTA
+                                    1-   63     	extern	_PWM4DUTY
+                                    1-   64     	extern	_P4CR1
+                                    1-   65     	extern	_BZ3CR
+                                    1-   66     	extern	_PS3CV
+                                    1-   67     	extern	_PWM3DUTY
+                                    1-   68     	extern	_T3CR2
+                                    1-   69     	extern	_T3CR1
+                                    1-   70     	extern	_TMR3
+                                    1-   71     	extern	_OSCCR
+                                    1-   72     	extern	_BZ2CR
+                                    1-   73     	extern	_PS2CV
+                                    1-   74     	extern	_PWM2DUTY
+                                    1-   75     	extern	_T2CR2
+                                    1-   76     	extern	_T2CR1
+                                    1-   77     	extern	_TMR2
+                                    1-   78     	extern	_TBHD
+                                    1-   79     	extern	_TBHP
+                                    1-   80     	extern	_IRCR
+                                    1-   81     	extern	_BZ1CR
+                                    1-   82     	extern	_PS1CV
+                                    1-   83     	extern	_PWM1DUTY
+                                    1-   84     	extern	_T1CR2
+                                    1-   85     	extern	_T1CR1
+                                    1-   86     	extern	_TMR1
+                                    1-   87     	extern	_ADD
+                                    1-   88     	extern	_PCHBUF
+                                    1-   89     	extern	_STATUS
+                                    1-   90     	extern	_PCL
+                                    1-   91     	extern	_TMR0
+                                    1-   92     	extern	_disp_delay_time_cnt
+                                    1-   93     	extern	_usb_check_ad_time_cnt
+                                    1-   94     	extern	_now_ch
+                                    1-   95     	extern	_temptimecount
+                                    1-   96     	extern	_sleep_delay_keep_time
+                                    1-   97     	extern	_running_keep_time
+                                    1-   98     	extern	_battery_low_cnt
+                                    1-   99     	extern	_usb_flag
+                                    1-  100     	extern	_HeatPlugInsert_flag
+                                    1-  101     	extern	_HeatPlugInsertTimeCount
+                                    1-  102     	extern	_HeatCount
+                                    1-  103     	extern	_SmokingKeepTime
+                                    1-  104     	extern	_HeatingKeepTime
+                                    1-  105     	extern	_KeyDowmTimeCount
+                                    1-  106     	extern	_VolTypeIndex
+                                    1-  107     	extern	_SmokeState
+                                    1-  108     	extern	_BatVolLevel
+                                    1-  109     	extern	_led_mode_flag
+                                    1-  110     	extern	_SaveHeaterIOStatus
+                                    1-  111     	extern	_MotorDutySet
+                                    1-  112     	extern	_NowMotorDuty
+                                    1-  113     	extern	_TargetMotorDuty
+                                    1-  114     	extern	_gAdcDataValue
+                                    1-  115     	extern	_OverCurrent_adc_value
+                                    1-  116     	extern	_OverCurrent_check_cnt
+                                    1-  117     	extern	_BuleLed_delay_keep_time
+                                    1-  118     	extern	_OverCurrentCount
+                                    1-  119     	extern	_OverCurrentDelayTime
+                                    1-  120     	extern	_led_delay_keep_time
+                                    1-  121     	extern	_led_flash_count
+                                    1-  122     	extern	_led_flash_flag
+                                    1-  123     	extern	_sleepCnt
+                                    1-  124     	extern	_Led_Breathe_count
+                                    1-  125     	extern	_LedShowKeepTime
+                                    1-  126     	extern	_LedShowStep
+                                    1-  127     	extern	_GroupColourIndex
+                                    1-  128     	extern	_ledRunStarStep
+                                    1-  129     	extern	_ledRunStep
+                                    1-  130     	extern	_nowLedMode
+                                    1-  131     	extern	_CodeSwitchIndex
+                                    1-  132     	extern	_msg
+                                    1-  133     	extern	_INTE2bits
+                                    1-  134     	extern	_TM3RHbits
+                                    1-  135     	extern	_RFCbits
+                                    1-  136     	extern	_ANAENbits
+                                    1-  137     	extern	_TMRHbits
+                                    1-  138     	extern	_INTEDGbits
+                                    1-  139     	extern	_ADJMDbits
+                                    1-  140     	extern	_PACONbits
+                                    1-  141     	extern	_AWUCONbits
+                                    1-  142     	extern	_ADCRbits
+                                    1-  143     	extern	_ADVREFHbits
+                                    1-  144     	extern	_ADRbits
+                                    1-  145     	extern	_ADMDbits
+                                    1-  146     	extern	_INTFbits
+                                    1-  147     	extern	_INTEbits
+                                    1-  148     	extern	_BPHCONbits
+                                    1-  149     	extern	_ABPLCONbits
+                                    1-  150     	extern	_BWUCONbits
+                                    1-  151     	extern	_PCONbits
+                                    1-  152     	extern	_PORTBbits
+                                    1-  153     	extern	_PORTAbits
+                                    1-  155     	extern PSAVE
+                                    1-  156     	extern SSAVE
+                                    1-  157     	extern WSAVE
+                                    1-  158     	extern STK12
+                                    1-  159     	extern STK11
+                                    1-  160     	extern STK10
+                                    1-  161     	extern STK09
+                                    1-  162     	extern STK08
+                                    1-  163     	extern STK07
+                                    1-  164     	extern STK06
+                                    1-  165     	extern STK05
+                                    1-  166     	extern STK04
+                                    1-  167     	extern STK03
+                                    1-  168     	extern STK02
+                                    1-  169     	extern STK01
+                                    1-  170     	extern STK00
+                                    1-  171     ;--------------------------------------------------------
+                                    1-  172     ; global declarations
+                                    1-  173     ;--------------------------------------------------------
+                                    1-  174     	extern	_isr
+                                    1-  175     	extern	_sys_flag_3
+                                    1-  176     	extern	_sys_flag_2
+                                    1-  177     	extern	_sys_flag_1
+                                    1-  178     	extern	_sys_flag_0
+                                    1-  179     	extern	_INTE2
+                                    1-  180     	extern	_TM3RH
+                                    1-  181     	extern	_RFC
+                                    1-  182     	extern	_ANAEN
+                                    1-  183     	extern	_TMRH
+                                    1-  184     	extern	_INTEDG
+                                    1-  185     	extern	_ADJMD
+                                    1-  186     	extern	_PACON
+                                    1-  187     	extern	_AWUCON
+                                    1-  188     	extern	_ADCR
+                                    1-  189     	extern	_ADVREFH
+                                    1-  190     	extern	_ADR
+                                    1-  191     	extern	_ADMD
+                                    1-  192     	extern	_INTF
+                                    1-  193     	extern	_INTE
+                                    1-  194     	extern	_BPHCON
+                                    1-  195     	extern	_ABPLCON
+                                    1-  196     	extern	_BWUCON
+                                    1-  197     	extern	_PCON
+                                    1-  198     	extern	_PORTB
+                                    1-  199     	extern	_PORTA
+                                    1-  200     	extern	_ad_start_flg
+                                    1-  201     	extern	_adc_value_tmp
+                                    1-  202     	extern	_percent_nun
+                                    1-  203     	extern	_PwmCycleCount
+                                    1-  204     	extern	_temp
+                                    1-  205     	extern	_time_base
+                                    1-  206     	extern	_time_base_1s
+                                    1-  207     	extern	_time_base_250ms
+                                    1-  208     	extern	_time_base_100ms
+                                    1-  209     	extern	_time_base_100us
+                                    1-  210     	extern	_isr_param_init
+                                    1-  212     ;--------------------------------------------------------
+                                    1-  213     ; global definitions
+                                    1-  214     ;--------------------------------------------------------
+                                    1-  215     .segment "uninit"
+     0000                           1-  216     _time_base_100us:
+                                    1-  217     	.res 1
+                                    1-  220     .segment "uninit"
+     0000                           1-  221     _time_base_100ms:
+                                    1-  222     	.res 1
+                                    1-  225     .segment "uninit"
+     0000                           1-  226     _time_base_250ms:
+                                    1-  227     	.res 1
+                                    1-  230     .segment "uninit"
+     0000                           1-  231     _time_base_1s:
+                                    1-  232     	.res 1
+                                    1-  235     .segment "uninit"
+     0000                           1-  236     _time_base:
+                                    1-  237     	.res 1
+                                    1-  240     .segment "uninit"
+     0000                           1-  241     _temp:
+                                    1-  242     	.res 1
+                                    1-  245     .segment "uninit"
+     0000                           1-  246     _PwmCycleCount:
+                                    1-  247     	.res 1
+                                    1-  250     .segment "uninit"
+     0000                           1-  251     _percent_nun:
+                                    1-  252     	.res 1
+                                    1-  255     .segment "uninit"
+     0000                           1-  256     _adc_value_tmp:
+                                    1-  257     	.res 2
                                     1-  260     ;--------------------------------------------------------
-                                    1-  261     ; compiler-defined variables
+                                    1-  261     ; absolute symbol definitions
                                     1-  262     ;--------------------------------------------------------
-                                    1-  263     .segment "uninit"
-     0000                           1-  264     _isr_sTime1MS_65536_44:
-                                    1-  265     	.res	1
-                                    1-  267     .segment "uninit"
-     0000                           1-  268     ___sdcc_saved_fsr:
-                                    1-  269     	.res	1
-                                    1-  271     .segment "uninit"
-     0000                           1-  272     ___sdcc_saved_stk00:
-                                    1-  273     	.res	1
-                                    1-  275     .segment "uninit"
-     0000                           1-  276     ___sdcc_saved_stk01:
-                                    1-  277     	.res	1
-                                    1-  279     ;--------------------------------------------------------
-                                    1-  280     ; initialized data
-                                    1-  281     ;--------------------------------------------------------
-                                    1-  283     .segment "idata"
-     0000                           1-  284     _ad_start_flg:
-     0000 0000                      1-  287     	dw	0x00	; 0
-                                    1-  290     .segment "idata"
-     0000                           1-  291     _isr_sTime10ms_65536_44:
-     0000 0000                      1-  294     	dw	0x00	; 0
-                                    1-  297     .segment "idata"
-     0000                           1-  298     _isr_sTime100ms_65536_44:
-     0000 0000                      1-  301     	dw	0x00	; 0
-                                    1-  303     ;--------------------------------------------------------
-                                    1-  304     ; initialized absolute data
-                                    1-  305     ;--------------------------------------------------------
+                                    1-  263     ;--------------------------------------------------------
+                                    1-  264     ; compiler-defined variables
+                                    1-  265     ;--------------------------------------------------------
+                                    1-  266     .segment "uninit"
+     0000                           1-  267     _isr_sTime1MS_65536_46:
+                                    1-  268     	.res	1
+                                    1-  270     .segment "uninit"
+     0000                           1-  271     ___sdcc_saved_fsr:
+                                    1-  272     	.res	1
+                                    1-  274     .segment "uninit"
+     0000                           1-  275     ___sdcc_saved_stk00:
+                                    1-  276     	.res	1
+                                    1-  278     .segment "uninit"
+     0000                           1-  279     ___sdcc_saved_stk01:
+                                    1-  280     	.res	1
+                                    1-  282     ;--------------------------------------------------------
+                                    1-  283     ; initialized data
+                                    1-  284     ;--------------------------------------------------------
+                                    1-  286     .segment "idata"
+     0000                           1-  287     _ad_start_flg:
+     0000 0000                      1-  290     	dw	0x00	; 0
+                                    1-  293     .segment "idata"
+     0000                           1-  294     _isr_sTime10ms_65536_46:
+     0000 0000                      1-  297     	dw	0x00	; 0
+                                    1-  300     .segment "idata"
+     0000                           1-  301     _isr_sTime100ms_65536_46:
+     0000 0000                      1-  304     	dw	0x00	; 0
                                     1-  306     ;--------------------------------------------------------
-                                    1-  307     ; overlayable items in internal ram 
+                                    1-  307     ; initialized absolute data
                                     1-  308     ;--------------------------------------------------------
-                                    1-  309     ;	udata_ovr
-                                    1-  310     ;--------------------------------------------------------
-                                    1-  311     ; interrupt and initialization code
-                                    1-  312     ;--------------------------------------------------------
-                                    1-  313     ORG 0x0008
-                                    1-  314     	MGOTO	__sdcc_interrupt
+                                    1-  309     ;--------------------------------------------------------
+                                    1-  310     ; overlayable items in internal ram 
+                                    1-  311     ;--------------------------------------------------------
+                                    1-  312     ;	udata_ovr
+                                    1-  313     ;--------------------------------------------------------
+                                    1-  314     ; interrupt and initialization code
+                                    1-  315     ;--------------------------------------------------------
+                                    1-  316     ORG 0x0008
+                                    1-  317     	MGOTO	__sdcc_interrupt
      0008 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  316     .segment "code"
-     0000                           1-  317     __sdcc_interrupt:
-                                    1-  318     ;***
-                                    1-  319     ;  pBlock Stats: dbName = I
-                                    1-  320     ;***
-                                    1-  321     ;functions called:
-                                    1-  322     ;   _ledRun
-                                    1-  323     ;   _F_wait_eoc
-                                    1-  324     ;   _F_wait_eoc
-                                    1-  325     ;   _ledRun
+                                    1-  319     .segment "code"
+     0000                           1-  320     __sdcc_interrupt:
+                                    1-  321     ;***
+                                    1-  322     ;  pBlock Stats: dbName = I
+                                    1-  323     ;***
+                                    1-  324     ;functions called:
+                                    1-  325     ;   _led_dis_loop_func
                                     1-  326     ;   _F_wait_eoc
                                     1-  327     ;   _F_wait_eoc
-                                    1-  328     ;5 compiler assigned registers:
-                                    1-  329     ;   STK00
-                                    1-  330     ;   STK01
-                                    1-  331     ;   r0x1018
-                                    1-  332     ;   r0x1019
-                                    1-  333     ;   r0x101A
-                                    1-  334     ;; Starting pCode block
-     0000                           1-  335     _isr:
-                                    1-  336     ; 0 exit points
-                                    1-  337     	.line	53, "isr.c"; 	void isr(void) __interrupt(0)
-     0000 00rr                      1-  338     	MOVAR	WSAVE
-     0001 1503                      1-  339     	SWAPR	STATUS,W
-     0002 0283                      1-  340     	CLRR	STATUS
-     0003 00rr                      1-  341     	MOVAR	SSAVE
-     0004 010A                      1-  342     	MOVR	PCHBUF,W
-     0005 028A                      1-  343     	CLRR	PCHBUF
-     0006 00rr                      1-  344     	MOVAR	PSAVE
-     0007 0104                      1-  345     	MOVR	FSR,W
-                                    1-  346     	BANKSEL	___sdcc_saved_fsr
+                                    1-  328     ;   _led_dis_loop_func
+                                    1-  329     ;   _F_wait_eoc
+                                    1-  330     ;   _F_wait_eoc
+                                    1-  331     ;5 compiler assigned registers:
+                                    1-  332     ;   STK00
+                                    1-  333     ;   STK01
+                                    1-  334     ;   r0x1017
+                                    1-  335     ;   r0x1018
+                                    1-  336     ;   r0x1019
+                                    1-  337     ;; Starting pCode block
+     0000                           1-  338     _isr:
+                                    1-  339     ; 0 exit points
+                                    1-  340     	.line	53, "isr.c"; 	void isr(void) __interrupt(0)
+     0000 00rr                      1-  341     	MOVAR	WSAVE
+     0001 1503                      1-  342     	SWAPR	STATUS,W
+     0002 0283                      1-  343     	CLRR	STATUS
+     0003 00rr                      1-  344     	MOVAR	SSAVE
+     0004 010A                      1-  345     	MOVR	PCHBUF,W
+     0005 028A                      1-  346     	CLRR	PCHBUF
+     0006 00rr                      1-  347     	MOVAR	PSAVE
+     0007 0104                      1-  348     	MOVR	FSR,W
+                                    1-  349     	BANKSEL	___sdcc_saved_fsr
      0008 rrrr                      3-  109 m1      .banksel ram_address
-     0009 00rr                      1-  347     	MOVAR	___sdcc_saved_fsr
-     000A 01rr                      1-  348     	MOVR	STK00,W
-                                    1-  349     	BANKSEL	___sdcc_saved_stk00
+     0009 00rr                      1-  350     	MOVAR	___sdcc_saved_fsr
+     000A 01rr                      1-  351     	MOVR	STK00,W
+                                    1-  352     	BANKSEL	___sdcc_saved_stk00
      000B rrrr                      3-  109 m1      .banksel ram_address
-     000C 00rr                      1-  350     	MOVAR	___sdcc_saved_stk00
-     000D 01rr                      1-  351     	MOVR	STK01,W
-                                    1-  352     	BANKSEL	___sdcc_saved_stk01
+     000C 00rr                      1-  353     	MOVAR	___sdcc_saved_stk00
+     000D 01rr                      1-  354     	MOVR	STK01,W
+                                    1-  355     	BANKSEL	___sdcc_saved_stk01
      000E rrrr                      3-  109 m1      .banksel ram_address
-     000F 00rr                      1-  353     	MOVAR	___sdcc_saved_stk01
-                                    1-  354     	.line	60, "isr.c"; 	if(INTFbits.T0IF)
-     0010 08rr                      1-  355     	BTRSS	_INTFbits,0
-                                    1-  356     	MGOTO	_02026_DS_
+     000F 00rr                      1-  356     	MOVAR	___sdcc_saved_stk01
+                                    1-  357     	.line	60, "isr.c"; 	if(INTFbits.T0IF)
+     0010 08rr                      1-  358     	BTRSS	_INTFbits,0
+                                    1-  359     	MGOTO	_02026_DS_
      0011 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  357     	.line	62, "isr.c"; 	INTFbits.T0IF = 0;
-     0012 21FE                      1-  358     	MOVIA	0xfe
-     0013 00rr                      1-  359     	MOVAR	(_INTFbits + 0)
-                                    1-  360     	.line	66, "isr.c"; 	TMR0 = 163;	//156;			// 156是计算值，163是用示波器矫正值
-     0014 21A3                      1-  361     	MOVIA	0xa3
-     0015 00rr                      1-  362     	MOVAR	_TMR0
-                                    1-  363     	.line	73, "isr.c"; 	ledRun();
-                                    1-  364     	MCALL	_ledRun
-     0016 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  365     	.line	74, "isr.c"; 	sTime1MS++;
-                                    1-  366     	BANKSEL	_isr_sTime1MS_65536_44
-     0017 rrrr                      3-  109 m1      .banksel ram_address
-     0018 05rr                      1-  367     	INCR	_isr_sTime1MS_65536_44,F
-                                    1-  368     ;;unsigned compare: left < lit(0xA=10), size=1
-                                    1-  369     	.line	75, "isr.c"; 	if(sTime1MS >= 10)//1MS
-     0019 210A                      1-  370     	MOVIA	0x0a
-     001A 04rr                      1-  371     	SUBAR	_isr_sTime1MS_65536_44,W
-     001B 0803                      1-  372     	BTRSS	STATUS,0
-                                    1-  373     	MGOTO	_02026_DS_
-     001C 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  374     	.line	78, "isr.c"; 	sTime1MS = 0;
-     001D 02rr                      1-  375     	CLRR	_isr_sTime1MS_65536_44
-                                    1-  376     	.line	79, "isr.c"; 	f_1ms_TimeOut = 1;
-                                    1-  377     	BANKSEL	_sys_flag_2
-     001E rrrr                      3-  109 m1      .banksel ram_address
-     001F 1Arr                      1-  378     	BSR	_sys_flag_2,4
-                                    1-  379     	.line	82, "isr.c"; 	if(temptimecount)
-                                    1-  380     	BANKSEL	_temptimecount
-     0020 rrrr                      3-  109 m1      .banksel ram_address
-     0021 01rr                      1-  381     	MOVR	(_temptimecount + 1),W
-     0022 11rr                      1-  382     	IORAR	_temptimecount,W
-     0023 0D03                      1-  383     	BTRSC	STATUS,2
-                                    1-  384     	MGOTO	_02010_DS_
-     0024 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  385     	.line	83, "isr.c"; 	temptimecount--;
-     0025 21FF                      1-  386     	MOVIA	0xff
-     0026 03rr                      1-  387     	ADDAR	_temptimecount,F
-     0027 21FF                      1-  388     	MOVIA	0xff
-     0028 34rr                      1-  389     	ADCAR	(_temptimecount + 1),F
-     0029                           1-  390     _02010_DS_:
-                                    1-  391     	.line	84, "isr.c"; 	if(SmokingKeepTime)
-                                    1-  392     	BANKSEL	_SmokingKeepTime
-     0029 rrrr                      3-  109 m1      .banksel ram_address
-     002A 01rr                      1-  393     	MOVR	(_SmokingKeepTime + 1),W
-     002B 11rr                      1-  394     	IORAR	_SmokingKeepTime,W
-     002C 0D03                      1-  395     	BTRSC	STATUS,2
-                                    1-  396     	MGOTO	_02012_DS_
-     002D 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  397     	.line	85, "isr.c"; 	SmokingKeepTime--;
-     002E 21FF                      1-  398     	MOVIA	0xff
-     002F 03rr                      1-  399     	ADDAR	_SmokingKeepTime,F
-     0030 21FF                      1-  400     	MOVIA	0xff
-     0031 34rr                      1-  401     	ADCAR	(_SmokingKeepTime + 1),F
-     0032                           1-  402     _02012_DS_:
-                                    1-  403     	.line	101, "isr.c"; 	sTime10ms++;
-                                    1-  404     	BANKSEL	_isr_sTime10ms_65536_44
-     0032 rrrr                      3-  109 m1      .banksel ram_address
-     0033 05rr                      1-  405     	INCR	_isr_sTime10ms_65536_44,F
-                                    1-  406     ;;unsigned compare: left < lit(0x9=9), size=1
-                                    1-  407     	.line	102, "isr.c"; 	if(sTime10ms >= 9)//10ms
-     0034 2109                      1-  408     	MOVIA	0x09
-     0035 04rr                      1-  409     	SUBAR	_isr_sTime10ms_65536_44,W
-     0036 0803                      1-  410     	BTRSS	STATUS,0
-                                    1-  411     	MGOTO	_02026_DS_
-     0037 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  412     	.line	104, "isr.c"; 	sTime10ms = 0;
-     0038 02rr                      1-  413     	CLRR	_isr_sTime10ms_65536_44
-                                    1-  414     	.line	109, "isr.c"; 	f_10ms_TimeOut = 1;
-                                    1-  415     	BANKSEL	_sys_flag_3
+                                    1-  360     	.line	62, "isr.c"; 	INTFbits.T0IF = 0;
+     0012 21FE                      1-  361     	MOVIA	0xfe
+     0013 00rr                      1-  362     	MOVAR	(_INTFbits + 0)
+                                    1-  363     	.line	66, "isr.c"; 	TMR0 = 163;	//156;			// 156是计算值，163是用示波器矫正值
+     0014 21A3                      1-  364     	MOVIA	0xa3
+     0015 00rr                      1-  365     	MOVAR	_TMR0
+                                    1-  366     	.line	74, "isr.c"; 	sTime1MS++;
+                                    1-  367     	BANKSEL	_isr_sTime1MS_65536_46
+     0016 rrrr                      3-  109 m1      .banksel ram_address
+     0017 05rr                      1-  368     	INCR	_isr_sTime1MS_65536_46,F
+                                    1-  369     ;;unsigned compare: left < lit(0xA=10), size=1
+                                    1-  370     	.line	75, "isr.c"; 	if(sTime1MS >= 10)//1MS
+     0018 210A                      1-  371     	MOVIA	0x0a
+     0019 04rr                      1-  372     	SUBAR	_isr_sTime1MS_65536_46,W
+     001A 0803                      1-  373     	BTRSS	STATUS,0
+                                    1-  374     	MGOTO	_02026_DS_
+     001B 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  375     	.line	78, "isr.c"; 	sTime1MS = 0;
+     001C 02rr                      1-  376     	CLRR	_isr_sTime1MS_65536_46
+                                    1-  377     	.line	79, "isr.c"; 	f_1ms_TimeOut = 1;
+                                    1-  378     	BANKSEL	_sys_flag_2
+     001D rrrr                      3-  109 m1      .banksel ram_address
+     001E 1Arr                      1-  379     	BSR	_sys_flag_2,4
+                                    1-  380     	.line	82, "isr.c"; 	if(temptimecount)
+                                    1-  381     	BANKSEL	_temptimecount
+     001F rrrr                      3-  109 m1      .banksel ram_address
+     0020 01rr                      1-  382     	MOVR	(_temptimecount + 1),W
+     0021 11rr                      1-  383     	IORAR	_temptimecount,W
+     0022 0D03                      1-  384     	BTRSC	STATUS,2
+                                    1-  385     	MGOTO	_02010_DS_
+     0023 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  386     	.line	83, "isr.c"; 	temptimecount--;
+     0024 21FF                      1-  387     	MOVIA	0xff
+     0025 03rr                      1-  388     	ADDAR	_temptimecount,F
+     0026 21FF                      1-  389     	MOVIA	0xff
+     0027 34rr                      1-  390     	ADCAR	(_temptimecount + 1),F
+     0028                           1-  391     _02010_DS_:
+                                    1-  392     	.line	84, "isr.c"; 	if(SmokingKeepTime)
+                                    1-  393     	BANKSEL	_SmokingKeepTime
+     0028 rrrr                      3-  109 m1      .banksel ram_address
+     0029 01rr                      1-  394     	MOVR	(_SmokingKeepTime + 1),W
+     002A 11rr                      1-  395     	IORAR	_SmokingKeepTime,W
+     002B 0D03                      1-  396     	BTRSC	STATUS,2
+                                    1-  397     	MGOTO	_02012_DS_
+     002C 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  398     	.line	85, "isr.c"; 	SmokingKeepTime--;
+     002D 21FF                      1-  399     	MOVIA	0xff
+     002E 03rr                      1-  400     	ADDAR	_SmokingKeepTime,F
+     002F 21FF                      1-  401     	MOVIA	0xff
+     0030 34rr                      1-  402     	ADCAR	(_SmokingKeepTime + 1),F
+     0031                           1-  403     _02012_DS_:
+                                    1-  404     	.line	101, "isr.c"; 	sTime10ms++;
+                                    1-  405     	BANKSEL	_isr_sTime10ms_65536_46
+     0031 rrrr                      3-  109 m1      .banksel ram_address
+     0032 05rr                      1-  406     	INCR	_isr_sTime10ms_65536_46,F
+                                    1-  407     ;;unsigned compare: left < lit(0x9=9), size=1
+                                    1-  408     	.line	102, "isr.c"; 	if(sTime10ms >= 9)//10ms
+     0033 2109                      1-  409     	MOVIA	0x09
+     0034 04rr                      1-  410     	SUBAR	_isr_sTime10ms_65536_46,W
+     0035 0803                      1-  411     	BTRSS	STATUS,0
+                                    1-  412     	MGOTO	_02026_DS_
+     0036 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  413     	.line	104, "isr.c"; 	sTime10ms = 0;
+     0037 02rr                      1-  414     	CLRR	_isr_sTime10ms_65536_46
+                                    1-  415     	.line	105, "isr.c"; 	led_dis_loop_func();
+                                    1-  416     	MCALL	_led_dis_loop_func
+     0038 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  417     	.line	110, "isr.c"; 	f_10ms_TimeOut = 1;
+                                    1-  418     	BANKSEL	_sys_flag_3
      0039 rrrr                      3-  109 m1      .banksel ram_address
-     003A 1Arr                      1-  416     	BSR	_sys_flag_3,4
-                                    1-  417     	.line	110, "isr.c"; 	f_charge_check = 1;
-                                    1-  418     	BANKSEL	_sys_flag_0
+     003A 1Arr                      1-  419     	BSR	_sys_flag_3,4
+                                    1-  420     	.line	111, "isr.c"; 	f_charge_check = 1;
+                                    1-  421     	BANKSEL	_sys_flag_0
      003B rrrr                      3-  109 m1      .banksel ram_address
-     003C 19rr                      1-  419     	BSR	_sys_flag_0,3
-                                    1-  420     	.line	111, "isr.c"; 	f_bat_lvd_check = 1;
-                                    1-  421     	BANKSEL	_sys_flag_3
+     003C 19rr                      1-  422     	BSR	_sys_flag_0,3
+                                    1-  423     	.line	112, "isr.c"; 	f_bat_lvd_check = 1;
+                                    1-  424     	BANKSEL	_sys_flag_3
      003D rrrr                      3-  109 m1      .banksel ram_address
-     003E 1Arr                      1-  422     	BSR	_sys_flag_3,5
-                                    1-  423     	.line	112, "isr.c"; 	f_heat_check = 1;
-     003F 18rr                      1-  424     	BSR	_sys_flag_3,1
-                                    1-  425     	.line	113, "isr.c"; 	f_sleep_check = 1;
-                                    1-  426     	BANKSEL	_sys_flag_1
+     003E 1Arr                      1-  425     	BSR	_sys_flag_3,5
+                                    1-  426     	.line	113, "isr.c"; 	f_heat_check = 1;
+     003F 18rr                      1-  427     	BSR	_sys_flag_3,1
+                                    1-  428     	.line	114, "isr.c"; 	f_sleep_check = 1;
+                                    1-  429     	BANKSEL	_sys_flag_1
      0040 rrrr                      3-  109 m1      .banksel ram_address
-     0041 1Brr                      1-  427     	BSR	_sys_flag_1,6
-                                    1-  428     	.line	114, "isr.c"; 	f_battery_check = 1;
-     0042 18rr                      1-  429     	BSR	_sys_flag_1,0
-                                    1-  430     	.line	126, "isr.c"; 	if(LedShowKeepTime)
-                                    1-  431     	BANKSEL	_LedShowKeepTime
+     0041 1Brr                      1-  430     	BSR	_sys_flag_1,6
+                                    1-  431     	.line	115, "isr.c"; 	f_battery_check = 1;
+     0042 18rr                      1-  432     	BSR	_sys_flag_1,0
+                                    1-  433     	.line	127, "isr.c"; 	if(LedShowKeepTime)
+                                    1-  434     	BANKSEL	_LedShowKeepTime
      0043 rrrr                      3-  109 m1      .banksel ram_address
-     0044 01rr                      1-  432     	MOVR	(_LedShowKeepTime + 1),W
-     0045 11rr                      1-  433     	IORAR	_LedShowKeepTime,W
-     0046 0D03                      1-  434     	BTRSC	STATUS,2
-                                    1-  435     	MGOTO	_02014_DS_
+     0044 01rr                      1-  435     	MOVR	(_LedShowKeepTime + 1),W
+     0045 11rr                      1-  436     	IORAR	_LedShowKeepTime,W
+     0046 0D03                      1-  437     	BTRSC	STATUS,2
+                                    1-  438     	MGOTO	_02014_DS_
      0047 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  436     	.line	127, "isr.c"; 	--LedShowKeepTime;	
-     0048 21FF                      1-  437     	MOVIA	0xff
-     0049 03rr                      1-  438     	ADDAR	_LedShowKeepTime,F
-     004A 21FF                      1-  439     	MOVIA	0xff
-     004B 34rr                      1-  440     	ADCAR	(_LedShowKeepTime + 1),F
-     004C                           1-  441     _02014_DS_:
-                                    1-  442     	.line	129, "isr.c"; 	if(disp_delay_time_cnt)
-                                    1-  443     	BANKSEL	_disp_delay_time_cnt
+                                    1-  439     	.line	128, "isr.c"; 	--LedShowKeepTime;	
+     0048 21FF                      1-  440     	MOVIA	0xff
+     0049 03rr                      1-  441     	ADDAR	_LedShowKeepTime,F
+     004A 21FF                      1-  442     	MOVIA	0xff
+     004B 34rr                      1-  443     	ADCAR	(_LedShowKeepTime + 1),F
+     004C                           1-  444     _02014_DS_:
+                                    1-  445     	.line	130, "isr.c"; 	if(disp_delay_time_cnt)
+                                    1-  446     	BANKSEL	_disp_delay_time_cnt
      004C rrrr                      3-  109 m1      .banksel ram_address
-     004D 01rr                      1-  444     	MOVR	_disp_delay_time_cnt,W
-     004E 0903                      1-  445     	BTRSS	STATUS,2
-                                    1-  446     	.line	130, "isr.c"; 	disp_delay_time_cnt--;
-     004F 06rr                      1-  447     	DECR	_disp_delay_time_cnt,F
-                                    1-  448     	.line	134, "isr.c"; 	if(led_delay_keep_time)
-                                    1-  449     	BANKSEL	_led_delay_keep_time
+     004D 01rr                      1-  447     	MOVR	_disp_delay_time_cnt,W
+     004E 0903                      1-  448     	BTRSS	STATUS,2
+                                    1-  449     	.line	131, "isr.c"; 	disp_delay_time_cnt--;
+     004F 06rr                      1-  450     	DECR	_disp_delay_time_cnt,F
+                                    1-  451     	.line	135, "isr.c"; 	if(led_delay_keep_time)
+                                    1-  452     	BANKSEL	_led_delay_keep_time
      0050 rrrr                      3-  109 m1      .banksel ram_address
-     0051 01rr                      1-  450     	MOVR	_led_delay_keep_time,W
-     0052 0903                      1-  451     	BTRSS	STATUS,2
-                                    1-  452     	.line	135, "isr.c"; 	--led_delay_keep_time;	
-     0053 06rr                      1-  453     	DECR	_led_delay_keep_time,F
-                                    1-  454     	.line	137, "isr.c"; 	sTime100ms++;
-                                    1-  455     	BANKSEL	_isr_sTime100ms_65536_44
+     0051 01rr                      1-  453     	MOVR	_led_delay_keep_time,W
+     0052 0903                      1-  454     	BTRSS	STATUS,2
+                                    1-  455     	.line	136, "isr.c"; 	--led_delay_keep_time;	
+     0053 06rr                      1-  456     	DECR	_led_delay_keep_time,F
+                                    1-  457     	.line	138, "isr.c"; 	sTime100ms++;
+                                    1-  458     	BANKSEL	_isr_sTime100ms_65536_46
      0054 rrrr                      3-  109 m1      .banksel ram_address
-     0055 05rr                      1-  456     	INCR	_isr_sTime100ms_65536_44,F
-                                    1-  457     	.line	138, "isr.c"; 	if(sTime100ms >= 10)//100ms
-     0056 210A                      1-  458     	MOVIA	0x0a
-     0057 04rr                      1-  459     	SUBAR	_isr_sTime100ms_65536_44,W
-     0058 0803                      1-  460     	BTRSS	STATUS,0
-                                    1-  461     	MGOTO	_02026_DS_
+     0055 05rr                      1-  459     	INCR	_isr_sTime100ms_65536_46,F
+                                    1-  460     	.line	139, "isr.c"; 	if(sTime100ms >= 10)//100ms
+     0056 210A                      1-  461     	MOVIA	0x0a
+     0057 04rr                      1-  462     	SUBAR	_isr_sTime100ms_65536_46,W
+     0058 0803                      1-  463     	BTRSS	STATUS,0
+                                    1-  464     	MGOTO	_02026_DS_
      0059 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  462     	.line	140, "isr.c"; 	sTime100ms = 0;
-     005A 02rr                      1-  463     	CLRR	_isr_sTime100ms_65536_44
-                                    1-  464     	.line	142, "isr.c"; 	f_1s_chrg_TimeOut = 1;
-                                    1-  465     	BANKSEL	_sys_flag_3
+                                    1-  465     	.line	141, "isr.c"; 	sTime100ms = 0;
+     005A 02rr                      1-  466     	CLRR	_isr_sTime100ms_65536_46
+                                    1-  467     	.line	143, "isr.c"; 	f_1s_chrg_TimeOut = 1;
+                                    1-  468     	BANKSEL	_sys_flag_3
      005B rrrr                      3-  109 m1      .banksel ram_address
-     005C 1Brr                      1-  466     	BSR	_sys_flag_3,7
-     005D                           1-  467     _02026_DS_:
-                                    1-  468     	.line	203, "isr.c"; 	if(INTFbits.T1IF)//25us
-     005D 09rr                      1-  469     	BTRSS	_INTFbits,3
-                                    1-  470     	MGOTO	_02039_DS_
+     005C 1Brr                      1-  469     	BSR	_sys_flag_3,7
+     005D                           1-  470     _02026_DS_:
+                                    1-  471     	.line	204, "isr.c"; 	if(INTFbits.T1IF)//25us
+     005D 09rr                      1-  472     	BTRSS	_INTFbits,3
+                                    1-  473     	MGOTO	_02037_DS_
      005E 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  471     	.line	205, "isr.c"; 	INTFbits.T1IF = 0;
-     005F 21F7                      1-  472     	MOVIA	0xf7
-     0060 00rr                      1-  473     	MOVAR	(_INTFbits + 0)
-                                    1-  474     	.line	207, "isr.c"; 	if(SmokeState == STATE_SMOKING)//4
-                                    1-  475     	BANKSEL	_SmokeState
+                                    1-  474     	.line	206, "isr.c"; 	INTFbits.T1IF = 0;
+     005F 21F7                      1-  475     	MOVIA	0xf7
+     0060 00rr                      1-  476     	MOVAR	(_INTFbits + 0)
+                                    1-  477     	.line	208, "isr.c"; 	if(SmokeState == STATE_SMOKING)//4
+                                    1-  478     	BANKSEL	_SmokeState
      0061 rrrr                      3-  109 m1      .banksel ram_address
-     0062 01rr                      1-  476     	MOVR	_SmokeState,W
-     0063 2405                      1-  477     	XORIA	0x05
-     0064 0903                      1-  478     	BTRSS	STATUS,2
-                                    1-  479     	MGOTO	_02035_DS_
+     0062 01rr                      1-  479     	MOVR	_SmokeState,W
+     0063 2405                      1-  480     	XORIA	0x05
+     0064 0903                      1-  481     	BTRSS	STATUS,2
+                                    1-  482     	MGOTO	_02033_DS_
      0065 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  480     	.line	209, "isr.c"; 	PwmCycleCount++;
-                                    1-  481     	BANKSEL	_PwmCycleCount
+                                    1-  483     	.line	210, "isr.c"; 	PwmCycleCount++;
+                                    1-  484     	BANKSEL	_PwmCycleCount
      0066 rrrr                      3-  109 m1      .banksel ram_address
-     0067 05rr                      1-  482     	INCR	_PwmCycleCount,F
-                                    1-  483     ;;unsigned compare: left < lit(0x46=70), size=1
-                                    1-  484     	.line	210, "isr.c"; 	if(PwmCycleCount>= DUTY_ALL) 
-     0068 2146                      1-  485     	MOVIA	0x46
-     0069 04rr                      1-  486     	SUBAR	_PwmCycleCount,W
-     006A 0C03                      1-  487     	BTRSC	STATUS,0
-                                    1-  488     	.line	212, "isr.c"; 	PwmCycleCount = 0;
-     006B 02rr                      1-  489     	CLRR	_PwmCycleCount
-                                    1-  490     	.line	214, "isr.c"; 	if(PwmCycleCount < percent_nun)
-                                    1-  491     	BANKSEL	_percent_nun
+     0067 05rr                      1-  485     	INCR	_PwmCycleCount,F
+                                    1-  486     ;;unsigned compare: left < lit(0x46=70), size=1
+                                    1-  487     	.line	211, "isr.c"; 	if(PwmCycleCount>= DUTY_ALL) 
+     0068 2146                      1-  488     	MOVIA	0x46
+     0069 04rr                      1-  489     	SUBAR	_PwmCycleCount,W
+     006A 0C03                      1-  490     	BTRSC	STATUS,0
+                                    1-  491     	.line	213, "isr.c"; 	PwmCycleCount = 0;
+     006B 02rr                      1-  492     	CLRR	_PwmCycleCount
+                                    1-  493     	.line	215, "isr.c"; 	if(PwmCycleCount < percent_nun)
+                                    1-  494     	BANKSEL	_percent_nun
      006C rrrr                      3-  109 m1      .banksel ram_address
-     006D 01rr                      1-  492     	MOVR	_percent_nun,W
-                                    1-  493     	BANKSEL	_PwmCycleCount
+     006D 01rr                      1-  495     	MOVR	_percent_nun,W
+                                    1-  496     	BANKSEL	_PwmCycleCount
      006E rrrr                      3-  109 m1      .banksel ram_address
-     006F 04rr                      1-  494     	SUBAR	_PwmCycleCount,W
-     0070 0C03                      1-  495     	BTRSC	STATUS,0
-                                    1-  496     	MGOTO	_02032_DS_
+     006F 04rr                      1-  497     	SUBAR	_PwmCycleCount,W
+     0070 0C03                      1-  498     	BTRSC	STATUS,0
+                                    1-  499     	MGOTO	_02030_DS_
      0071 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  497     	.line	216, "isr.c"; 	I0_PWM2 = MT_ON;
-     0072 1Drr                      1-  498     	BCR	_PORTBbits,2
-                                    1-  499     	.line	270, "isr.c"; 	ADMDbits.START = 1;
-     0073 1Brr                      1-  500     	BSR	_ADMDbits,6
-                                    1-  501     	.line	271, "isr.c"; 	F_wait_eoc();
-                                    1-  502     	MCALL	_F_wait_eoc
+                                    1-  500     	.line	217, "isr.c"; 	I0_PWM2 = MT_ON;
+     0072 1Drr                      1-  501     	BCR	_PORTBbits,2
+                                    1-  502     	.line	271, "isr.c"; 	ADMDbits.START = 1;
+     0073 1Brr                      1-  503     	BSR	_ADMDbits,6
+                                    1-  504     	.line	272, "isr.c"; 	F_wait_eoc();
+                                    1-  505     	MCALL	_F_wait_eoc
      0074 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  503     	.line	272, "isr.c"; 	ADMDbits.START = 1;
-     0075 1Brr                      1-  504     	BSR	_ADMDbits,6
-                                    1-  505     	.line	273, "isr.c"; 	F_wait_eoc();
-                                    1-  506     	MCALL	_F_wait_eoc
+                                    1-  506     	.line	273, "isr.c"; 	ADMDbits.START = 1;
+     0075 1Brr                      1-  507     	BSR	_ADMDbits,6
+                                    1-  508     	.line	274, "isr.c"; 	F_wait_eoc();
+                                    1-  509     	MCALL	_F_wait_eoc
      0076 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  507     	.line	274, "isr.c"; 	adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
-     0077 01rr                      1-  508     	MOVR	_ADD,W
-                                    1-  509     	BANKSEL	_adc_value_tmp
+                                    1-  510     	.line	275, "isr.c"; 	adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
+     0077 01rr                      1-  511     	MOVR	_ADD,W
+                                    1-  512     	BANKSEL	_adc_value_tmp
      0078 rrrr                      3-  109 m1      .banksel ram_address
-     0079 00rr                      1-  510     	MOVAR	_adc_value_tmp
-     007A 02rr                      1-  511     	CLRR	(_adc_value_tmp + 1)
-                                    1-  512     	.line	275, "isr.c"; 	adc_value_tmp = adc_value_tmp << 4;
-     007B 15rr                      1-  513     	SWAPR	(_adc_value_tmp + 1),W
-     007C 22F0                      1-  514     	ANDIA	0xf0
-     007D 00rr                      1-  515     	MOVAR	(_adc_value_tmp + 1)
-     007E 15rr                      1-  516     	SWAPR	_adc_value_tmp,W
-     007F 00rr                      1-  517     	MOVAR	_adc_value_tmp
-     0080 220F                      1-  518     	ANDIA	0x0f
-     0081 11rr                      1-  519     	IORAR	(_adc_value_tmp + 1),F
-     0082 12rr                      1-  520     	XORAR	_adc_value_tmp,F
-                                    1-  521     	.line	276, "isr.c"; 	adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
-     0083 210F                      1-  522     	MOVIA	0x0f
-     0084 10rr                      1-  523     	ANDAR	_ADR,W
-                                    1-  524     ;;1	MOVAR	r0x1018
-                                    1-  525     ;;1	MOVAR	r0x1019
-     0085 11rr                      1-  526     	IORAR	_adc_value_tmp,F
-     0086 2100                      1-  527     	MOVIA	0x00
-     0087 11rr                      1-  528     	IORAR	(_adc_value_tmp + 1),F
-                                    1-  529     ;;unsigned compare: left < lit(0xED8=3800), size=2
-                                    1-  530     	.line	277, "isr.c"; 	if(adc_value_tmp < 3800)//3820//3600//3700
-     0088 21D8                      1-  531     	MOVIA	0xd8
-     0089 04rr                      1-  532     	SUBAR	_adc_value_tmp,W
-     008A 210E                      1-  533     	MOVIA	0x0e
-     008B 35rr                      1-  534     	SBCAR	(_adc_value_tmp + 1),W
-     008C 0C03                      1-  535     	BTRSC	STATUS,0
-                                    1-  536     	MGOTO	_02039_DS_
-     008D 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  537     	.line	280, "isr.c"; 	I0_PWM2 = MT_OF;
-     008E 19rr                      1-  538     	BSR	_PORTBbits,2
-                                    1-  539     	.line	281, "isr.c"; 	percent_nun = 0;
-                                    1-  540     	BANKSEL	_percent_nun
-     008F rrrr                      3-  109 m1      .banksel ram_address
-     0090 02rr                      1-  541     	CLRR	_percent_nun
-                                    1-  542     	.line	283, "isr.c"; 	msg = MSG_CURRENT_OVER;
-     0091 2109                      1-  543     	MOVIA	0x09
-                                    1-  544     	BANKSEL	_msg
+     0079 00rr                      1-  513     	MOVAR	_adc_value_tmp
+     007A 02rr                      1-  514     	CLRR	(_adc_value_tmp + 1)
+                                    1-  515     	.line	276, "isr.c"; 	adc_value_tmp = adc_value_tmp << 4;
+     007B 15rr                      1-  516     	SWAPR	(_adc_value_tmp + 1),W
+     007C 22F0                      1-  517     	ANDIA	0xf0
+     007D 00rr                      1-  518     	MOVAR	(_adc_value_tmp + 1)
+     007E 15rr                      1-  519     	SWAPR	_adc_value_tmp,W
+     007F 00rr                      1-  520     	MOVAR	_adc_value_tmp
+     0080 220F                      1-  521     	ANDIA	0x0f
+     0081 11rr                      1-  522     	IORAR	(_adc_value_tmp + 1),F
+     0082 12rr                      1-  523     	XORAR	_adc_value_tmp,F
+                                    1-  524     	.line	277, "isr.c"; 	adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
+     0083 210F                      1-  525     	MOVIA	0x0f
+     0084 10rr                      1-  526     	ANDAR	_ADR,W
+                                    1-  527     ;;1	MOVAR	r0x1017
+                                    1-  528     ;;1	MOVAR	r0x1018
+     0085 11rr                      1-  529     	IORAR	_adc_value_tmp,F
+     0086 2100                      1-  530     	MOVIA	0x00
+     0087 11rr                      1-  531     	IORAR	(_adc_value_tmp + 1),F
+                                    1-  532     	.line	277, "isr.c"; 	// if(adc_value_tmp < 3800)//3820//3600//3700
+                                    1-  533     	MGOTO	_02037_DS_
+     0088 3rrr                      3-   62 m1      LGOTO rom_address
+     0089                           1-  534     _02030_DS_:
+                                    1-  535     	.line	292, "isr.c"; 	I0_PWM2 = MT_OF;
+     0089 19rr                      1-  536     	BSR	_PORTBbits,2
+                                    1-  537     	.line	293, "isr.c"; 	ad_start_flg = 0;
+                                    1-  538     	BANKSEL	_ad_start_flg
+     008A rrrr                      3-  109 m1      .banksel ram_address
+     008B 02rr                      1-  539     	CLRR	_ad_start_flg
+                                    1-  540     	MGOTO	_02037_DS_
+     008C 3rrr                      3-   62 m1      LGOTO rom_address
+     008D                           1-  541     _02033_DS_:
+                                    1-  542     	.line	300, "isr.c"; 	percent_nun = 0;
+                                    1-  543     	BANKSEL	_percent_nun
+     008D rrrr                      3-  109 m1      .banksel ram_address
+     008E 02rr                      1-  544     	CLRR	_percent_nun
+                                    1-  545     	.line	301, "isr.c"; 	I0_PWM2 = MT_OF;
+     008F 19rr                      1-  546     	BSR	_PORTBbits,2
+                                    1-  547     	.line	302, "isr.c"; 	ad_start_flg = 0;
+                                    1-  548     	BANKSEL	_ad_start_flg
+     0090 rrrr                      3-  109 m1      .banksel ram_address
+     0091 02rr                      1-  549     	CLRR	_ad_start_flg
+     0092                           1-  550     _02037_DS_:
+                                    1-  551     	.line	306, "isr.c"; 	}
+                                    1-  552     	BANKSEL	___sdcc_saved_stk01
      0092 rrrr                      3-  109 m1      .banksel ram_address
-     0093 00rr                      1-  545     	MOVAR	_msg
-                                    1-  546     	.line	284, "isr.c"; 	SmokeState = STATE_SMOKE_IDLE;
-                                    1-  547     	BANKSEL	_SmokeState
-     0094 rrrr                      3-  109 m1      .banksel ram_address
-     0095 02rr                      1-  548     	CLRR	_SmokeState
-                                    1-  549     	MGOTO	_02039_DS_
-     0096 3rrr                      3-   62 m1      LGOTO rom_address
-     0097                           1-  550     _02032_DS_:
-                                    1-  551     	.line	291, "isr.c"; 	I0_PWM2 = MT_OF;
-     0097 19rr                      1-  552     	BSR	_PORTBbits,2
-                                    1-  553     	.line	292, "isr.c"; 	ad_start_flg = 0;
-                                    1-  554     	BANKSEL	_ad_start_flg
+     0093 01rr                      1-  553     	MOVR	___sdcc_saved_stk01,W
+     0094 00rr                      1-  554     	MOVAR	STK01
+                                    1-  555     	BANKSEL	___sdcc_saved_stk00
+     0095 rrrr                      3-  109 m1      .banksel ram_address
+     0096 01rr                      1-  556     	MOVR	___sdcc_saved_stk00,W
+     0097 00rr                      1-  557     	MOVAR	STK00
+                                    1-  558     	BANKSEL	___sdcc_saved_fsr
      0098 rrrr                      3-  109 m1      .banksel ram_address
-     0099 02rr                      1-  555     	CLRR	_ad_start_flg
-                                    1-  556     	MGOTO	_02039_DS_
-     009A 3rrr                      3-   62 m1      LGOTO rom_address
-     009B                           1-  557     _02035_DS_:
-                                    1-  558     	.line	299, "isr.c"; 	percent_nun = 0;
-                                    1-  559     	BANKSEL	_percent_nun
-     009B rrrr                      3-  109 m1      .banksel ram_address
-     009C 02rr                      1-  560     	CLRR	_percent_nun
-                                    1-  561     	.line	300, "isr.c"; 	I0_PWM2 = MT_OF;
-     009D 19rr                      1-  562     	BSR	_PORTBbits,2
-                                    1-  563     	.line	301, "isr.c"; 	ad_start_flg = 0;
-                                    1-  564     	BANKSEL	_ad_start_flg
-     009E rrrr                      3-  109 m1      .banksel ram_address
-     009F 02rr                      1-  565     	CLRR	_ad_start_flg
-     00A0                           1-  566     _02039_DS_:
-                                    1-  567     	.line	346, "isr.c"; 	}
-                                    1-  568     	BANKSEL	___sdcc_saved_stk01
-     00A0 rrrr                      3-  109 m1      .banksel ram_address
-     00A1 01rr                      1-  569     	MOVR	___sdcc_saved_stk01,W
-     00A2 00rr                      1-  570     	MOVAR	STK01
-                                    1-  571     	BANKSEL	___sdcc_saved_stk00
-     00A3 rrrr                      3-  109 m1      .banksel ram_address
-     00A4 01rr                      1-  572     	MOVR	___sdcc_saved_stk00,W
-     00A5 00rr                      1-  573     	MOVAR	STK00
-                                    1-  574     	BANKSEL	___sdcc_saved_fsr
-     00A6 rrrr                      3-  109 m1      .banksel ram_address
-     00A7 01rr                      1-  575     	MOVR	___sdcc_saved_fsr,W
-     00A8 0084                      1-  576     	MOVAR	FSR
-     00A9 01rr                      1-  577     	MOVR	PSAVE,W
-     00AA 008A                      1-  578     	MOVAR	PCHBUF
-     00AB 0283                      1-  579     	CLRR	STATUS
-     00AC 15rr                      1-  580     	SWAPR	SSAVE,W
-     00AD 0083                      1-  581     	MOVAR	STATUS
-     00AE 15rr                      1-  582     	SWAPR	WSAVE,F
-     00AF 15rr                      1-  583     	SWAPR	WSAVE,W
-     00B0                           1-  584     END_OF_INTERRUPT:
-     00B0 0011                      1-  585     	RETIE	
-                                    1-  587     ;--------------------------------------------------------
-                                    1-  588     ; code
-                                    1-  589     ;--------------------------------------------------------
-                                    1-  590     ; code_isr	code
-                                    1-  591     ;***
-                                    1-  592     ;  pBlock Stats: dbName = C
-                                    1-  593     ;***
-                                    1-  594     ;has an exit
-                                    1-  595     ;; Starting pCode block
-                                    1-  596     .segment "code"; module=isr, function=_isr_param_init
-     0000                           1-  598     _isr_param_init:
-                                    1-  599     ; 2 exit points
-                                    1-  600     	.line	40, "isr.c"; 	time_base_250ms = TIME_BASE_250MS;
-     0000 2119                      1-  601     	MOVIA	0x19
-                                    1-  602     	BANKSEL	_time_base_250ms
+     0099 01rr                      1-  559     	MOVR	___sdcc_saved_fsr,W
+     009A 0084                      1-  560     	MOVAR	FSR
+     009B 01rr                      1-  561     	MOVR	PSAVE,W
+     009C 008A                      1-  562     	MOVAR	PCHBUF
+     009D 0283                      1-  563     	CLRR	STATUS
+     009E 15rr                      1-  564     	SWAPR	SSAVE,W
+     009F 0083                      1-  565     	MOVAR	STATUS
+     00A0 15rr                      1-  566     	SWAPR	WSAVE,F
+     00A1 15rr                      1-  567     	SWAPR	WSAVE,W
+     00A2                           1-  568     END_OF_INTERRUPT:
+     00A2 0011                      1-  569     	RETIE	
+                                    1-  571     ;--------------------------------------------------------
+                                    1-  572     ; code
+                                    1-  573     ;--------------------------------------------------------
+                                    1-  574     ; code_isr	code
+                                    1-  575     ;***
+                                    1-  576     ;  pBlock Stats: dbName = C
+                                    1-  577     ;***
+                                    1-  578     ;has an exit
+                                    1-  579     ;; Starting pCode block
+                                    1-  580     .segment "code"; module=isr, function=_isr_param_init
+     0000                           1-  582     _isr_param_init:
+                                    1-  583     ; 2 exit points
+                                    1-  584     	.line	40, "isr.c"; 	time_base_250ms = TIME_BASE_250MS;
+     0000 2119                      1-  585     	MOVIA	0x19
+                                    1-  586     	BANKSEL	_time_base_250ms
      0001 rrrr                      3-  109 m1      .banksel ram_address
-     0002 00rr                      1-  603     	MOVAR	_time_base_250ms
-                                    1-  604     	.line	41, "isr.c"; 	time_base_1s = TIME_BASE_1S;
-     0003 2164                      1-  605     	MOVIA	0x64
-                                    1-  606     	BANKSEL	_time_base_1s
+     0002 00rr                      1-  587     	MOVAR	_time_base_250ms
+                                    1-  588     	.line	41, "isr.c"; 	time_base_1s = TIME_BASE_1S;
+     0003 2164                      1-  589     	MOVIA	0x64
+                                    1-  590     	BANKSEL	_time_base_1s
      0004 rrrr                      3-  109 m1      .banksel ram_address
-     0005 00rr                      1-  607     	MOVAR	_time_base_1s
-                                    1-  608     	.line	42, "isr.c"; 	time_base = 0;
-                                    1-  609     	BANKSEL	_time_base
+     0005 00rr                      1-  591     	MOVAR	_time_base_1s
+                                    1-  592     	.line	42, "isr.c"; 	time_base = 0;
+                                    1-  593     	BANKSEL	_time_base
      0006 rrrr                      3-  109 m1      .banksel ram_address
-     0007 02rr                      1-  610     	CLRR	_time_base
-                                    1-  611     	.line	43, "isr.c"; 	PwmCycleCount = 0;
-                                    1-  612     	BANKSEL	_PwmCycleCount
+     0007 02rr                      1-  594     	CLRR	_time_base
+                                    1-  595     	.line	43, "isr.c"; 	PwmCycleCount = 0;
+                                    1-  596     	BANKSEL	_PwmCycleCount
      0008 rrrr                      3-  109 m1      .banksel ram_address
-     0009 02rr                      1-  613     	CLRR	_PwmCycleCount
-                                    1-  614     	.line	44, "isr.c"; 	percent_nun = 0;
-                                    1-  615     	BANKSEL	_percent_nun
+     0009 02rr                      1-  597     	CLRR	_PwmCycleCount
+                                    1-  598     	.line	44, "isr.c"; 	percent_nun = 0;
+                                    1-  599     	BANKSEL	_percent_nun
      000A rrrr                      3-  109 m1      .banksel ram_address
-     000B 02rr                      1-  616     	CLRR	_percent_nun
-                                    1-  617     	.line	46, "isr.c"; 	ad_start_flg = 0;
-                                    1-  618     	BANKSEL	_ad_start_flg
+     000B 02rr                      1-  600     	CLRR	_percent_nun
+                                    1-  601     	.line	46, "isr.c"; 	ad_start_flg = 0;
+                                    1-  602     	BANKSEL	_ad_start_flg
      000C rrrr                      3-  109 m1      .banksel ram_address
-     000D 02rr                      1-  619     	CLRR	_ad_start_flg
-                                    1-  620     	.line	47, "isr.c"; 	}
-                                    1-  621     	RETURN	
+     000D 02rr                      1-  603     	CLRR	_ad_start_flg
+                                    1-  604     	.line	47, "isr.c"; 	}
+                                    1-  605     	RETURN	
      000E 0010                      3-   39 m1      ret
-                                    1-  622     ; exit point of _isr_param_init
-                                    1-  625     ;	code size estimation:
-                                    1-  626     ;	  155+   37 =   192 instructions (  458 byte)
-                                    1-  628     	end
+                                    1-  606     ; exit point of _isr_param_init
+                                    1-  609     ;	code size estimation:
+                                    1-  610     ;	  144+   34 =   178 instructions (  424 byte)
+                                    1-  612     	end
 
 SYMBOL TABLE            TYPE     VALUE
 __pin_count__           Constant 0000000E

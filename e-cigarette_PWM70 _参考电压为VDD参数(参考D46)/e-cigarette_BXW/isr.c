@@ -70,7 +70,7 @@ void isr(void) __interrupt(0)
 		//f_100us_TimeOut = 1;
 		//b_OC_100us_TimeOut = 1;
 		//Ledbreathing();
-		ledRun();
+		// ledRun();
 		sTime1MS++;
 		if(sTime1MS >= 10)//1MS
 		//if(sTime1MS >= 4)//1MS
@@ -102,6 +102,7 @@ void isr(void) __interrupt(0)
 			if(sTime10ms >= 9)//10ms
 			{
 				sTime10ms = 0;
+				led_dis_loop_func();
 				//PORTAbits.PA6 ^= 1;
 				//------------------------------------------------------
 				//	10ms
@@ -274,16 +275,16 @@ void isr(void) __interrupt(0)
 				adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
 				adc_value_tmp = adc_value_tmp << 4;
 				adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
-				if(adc_value_tmp < 3800)//3820//3600//3700
-				{
-					#if 1
-					I0_PWM2 = MT_OF;
-					percent_nun = 0;
-					//TargetMotorDuty = 0;
-					msg = MSG_CURRENT_OVER;
-					SmokeState = STATE_SMOKE_IDLE;
-					#endif
-				}
+				// if(adc_value_tmp < 3800)//3820//3600//3700
+				// {
+				// 	#if 1
+				// 	I0_PWM2 = MT_OF;
+				// 	percent_nun = 0;
+				// 	//TargetMotorDuty = 0;
+				// 	msg = MSG_CURRENT_OVER;
+				// 	SmokeState = STATE_SMOKE_IDLE;
+				// 	#endif
+				// }
 				#endif
 			}
 			else
@@ -302,45 +303,4 @@ void isr(void) __interrupt(0)
 		}
 
 	}
-	/*
-	if(INTFbits.WDTIF)//watchdog  250ms	
-	{ 
-		INTFbits.WDTIF = 0;	
-		sleepWakedUpByWDTFlag = 1;
-	}
-	*/
-/*		
-#if USE_MCU == __CPU_NY8A062D__
-	if(ADRbits.ADIF)
-	{
-		ADRbits.ADIF = 0;						// Clear adc interrupt flag bit
-		//if(gAdcCheckDelayCount == 0)//
-		if(b_smoking)
-		{
-			adc_value_tmp = ADD;		//Store AIN4's ADC data bit 11~4
-			adc_value_tmp = adc_value_tmp << 4;
-			adc_value_tmp |= (0x0F & ADR);//得到12bit ADC值	
-			OverCurrent_adc_value += adc_value_tmp;
-			OverCurrent_check_cnt++;
-			if(OverCurrent_check_cnt == 4)
-			{
-				OverCurrent_check_cnt = 0;
-				OverCurrent_adc_value = OverCurrent_adc_value >> 2;//求平均值
-				//gAdSampleFinishFlag = 1;
-				PORTBbits.PB4 = 1;
-				PORTBbits.PB5 = 0;
-				if(OverCurrent_adc_value > 300)//过流了直接关掉
-				{
-					b_smoking = 0;
-					PWM2DUTY = 0;//
-					msg = MSG_CURRENT_OVER;
-				}
-			}
-		}
-		ADMDbits.START = 1;
-	}
-#endif	
-*/
-//	INTF = 0x00;
-//	INTE2 = 0x00;
 }

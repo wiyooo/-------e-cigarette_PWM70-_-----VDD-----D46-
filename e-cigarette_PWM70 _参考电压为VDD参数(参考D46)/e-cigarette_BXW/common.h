@@ -36,8 +36,8 @@ typedef unsigned long u32;
 #define TIME_BASE_1S			100
 
 //设置CHRG和STDBY,CS
-#define	C_IO_CHRG				PORTAbits.PA2
-#define	C_IO_USB_DEC			PORTAbits.PA4
+#define	C_IO_CHRG				PORTAbits.PA5
+#define	C_IO_USB_DEC			PORTAbits.PA2
 #define	C_IO_HEATER_CHECK_DEC	PORTAbits.PA0
 #define I0_ADC					PORTAbits.PA0
 
@@ -50,8 +50,8 @@ typedef unsigned long u32;
 
 //#define C_IO_OVERCURRENT_CHECK_DEC PORTBbits.PB0//如果过流用的是IO口电平检测则打开这个宏定义
 
-#define	EN_PAUSE_CHRG			PORTAbits.PA5 = 1//充电状态下吸烟时临时关闭充电电流
-#define	EN_RESUME_CHRG			PORTAbits.PA5 = 0//充电状态下吸烟停止时恢复充电电流
+#define	EN_PAUSE_CHRG			PORTAbits.PA4 = 1//充电状态下吸烟时临时关闭充电电流
+#define	EN_RESUME_CHRG			PORTAbits.PA4 = 0//充电状态下吸烟停止时恢复充电电流
 
 #define I0_PWM2					PORTBbits.PB2
 
@@ -60,6 +60,8 @@ typedef unsigned long u32;
 
 #define OUT_LED_R 				PORTAbits.PA7//------红灯
 #define OUT_LED_G 				PORTBbits.PB3//------白灯
+
+#define PIN_LED					PORTBbits.PB3//------白灯
 //#define OUT_LED_B 				PORTAbits.PA2
 //#define LED_IO 				PORTAbits.PA4
 //#define LED_ON 				PORTAbits.PA4 = 0
@@ -202,6 +204,7 @@ extern u8 TargetMotorDuty;
 extern u8 NowMotorDuty;
 extern u8 MotorDutySet;
 extern u8 SaveHeaterIOStatus;
+extern u8 led_mode_flag;
 //extern u8 sleepWakedUpByWDTFlag;
 //extern u8 sleepWakedUpByWDTCount;
 //extern u8 sleepWakedUpCheckTimeCount;
@@ -535,4 +538,7 @@ void charge_check_by_IO(void);//充电检测
 //void breathingLedRunOnce_ToUp(void);//渐亮 然后退出
 //void breathingLedRunOnce_ToDown(void);//渐暗 然后退出
 //void JudgeSmokingLightCountTimeoutOrNot(void);//判断吸烟灯光开关计时是否超时
+
+void led_mode_set(u8 mode);
+void led_dis_loop_func(void);
 #endif

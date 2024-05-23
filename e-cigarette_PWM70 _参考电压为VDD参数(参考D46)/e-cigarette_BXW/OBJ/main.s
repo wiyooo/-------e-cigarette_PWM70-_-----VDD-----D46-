@@ -11,6 +11,8 @@
 ;--------------------------------------------------------
 ; external declarations
 ;--------------------------------------------------------
+	extern	_led_dis_loop_func
+	extern	_led_mode_set
 	extern	_charge_check_by_IO
 	extern	_ledRun
 	extern	_Detect_OverCurrent_ByAD
@@ -101,6 +103,7 @@
 	extern	_VolTypeIndex
 	extern	_SmokeState
 	extern	_BatVolLevel
+	extern	_led_mode_flag
 	extern	_SaveHeaterIOStatus
 	extern	_MotorDutySet
 	extern	_NowMotorDuty
@@ -278,18 +281,6 @@ _sys_flag_3:
 ; compiler-defined variables
 ;--------------------------------------------------------
 .segment "uninit"
-r0x1010:
-	.res	1
-.segment "uninit"
-r0x100F:
-	.res	1
-.segment "uninit"
-r0x1011:
-	.res	1
-.segment "uninit"
-r0x1012:
-	.res	1
-.segment "uninit"
 r0x100D:
 	.res	1
 .segment "uninit"
@@ -297,6 +288,18 @@ r0x100C:
 	.res	1
 .segment "uninit"
 r0x100E:
+	.res	1
+.segment "uninit"
+r0x100F:
+	.res	1
+.segment "uninit"
+r0x100A:
+	.res	1
+.segment "uninit"
+r0x1009:
+	.res	1
+.segment "uninit"
+r0x100B:
 	.res	1
 ;--------------------------------------------------------
 ; initialized data
@@ -328,28 +331,22 @@ ORG	0x0000
 ;   _key_param_init
 ;   _led_param_init
 ;   _sleep_param_init
-;   _SetLedColorNormallyOn
+;   _led_mode_set
 ;   _MicScan
 ;   _msg_handle
-;   _led_handle
 ;   _charge_check_by_IO
-;   _bat_lvd_check
 ;   _SmokeFun
-;   _sleep_handle
 ;   _system_init
 ;   _common_param_init
 ;   _isr_param_init
 ;   _key_param_init
 ;   _led_param_init
 ;   _sleep_param_init
-;   _SetLedColorNormallyOn
+;   _led_mode_set
 ;   _MicScan
 ;   _msg_handle
-;   _led_handle
 ;   _charge_check_by_IO
-;   _bat_lvd_check
 ;   _SmokeFun
-;   _sleep_handle
 ;; Starting pCode block
 .segment "code"; module=main, function=_main
 	.debuginfo subprogram _main
@@ -370,37 +367,22 @@ _main:
 	.line	106, "main.c"; 	isSleep = 0;//上电默认关机状态
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,3
-	.line	107, "main.c"; 	nowLedMode = 1;//第一次上电红白灯交替闪三次，进入低功耗
+	.line	129, "main.c"; 	led_mode_set(1);
 	MOVIA	0x01
-	BANKSEL	_nowLedMode
-	MOVAR	_nowLedMode
-	.line	109, "main.c"; 	SetLedColorNormallyOn(COLOR_RED);//红色
-	MOVIA	0x00
-	MCALL	_SetLedColorNormallyOn
-	.line	110, "main.c"; 	LedShowKeepTime = 100;//单位：10ms
-	MOVIA	0x64
-	BANKSEL	_LedShowKeepTime
-	MOVAR	_LedShowKeepTime
-	CLRR	(_LedShowKeepTime + 1)
+	MCALL	_led_mode_set
 _02032_DS_:
-	.line	131, "main.c"; 	CLRWDT();	
+	.line	132, "main.c"; 	CLRWDT();	
 	clrwdt
-	.line	132, "main.c"; 	MicScan();//咪头扫描
+	.line	133, "main.c"; 	MicScan();//咪头扫描
 	MCALL	_MicScan
-	.line	133, "main.c"; 	msg_handle();//消息处理
+	.line	134, "main.c"; 	msg_handle();//消息处理
 	MCALL	_msg_handle
-	.line	134, "main.c"; 	led_handle();
-	MCALL	_led_handle
-	.line	136, "main.c"; 	charge_check_by_IO();//充电检测
+	.line	137, "main.c"; 	charge_check_by_IO();//充电检测
 	MCALL	_charge_check_by_IO
-	.line	138, "main.c"; 	bat_lvd_check();//只在吸烟中检测(吸烟中：电量低于2.9V（±0.1V），停止输出，红灯闪5次)
-	MCALL	_bat_lvd_check
-	.line	139, "main.c"; 	SmokeFun();
+	.line	140, "main.c"; 	SmokeFun();
 	MCALL	_SmokeFun
-	.line	140, "main.c"; 	sleep_handle();
-	MCALL	_sleep_handle
 	MGOTO	_02032_DS_
-	.line	143, "main.c"; 	}
+	.line	144, "main.c"; 	}
 	RETURN	
 ; exit point of _main
 
@@ -409,34 +391,28 @@ _02032_DS_:
 ;***
 ;has an exit
 ;functions called:
-;   _SetLedFlashParameters
+;   _led_mode_set
+;   _led_mode_set
 ;   _adc_init4
-;   _SetLedBreathingParameters2
-;   _SetLedColorNormallyOn
-;   _SetLedFlashParameters
-;   _SetLedFlashParameters
-;   _SetLedFlashParameters
-;   _LedOff
-;   _SetLedFlashParameters
-;   _SetLedFlashParameters
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
 ;   _adc_init4
-;   _SetLedBreathingParameters2
-;   _SetLedColorNormallyOn
-;   _SetLedFlashParameters
-;   _SetLedFlashParameters
-;   _SetLedFlashParameters
-;   _LedOff
-;   _SetLedFlashParameters
-;3 compiler assigned registers:
-;   STK02
-;   STK01
-;   STK00
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
+;   _led_mode_set
 ;; Starting pCode block
 .segment "code"; module=main, function=_msg_handle
 	.debuginfo subprogram _msg_handle
 _msg_handle:
 ; 2 exit points
-	.line	151, "main.c"; 	switch(msg)
+	.line	152, "main.c"; 	switch(msg)
 	BANKSEL	_msg
 	MOVR	_msg,W
 	XORIA	0x01
@@ -453,7 +429,7 @@ _msg_handle:
 	MOVR	_msg,W
 	XORIA	0x04
 	BTRSC	STATUS,2
-	MGOTO	_02045_DS_
+	MGOTO	_02042_DS_
 	MOVR	_msg,W
 	XORIA	0x07
 	BTRSC	STATUS,2
@@ -461,242 +437,186 @@ _msg_handle:
 	MOVR	_msg,W
 	XORIA	0x08
 	BTRSC	STATUS,2
-	MGOTO	_02049_DS_
+	MGOTO	_02043_DS_
 	MOVR	_msg,W
 	XORIA	0x09
 	BTRSC	STATUS,2
-	MGOTO	_02050_DS_
+	MGOTO	_02044_DS_
 	MOVR	_msg,W
 	XORIA	0x0a
 	BTRSC	STATUS,2
 	MGOTO	_02038_DS_
-	MGOTO	_02052_DS_
+	MGOTO	_02046_DS_
 _02037_DS_:
-	.line	157, "main.c"; 	msg = MSG_NULL;
+	.line	158, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	160, "main.c"; 	nowLedMode = 2;
-	MOVIA	0x02
-	BANKSEL	_nowLedMode
-	MOVAR	_nowLedMode
-	.line	161, "main.c"; 	SmokeState = STATE_SMOKE_INIT;
+	.line	162, "main.c"; 	SmokeState = STATE_SMOKE_INIT;
 	MOVIA	0x01
 	BANKSEL	_SmokeState
 	MOVAR	_SmokeState
-	.line	162, "main.c"; 	b_smoke_init = 1;
+	.line	163, "main.c"; 	b_smoke_init = 1;
 	BANKSEL	_sys_flag_0
 	BSR	_sys_flag_0,1
-	.line	164, "main.c"; 	b_smoking = 0;//清除吸烟开始标志	
+	.line	165, "main.c"; 	b_smoking = 0;//清除吸烟开始标志	
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	165, "main.c"; 	break;	
-	MGOTO	_02052_DS_
+	.line	167, "main.c"; 	break;	
+	MGOTO	_02046_DS_
 _02038_DS_:
-	.line	168, "main.c"; 	msg = MSG_NULL;
+	.line	170, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	169, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+	.line	171, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
 	BANKSEL	_SmokeState
 	CLRR	_SmokeState
-	.line	170, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+	.line	172, "main.c"; 	b_smoking = 0;//清吸烟开始标志
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	172, "main.c"; 	charging_breath_flash_flag = 0;
+	.line	174, "main.c"; 	charging_breath_flash_flag = 0;
 	BANKSEL	_sys_flag_3
 	BCR	_sys_flag_3,6
-	.line	173, "main.c"; 	led_breath_flash_flag = 0;
+	.line	175, "main.c"; 	led_breath_flash_flag = 0;
 	BANKSEL	_sys_flag_2
 	BCR	_sys_flag_2,2
-	.line	174, "main.c"; 	led_flash_flag = 0;
+	.line	176, "main.c"; 	led_flash_flag = 0;
 	BANKSEL	_led_flash_flag
 	CLRR	_led_flash_flag
-	.line	176, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,8,50,2);
-	MOVIA	0x02
-	MOVAR	STK02
-	MOVIA	0x32
-	MOVAR	STK01
-	MOVIA	0x08
-	MOVAR	STK00
-	MOVIA	0x02
-	MCALL	_SetLedFlashParameters
-	.line	177, "main.c"; 	disp_delay_time_cnt = 150;
+	.line	177, "main.c"; 	led_mode_set(4);
+	MOVIA	0x04
+	MCALL	_led_mode_set
+	.line	180, "main.c"; 	disp_delay_time_cnt = 150;
 	MOVIA	0x96
 	BANKSEL	_disp_delay_time_cnt
 	MOVAR	_disp_delay_time_cnt
-	.line	178, "main.c"; 	break;
-	MGOTO	_02052_DS_
+	.line	181, "main.c"; 	break;
+	MGOTO	_02046_DS_
 _02039_DS_:
-	.line	181, "main.c"; 	msg = MSG_NULL;
+	.line	184, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	182, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+	.line	185, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
 	BANKSEL	_SmokeState
 	CLRR	_SmokeState
-	.line	183, "main.c"; 	b_smoking = 0;//清吸烟开始标志			
+	.line	186, "main.c"; 	b_smoking = 0;//清吸烟开始标志			
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	185, "main.c"; 	led_flash_flag = 0;
+	.line	188, "main.c"; 	led_flash_flag = 0;
 	BANKSEL	_led_flash_flag
 	CLRR	_led_flash_flag
-	.line	186, "main.c"; 	disp_delay_time_cnt = 150;//吸烟后1,5秒才检测低电
+	.line	189, "main.c"; 	disp_delay_time_cnt = 150;//吸烟后1,5秒才检测低电
 	MOVIA	0x96
 	BANKSEL	_disp_delay_time_cnt
 	MOVAR	_disp_delay_time_cnt
-	.line	213, "main.c"; 	break;
-	MGOTO	_02052_DS_
+	.line	190, "main.c"; 	led_mode_set(3);
+	MOVIA	0x03
+	MCALL	_led_mode_set
+	.line	217, "main.c"; 	break;
+	MGOTO	_02046_DS_
 _02040_DS_:
-	.line	216, "main.c"; 	msg = MSG_NULL;
+	.line	220, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	217, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+	.line	221, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
 	BANKSEL	_SmokeState
 	CLRR	_SmokeState
-	.line	218, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+	.line	222, "main.c"; 	b_smoking = 0;//清吸烟开始标志
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	220, "main.c"; 	f_charging = 1;
+	.line	224, "main.c"; 	f_charging = 1;
 	BANKSEL	_sys_flag_0
 	BSR	_sys_flag_0,6
-	.line	221, "main.c"; 	f_charge_full = 0;
+	.line	225, "main.c"; 	f_charge_full = 0;
 	BCR	_sys_flag_0,4
-	.line	222, "main.c"; 	temp_flag = 0;
+	.line	226, "main.c"; 	temp_flag = 0;
 	BANKSEL	_sys_flag_2
 	BCR	_sys_flag_2,0
-	.line	224, "main.c"; 	led_breath_flash_flag = 0;//停止呼吸效果
+	.line	228, "main.c"; 	led_breath_flash_flag = 0;//停止呼吸效果
 	BCR	_sys_flag_2,2
-	.line	225, "main.c"; 	led_flash_flag = 0;
+	.line	229, "main.c"; 	led_flash_flag = 0;
 	BANKSEL	_led_flash_flag
 	CLRR	_led_flash_flag
-	.line	226, "main.c"; 	usb_check_ad_time_cnt = 0;
+	.line	230, "main.c"; 	usb_check_ad_time_cnt = 0;
 	BANKSEL	_usb_check_ad_time_cnt
 	CLRR	_usb_check_ad_time_cnt
-	.line	227, "main.c"; 	f_battery_low = 0;
+	.line	231, "main.c"; 	f_battery_low = 0;
 	BANKSEL	_sys_flag_0
 	BCR	_sys_flag_0,5
-	.line	228, "main.c"; 	adc_init4(Quarter_VDD);
+	.line	232, "main.c"; 	adc_init4(Quarter_VDD);
 	MOVIA	0x01
 	MCALL	_adc_init4
-	.line	232, "main.c"; 	SetLedBreathingParameters2(COLOR_RED);//开始红灯呼吸效果
-	MOVIA	0x00
-	MCALL	_SetLedBreathingParameters2
-	.line	233, "main.c"; 	break;
-	MGOTO	_02052_DS_
+	.line	233, "main.c"; 	led_mode_set(7);
+	MOVIA	0x07
+	MCALL	_led_mode_set
+	.line	238, "main.c"; 	break;
+	MGOTO	_02046_DS_
 _02041_DS_:
-	.line	236, "main.c"; 	msg = MSG_NULL;		
+	.line	241, "main.c"; 	msg = MSG_NULL;		
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	238, "main.c"; 	f_charge_full = 1;
+	.line	243, "main.c"; 	f_charge_full = 1;
 	BANKSEL	_sys_flag_0
 	BSR	_sys_flag_0,4
-	.line	240, "main.c"; 	if((nowLedMode == 1)||(nowLedMode == 3))
-	BANKSEL	_nowLedMode
-	MOVR	_nowLedMode,W
-	XORIA	0x01
-	BTRSC	STATUS,2
-	MGOTO	_02052_DS_
-	MOVR	_nowLedMode,W
-	XORIA	0x03
-	BTRSC	STATUS,2
-	MGOTO	_02052_DS_
-	.line	244, "main.c"; 	SetLedColorNormallyOn(COLOR_GREEN);//充满电后白灯常亮
-	MOVIA	0x02
-	MCALL	_SetLedColorNormallyOn
-	.line	246, "main.c"; 	break;	
-	MGOTO	_02052_DS_
-_02045_DS_:
-	.line	249, "main.c"; 	msg = MSG_NULL;
+	.line	244, "main.c"; 	led_mode_set(8);
+	MOVIA	0x08
+	MCALL	_led_mode_set
+	.line	252, "main.c"; 	break;	
+	MGOTO	_02046_DS_
+_02042_DS_:
+	.line	255, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	250, "main.c"; 	led_flash_flag = 0;
+	.line	256, "main.c"; 	led_flash_flag = 0;
 	BANKSEL	_led_flash_flag
 	CLRR	_led_flash_flag
-	.line	252, "main.c"; 	if(f_charge_full)
-	BANKSEL	_sys_flag_0
-	BTRSS	_sys_flag_0,4
-	MGOTO	_02047_DS_
-	.line	253, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,8,20,2);
-	MOVIA	0x02
-	MOVAR	STK02
-	MOVIA	0x14
-	MOVAR	STK01
-	MOVIA	0x08
-	MOVAR	STK00
-	MOVIA	0x02
-	MCALL	_SetLedFlashParameters
-	MGOTO	_02048_DS_
-_02047_DS_:
-	.line	256, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,6,20,2);
-	MOVIA	0x02
-	MOVAR	STK02
-	MOVIA	0x14
-	MOVAR	STK01
-	MOVIA	0x06
-	MOVAR	STK00
-	MOVIA	0x02
-	MCALL	_SetLedFlashParameters
-_02048_DS_:
-	.line	261, "main.c"; 	f_charging = 0;
+	.line	264, "main.c"; 	led_mode_set(9);
+	MOVIA	0x09
+	MCALL	_led_mode_set
+	.line	268, "main.c"; 	f_charging = 0;
 	BANKSEL	_sys_flag_0
 	BCR	_sys_flag_0,6
-	.line	262, "main.c"; 	f_charge_full = 0;
+	.line	269, "main.c"; 	f_charge_full = 0;
 	BCR	_sys_flag_0,4
-	.line	263, "main.c"; 	break;	
-	MGOTO	_02052_DS_
-_02049_DS_:
-	.line	312, "main.c"; 	msg = MSG_NULL;
+	.line	270, "main.c"; 	break;	
+	MGOTO	_02046_DS_
+_02043_DS_:
+	.line	273, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	313, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+	.line	274, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
 	BANKSEL	_SmokeState
 	CLRR	_SmokeState
-	.line	314, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+	.line	275, "main.c"; 	b_smoking = 0;//清吸烟开始标志
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	315, "main.c"; 	led_breath_flash_flag = 0;
-	BANKSEL	_sys_flag_2
-	BCR	_sys_flag_2,2
-	.line	316, "main.c"; 	f_battery_low = 1;
+	.line	277, "main.c"; 	f_battery_low = 1;
 	BANKSEL	_sys_flag_0
 	BSR	_sys_flag_0,5
-	.line	317, "main.c"; 	SetLedFlashParameters(COLOR_RED,10,20,2);//当吸烟前电池电压低于3.4V（±0.1V）时，或吸烟中低于3.2V（±0.1V），红灯快闪5次提示低电压，并停止输出电压。
-	MOVIA	0x02
-	MOVAR	STK02
-	MOVIA	0x14
-	MOVAR	STK01
-	MOVIA	0x0a
-	MOVAR	STK00
-	MOVIA	0x00
-	MCALL	_SetLedFlashParameters
-	.line	318, "main.c"; 	break;
-	MGOTO	_02052_DS_
-_02050_DS_:
-	.line	322, "main.c"; 	msg = MSG_NULL;
+	.line	279, "main.c"; 	led_mode_set(5);
+	MOVIA	0x05
+	MCALL	_led_mode_set
+	.line	280, "main.c"; 	break;
+	MGOTO	_02046_DS_
+_02044_DS_:
+	.line	284, "main.c"; 	msg = MSG_NULL;
 	BANKSEL	_msg
 	CLRR	_msg
-	.line	323, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+	.line	285, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
 	BANKSEL	_SmokeState
 	CLRR	_SmokeState
-	.line	325, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+	.line	287, "main.c"; 	b_smoking = 0;//清吸烟开始标志
 	BANKSEL	_sys_flag_1
 	BCR	_sys_flag_1,1
-	.line	326, "main.c"; 	led_breath_flash_flag = 0;
+	.line	288, "main.c"; 	led_breath_flash_flag = 0;
 	BANKSEL	_sys_flag_2
 	BCR	_sys_flag_2,2
-	.line	329, "main.c"; 	b_heater_detect_mask = 0;
+	.line	291, "main.c"; 	b_heater_detect_mask = 0;
 	BCR	_sys_flag_2,5
-	.line	330, "main.c"; 	LedOff();
-	MCALL	_LedOff
-	.line	332, "main.c"; 	SetLedFlashParameters(COLOR_RED,6,20,2);//吸烟中或前发热丝开路，短路，红灯快闪3次
-	MOVIA	0x02
-	MOVAR	STK02
-	MOVIA	0x14
-	MOVAR	STK01
-	MOVIA	0x06
-	MOVAR	STK00
-	MOVIA	0x00
-	MCALL	_SetLedFlashParameters
-_02052_DS_:
-	.line	344, "main.c"; 	}
+	.line	292, "main.c"; 	led_mode_set(10);
+	MOVIA	0x0a
+	MCALL	_led_mode_set
+_02046_DS_:
+	.line	307, "main.c"; 	}
 	RETURN	
 ; exit point of _msg_handle
 
@@ -705,35 +625,35 @@ _02052_DS_:
 ;***
 ;has an exit
 ;4 compiler assigned registers:
-;   r0x100C
+;   r0x1009
 ;   STK00
-;   r0x100D
-;   r0x100E
+;   r0x100A
+;   r0x100B
 ;; Starting pCode block
 .segment "code"; module=main, function=_Delay_N1ms_16bit
 	.debuginfo subprogram _Delay_N1ms_16bit
 ;local variable name mapping:
-	.debuginfo complex-type (local-sym "_i" 1 "main.c" 54 (basetype 1 unsigned) split "r0x100E")
+	.debuginfo complex-type (local-sym "_i" 1 "main.c" 54 (basetype 1 unsigned) split "r0x100B")
 _Delay_N1ms_16bit:
 ; 2 exit points
 	.line	52, "main.c"; 	void Delay_N1ms_16bit(u16 N)		// 经过示波器矫正
-	BANKSEL	r0x100C
-	MOVAR	r0x100C
+	BANKSEL	r0x1009
+	MOVAR	r0x1009
 	MOVR	STK00,W
-	BANKSEL	r0x100D
-	MOVAR	r0x100D
+	BANKSEL	r0x100A
+	MOVAR	r0x100A
 _02024_DS_:
 	.line	55, "main.c"; 	for(;N !=0; N--)
-	BANKSEL	r0x100C
-	MOVR	r0x100C,W
-	BANKSEL	r0x100D
-	IORAR	r0x100D,W
+	BANKSEL	r0x1009
+	MOVR	r0x1009,W
+	BANKSEL	r0x100A
+	IORAR	r0x100A,W
 	BTRSC	STATUS,2
 	MGOTO	_02026_DS_
 	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
 	MOVIA	0xff
-	BANKSEL	r0x100E
-	MOVAR	r0x100E
+	BANKSEL	r0x100B
+	MOVAR	r0x100B
 _02022_DS_:
 	.line	73, "main.c"; 	NOP();
 	nop
@@ -753,17 +673,17 @@ _02022_DS_:
 	nop
 	.line	81, "main.c"; 	NOP();
 	nop
-	BANKSEL	r0x100E
-	DECRSZ	r0x100E,F
+	BANKSEL	r0x100B
+	DECRSZ	r0x100B,F
 	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
 	MGOTO	_02022_DS_
 	.line	55, "main.c"; 	for(;N !=0; N--)
 	MOVIA	0xff
-	BANKSEL	r0x100D
-	ADDAR	r0x100D,F
+	BANKSEL	r0x100A
+	ADDAR	r0x100A,F
 	MOVIA	0xff
-	BANKSEL	r0x100C
-	ADCAR	r0x100C,F
+	BANKSEL	r0x1009
+	ADCAR	r0x1009,F
 	.line	55, "main.c"; 	{
 	MGOTO	_02024_DS_
 _02026_DS_:
@@ -776,48 +696,48 @@ _02026_DS_:
 ;***
 ;has an exit
 ;5 compiler assigned registers:
-;   r0x100F
+;   r0x100C
 ;   STK00
-;   r0x1010
-;   r0x1011
-;   r0x1012
+;   r0x100D
+;   r0x100E
+;   r0x100F
 ;; Starting pCode block
 .segment "code"; module=main, function=_delay
 	.debuginfo subprogram _delay
 ;local variable name mapping:
-	.debuginfo complex-type (local-sym "_count" 2 "main.c" 45 (basetype 2 unsigned) split "r0x1010" "r0x100F")
-	.debuginfo complex-type (local-sym "_i" 2 "main.c" 47 (basetype 2 unsigned) split "r0x1011" "r0x1012")
+	.debuginfo complex-type (local-sym "_count" 2 "main.c" 45 (basetype 2 unsigned) split "r0x100D" "r0x100C")
+	.debuginfo complex-type (local-sym "_i" 2 "main.c" 47 (basetype 2 unsigned) split "r0x100E" "r0x100F")
 _delay:
 ; 2 exit points
 	.line	45, "main.c"; 	void delay(u16 count)
-	BANKSEL	r0x100F
-	MOVAR	r0x100F
+	BANKSEL	r0x100C
+	MOVAR	r0x100C
 	MOVR	STK00,W
-	BANKSEL	r0x1010
-	MOVAR	r0x1010
+	BANKSEL	r0x100D
+	MOVAR	r0x100D
 	.line	48, "main.c"; 	for(i=1;i<=count;i++)
 	MOVIA	0x01
-	BANKSEL	r0x1011
-	MOVAR	r0x1011
-	BANKSEL	r0x1012
-	CLRR	r0x1012
-_02011_DS_:
-	BANKSEL	r0x1011
-	MOVR	r0x1011,W
-	BANKSEL	r0x1010
-	SUBAR	r0x1010,W
-	BANKSEL	r0x1012
-	MOVR	r0x1012,W
+	BANKSEL	r0x100E
+	MOVAR	r0x100E
 	BANKSEL	r0x100F
-	SBCAR	r0x100F,W
+	CLRR	r0x100F
+_02011_DS_:
+	BANKSEL	r0x100E
+	MOVR	r0x100E,W
+	BANKSEL	r0x100D
+	SUBAR	r0x100D,W
+	BANKSEL	r0x100F
+	MOVR	r0x100F,W
+	BANKSEL	r0x100C
+	SBCAR	r0x100C,W
 	BTRSS	STATUS,0
 	MGOTO	_02013_DS_
-	BANKSEL	r0x1011
-	INCR	r0x1011,F
+	BANKSEL	r0x100E
+	INCR	r0x100E,F
 	BTRSS	STATUS,2
 	MGOTO	_00001_DS_
-	BANKSEL	r0x1012
-	INCR	r0x1012,F
+	BANKSEL	r0x100F
+	INCR	r0x100F,F
 _00001_DS_:
 	MGOTO	_02011_DS_
 _02013_DS_:
@@ -858,6 +778,6 @@ _common_param_init:
 
 
 ;	code size estimation:
-;	  211+   69 =   280 instructions (  698 byte)
+;	  158+   63 =   221 instructions (  568 byte)
 
 	end

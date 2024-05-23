@@ -59,954 +59,860 @@ NYASM 2.41
                                     1-   11     ;--------------------------------------------------------
                                     1-   12     ; external declarations
                                     1-   13     ;--------------------------------------------------------
-                                    1-   14     	extern	_charge_check_by_IO
-                                    1-   15     	extern	_ledRun
-                                    1-   16     	extern	_Detect_OverCurrent_ByAD
-                                    1-   17     	extern	_BaseBatSetPWMValue
-                                    1-   18     	extern	_ADC_Convert_Pre
-                                    1-   19     	extern	_Get_Onetime_Bat_ADCValue
-                                    1-   20     	extern	_Ledbreathing
-                                    1-   21     	extern	_LedOff
-                                    1-   22     	extern	_SetLedColorNormallyOn
-                                    1-   23     	extern	_SetLedBreathingParameters2
-                                    1-   24     	extern	_SetLedBreathingParameters
-                                    1-   25     	extern	_SetLedFlashParameters
-                                    1-   26     	extern	_adc_get
-                                    1-   27     	extern	_F_wait_eoc
-                                    1-   28     	extern	_adc_init4
-                                    1-   29     	extern	_adc3_init
-                                    1-   30     	extern	_adc2_init
-                                    1-   31     	extern	_adc_init
-                                    1-   32     	extern	_sleep_handle
-                                    1-   33     	extern	_sleep_param_init
-                                    1-   34     	extern	_led_handle
-                                    1-   35     	extern	_led_param_init
-                                    1-   36     	extern	_bat_lvd_check
-                                    1-   37     	extern	_battery_check
-                                    1-   38     	extern	_battery_param_init
-                                    1-   39     	extern	_SmokeFun
-                                    1-   40     	extern	_detect_param_init
-                                    1-   41     	extern	_MicScan
-                                    1-   42     	extern	_KeyScan
-                                    1-   43     	extern	_key_param_init
-                                    1-   44     	extern	_isr_param_init
-                                    1-   45     	extern	_gpio_init
-                                    1-   46     	extern	_sleep_init
-                                    1-   47     	extern	_system_init
-                                    1-   48     	extern	_clear_ram
-                                    1-   49     	extern	_multi_16b
-                                    1-   50     	extern	_T0MD
-                                    1-   51     	extern	_PCON1
-                                    1-   52     	extern	_CMPCR
-                                    1-   53     	extern	_BODCON
-                                    1-   54     	extern	_PS0CV
-                                    1-   55     	extern	_APHCON
-                                    1-   56     	extern	_IOSTB
-                                    1-   57     	extern	_IOSTA
-                                    1-   58     	extern	_PWM4DUTY
-                                    1-   59     	extern	_P4CR1
-                                    1-   60     	extern	_BZ3CR
-                                    1-   61     	extern	_PS3CV
-                                    1-   62     	extern	_PWM3DUTY
-                                    1-   63     	extern	_T3CR2
-                                    1-   64     	extern	_T3CR1
-                                    1-   65     	extern	_TMR3
-                                    1-   66     	extern	_OSCCR
-                                    1-   67     	extern	_BZ2CR
-                                    1-   68     	extern	_PS2CV
-                                    1-   69     	extern	_PWM2DUTY
-                                    1-   70     	extern	_T2CR2
-                                    1-   71     	extern	_T2CR1
-                                    1-   72     	extern	_TMR2
-                                    1-   73     	extern	_TBHD
-                                    1-   74     	extern	_TBHP
-                                    1-   75     	extern	_IRCR
-                                    1-   76     	extern	_BZ1CR
-                                    1-   77     	extern	_PS1CV
-                                    1-   78     	extern	_PWM1DUTY
-                                    1-   79     	extern	_T1CR2
-                                    1-   80     	extern	_T1CR1
-                                    1-   81     	extern	_TMR1
-                                    1-   82     	extern	_ADD
-                                    1-   83     	extern	_PCHBUF
-                                    1-   84     	extern	_STATUS
-                                    1-   85     	extern	_PCL
-                                    1-   86     	extern	_TMR0
-                                    1-   87     	extern	_disp_delay_time_cnt
-                                    1-   88     	extern	_usb_check_ad_time_cnt
-                                    1-   89     	extern	_now_ch
-                                    1-   90     	extern	_temptimecount
-                                    1-   91     	extern	_sleep_delay_keep_time
-                                    1-   92     	extern	_running_keep_time
-                                    1-   93     	extern	_battery_low_cnt
-                                    1-   94     	extern	_usb_flag
-                                    1-   95     	extern	_HeatPlugInsert_flag
-                                    1-   96     	extern	_HeatPlugInsertTimeCount
-                                    1-   97     	extern	_HeatCount
-                                    1-   98     	extern	_SmokingKeepTime
-                                    1-   99     	extern	_HeatingKeepTime
-                                    1-  100     	extern	_KeyDowmTimeCount
-                                    1-  101     	extern	_VolTypeIndex
-                                    1-  102     	extern	_SmokeState
-                                    1-  103     	extern	_BatVolLevel
-                                    1-  104     	extern	_SaveHeaterIOStatus
-                                    1-  105     	extern	_MotorDutySet
-                                    1-  106     	extern	_NowMotorDuty
-                                    1-  107     	extern	_TargetMotorDuty
-                                    1-  108     	extern	_gAdcDataValue
-                                    1-  109     	extern	_OverCurrent_adc_value
-                                    1-  110     	extern	_OverCurrent_check_cnt
-                                    1-  111     	extern	_BuleLed_delay_keep_time
-                                    1-  112     	extern	_OverCurrentCount
-                                    1-  113     	extern	_OverCurrentDelayTime
-                                    1-  114     	extern	_led_delay_keep_time
-                                    1-  115     	extern	_led_flash_count
-                                    1-  116     	extern	_led_flash_flag
-                                    1-  117     	extern	_percent_nun
-                                    1-  118     	extern	_PwmCycleCount
-                                    1-  119     	extern	_sleepCnt
-                                    1-  120     	extern	_Led_Breathe_count
-                                    1-  121     	extern	_LedShowKeepTime
-                                    1-  122     	extern	_LedShowStep
-                                    1-  123     	extern	_GroupColourIndex
-                                    1-  124     	extern	_ledRunStarStep
-                                    1-  125     	extern	_ledRunStep
-                                    1-  126     	extern	_nowLedMode
-                                    1-  127     	extern	_CodeSwitchIndex
-                                    1-  128     	extern	_msg
-                                    1-  129     	extern	_INTE2bits
-                                    1-  130     	extern	_TM3RHbits
-                                    1-  131     	extern	_RFCbits
-                                    1-  132     	extern	_ANAENbits
-                                    1-  133     	extern	_TMRHbits
-                                    1-  134     	extern	_INTEDGbits
-                                    1-  135     	extern	_ADJMDbits
-                                    1-  136     	extern	_PACONbits
-                                    1-  137     	extern	_AWUCONbits
-                                    1-  138     	extern	_ADCRbits
-                                    1-  139     	extern	_ADVREFHbits
-                                    1-  140     	extern	_ADRbits
-                                    1-  141     	extern	_ADMDbits
-                                    1-  142     	extern	_INTFbits
-                                    1-  143     	extern	_INTEbits
-                                    1-  144     	extern	_BPHCONbits
-                                    1-  145     	extern	_ABPLCONbits
-                                    1-  146     	extern	_BWUCONbits
-                                    1-  147     	extern	_PCONbits
-                                    1-  148     	extern	_PORTBbits
-                                    1-  149     	extern	_PORTAbits
-                                    1-  150     	extern	__nyc_ny8_startup
-                                    1-  151     ;--------------------------------------------------------
-                                    1-  152     ; global declarations
-                                    1-  153     ;--------------------------------------------------------
-                                    1-  154     	extern	_main
-                                    1-  155     	extern	_INTE2
-                                    1-  156     	extern	_TM3RH
-                                    1-  157     	extern	_RFC
-                                    1-  158     	extern	_ANAEN
-                                    1-  159     	extern	_TMRH
-                                    1-  160     	extern	_INTEDG
-                                    1-  161     	extern	_ADJMD
-                                    1-  162     	extern	_PACON
-                                    1-  163     	extern	_AWUCON
-                                    1-  164     	extern	_ADCR
-                                    1-  165     	extern	_ADVREFH
-                                    1-  166     	extern	_ADR
-                                    1-  167     	extern	_ADMD
-                                    1-  168     	extern	_INTF
-                                    1-  169     	extern	_INTE
-                                    1-  170     	extern	_BPHCON
-                                    1-  171     	extern	_ABPLCON
-                                    1-  172     	extern	_BWUCON
-                                    1-  173     	extern	_PCON
-                                    1-  174     	extern	_PORTB
-                                    1-  175     	extern	_PORTA
-                                    1-  176     	extern	_sys_flag_3
-                                    1-  177     	extern	_sys_flag_2
-                                    1-  178     	extern	_sys_flag_1
-                                    1-  179     	extern	_sys_flag_0
-                                    1-  180     	extern	_common_param_init
-                                    1-  181     	extern	_delay
-                                    1-  182     	extern	_Delay_N1ms_16bit
-                                    1-  183     	extern	_msg_handle
-                                    1-  185     	extern PSAVE
-                                    1-  186     	extern SSAVE
-                                    1-  187     	extern WSAVE
-                                    1-  188     	extern STK12
-                                    1-  189     	extern STK11
-                                    1-  190     	extern STK10
-                                    1-  191     	extern STK09
-                                    1-  192     	extern STK08
-                                    1-  193     	extern STK07
-                                    1-  194     	extern STK06
-                                    1-  195     	extern STK05
-                                    1-  196     	extern STK04
-                                    1-  197     	extern STK03
-                                    1-  198     	extern STK02
-                                    1-  199     	extern STK01
-                                    1-  200     	extern STK00
-                                    1-  202     .segment "share_bank"
-     0000                           1-  203     PSAVE:
-                                    1-  204     	.res 1
+                                    1-   14     	extern	_led_dis_loop_func
+                                    1-   15     	extern	_led_mode_set
+                                    1-   16     	extern	_charge_check_by_IO
+                                    1-   17     	extern	_ledRun
+                                    1-   18     	extern	_Detect_OverCurrent_ByAD
+                                    1-   19     	extern	_BaseBatSetPWMValue
+                                    1-   20     	extern	_ADC_Convert_Pre
+                                    1-   21     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   22     	extern	_Ledbreathing
+                                    1-   23     	extern	_LedOff
+                                    1-   24     	extern	_SetLedColorNormallyOn
+                                    1-   25     	extern	_SetLedBreathingParameters2
+                                    1-   26     	extern	_SetLedBreathingParameters
+                                    1-   27     	extern	_SetLedFlashParameters
+                                    1-   28     	extern	_adc_get
+                                    1-   29     	extern	_F_wait_eoc
+                                    1-   30     	extern	_adc_init4
+                                    1-   31     	extern	_adc3_init
+                                    1-   32     	extern	_adc2_init
+                                    1-   33     	extern	_adc_init
+                                    1-   34     	extern	_sleep_handle
+                                    1-   35     	extern	_sleep_param_init
+                                    1-   36     	extern	_led_handle
+                                    1-   37     	extern	_led_param_init
+                                    1-   38     	extern	_bat_lvd_check
+                                    1-   39     	extern	_battery_check
+                                    1-   40     	extern	_battery_param_init
+                                    1-   41     	extern	_SmokeFun
+                                    1-   42     	extern	_detect_param_init
+                                    1-   43     	extern	_MicScan
+                                    1-   44     	extern	_KeyScan
+                                    1-   45     	extern	_key_param_init
+                                    1-   46     	extern	_isr_param_init
+                                    1-   47     	extern	_gpio_init
+                                    1-   48     	extern	_sleep_init
+                                    1-   49     	extern	_system_init
+                                    1-   50     	extern	_clear_ram
+                                    1-   51     	extern	_multi_16b
+                                    1-   52     	extern	_T0MD
+                                    1-   53     	extern	_PCON1
+                                    1-   54     	extern	_CMPCR
+                                    1-   55     	extern	_BODCON
+                                    1-   56     	extern	_PS0CV
+                                    1-   57     	extern	_APHCON
+                                    1-   58     	extern	_IOSTB
+                                    1-   59     	extern	_IOSTA
+                                    1-   60     	extern	_PWM4DUTY
+                                    1-   61     	extern	_P4CR1
+                                    1-   62     	extern	_BZ3CR
+                                    1-   63     	extern	_PS3CV
+                                    1-   64     	extern	_PWM3DUTY
+                                    1-   65     	extern	_T3CR2
+                                    1-   66     	extern	_T3CR1
+                                    1-   67     	extern	_TMR3
+                                    1-   68     	extern	_OSCCR
+                                    1-   69     	extern	_BZ2CR
+                                    1-   70     	extern	_PS2CV
+                                    1-   71     	extern	_PWM2DUTY
+                                    1-   72     	extern	_T2CR2
+                                    1-   73     	extern	_T2CR1
+                                    1-   74     	extern	_TMR2
+                                    1-   75     	extern	_TBHD
+                                    1-   76     	extern	_TBHP
+                                    1-   77     	extern	_IRCR
+                                    1-   78     	extern	_BZ1CR
+                                    1-   79     	extern	_PS1CV
+                                    1-   80     	extern	_PWM1DUTY
+                                    1-   81     	extern	_T1CR2
+                                    1-   82     	extern	_T1CR1
+                                    1-   83     	extern	_TMR1
+                                    1-   84     	extern	_ADD
+                                    1-   85     	extern	_PCHBUF
+                                    1-   86     	extern	_STATUS
+                                    1-   87     	extern	_PCL
+                                    1-   88     	extern	_TMR0
+                                    1-   89     	extern	_disp_delay_time_cnt
+                                    1-   90     	extern	_usb_check_ad_time_cnt
+                                    1-   91     	extern	_now_ch
+                                    1-   92     	extern	_temptimecount
+                                    1-   93     	extern	_sleep_delay_keep_time
+                                    1-   94     	extern	_running_keep_time
+                                    1-   95     	extern	_battery_low_cnt
+                                    1-   96     	extern	_usb_flag
+                                    1-   97     	extern	_HeatPlugInsert_flag
+                                    1-   98     	extern	_HeatPlugInsertTimeCount
+                                    1-   99     	extern	_HeatCount
+                                    1-  100     	extern	_SmokingKeepTime
+                                    1-  101     	extern	_HeatingKeepTime
+                                    1-  102     	extern	_KeyDowmTimeCount
+                                    1-  103     	extern	_VolTypeIndex
+                                    1-  104     	extern	_SmokeState
+                                    1-  105     	extern	_BatVolLevel
+                                    1-  106     	extern	_led_mode_flag
+                                    1-  107     	extern	_SaveHeaterIOStatus
+                                    1-  108     	extern	_MotorDutySet
+                                    1-  109     	extern	_NowMotorDuty
+                                    1-  110     	extern	_TargetMotorDuty
+                                    1-  111     	extern	_gAdcDataValue
+                                    1-  112     	extern	_OverCurrent_adc_value
+                                    1-  113     	extern	_OverCurrent_check_cnt
+                                    1-  114     	extern	_BuleLed_delay_keep_time
+                                    1-  115     	extern	_OverCurrentCount
+                                    1-  116     	extern	_OverCurrentDelayTime
+                                    1-  117     	extern	_led_delay_keep_time
+                                    1-  118     	extern	_led_flash_count
+                                    1-  119     	extern	_led_flash_flag
+                                    1-  120     	extern	_percent_nun
+                                    1-  121     	extern	_PwmCycleCount
+                                    1-  122     	extern	_sleepCnt
+                                    1-  123     	extern	_Led_Breathe_count
+                                    1-  124     	extern	_LedShowKeepTime
+                                    1-  125     	extern	_LedShowStep
+                                    1-  126     	extern	_GroupColourIndex
+                                    1-  127     	extern	_ledRunStarStep
+                                    1-  128     	extern	_ledRunStep
+                                    1-  129     	extern	_nowLedMode
+                                    1-  130     	extern	_CodeSwitchIndex
+                                    1-  131     	extern	_msg
+                                    1-  132     	extern	_INTE2bits
+                                    1-  133     	extern	_TM3RHbits
+                                    1-  134     	extern	_RFCbits
+                                    1-  135     	extern	_ANAENbits
+                                    1-  136     	extern	_TMRHbits
+                                    1-  137     	extern	_INTEDGbits
+                                    1-  138     	extern	_ADJMDbits
+                                    1-  139     	extern	_PACONbits
+                                    1-  140     	extern	_AWUCONbits
+                                    1-  141     	extern	_ADCRbits
+                                    1-  142     	extern	_ADVREFHbits
+                                    1-  143     	extern	_ADRbits
+                                    1-  144     	extern	_ADMDbits
+                                    1-  145     	extern	_INTFbits
+                                    1-  146     	extern	_INTEbits
+                                    1-  147     	extern	_BPHCONbits
+                                    1-  148     	extern	_ABPLCONbits
+                                    1-  149     	extern	_BWUCONbits
+                                    1-  150     	extern	_PCONbits
+                                    1-  151     	extern	_PORTBbits
+                                    1-  152     	extern	_PORTAbits
+                                    1-  153     	extern	__nyc_ny8_startup
+                                    1-  154     ;--------------------------------------------------------
+                                    1-  155     ; global declarations
+                                    1-  156     ;--------------------------------------------------------
+                                    1-  157     	extern	_main
+                                    1-  158     	extern	_INTE2
+                                    1-  159     	extern	_TM3RH
+                                    1-  160     	extern	_RFC
+                                    1-  161     	extern	_ANAEN
+                                    1-  162     	extern	_TMRH
+                                    1-  163     	extern	_INTEDG
+                                    1-  164     	extern	_ADJMD
+                                    1-  165     	extern	_PACON
+                                    1-  166     	extern	_AWUCON
+                                    1-  167     	extern	_ADCR
+                                    1-  168     	extern	_ADVREFH
+                                    1-  169     	extern	_ADR
+                                    1-  170     	extern	_ADMD
+                                    1-  171     	extern	_INTF
+                                    1-  172     	extern	_INTE
+                                    1-  173     	extern	_BPHCON
+                                    1-  174     	extern	_ABPLCON
+                                    1-  175     	extern	_BWUCON
+                                    1-  176     	extern	_PCON
+                                    1-  177     	extern	_PORTB
+                                    1-  178     	extern	_PORTA
+                                    1-  179     	extern	_sys_flag_3
+                                    1-  180     	extern	_sys_flag_2
+                                    1-  181     	extern	_sys_flag_1
+                                    1-  182     	extern	_sys_flag_0
+                                    1-  183     	extern	_common_param_init
+                                    1-  184     	extern	_delay
+                                    1-  185     	extern	_Delay_N1ms_16bit
+                                    1-  186     	extern	_msg_handle
+                                    1-  188     	extern PSAVE
+                                    1-  189     	extern SSAVE
+                                    1-  190     	extern WSAVE
+                                    1-  191     	extern STK12
+                                    1-  192     	extern STK11
+                                    1-  193     	extern STK10
+                                    1-  194     	extern STK09
+                                    1-  195     	extern STK08
+                                    1-  196     	extern STK07
+                                    1-  197     	extern STK06
+                                    1-  198     	extern STK05
+                                    1-  199     	extern STK04
+                                    1-  200     	extern STK03
+                                    1-  201     	extern STK02
+                                    1-  202     	extern STK01
+                                    1-  203     	extern STK00
                                     1-  205     .segment "share_bank"
-     0000                           1-  206     SSAVE:
+     0000                           1-  206     PSAVE:
                                     1-  207     	.res 1
                                     1-  208     .segment "share_bank"
-     0000                           1-  209     WSAVE:
+     0000                           1-  209     SSAVE:
                                     1-  210     	.res 1
                                     1-  211     .segment "share_bank"
-     0000                           1-  212     STK12:
+     0000                           1-  212     WSAVE:
                                     1-  213     	.res 1
                                     1-  214     .segment "share_bank"
-     0000                           1-  215     STK11:
+     0000                           1-  215     STK12:
                                     1-  216     	.res 1
                                     1-  217     .segment "share_bank"
-     0000                           1-  218     STK10:
+     0000                           1-  218     STK11:
                                     1-  219     	.res 1
                                     1-  220     .segment "share_bank"
-     0000                           1-  221     STK09:
+     0000                           1-  221     STK10:
                                     1-  222     	.res 1
                                     1-  223     .segment "share_bank"
-     0000                           1-  224     STK08:
+     0000                           1-  224     STK09:
                                     1-  225     	.res 1
                                     1-  226     .segment "share_bank"
-     0000                           1-  227     STK07:
+     0000                           1-  227     STK08:
                                     1-  228     	.res 1
                                     1-  229     .segment "share_bank"
-     0000                           1-  230     STK06:
+     0000                           1-  230     STK07:
                                     1-  231     	.res 1
                                     1-  232     .segment "share_bank"
-     0000                           1-  233     STK05:
+     0000                           1-  233     STK06:
                                     1-  234     	.res 1
                                     1-  235     .segment "share_bank"
-     0000                           1-  236     STK04:
+     0000                           1-  236     STK05:
                                     1-  237     	.res 1
                                     1-  238     .segment "share_bank"
-     0000                           1-  239     STK03:
+     0000                           1-  239     STK04:
                                     1-  240     	.res 1
                                     1-  241     .segment "share_bank"
-     0000                           1-  242     STK02:
+     0000                           1-  242     STK03:
                                     1-  243     	.res 1
                                     1-  244     .segment "share_bank"
-     0000                           1-  245     STK01:
+     0000                           1-  245     STK02:
                                     1-  246     	.res 1
                                     1-  247     .segment "share_bank"
-     0000                           1-  248     STK00:
+     0000                           1-  248     STK01:
                                     1-  249     	.res 1
-                                    1-  251     ;--------------------------------------------------------
-                                    1-  252     ; global definitions
-                                    1-  253     ;--------------------------------------------------------
-                                    1-  254     .segment "uninit"
-     0000                           1-  255     _sys_flag_0:
-                                    1-  256     	.res 1
-                                    1-  259     .segment "uninit"
-     0000                           1-  260     _sys_flag_1:
-                                    1-  261     	.res 1
-                                    1-  264     .segment "uninit"
-     0000                           1-  265     _sys_flag_2:
-                                    1-  266     	.res 1
-                                    1-  269     .segment "uninit"
-     0000                           1-  270     _sys_flag_3:
-                                    1-  271     	.res 1
-                                    1-  274     ;--------------------------------------------------------
-                                    1-  275     ; absolute symbol definitions
-                                    1-  276     ;--------------------------------------------------------
+                                    1-  250     .segment "share_bank"
+     0000                           1-  251     STK00:
+                                    1-  252     	.res 1
+                                    1-  254     ;--------------------------------------------------------
+                                    1-  255     ; global definitions
+                                    1-  256     ;--------------------------------------------------------
+                                    1-  257     .segment "uninit"
+     0000                           1-  258     _sys_flag_0:
+                                    1-  259     	.res 1
+                                    1-  262     .segment "uninit"
+     0000                           1-  263     _sys_flag_1:
+                                    1-  264     	.res 1
+                                    1-  267     .segment "uninit"
+     0000                           1-  268     _sys_flag_2:
+                                    1-  269     	.res 1
+                                    1-  272     .segment "uninit"
+     0000                           1-  273     _sys_flag_3:
+                                    1-  274     	.res 1
                                     1-  277     ;--------------------------------------------------------
-                                    1-  278     ; compiler-defined variables
+                                    1-  278     ; absolute symbol definitions
                                     1-  279     ;--------------------------------------------------------
-                                    1-  280     .segment "uninit"
-     0000                           1-  281     r0x1010:
-                                    1-  282     	.res	1
+                                    1-  280     ;--------------------------------------------------------
+                                    1-  281     ; compiler-defined variables
+                                    1-  282     ;--------------------------------------------------------
                                     1-  283     .segment "uninit"
-     0000                           1-  284     r0x100F:
+     0000                           1-  284     r0x100D:
                                     1-  285     	.res	1
                                     1-  286     .segment "uninit"
-     0000                           1-  287     r0x1011:
+     0000                           1-  287     r0x100C:
                                     1-  288     	.res	1
                                     1-  289     .segment "uninit"
-     0000                           1-  290     r0x1012:
+     0000                           1-  290     r0x100E:
                                     1-  291     	.res	1
                                     1-  292     .segment "uninit"
-     0000                           1-  293     r0x100D:
+     0000                           1-  293     r0x100F:
                                     1-  294     	.res	1
                                     1-  295     .segment "uninit"
-     0000                           1-  296     r0x100C:
+     0000                           1-  296     r0x100A:
                                     1-  297     	.res	1
                                     1-  298     .segment "uninit"
-     0000                           1-  299     r0x100E:
+     0000                           1-  299     r0x1009:
                                     1-  300     	.res	1
-                                    1-  301     ;--------------------------------------------------------
-                                    1-  302     ; initialized data
-                                    1-  303     ;--------------------------------------------------------
+                                    1-  301     .segment "uninit"
+     0000                           1-  302     r0x100B:
+                                    1-  303     	.res	1
                                     1-  304     ;--------------------------------------------------------
-                                    1-  305     ; initialized absolute data
+                                    1-  305     ; initialized data
                                     1-  306     ;--------------------------------------------------------
                                     1-  307     ;--------------------------------------------------------
-                                    1-  308     ; overlayable items in internal ram 
+                                    1-  308     ; initialized absolute data
                                     1-  309     ;--------------------------------------------------------
-                                    1-  310     ;	udata_ovr
-                                    1-  311     ;--------------------------------------------------------
-                                    1-  312     ; reset vector 
-                                    1-  313     ;--------------------------------------------------------
-                                    1-  314     ORG	0x0000
-     0000 3rrr                      1-  315     	LGOTO	__nyc_ny8_startup
+                                    1-  310     ;--------------------------------------------------------
+                                    1-  311     ; overlayable items in internal ram 
+                                    1-  312     ;--------------------------------------------------------
+                                    1-  313     ;	udata_ovr
+                                    1-  314     ;--------------------------------------------------------
+                                    1-  315     ; reset vector 
                                     1-  316     ;--------------------------------------------------------
-                                    1-  317     ; code
-                                    1-  318     ;--------------------------------------------------------
-                                    1-  319     ; code_main	code
-                                    1-  320     ;***
-                                    1-  321     ;  pBlock Stats: dbName = M
-                                    1-  322     ;***
-                                    1-  323     ;has an exit
-                                    1-  324     ;functions called:
-                                    1-  325     ;   _system_init
-                                    1-  326     ;   _common_param_init
-                                    1-  327     ;   _isr_param_init
-                                    1-  328     ;   _key_param_init
-                                    1-  329     ;   _led_param_init
-                                    1-  330     ;   _sleep_param_init
-                                    1-  331     ;   _SetLedColorNormallyOn
-                                    1-  332     ;   _MicScan
-                                    1-  333     ;   _msg_handle
-                                    1-  334     ;   _led_handle
-                                    1-  335     ;   _charge_check_by_IO
-                                    1-  336     ;   _bat_lvd_check
-                                    1-  337     ;   _SmokeFun
-                                    1-  338     ;   _sleep_handle
+                                    1-  317     ORG	0x0000
+     0000 3rrr                      1-  318     	LGOTO	__nyc_ny8_startup
+                                    1-  319     ;--------------------------------------------------------
+                                    1-  320     ; code
+                                    1-  321     ;--------------------------------------------------------
+                                    1-  322     ; code_main	code
+                                    1-  323     ;***
+                                    1-  324     ;  pBlock Stats: dbName = M
+                                    1-  325     ;***
+                                    1-  326     ;has an exit
+                                    1-  327     ;functions called:
+                                    1-  328     ;   _system_init
+                                    1-  329     ;   _common_param_init
+                                    1-  330     ;   _isr_param_init
+                                    1-  331     ;   _key_param_init
+                                    1-  332     ;   _led_param_init
+                                    1-  333     ;   _sleep_param_init
+                                    1-  334     ;   _led_mode_set
+                                    1-  335     ;   _MicScan
+                                    1-  336     ;   _msg_handle
+                                    1-  337     ;   _charge_check_by_IO
+                                    1-  338     ;   _SmokeFun
                                     1-  339     ;   _system_init
                                     1-  340     ;   _common_param_init
                                     1-  341     ;   _isr_param_init
                                     1-  342     ;   _key_param_init
                                     1-  343     ;   _led_param_init
                                     1-  344     ;   _sleep_param_init
-                                    1-  345     ;   _SetLedColorNormallyOn
+                                    1-  345     ;   _led_mode_set
                                     1-  346     ;   _MicScan
                                     1-  347     ;   _msg_handle
-                                    1-  348     ;   _led_handle
-                                    1-  349     ;   _charge_check_by_IO
-                                    1-  350     ;   _bat_lvd_check
-                                    1-  351     ;   _SmokeFun
-                                    1-  352     ;   _sleep_handle
-                                    1-  353     ;; Starting pCode block
-                                    1-  354     .segment "code"; module=main, function=_main
-     0000                           1-  356     _main:
-                                    1-  357     ; 2 exit points
-                                    1-  358     	.line	97, "main.c"; 	system_init();	
-                                    1-  359     	MCALL	_system_init
+                                    1-  348     ;   _charge_check_by_IO
+                                    1-  349     ;   _SmokeFun
+                                    1-  350     ;; Starting pCode block
+                                    1-  351     .segment "code"; module=main, function=_main
+     0000                           1-  353     _main:
+                                    1-  354     ; 2 exit points
+                                    1-  355     	.line	97, "main.c"; 	system_init();	
+                                    1-  356     	MCALL	_system_init
      0000 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  360     	.line	101, "main.c"; 	common_param_init();
-                                    1-  361     	MCALL	_common_param_init
+                                    1-  357     	.line	101, "main.c"; 	common_param_init();
+                                    1-  358     	MCALL	_common_param_init
      0001 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  362     	.line	102, "main.c"; 	isr_param_init();
-                                    1-  363     	MCALL	_isr_param_init
+                                    1-  359     	.line	102, "main.c"; 	isr_param_init();
+                                    1-  360     	MCALL	_isr_param_init
      0002 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  364     	.line	103, "main.c"; 	key_param_init();
-                                    1-  365     	MCALL	_key_param_init
+                                    1-  361     	.line	103, "main.c"; 	key_param_init();
+                                    1-  362     	MCALL	_key_param_init
      0003 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  366     	.line	104, "main.c"; 	led_param_init();
-                                    1-  367     	MCALL	_led_param_init
+                                    1-  363     	.line	104, "main.c"; 	led_param_init();
+                                    1-  364     	MCALL	_led_param_init
      0004 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  368     	.line	105, "main.c"; 	sleep_param_init();
-                                    1-  369     	MCALL	_sleep_param_init
+                                    1-  365     	.line	105, "main.c"; 	sleep_param_init();
+                                    1-  366     	MCALL	_sleep_param_init
      0005 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  370     	.line	106, "main.c"; 	isSleep = 0;//上电默认关机状态
-                                    1-  371     	BANKSEL	_sys_flag_1
+                                    1-  367     	.line	106, "main.c"; 	isSleep = 0;//上电默认关机状态
+                                    1-  368     	BANKSEL	_sys_flag_1
      0006 rrrr                      3-  109 m1      .banksel ram_address
-     0007 1Drr                      1-  372     	BCR	_sys_flag_1,3
-                                    1-  373     	.line	107, "main.c"; 	nowLedMode = 1;//第一次上电红白灯交替闪三次，进入低功耗
-     0008 2101                      1-  374     	MOVIA	0x01
-                                    1-  375     	BANKSEL	_nowLedMode
-     0009 rrrr                      3-  109 m1      .banksel ram_address
-     000A 00rr                      1-  376     	MOVAR	_nowLedMode
-                                    1-  377     	.line	109, "main.c"; 	SetLedColorNormallyOn(COLOR_RED);//红色
-     000B 2100                      1-  378     	MOVIA	0x00
-                                    1-  379     	MCALL	_SetLedColorNormallyOn
+     0007 1Drr                      1-  369     	BCR	_sys_flag_1,3
+                                    1-  370     	.line	129, "main.c"; 	led_mode_set(1);
+     0008 2101                      1-  371     	MOVIA	0x01
+                                    1-  372     	MCALL	_led_mode_set
+     0009 2rrr                      3-   65 m1      LCALL rom_address
+     000A                           1-  373     _02032_DS_:
+                                    1-  374     	.line	132, "main.c"; 	CLRWDT();	
+     000A 0002                      1-  375     	clrwdt
+                                    1-  376     	.line	133, "main.c"; 	MicScan();//咪头扫描
+                                    1-  377     	MCALL	_MicScan
+     000B 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  378     	.line	134, "main.c"; 	msg_handle();//消息处理
+                                    1-  379     	MCALL	_msg_handle
      000C 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  380     	.line	110, "main.c"; 	LedShowKeepTime = 100;//单位：10ms
-     000D 2164                      1-  381     	MOVIA	0x64
-                                    1-  382     	BANKSEL	_LedShowKeepTime
-     000E rrrr                      3-  109 m1      .banksel ram_address
-     000F 00rr                      1-  383     	MOVAR	_LedShowKeepTime
-     0010 02rr                      1-  384     	CLRR	(_LedShowKeepTime + 1)
-     0011                           1-  385     _02032_DS_:
-                                    1-  386     	.line	131, "main.c"; 	CLRWDT();	
-     0011 0002                      1-  387     	clrwdt
-                                    1-  388     	.line	132, "main.c"; 	MicScan();//咪头扫描
-                                    1-  389     	MCALL	_MicScan
-     0012 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  390     	.line	133, "main.c"; 	msg_handle();//消息处理
-                                    1-  391     	MCALL	_msg_handle
-     0013 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  392     	.line	134, "main.c"; 	led_handle();
-                                    1-  393     	MCALL	_led_handle
-     0014 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  394     	.line	136, "main.c"; 	charge_check_by_IO();//充电检测
-                                    1-  395     	MCALL	_charge_check_by_IO
-     0015 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  396     	.line	138, "main.c"; 	bat_lvd_check();//只在吸烟中检测(吸烟中：电量低于2.9V（±0.1V），停止输出，红灯闪5次)
-                                    1-  397     	MCALL	_bat_lvd_check
-     0016 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  398     	.line	139, "main.c"; 	SmokeFun();
-                                    1-  399     	MCALL	_SmokeFun
-     0017 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  400     	.line	140, "main.c"; 	sleep_handle();
-                                    1-  401     	MCALL	_sleep_handle
-     0018 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  402     	MGOTO	_02032_DS_
-     0019 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  403     	.line	143, "main.c"; 	}
-                                    1-  404     	RETURN	
-     001A 0010                      3-   39 m1      ret
-                                    1-  405     ; exit point of _main
-                                    1-  407     ;***
-                                    1-  408     ;  pBlock Stats: dbName = C
-                                    1-  409     ;***
-                                    1-  410     ;has an exit
-                                    1-  411     ;functions called:
-                                    1-  412     ;   _SetLedFlashParameters
-                                    1-  413     ;   _adc_init4
-                                    1-  414     ;   _SetLedBreathingParameters2
-                                    1-  415     ;   _SetLedColorNormallyOn
-                                    1-  416     ;   _SetLedFlashParameters
-                                    1-  417     ;   _SetLedFlashParameters
-                                    1-  418     ;   _SetLedFlashParameters
-                                    1-  419     ;   _LedOff
-                                    1-  420     ;   _SetLedFlashParameters
-                                    1-  421     ;   _SetLedFlashParameters
-                                    1-  422     ;   _adc_init4
-                                    1-  423     ;   _SetLedBreathingParameters2
-                                    1-  424     ;   _SetLedColorNormallyOn
-                                    1-  425     ;   _SetLedFlashParameters
-                                    1-  426     ;   _SetLedFlashParameters
-                                    1-  427     ;   _SetLedFlashParameters
-                                    1-  428     ;   _LedOff
-                                    1-  429     ;   _SetLedFlashParameters
-                                    1-  430     ;3 compiler assigned registers:
-                                    1-  431     ;   STK02
-                                    1-  432     ;   STK01
-                                    1-  433     ;   STK00
-                                    1-  434     ;; Starting pCode block
-                                    1-  435     .segment "code"; module=main, function=_msg_handle
-     0000                           1-  437     _msg_handle:
-                                    1-  438     ; 2 exit points
-                                    1-  439     	.line	151, "main.c"; 	switch(msg)
-                                    1-  440     	BANKSEL	_msg
+                                    1-  380     	.line	137, "main.c"; 	charge_check_by_IO();//充电检测
+                                    1-  381     	MCALL	_charge_check_by_IO
+     000D 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  382     	.line	140, "main.c"; 	SmokeFun();
+                                    1-  383     	MCALL	_SmokeFun
+     000E 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  384     	MGOTO	_02032_DS_
+     000F 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  385     	.line	144, "main.c"; 	}
+                                    1-  386     	RETURN	
+     0010 0010                      3-   39 m1      ret
+                                    1-  387     ; exit point of _main
+                                    1-  389     ;***
+                                    1-  390     ;  pBlock Stats: dbName = C
+                                    1-  391     ;***
+                                    1-  392     ;has an exit
+                                    1-  393     ;functions called:
+                                    1-  394     ;   _led_mode_set
+                                    1-  395     ;   _led_mode_set
+                                    1-  396     ;   _adc_init4
+                                    1-  397     ;   _led_mode_set
+                                    1-  398     ;   _led_mode_set
+                                    1-  399     ;   _led_mode_set
+                                    1-  400     ;   _led_mode_set
+                                    1-  401     ;   _led_mode_set
+                                    1-  402     ;   _led_mode_set
+                                    1-  403     ;   _led_mode_set
+                                    1-  404     ;   _adc_init4
+                                    1-  405     ;   _led_mode_set
+                                    1-  406     ;   _led_mode_set
+                                    1-  407     ;   _led_mode_set
+                                    1-  408     ;   _led_mode_set
+                                    1-  409     ;   _led_mode_set
+                                    1-  410     ;; Starting pCode block
+                                    1-  411     .segment "code"; module=main, function=_msg_handle
+     0000                           1-  413     _msg_handle:
+                                    1-  414     ; 2 exit points
+                                    1-  415     	.line	152, "main.c"; 	switch(msg)
+                                    1-  416     	BANKSEL	_msg
      0000 rrrr                      3-  109 m1      .banksel ram_address
-     0001 01rr                      1-  441     	MOVR	_msg,W
-     0002 2401                      1-  442     	XORIA	0x01
-     0003 0D03                      1-  443     	BTRSC	STATUS,2
-                                    1-  444     	MGOTO	_02037_DS_
+     0001 01rr                      1-  417     	MOVR	_msg,W
+     0002 2401                      1-  418     	XORIA	0x01
+     0003 0D03                      1-  419     	BTRSC	STATUS,2
+                                    1-  420     	MGOTO	_02037_DS_
      0004 3rrr                      3-   62 m1      LGOTO rom_address
-     0005 01rr                      1-  445     	MOVR	_msg,W
-     0006 2402                      1-  446     	XORIA	0x02
-     0007 0D03                      1-  447     	BTRSC	STATUS,2
-                                    1-  448     	MGOTO	_02039_DS_
+     0005 01rr                      1-  421     	MOVR	_msg,W
+     0006 2402                      1-  422     	XORIA	0x02
+     0007 0D03                      1-  423     	BTRSC	STATUS,2
+                                    1-  424     	MGOTO	_02039_DS_
      0008 3rrr                      3-   62 m1      LGOTO rom_address
-     0009 01rr                      1-  449     	MOVR	_msg,W
-     000A 2403                      1-  450     	XORIA	0x03
-     000B 0D03                      1-  451     	BTRSC	STATUS,2
-                                    1-  452     	MGOTO	_02040_DS_
+     0009 01rr                      1-  425     	MOVR	_msg,W
+     000A 2403                      1-  426     	XORIA	0x03
+     000B 0D03                      1-  427     	BTRSC	STATUS,2
+                                    1-  428     	MGOTO	_02040_DS_
      000C 3rrr                      3-   62 m1      LGOTO rom_address
-     000D 01rr                      1-  453     	MOVR	_msg,W
-     000E 2404                      1-  454     	XORIA	0x04
-     000F 0D03                      1-  455     	BTRSC	STATUS,2
-                                    1-  456     	MGOTO	_02045_DS_
+     000D 01rr                      1-  429     	MOVR	_msg,W
+     000E 2404                      1-  430     	XORIA	0x04
+     000F 0D03                      1-  431     	BTRSC	STATUS,2
+                                    1-  432     	MGOTO	_02042_DS_
      0010 3rrr                      3-   62 m1      LGOTO rom_address
-     0011 01rr                      1-  457     	MOVR	_msg,W
-     0012 2407                      1-  458     	XORIA	0x07
-     0013 0D03                      1-  459     	BTRSC	STATUS,2
-                                    1-  460     	MGOTO	_02041_DS_
+     0011 01rr                      1-  433     	MOVR	_msg,W
+     0012 2407                      1-  434     	XORIA	0x07
+     0013 0D03                      1-  435     	BTRSC	STATUS,2
+                                    1-  436     	MGOTO	_02041_DS_
      0014 3rrr                      3-   62 m1      LGOTO rom_address
-     0015 01rr                      1-  461     	MOVR	_msg,W
-     0016 2408                      1-  462     	XORIA	0x08
-     0017 0D03                      1-  463     	BTRSC	STATUS,2
-                                    1-  464     	MGOTO	_02049_DS_
+     0015 01rr                      1-  437     	MOVR	_msg,W
+     0016 2408                      1-  438     	XORIA	0x08
+     0017 0D03                      1-  439     	BTRSC	STATUS,2
+                                    1-  440     	MGOTO	_02043_DS_
      0018 3rrr                      3-   62 m1      LGOTO rom_address
-     0019 01rr                      1-  465     	MOVR	_msg,W
-     001A 2409                      1-  466     	XORIA	0x09
-     001B 0D03                      1-  467     	BTRSC	STATUS,2
-                                    1-  468     	MGOTO	_02050_DS_
+     0019 01rr                      1-  441     	MOVR	_msg,W
+     001A 2409                      1-  442     	XORIA	0x09
+     001B 0D03                      1-  443     	BTRSC	STATUS,2
+                                    1-  444     	MGOTO	_02044_DS_
      001C 3rrr                      3-   62 m1      LGOTO rom_address
-     001D 01rr                      1-  469     	MOVR	_msg,W
-     001E 240A                      1-  470     	XORIA	0x0a
-     001F 0D03                      1-  471     	BTRSC	STATUS,2
-                                    1-  472     	MGOTO	_02038_DS_
+     001D 01rr                      1-  445     	MOVR	_msg,W
+     001E 240A                      1-  446     	XORIA	0x0a
+     001F 0D03                      1-  447     	BTRSC	STATUS,2
+                                    1-  448     	MGOTO	_02038_DS_
      0020 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  473     	MGOTO	_02052_DS_
+                                    1-  449     	MGOTO	_02046_DS_
      0021 3rrr                      3-   62 m1      LGOTO rom_address
-     0022                           1-  474     _02037_DS_:
-                                    1-  475     	.line	157, "main.c"; 	msg = MSG_NULL;
-                                    1-  476     	BANKSEL	_msg
+     0022                           1-  450     _02037_DS_:
+                                    1-  451     	.line	158, "main.c"; 	msg = MSG_NULL;
+                                    1-  452     	BANKSEL	_msg
      0022 rrrr                      3-  109 m1      .banksel ram_address
-     0023 02rr                      1-  477     	CLRR	_msg
-                                    1-  478     	.line	160, "main.c"; 	nowLedMode = 2;
-     0024 2102                      1-  479     	MOVIA	0x02
-                                    1-  480     	BANKSEL	_nowLedMode
+     0023 02rr                      1-  453     	CLRR	_msg
+                                    1-  454     	.line	162, "main.c"; 	SmokeState = STATE_SMOKE_INIT;
+     0024 2101                      1-  455     	MOVIA	0x01
+                                    1-  456     	BANKSEL	_SmokeState
      0025 rrrr                      3-  109 m1      .banksel ram_address
-     0026 00rr                      1-  481     	MOVAR	_nowLedMode
-                                    1-  482     	.line	161, "main.c"; 	SmokeState = STATE_SMOKE_INIT;
-     0027 2101                      1-  483     	MOVIA	0x01
-                                    1-  484     	BANKSEL	_SmokeState
-     0028 rrrr                      3-  109 m1      .banksel ram_address
-     0029 00rr                      1-  485     	MOVAR	_SmokeState
-                                    1-  486     	.line	162, "main.c"; 	b_smoke_init = 1;
-                                    1-  487     	BANKSEL	_sys_flag_0
-     002A rrrr                      3-  109 m1      .banksel ram_address
-     002B 18rr                      1-  488     	BSR	_sys_flag_0,1
-                                    1-  489     	.line	164, "main.c"; 	b_smoking = 0;//清除吸烟开始标志	
-                                    1-  490     	BANKSEL	_sys_flag_1
+     0026 00rr                      1-  457     	MOVAR	_SmokeState
+                                    1-  458     	.line	163, "main.c"; 	b_smoke_init = 1;
+                                    1-  459     	BANKSEL	_sys_flag_0
+     0027 rrrr                      3-  109 m1      .banksel ram_address
+     0028 18rr                      1-  460     	BSR	_sys_flag_0,1
+                                    1-  461     	.line	165, "main.c"; 	b_smoking = 0;//清除吸烟开始标志	
+                                    1-  462     	BANKSEL	_sys_flag_1
+     0029 rrrr                      3-  109 m1      .banksel ram_address
+     002A 1Crr                      1-  463     	BCR	_sys_flag_1,1
+                                    1-  464     	.line	167, "main.c"; 	break;	
+                                    1-  465     	MGOTO	_02046_DS_
+     002B 3rrr                      3-   62 m1      LGOTO rom_address
+     002C                           1-  466     _02038_DS_:
+                                    1-  467     	.line	170, "main.c"; 	msg = MSG_NULL;
+                                    1-  468     	BANKSEL	_msg
      002C rrrr                      3-  109 m1      .banksel ram_address
-     002D 1Crr                      1-  491     	BCR	_sys_flag_1,1
-                                    1-  492     	.line	165, "main.c"; 	break;	
-                                    1-  493     	MGOTO	_02052_DS_
-     002E 3rrr                      3-   62 m1      LGOTO rom_address
-     002F                           1-  494     _02038_DS_:
-                                    1-  495     	.line	168, "main.c"; 	msg = MSG_NULL;
+     002D 02rr                      1-  469     	CLRR	_msg
+                                    1-  470     	.line	171, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+                                    1-  471     	BANKSEL	_SmokeState
+     002E rrrr                      3-  109 m1      .banksel ram_address
+     002F 02rr                      1-  472     	CLRR	_SmokeState
+                                    1-  473     	.line	172, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+                                    1-  474     	BANKSEL	_sys_flag_1
+     0030 rrrr                      3-  109 m1      .banksel ram_address
+     0031 1Crr                      1-  475     	BCR	_sys_flag_1,1
+                                    1-  476     	.line	174, "main.c"; 	charging_breath_flash_flag = 0;
+                                    1-  477     	BANKSEL	_sys_flag_3
+     0032 rrrr                      3-  109 m1      .banksel ram_address
+     0033 1Frr                      1-  478     	BCR	_sys_flag_3,6
+                                    1-  479     	.line	175, "main.c"; 	led_breath_flash_flag = 0;
+                                    1-  480     	BANKSEL	_sys_flag_2
+     0034 rrrr                      3-  109 m1      .banksel ram_address
+     0035 1Drr                      1-  481     	BCR	_sys_flag_2,2
+                                    1-  482     	.line	176, "main.c"; 	led_flash_flag = 0;
+                                    1-  483     	BANKSEL	_led_flash_flag
+     0036 rrrr                      3-  109 m1      .banksel ram_address
+     0037 02rr                      1-  484     	CLRR	_led_flash_flag
+                                    1-  485     	.line	177, "main.c"; 	led_mode_set(4);
+     0038 2104                      1-  486     	MOVIA	0x04
+                                    1-  487     	MCALL	_led_mode_set
+     0039 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  488     	.line	180, "main.c"; 	disp_delay_time_cnt = 150;
+     003A 2196                      1-  489     	MOVIA	0x96
+                                    1-  490     	BANKSEL	_disp_delay_time_cnt
+     003B rrrr                      3-  109 m1      .banksel ram_address
+     003C 00rr                      1-  491     	MOVAR	_disp_delay_time_cnt
+                                    1-  492     	.line	181, "main.c"; 	break;
+                                    1-  493     	MGOTO	_02046_DS_
+     003D 3rrr                      3-   62 m1      LGOTO rom_address
+     003E                           1-  494     _02039_DS_:
+                                    1-  495     	.line	184, "main.c"; 	msg = MSG_NULL;
                                     1-  496     	BANKSEL	_msg
-     002F rrrr                      3-  109 m1      .banksel ram_address
-     0030 02rr                      1-  497     	CLRR	_msg
-                                    1-  498     	.line	169, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+     003E rrrr                      3-  109 m1      .banksel ram_address
+     003F 02rr                      1-  497     	CLRR	_msg
+                                    1-  498     	.line	185, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
                                     1-  499     	BANKSEL	_SmokeState
-     0031 rrrr                      3-  109 m1      .banksel ram_address
-     0032 02rr                      1-  500     	CLRR	_SmokeState
-                                    1-  501     	.line	170, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+     0040 rrrr                      3-  109 m1      .banksel ram_address
+     0041 02rr                      1-  500     	CLRR	_SmokeState
+                                    1-  501     	.line	186, "main.c"; 	b_smoking = 0;//清吸烟开始标志			
                                     1-  502     	BANKSEL	_sys_flag_1
-     0033 rrrr                      3-  109 m1      .banksel ram_address
-     0034 1Crr                      1-  503     	BCR	_sys_flag_1,1
-                                    1-  504     	.line	172, "main.c"; 	charging_breath_flash_flag = 0;
-                                    1-  505     	BANKSEL	_sys_flag_3
-     0035 rrrr                      3-  109 m1      .banksel ram_address
-     0036 1Frr                      1-  506     	BCR	_sys_flag_3,6
-                                    1-  507     	.line	173, "main.c"; 	led_breath_flash_flag = 0;
-                                    1-  508     	BANKSEL	_sys_flag_2
-     0037 rrrr                      3-  109 m1      .banksel ram_address
-     0038 1Drr                      1-  509     	BCR	_sys_flag_2,2
-                                    1-  510     	.line	174, "main.c"; 	led_flash_flag = 0;
-                                    1-  511     	BANKSEL	_led_flash_flag
-     0039 rrrr                      3-  109 m1      .banksel ram_address
-     003A 02rr                      1-  512     	CLRR	_led_flash_flag
-                                    1-  513     	.line	176, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,8,50,2);
-     003B 2102                      1-  514     	MOVIA	0x02
-     003C 00rr                      1-  515     	MOVAR	STK02
-     003D 2132                      1-  516     	MOVIA	0x32
-     003E 00rr                      1-  517     	MOVAR	STK01
-     003F 2108                      1-  518     	MOVIA	0x08
-     0040 00rr                      1-  519     	MOVAR	STK00
-     0041 2102                      1-  520     	MOVIA	0x02
-                                    1-  521     	MCALL	_SetLedFlashParameters
-     0042 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  522     	.line	177, "main.c"; 	disp_delay_time_cnt = 150;
-     0043 2196                      1-  523     	MOVIA	0x96
-                                    1-  524     	BANKSEL	_disp_delay_time_cnt
+     0042 rrrr                      3-  109 m1      .banksel ram_address
+     0043 1Crr                      1-  503     	BCR	_sys_flag_1,1
+                                    1-  504     	.line	188, "main.c"; 	led_flash_flag = 0;
+                                    1-  505     	BANKSEL	_led_flash_flag
      0044 rrrr                      3-  109 m1      .banksel ram_address
-     0045 00rr                      1-  525     	MOVAR	_disp_delay_time_cnt
-                                    1-  526     	.line	178, "main.c"; 	break;
-                                    1-  527     	MGOTO	_02052_DS_
-     0046 3rrr                      3-   62 m1      LGOTO rom_address
-     0047                           1-  528     _02039_DS_:
-                                    1-  529     	.line	181, "main.c"; 	msg = MSG_NULL;
-                                    1-  530     	BANKSEL	_msg
+     0045 02rr                      1-  506     	CLRR	_led_flash_flag
+                                    1-  507     	.line	189, "main.c"; 	disp_delay_time_cnt = 150;//吸烟后1,5秒才检测低电
+     0046 2196                      1-  508     	MOVIA	0x96
+                                    1-  509     	BANKSEL	_disp_delay_time_cnt
      0047 rrrr                      3-  109 m1      .banksel ram_address
-     0048 02rr                      1-  531     	CLRR	_msg
-                                    1-  532     	.line	182, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
-                                    1-  533     	BANKSEL	_SmokeState
-     0049 rrrr                      3-  109 m1      .banksel ram_address
-     004A 02rr                      1-  534     	CLRR	_SmokeState
-                                    1-  535     	.line	183, "main.c"; 	b_smoking = 0;//清吸烟开始标志			
-                                    1-  536     	BANKSEL	_sys_flag_1
-     004B rrrr                      3-  109 m1      .banksel ram_address
-     004C 1Crr                      1-  537     	BCR	_sys_flag_1,1
-                                    1-  538     	.line	185, "main.c"; 	led_flash_flag = 0;
-                                    1-  539     	BANKSEL	_led_flash_flag
-     004D rrrr                      3-  109 m1      .banksel ram_address
-     004E 02rr                      1-  540     	CLRR	_led_flash_flag
-                                    1-  541     	.line	186, "main.c"; 	disp_delay_time_cnt = 150;//吸烟后1,5秒才检测低电
-     004F 2196                      1-  542     	MOVIA	0x96
-                                    1-  543     	BANKSEL	_disp_delay_time_cnt
+     0048 00rr                      1-  510     	MOVAR	_disp_delay_time_cnt
+                                    1-  511     	.line	190, "main.c"; 	led_mode_set(3);
+     0049 2103                      1-  512     	MOVIA	0x03
+                                    1-  513     	MCALL	_led_mode_set
+     004A 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  514     	.line	217, "main.c"; 	break;
+                                    1-  515     	MGOTO	_02046_DS_
+     004B 3rrr                      3-   62 m1      LGOTO rom_address
+     004C                           1-  516     _02040_DS_:
+                                    1-  517     	.line	220, "main.c"; 	msg = MSG_NULL;
+                                    1-  518     	BANKSEL	_msg
+     004C rrrr                      3-  109 m1      .banksel ram_address
+     004D 02rr                      1-  519     	CLRR	_msg
+                                    1-  520     	.line	221, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+                                    1-  521     	BANKSEL	_SmokeState
+     004E rrrr                      3-  109 m1      .banksel ram_address
+     004F 02rr                      1-  522     	CLRR	_SmokeState
+                                    1-  523     	.line	222, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+                                    1-  524     	BANKSEL	_sys_flag_1
      0050 rrrr                      3-  109 m1      .banksel ram_address
-     0051 00rr                      1-  544     	MOVAR	_disp_delay_time_cnt
-                                    1-  545     	.line	213, "main.c"; 	break;
-                                    1-  546     	MGOTO	_02052_DS_
-     0052 3rrr                      3-   62 m1      LGOTO rom_address
-     0053                           1-  547     _02040_DS_:
-                                    1-  548     	.line	216, "main.c"; 	msg = MSG_NULL;
-                                    1-  549     	BANKSEL	_msg
-     0053 rrrr                      3-  109 m1      .banksel ram_address
-     0054 02rr                      1-  550     	CLRR	_msg
-                                    1-  551     	.line	217, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
-                                    1-  552     	BANKSEL	_SmokeState
+     0051 1Crr                      1-  525     	BCR	_sys_flag_1,1
+                                    1-  526     	.line	224, "main.c"; 	f_charging = 1;
+                                    1-  527     	BANKSEL	_sys_flag_0
+     0052 rrrr                      3-  109 m1      .banksel ram_address
+     0053 1Brr                      1-  528     	BSR	_sys_flag_0,6
+                                    1-  529     	.line	225, "main.c"; 	f_charge_full = 0;
+     0054 1Err                      1-  530     	BCR	_sys_flag_0,4
+                                    1-  531     	.line	226, "main.c"; 	temp_flag = 0;
+                                    1-  532     	BANKSEL	_sys_flag_2
      0055 rrrr                      3-  109 m1      .banksel ram_address
-     0056 02rr                      1-  553     	CLRR	_SmokeState
-                                    1-  554     	.line	218, "main.c"; 	b_smoking = 0;//清吸烟开始标志
-                                    1-  555     	BANKSEL	_sys_flag_1
-     0057 rrrr                      3-  109 m1      .banksel ram_address
-     0058 1Crr                      1-  556     	BCR	_sys_flag_1,1
-                                    1-  557     	.line	220, "main.c"; 	f_charging = 1;
-                                    1-  558     	BANKSEL	_sys_flag_0
-     0059 rrrr                      3-  109 m1      .banksel ram_address
-     005A 1Brr                      1-  559     	BSR	_sys_flag_0,6
-                                    1-  560     	.line	221, "main.c"; 	f_charge_full = 0;
-     005B 1Err                      1-  561     	BCR	_sys_flag_0,4
-                                    1-  562     	.line	222, "main.c"; 	temp_flag = 0;
-                                    1-  563     	BANKSEL	_sys_flag_2
+     0056 1Crr                      1-  533     	BCR	_sys_flag_2,0
+                                    1-  534     	.line	228, "main.c"; 	led_breath_flash_flag = 0;//停止呼吸效果
+     0057 1Drr                      1-  535     	BCR	_sys_flag_2,2
+                                    1-  536     	.line	229, "main.c"; 	led_flash_flag = 0;
+                                    1-  537     	BANKSEL	_led_flash_flag
+     0058 rrrr                      3-  109 m1      .banksel ram_address
+     0059 02rr                      1-  538     	CLRR	_led_flash_flag
+                                    1-  539     	.line	230, "main.c"; 	usb_check_ad_time_cnt = 0;
+                                    1-  540     	BANKSEL	_usb_check_ad_time_cnt
+     005A rrrr                      3-  109 m1      .banksel ram_address
+     005B 02rr                      1-  541     	CLRR	_usb_check_ad_time_cnt
+                                    1-  542     	.line	231, "main.c"; 	f_battery_low = 0;
+                                    1-  543     	BANKSEL	_sys_flag_0
      005C rrrr                      3-  109 m1      .banksel ram_address
-     005D 1Crr                      1-  564     	BCR	_sys_flag_2,0
-                                    1-  565     	.line	224, "main.c"; 	led_breath_flash_flag = 0;//停止呼吸效果
-     005E 1Drr                      1-  566     	BCR	_sys_flag_2,2
-                                    1-  567     	.line	225, "main.c"; 	led_flash_flag = 0;
-                                    1-  568     	BANKSEL	_led_flash_flag
-     005F rrrr                      3-  109 m1      .banksel ram_address
-     0060 02rr                      1-  569     	CLRR	_led_flash_flag
-                                    1-  570     	.line	226, "main.c"; 	usb_check_ad_time_cnt = 0;
-                                    1-  571     	BANKSEL	_usb_check_ad_time_cnt
-     0061 rrrr                      3-  109 m1      .banksel ram_address
-     0062 02rr                      1-  572     	CLRR	_usb_check_ad_time_cnt
-                                    1-  573     	.line	227, "main.c"; 	f_battery_low = 0;
-                                    1-  574     	BANKSEL	_sys_flag_0
+     005D 1Err                      1-  544     	BCR	_sys_flag_0,5
+                                    1-  545     	.line	232, "main.c"; 	adc_init4(Quarter_VDD);
+     005E 2101                      1-  546     	MOVIA	0x01
+                                    1-  547     	MCALL	_adc_init4
+     005F 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  548     	.line	233, "main.c"; 	led_mode_set(7);
+     0060 2107                      1-  549     	MOVIA	0x07
+                                    1-  550     	MCALL	_led_mode_set
+     0061 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  551     	.line	238, "main.c"; 	break;
+                                    1-  552     	MGOTO	_02046_DS_
+     0062 3rrr                      3-   62 m1      LGOTO rom_address
+     0063                           1-  553     _02041_DS_:
+                                    1-  554     	.line	241, "main.c"; 	msg = MSG_NULL;		
+                                    1-  555     	BANKSEL	_msg
      0063 rrrr                      3-  109 m1      .banksel ram_address
-     0064 1Err                      1-  575     	BCR	_sys_flag_0,5
-                                    1-  576     	.line	228, "main.c"; 	adc_init4(Quarter_VDD);
-     0065 2101                      1-  577     	MOVIA	0x01
-                                    1-  578     	MCALL	_adc_init4
-     0066 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  579     	.line	232, "main.c"; 	SetLedBreathingParameters2(COLOR_RED);//开始红灯呼吸效果
-     0067 2100                      1-  580     	MOVIA	0x00
-                                    1-  581     	MCALL	_SetLedBreathingParameters2
+     0064 02rr                      1-  556     	CLRR	_msg
+                                    1-  557     	.line	243, "main.c"; 	f_charge_full = 1;
+                                    1-  558     	BANKSEL	_sys_flag_0
+     0065 rrrr                      3-  109 m1      .banksel ram_address
+     0066 1Arr                      1-  559     	BSR	_sys_flag_0,4
+                                    1-  560     	.line	244, "main.c"; 	led_mode_set(8);
+     0067 2108                      1-  561     	MOVIA	0x08
+                                    1-  562     	MCALL	_led_mode_set
      0068 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  582     	.line	233, "main.c"; 	break;
-                                    1-  583     	MGOTO	_02052_DS_
+                                    1-  563     	.line	252, "main.c"; 	break;	
+                                    1-  564     	MGOTO	_02046_DS_
      0069 3rrr                      3-   62 m1      LGOTO rom_address
-     006A                           1-  584     _02041_DS_:
-                                    1-  585     	.line	236, "main.c"; 	msg = MSG_NULL;		
-                                    1-  586     	BANKSEL	_msg
+     006A                           1-  565     _02042_DS_:
+                                    1-  566     	.line	255, "main.c"; 	msg = MSG_NULL;
+                                    1-  567     	BANKSEL	_msg
      006A rrrr                      3-  109 m1      .banksel ram_address
-     006B 02rr                      1-  587     	CLRR	_msg
-                                    1-  588     	.line	238, "main.c"; 	f_charge_full = 1;
-                                    1-  589     	BANKSEL	_sys_flag_0
+     006B 02rr                      1-  568     	CLRR	_msg
+                                    1-  569     	.line	256, "main.c"; 	led_flash_flag = 0;
+                                    1-  570     	BANKSEL	_led_flash_flag
      006C rrrr                      3-  109 m1      .banksel ram_address
-     006D 1Arr                      1-  590     	BSR	_sys_flag_0,4
-                                    1-  591     	.line	240, "main.c"; 	if((nowLedMode == 1)||(nowLedMode == 3))
-                                    1-  592     	BANKSEL	_nowLedMode
-     006E rrrr                      3-  109 m1      .banksel ram_address
-     006F 01rr                      1-  593     	MOVR	_nowLedMode,W
-     0070 2401                      1-  594     	XORIA	0x01
-     0071 0D03                      1-  595     	BTRSC	STATUS,2
-                                    1-  596     	MGOTO	_02052_DS_
-     0072 3rrr                      3-   62 m1      LGOTO rom_address
-     0073 01rr                      1-  597     	MOVR	_nowLedMode,W
-     0074 2403                      1-  598     	XORIA	0x03
-     0075 0D03                      1-  599     	BTRSC	STATUS,2
-                                    1-  600     	MGOTO	_02052_DS_
-     0076 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  601     	.line	244, "main.c"; 	SetLedColorNormallyOn(COLOR_GREEN);//充满电后白灯常亮
-     0077 2102                      1-  602     	MOVIA	0x02
-                                    1-  603     	MCALL	_SetLedColorNormallyOn
-     0078 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  604     	.line	246, "main.c"; 	break;	
-                                    1-  605     	MGOTO	_02052_DS_
-     0079 3rrr                      3-   62 m1      LGOTO rom_address
-     007A                           1-  606     _02045_DS_:
-                                    1-  607     	.line	249, "main.c"; 	msg = MSG_NULL;
-                                    1-  608     	BANKSEL	_msg
+     006D 02rr                      1-  571     	CLRR	_led_flash_flag
+                                    1-  572     	.line	264, "main.c"; 	led_mode_set(9);
+     006E 2109                      1-  573     	MOVIA	0x09
+                                    1-  574     	MCALL	_led_mode_set
+     006F 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  575     	.line	268, "main.c"; 	f_charging = 0;
+                                    1-  576     	BANKSEL	_sys_flag_0
+     0070 rrrr                      3-  109 m1      .banksel ram_address
+     0071 1Frr                      1-  577     	BCR	_sys_flag_0,6
+                                    1-  578     	.line	269, "main.c"; 	f_charge_full = 0;
+     0072 1Err                      1-  579     	BCR	_sys_flag_0,4
+                                    1-  580     	.line	270, "main.c"; 	break;	
+                                    1-  581     	MGOTO	_02046_DS_
+     0073 3rrr                      3-   62 m1      LGOTO rom_address
+     0074                           1-  582     _02043_DS_:
+                                    1-  583     	.line	273, "main.c"; 	msg = MSG_NULL;
+                                    1-  584     	BANKSEL	_msg
+     0074 rrrr                      3-  109 m1      .banksel ram_address
+     0075 02rr                      1-  585     	CLRR	_msg
+                                    1-  586     	.line	274, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+                                    1-  587     	BANKSEL	_SmokeState
+     0076 rrrr                      3-  109 m1      .banksel ram_address
+     0077 02rr                      1-  588     	CLRR	_SmokeState
+                                    1-  589     	.line	275, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+                                    1-  590     	BANKSEL	_sys_flag_1
+     0078 rrrr                      3-  109 m1      .banksel ram_address
+     0079 1Crr                      1-  591     	BCR	_sys_flag_1,1
+                                    1-  592     	.line	277, "main.c"; 	f_battery_low = 1;
+                                    1-  593     	BANKSEL	_sys_flag_0
      007A rrrr                      3-  109 m1      .banksel ram_address
-     007B 02rr                      1-  609     	CLRR	_msg
-                                    1-  610     	.line	250, "main.c"; 	led_flash_flag = 0;
-                                    1-  611     	BANKSEL	_led_flash_flag
-     007C rrrr                      3-  109 m1      .banksel ram_address
-     007D 02rr                      1-  612     	CLRR	_led_flash_flag
-                                    1-  613     	.line	252, "main.c"; 	if(f_charge_full)
-                                    1-  614     	BANKSEL	_sys_flag_0
-     007E rrrr                      3-  109 m1      .banksel ram_address
-     007F 0Arr                      1-  615     	BTRSS	_sys_flag_0,4
-                                    1-  616     	MGOTO	_02047_DS_
-     0080 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  617     	.line	253, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,8,20,2);
-     0081 2102                      1-  618     	MOVIA	0x02
-     0082 00rr                      1-  619     	MOVAR	STK02
-     0083 2114                      1-  620     	MOVIA	0x14
-     0084 00rr                      1-  621     	MOVAR	STK01
-     0085 2108                      1-  622     	MOVIA	0x08
-     0086 00rr                      1-  623     	MOVAR	STK00
-     0087 2102                      1-  624     	MOVIA	0x02
-                                    1-  625     	MCALL	_SetLedFlashParameters
-     0088 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  626     	MGOTO	_02048_DS_
-     0089 3rrr                      3-   62 m1      LGOTO rom_address
-     008A                           1-  627     _02047_DS_:
-                                    1-  628     	.line	256, "main.c"; 	SetLedFlashParameters(COLOR_GREEN,6,20,2);
-     008A 2102                      1-  629     	MOVIA	0x02
-     008B 00rr                      1-  630     	MOVAR	STK02
-     008C 2114                      1-  631     	MOVIA	0x14
-     008D 00rr                      1-  632     	MOVAR	STK01
-     008E 2106                      1-  633     	MOVIA	0x06
-     008F 00rr                      1-  634     	MOVAR	STK00
-     0090 2102                      1-  635     	MOVIA	0x02
-                                    1-  636     	MCALL	_SetLedFlashParameters
-     0091 2rrr                      3-   65 m1      LCALL rom_address
-     0092                           1-  637     _02048_DS_:
-                                    1-  638     	.line	261, "main.c"; 	f_charging = 0;
-                                    1-  639     	BANKSEL	_sys_flag_0
-     0092 rrrr                      3-  109 m1      .banksel ram_address
-     0093 1Frr                      1-  640     	BCR	_sys_flag_0,6
-                                    1-  641     	.line	262, "main.c"; 	f_charge_full = 0;
-     0094 1Err                      1-  642     	BCR	_sys_flag_0,4
-                                    1-  643     	.line	263, "main.c"; 	break;	
-                                    1-  644     	MGOTO	_02052_DS_
-     0095 3rrr                      3-   62 m1      LGOTO rom_address
-     0096                           1-  645     _02049_DS_:
-                                    1-  646     	.line	312, "main.c"; 	msg = MSG_NULL;
-                                    1-  647     	BANKSEL	_msg
-     0096 rrrr                      3-  109 m1      .banksel ram_address
-     0097 02rr                      1-  648     	CLRR	_msg
-                                    1-  649     	.line	313, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
-                                    1-  650     	BANKSEL	_SmokeState
-     0098 rrrr                      3-  109 m1      .banksel ram_address
-     0099 02rr                      1-  651     	CLRR	_SmokeState
-                                    1-  652     	.line	314, "main.c"; 	b_smoking = 0;//清吸烟开始标志
-                                    1-  653     	BANKSEL	_sys_flag_1
-     009A rrrr                      3-  109 m1      .banksel ram_address
-     009B 1Crr                      1-  654     	BCR	_sys_flag_1,1
-                                    1-  655     	.line	315, "main.c"; 	led_breath_flash_flag = 0;
-                                    1-  656     	BANKSEL	_sys_flag_2
-     009C rrrr                      3-  109 m1      .banksel ram_address
-     009D 1Drr                      1-  657     	BCR	_sys_flag_2,2
-                                    1-  658     	.line	316, "main.c"; 	f_battery_low = 1;
-                                    1-  659     	BANKSEL	_sys_flag_0
-     009E rrrr                      3-  109 m1      .banksel ram_address
-     009F 1Arr                      1-  660     	BSR	_sys_flag_0,5
-                                    1-  661     	.line	317, "main.c"; 	SetLedFlashParameters(COLOR_RED,10,20,2);//当吸烟前电池电压低于3.4V（±0.1V）时，或吸烟中低于3.2V（±0.1V），红灯快闪5次提示低电压，并停止输出电压。
-     00A0 2102                      1-  662     	MOVIA	0x02
-     00A1 00rr                      1-  663     	MOVAR	STK02
-     00A2 2114                      1-  664     	MOVIA	0x14
-     00A3 00rr                      1-  665     	MOVAR	STK01
-     00A4 210A                      1-  666     	MOVIA	0x0a
-     00A5 00rr                      1-  667     	MOVAR	STK00
-     00A6 2100                      1-  668     	MOVIA	0x00
-                                    1-  669     	MCALL	_SetLedFlashParameters
-     00A7 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  670     	.line	318, "main.c"; 	break;
-                                    1-  671     	MGOTO	_02052_DS_
-     00A8 3rrr                      3-   62 m1      LGOTO rom_address
-     00A9                           1-  672     _02050_DS_:
-                                    1-  673     	.line	322, "main.c"; 	msg = MSG_NULL;
-                                    1-  674     	BANKSEL	_msg
-     00A9 rrrr                      3-  109 m1      .banksel ram_address
-     00AA 02rr                      1-  675     	CLRR	_msg
-                                    1-  676     	.line	323, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
-                                    1-  677     	BANKSEL	_SmokeState
-     00AB rrrr                      3-  109 m1      .banksel ram_address
-     00AC 02rr                      1-  678     	CLRR	_SmokeState
-                                    1-  679     	.line	325, "main.c"; 	b_smoking = 0;//清吸烟开始标志
-                                    1-  680     	BANKSEL	_sys_flag_1
-     00AD rrrr                      3-  109 m1      .banksel ram_address
-     00AE 1Crr                      1-  681     	BCR	_sys_flag_1,1
-                                    1-  682     	.line	326, "main.c"; 	led_breath_flash_flag = 0;
-                                    1-  683     	BANKSEL	_sys_flag_2
-     00AF rrrr                      3-  109 m1      .banksel ram_address
-     00B0 1Drr                      1-  684     	BCR	_sys_flag_2,2
-                                    1-  685     	.line	329, "main.c"; 	b_heater_detect_mask = 0;
-     00B1 1Err                      1-  686     	BCR	_sys_flag_2,5
-                                    1-  687     	.line	330, "main.c"; 	LedOff();
-                                    1-  688     	MCALL	_LedOff
-     00B2 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  689     	.line	332, "main.c"; 	SetLedFlashParameters(COLOR_RED,6,20,2);//吸烟中或前发热丝开路，短路，红灯快闪3次
-     00B3 2102                      1-  690     	MOVIA	0x02
-     00B4 00rr                      1-  691     	MOVAR	STK02
-     00B5 2114                      1-  692     	MOVIA	0x14
-     00B6 00rr                      1-  693     	MOVAR	STK01
-     00B7 2106                      1-  694     	MOVIA	0x06
-     00B8 00rr                      1-  695     	MOVAR	STK00
-     00B9 2100                      1-  696     	MOVIA	0x00
-                                    1-  697     	MCALL	_SetLedFlashParameters
-     00BA 2rrr                      3-   65 m1      LCALL rom_address
-     00BB                           1-  698     _02052_DS_:
-                                    1-  699     	.line	344, "main.c"; 	}
-                                    1-  700     	RETURN	
-     00BB 0010                      3-   39 m1      ret
-                                    1-  701     ; exit point of _msg_handle
-                                    1-  703     ;***
-                                    1-  704     ;  pBlock Stats: dbName = C
-                                    1-  705     ;***
-                                    1-  706     ;has an exit
-                                    1-  707     ;4 compiler assigned registers:
-                                    1-  708     ;   r0x100C
-                                    1-  709     ;   STK00
-                                    1-  710     ;   r0x100D
-                                    1-  711     ;   r0x100E
-                                    1-  712     ;; Starting pCode block
-                                    1-  713     .segment "code"; module=main, function=_Delay_N1ms_16bit
-                                    1-  715     ;local variable name mapping:
-     0000                           1-  717     _Delay_N1ms_16bit:
-                                    1-  718     ; 2 exit points
-                                    1-  719     	.line	52, "main.c"; 	void Delay_N1ms_16bit(u16 N)		// 经过示波器矫正
-                                    1-  720     	BANKSEL	r0x100C
+     007B 1Arr                      1-  594     	BSR	_sys_flag_0,5
+                                    1-  595     	.line	279, "main.c"; 	led_mode_set(5);
+     007C 2105                      1-  596     	MOVIA	0x05
+                                    1-  597     	MCALL	_led_mode_set
+     007D 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  598     	.line	280, "main.c"; 	break;
+                                    1-  599     	MGOTO	_02046_DS_
+     007E 3rrr                      3-   62 m1      LGOTO rom_address
+     007F                           1-  600     _02044_DS_:
+                                    1-  601     	.line	284, "main.c"; 	msg = MSG_NULL;
+                                    1-  602     	BANKSEL	_msg
+     007F rrrr                      3-  109 m1      .banksel ram_address
+     0080 02rr                      1-  603     	CLRR	_msg
+                                    1-  604     	.line	285, "main.c"; 	SmokeState = STATE_SMOKE_IDLE;
+                                    1-  605     	BANKSEL	_SmokeState
+     0081 rrrr                      3-  109 m1      .banksel ram_address
+     0082 02rr                      1-  606     	CLRR	_SmokeState
+                                    1-  607     	.line	287, "main.c"; 	b_smoking = 0;//清吸烟开始标志
+                                    1-  608     	BANKSEL	_sys_flag_1
+     0083 rrrr                      3-  109 m1      .banksel ram_address
+     0084 1Crr                      1-  609     	BCR	_sys_flag_1,1
+                                    1-  610     	.line	288, "main.c"; 	led_breath_flash_flag = 0;
+                                    1-  611     	BANKSEL	_sys_flag_2
+     0085 rrrr                      3-  109 m1      .banksel ram_address
+     0086 1Drr                      1-  612     	BCR	_sys_flag_2,2
+                                    1-  613     	.line	291, "main.c"; 	b_heater_detect_mask = 0;
+     0087 1Err                      1-  614     	BCR	_sys_flag_2,5
+                                    1-  615     	.line	292, "main.c"; 	led_mode_set(10);
+     0088 210A                      1-  616     	MOVIA	0x0a
+                                    1-  617     	MCALL	_led_mode_set
+     0089 2rrr                      3-   65 m1      LCALL rom_address
+     008A                           1-  618     _02046_DS_:
+                                    1-  619     	.line	307, "main.c"; 	}
+                                    1-  620     	RETURN	
+     008A 0010                      3-   39 m1      ret
+                                    1-  621     ; exit point of _msg_handle
+                                    1-  623     ;***
+                                    1-  624     ;  pBlock Stats: dbName = C
+                                    1-  625     ;***
+                                    1-  626     ;has an exit
+                                    1-  627     ;4 compiler assigned registers:
+                                    1-  628     ;   r0x1009
+                                    1-  629     ;   STK00
+                                    1-  630     ;   r0x100A
+                                    1-  631     ;   r0x100B
+                                    1-  632     ;; Starting pCode block
+                                    1-  633     .segment "code"; module=main, function=_Delay_N1ms_16bit
+                                    1-  635     ;local variable name mapping:
+     0000                           1-  637     _Delay_N1ms_16bit:
+                                    1-  638     ; 2 exit points
+                                    1-  639     	.line	52, "main.c"; 	void Delay_N1ms_16bit(u16 N)		// 经过示波器矫正
+                                    1-  640     	BANKSEL	r0x1009
      0000 rrrr                      3-  109 m1      .banksel ram_address
-     0001 00rr                      1-  721     	MOVAR	r0x100C
-     0002 01rr                      1-  722     	MOVR	STK00,W
-                                    1-  723     	BANKSEL	r0x100D
+     0001 00rr                      1-  641     	MOVAR	r0x1009
+     0002 01rr                      1-  642     	MOVR	STK00,W
+                                    1-  643     	BANKSEL	r0x100A
      0003 rrrr                      3-  109 m1      .banksel ram_address
-     0004 00rr                      1-  724     	MOVAR	r0x100D
-     0005                           1-  725     _02024_DS_:
-                                    1-  726     	.line	55, "main.c"; 	for(;N !=0; N--)
-                                    1-  727     	BANKSEL	r0x100C
+     0004 00rr                      1-  644     	MOVAR	r0x100A
+     0005                           1-  645     _02024_DS_:
+                                    1-  646     	.line	55, "main.c"; 	for(;N !=0; N--)
+                                    1-  647     	BANKSEL	r0x1009
      0005 rrrr                      3-  109 m1      .banksel ram_address
-     0006 01rr                      1-  728     	MOVR	r0x100C,W
-                                    1-  729     	BANKSEL	r0x100D
+     0006 01rr                      1-  648     	MOVR	r0x1009,W
+                                    1-  649     	BANKSEL	r0x100A
      0007 rrrr                      3-  109 m1      .banksel ram_address
-     0008 11rr                      1-  730     	IORAR	r0x100D,W
-     0009 0D03                      1-  731     	BTRSC	STATUS,2
-                                    1-  732     	MGOTO	_02026_DS_
+     0008 11rr                      1-  650     	IORAR	r0x100A,W
+     0009 0D03                      1-  651     	BTRSC	STATUS,2
+                                    1-  652     	MGOTO	_02026_DS_
      000A 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  733     	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
-     000B 21FF                      1-  734     	MOVIA	0xff
-                                    1-  735     	BANKSEL	r0x100E
+                                    1-  653     	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
+     000B 21FF                      1-  654     	MOVIA	0xff
+                                    1-  655     	BANKSEL	r0x100B
      000C rrrr                      3-  109 m1      .banksel ram_address
-     000D 00rr                      1-  736     	MOVAR	r0x100E
-     000E                           1-  737     _02022_DS_:
-                                    1-  738     	.line	73, "main.c"; 	NOP();
-     000E 0000                      1-  739     	nop
-                                    1-  740     	.line	74, "main.c"; 	NOP();
-     000F 0000                      1-  741     	nop
-                                    1-  742     	.line	75, "main.c"; 	NOP();
-     0010 0000                      1-  743     	nop
-                                    1-  744     	.line	76, "main.c"; 	NOP();
-     0011 0000                      1-  745     	nop
-                                    1-  746     	.line	77, "main.c"; 	NOP();
-     0012 0000                      1-  747     	nop
-                                    1-  748     	.line	78, "main.c"; 	NOP();
-     0013 0000                      1-  749     	nop
-                                    1-  750     	.line	79, "main.c"; 	NOP();
-     0014 0000                      1-  751     	nop
-                                    1-  752     	.line	80, "main.c"; 	NOP();
-     0015 0000                      1-  753     	nop
-                                    1-  754     	.line	81, "main.c"; 	NOP();
-     0016 0000                      1-  755     	nop
-                                    1-  756     	BANKSEL	r0x100E
+     000D 00rr                      1-  656     	MOVAR	r0x100B
+     000E                           1-  657     _02022_DS_:
+                                    1-  658     	.line	73, "main.c"; 	NOP();
+     000E 0000                      1-  659     	nop
+                                    1-  660     	.line	74, "main.c"; 	NOP();
+     000F 0000                      1-  661     	nop
+                                    1-  662     	.line	75, "main.c"; 	NOP();
+     0010 0000                      1-  663     	nop
+                                    1-  664     	.line	76, "main.c"; 	NOP();
+     0011 0000                      1-  665     	nop
+                                    1-  666     	.line	77, "main.c"; 	NOP();
+     0012 0000                      1-  667     	nop
+                                    1-  668     	.line	78, "main.c"; 	NOP();
+     0013 0000                      1-  669     	nop
+                                    1-  670     	.line	79, "main.c"; 	NOP();
+     0014 0000                      1-  671     	nop
+                                    1-  672     	.line	80, "main.c"; 	NOP();
+     0015 0000                      1-  673     	nop
+                                    1-  674     	.line	81, "main.c"; 	NOP();
+     0016 0000                      1-  675     	nop
+                                    1-  676     	BANKSEL	r0x100B
      0017 rrrr                      3-  109 m1      .banksel ram_address
-     0018 17rr                      1-  757     	DECRSZ	r0x100E,F
-                                    1-  758     	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
-                                    1-  759     	MGOTO	_02022_DS_
+     0018 17rr                      1-  677     	DECRSZ	r0x100B,F
+                                    1-  678     	.line	71, "main.c"; 	for(i=0;i <255 ; i++)
+                                    1-  679     	MGOTO	_02022_DS_
      0019 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  760     	.line	55, "main.c"; 	for(;N !=0; N--)
-     001A 21FF                      1-  761     	MOVIA	0xff
-                                    1-  762     	BANKSEL	r0x100D
+                                    1-  680     	.line	55, "main.c"; 	for(;N !=0; N--)
+     001A 21FF                      1-  681     	MOVIA	0xff
+                                    1-  682     	BANKSEL	r0x100A
      001B rrrr                      3-  109 m1      .banksel ram_address
-     001C 03rr                      1-  763     	ADDAR	r0x100D,F
-     001D 21FF                      1-  764     	MOVIA	0xff
-                                    1-  765     	BANKSEL	r0x100C
+     001C 03rr                      1-  683     	ADDAR	r0x100A,F
+     001D 21FF                      1-  684     	MOVIA	0xff
+                                    1-  685     	BANKSEL	r0x1009
      001E rrrr                      3-  109 m1      .banksel ram_address
-     001F 34rr                      1-  766     	ADCAR	r0x100C,F
-                                    1-  767     	.line	55, "main.c"; 	{
-                                    1-  768     	MGOTO	_02024_DS_
+     001F 34rr                      1-  686     	ADCAR	r0x1009,F
+                                    1-  687     	.line	55, "main.c"; 	{
+                                    1-  688     	MGOTO	_02024_DS_
      0020 3rrr                      3-   62 m1      LGOTO rom_address
-     0021                           1-  769     _02026_DS_:
-                                    1-  770     	.line	85, "main.c"; 	}
-                                    1-  771     	RETURN	
+     0021                           1-  689     _02026_DS_:
+                                    1-  690     	.line	85, "main.c"; 	}
+                                    1-  691     	RETURN	
      0021 0010                      3-   39 m1      ret
-                                    1-  772     ; exit point of _Delay_N1ms_16bit
-                                    1-  774     ;***
-                                    1-  775     ;  pBlock Stats: dbName = C
-                                    1-  776     ;***
-                                    1-  777     ;has an exit
-                                    1-  778     ;5 compiler assigned registers:
-                                    1-  779     ;   r0x100F
-                                    1-  780     ;   STK00
-                                    1-  781     ;   r0x1010
-                                    1-  782     ;   r0x1011
-                                    1-  783     ;   r0x1012
-                                    1-  784     ;; Starting pCode block
-                                    1-  785     .segment "code"; module=main, function=_delay
-                                    1-  787     ;local variable name mapping:
-     0000                           1-  790     _delay:
-                                    1-  791     ; 2 exit points
-                                    1-  792     	.line	45, "main.c"; 	void delay(u16 count)
-                                    1-  793     	BANKSEL	r0x100F
+                                    1-  692     ; exit point of _Delay_N1ms_16bit
+                                    1-  694     ;***
+                                    1-  695     ;  pBlock Stats: dbName = C
+                                    1-  696     ;***
+                                    1-  697     ;has an exit
+                                    1-  698     ;5 compiler assigned registers:
+                                    1-  699     ;   r0x100C
+                                    1-  700     ;   STK00
+                                    1-  701     ;   r0x100D
+                                    1-  702     ;   r0x100E
+                                    1-  703     ;   r0x100F
+                                    1-  704     ;; Starting pCode block
+                                    1-  705     .segment "code"; module=main, function=_delay
+                                    1-  707     ;local variable name mapping:
+     0000                           1-  710     _delay:
+                                    1-  711     ; 2 exit points
+                                    1-  712     	.line	45, "main.c"; 	void delay(u16 count)
+                                    1-  713     	BANKSEL	r0x100C
      0000 rrrr                      3-  109 m1      .banksel ram_address
-     0001 00rr                      1-  794     	MOVAR	r0x100F
-     0002 01rr                      1-  795     	MOVR	STK00,W
-                                    1-  796     	BANKSEL	r0x1010
+     0001 00rr                      1-  714     	MOVAR	r0x100C
+     0002 01rr                      1-  715     	MOVR	STK00,W
+                                    1-  716     	BANKSEL	r0x100D
      0003 rrrr                      3-  109 m1      .banksel ram_address
-     0004 00rr                      1-  797     	MOVAR	r0x1010
-                                    1-  798     	.line	48, "main.c"; 	for(i=1;i<=count;i++)
-     0005 2101                      1-  799     	MOVIA	0x01
-                                    1-  800     	BANKSEL	r0x1011
+     0004 00rr                      1-  717     	MOVAR	r0x100D
+                                    1-  718     	.line	48, "main.c"; 	for(i=1;i<=count;i++)
+     0005 2101                      1-  719     	MOVIA	0x01
+                                    1-  720     	BANKSEL	r0x100E
      0006 rrrr                      3-  109 m1      .banksel ram_address
-     0007 00rr                      1-  801     	MOVAR	r0x1011
-                                    1-  802     	BANKSEL	r0x1012
+     0007 00rr                      1-  721     	MOVAR	r0x100E
+                                    1-  722     	BANKSEL	r0x100F
      0008 rrrr                      3-  109 m1      .banksel ram_address
-     0009 02rr                      1-  803     	CLRR	r0x1012
-     000A                           1-  804     _02011_DS_:
-                                    1-  805     	BANKSEL	r0x1011
+     0009 02rr                      1-  723     	CLRR	r0x100F
+     000A                           1-  724     _02011_DS_:
+                                    1-  725     	BANKSEL	r0x100E
      000A rrrr                      3-  109 m1      .banksel ram_address
-     000B 01rr                      1-  806     	MOVR	r0x1011,W
-                                    1-  807     	BANKSEL	r0x1010
+     000B 01rr                      1-  726     	MOVR	r0x100E,W
+                                    1-  727     	BANKSEL	r0x100D
      000C rrrr                      3-  109 m1      .banksel ram_address
-     000D 04rr                      1-  808     	SUBAR	r0x1010,W
-                                    1-  809     	BANKSEL	r0x1012
+     000D 04rr                      1-  728     	SUBAR	r0x100D,W
+                                    1-  729     	BANKSEL	r0x100F
      000E rrrr                      3-  109 m1      .banksel ram_address
-     000F 01rr                      1-  810     	MOVR	r0x1012,W
-                                    1-  811     	BANKSEL	r0x100F
+     000F 01rr                      1-  730     	MOVR	r0x100F,W
+                                    1-  731     	BANKSEL	r0x100C
      0010 rrrr                      3-  109 m1      .banksel ram_address
-     0011 35rr                      1-  812     	SBCAR	r0x100F,W
-     0012 0803                      1-  813     	BTRSS	STATUS,0
-                                    1-  814     	MGOTO	_02013_DS_
+     0011 35rr                      1-  732     	SBCAR	r0x100C,W
+     0012 0803                      1-  733     	BTRSS	STATUS,0
+                                    1-  734     	MGOTO	_02013_DS_
      0013 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  815     	BANKSEL	r0x1011
+                                    1-  735     	BANKSEL	r0x100E
      0014 rrrr                      3-  109 m1      .banksel ram_address
-     0015 05rr                      1-  816     	INCR	r0x1011,F
-     0016 0903                      1-  817     	BTRSS	STATUS,2
-                                    1-  818     	MGOTO	_00001_DS_
+     0015 05rr                      1-  736     	INCR	r0x100E,F
+     0016 0903                      1-  737     	BTRSS	STATUS,2
+                                    1-  738     	MGOTO	_00001_DS_
      0017 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  819     	BANKSEL	r0x1012
+                                    1-  739     	BANKSEL	r0x100F
      0018 rrrr                      3-  109 m1      .banksel ram_address
-     0019 05rr                      1-  820     	INCR	r0x1012,F
-     001A                           1-  821     _00001_DS_:
-                                    1-  822     	MGOTO	_02011_DS_
+     0019 05rr                      1-  740     	INCR	r0x100F,F
+     001A                           1-  741     _00001_DS_:
+                                    1-  742     	MGOTO	_02011_DS_
      001A 3rrr                      3-   62 m1      LGOTO rom_address
-     001B                           1-  823     _02013_DS_:
-                                    1-  824     	.line	50, "main.c"; 	}
-                                    1-  825     	RETURN	
+     001B                           1-  743     _02013_DS_:
+                                    1-  744     	.line	50, "main.c"; 	}
+                                    1-  745     	RETURN	
      001B 0010                      3-   39 m1      ret
-                                    1-  826     ; exit point of _delay
-                                    1-  828     ;***
-                                    1-  829     ;  pBlock Stats: dbName = C
-                                    1-  830     ;***
-                                    1-  831     ;has an exit
-                                    1-  832     ;; Starting pCode block
-                                    1-  833     .segment "code"; module=main, function=_common_param_init
-     0000                           1-  835     _common_param_init:
-                                    1-  836     ; 2 exit points
-                                    1-  837     	.line	30, "main.c"; 	sys_flag_0 = 0;
-                                    1-  838     	BANKSEL	_sys_flag_0
+                                    1-  746     ; exit point of _delay
+                                    1-  748     ;***
+                                    1-  749     ;  pBlock Stats: dbName = C
+                                    1-  750     ;***
+                                    1-  751     ;has an exit
+                                    1-  752     ;; Starting pCode block
+                                    1-  753     .segment "code"; module=main, function=_common_param_init
+     0000                           1-  755     _common_param_init:
+                                    1-  756     ; 2 exit points
+                                    1-  757     	.line	30, "main.c"; 	sys_flag_0 = 0;
+                                    1-  758     	BANKSEL	_sys_flag_0
      0000 rrrr                      3-  109 m1      .banksel ram_address
-     0001 02rr                      1-  839     	CLRR	_sys_flag_0
-                                    1-  840     	.line	31, "main.c"; 	sys_flag_1 = 0;
-                                    1-  841     	BANKSEL	_sys_flag_1
+     0001 02rr                      1-  759     	CLRR	_sys_flag_0
+                                    1-  760     	.line	31, "main.c"; 	sys_flag_1 = 0;
+                                    1-  761     	BANKSEL	_sys_flag_1
      0002 rrrr                      3-  109 m1      .banksel ram_address
-     0003 02rr                      1-  842     	CLRR	_sys_flag_1
-                                    1-  843     	.line	32, "main.c"; 	sys_flag_2 = 0;
-                                    1-  844     	BANKSEL	_sys_flag_2
+     0003 02rr                      1-  762     	CLRR	_sys_flag_1
+                                    1-  763     	.line	32, "main.c"; 	sys_flag_2 = 0;
+                                    1-  764     	BANKSEL	_sys_flag_2
      0004 rrrr                      3-  109 m1      .banksel ram_address
-     0005 02rr                      1-  845     	CLRR	_sys_flag_2
-                                    1-  846     	.line	33, "main.c"; 	sys_flag_3 = 0;
-                                    1-  847     	BANKSEL	_sys_flag_3
+     0005 02rr                      1-  765     	CLRR	_sys_flag_2
+                                    1-  766     	.line	33, "main.c"; 	sys_flag_3 = 0;
+                                    1-  767     	BANKSEL	_sys_flag_3
      0006 rrrr                      3-  109 m1      .banksel ram_address
-     0007 02rr                      1-  848     	CLRR	_sys_flag_3
-                                    1-  849     	.line	34, "main.c"; 	msg = 0;
-                                    1-  850     	BANKSEL	_msg
+     0007 02rr                      1-  768     	CLRR	_sys_flag_3
+                                    1-  769     	.line	34, "main.c"; 	msg = 0;
+                                    1-  770     	BANKSEL	_msg
      0008 rrrr                      3-  109 m1      .banksel ram_address
-     0009 02rr                      1-  851     	CLRR	_msg
-                                    1-  852     	.line	35, "main.c"; 	b_isPowerOn = 1;
-                                    1-  853     	BANKSEL	_sys_flag_0
+     0009 02rr                      1-  771     	CLRR	_msg
+                                    1-  772     	.line	35, "main.c"; 	b_isPowerOn = 1;
+                                    1-  773     	BANKSEL	_sys_flag_0
      000A rrrr                      3-  109 m1      .banksel ram_address
-     000B 18rr                      1-  854     	BSR	_sys_flag_0,0
-                                    1-  855     	.line	39, "main.c"; 	}
-                                    1-  856     	RETURN	
+     000B 18rr                      1-  774     	BSR	_sys_flag_0,0
+                                    1-  775     	.line	39, "main.c"; 	}
+                                    1-  776     	RETURN	
      000C 0010                      3-   39 m1      ret
-                                    1-  857     ; exit point of _common_param_init
-                                    1-  860     ;	code size estimation:
-                                    1-  861     ;	  211+   69 =   280 instructions (  698 byte)
-                                    1-  863     	end
+                                    1-  777     ; exit point of _common_param_init
+                                    1-  780     ;	code size estimation:
+                                    1-  781     ;	  158+   63 =   221 instructions (  568 byte)
+                                    1-  783     	end
 
 SYMBOL TABLE            TYPE     VALUE
 __pin_count__           Constant 0000000E

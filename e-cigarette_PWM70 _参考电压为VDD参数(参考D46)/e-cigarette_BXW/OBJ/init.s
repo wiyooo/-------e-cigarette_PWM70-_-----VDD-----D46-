@@ -11,6 +11,8 @@
 ;--------------------------------------------------------
 ; external declarations
 ;--------------------------------------------------------
+	extern	_led_dis_loop_func
+	extern	_led_mode_set
 	extern	_charge_check_by_IO
 	extern	_ledRun
 	extern	_Detect_OverCurrent_ByAD
@@ -98,6 +100,7 @@
 	extern	_VolTypeIndex
 	extern	_SmokeState
 	extern	_BatVolLevel
+	extern	_led_mode_flag
 	extern	_SaveHeaterIOStatus
 	extern	_MotorDutySet
 	extern	_NowMotorDuty
@@ -794,31 +797,28 @@ _timer0_init:
 	.debuginfo subprogram _gpio_init
 _gpio_init:
 ; 2 exit points
-	.line	113, "init.c"; 	PORTA = 0x80;
-	MOVIA	0x80
-	MOVAR	_PORTA
+	.line	113, "init.c"; 	PORTA = 0x00;
+	CLRR	_PORTA
 	.line	122, "init.c"; 	PORTB = 0x0c;
 	MOVIA	0x0c
 	MOVAR	_PORTB
-	.line	135, "init.c"; 	IOSTA = 0x15;
-	MOVIA	0x15
+	.line	135, "init.c"; 	IOSTA = 0x25;
+	MOVIA	0x25
 	IOST	_IOSTA
 	.line	144, "init.c"; 	IOSTB = 0x01;
 	MOVIA	0x01
 	IOST	_IOSTB
-	.line	157, "init.c"; 	APHCON = 0xfb;
-	MOVIA	0xfb
+	.line	157, "init.c"; 	APHCON = 0xdf;
+	MOVIA	0xdf
 	IOST	_APHCON
-	.line	160, "init.c"; 	PCONbits.PHPA5 = 1;	
-	BSR	_PCONbits,4
 	.line	170, "init.c"; 	BPHCON = 0x3F;
 	MOVIA	0x3f
 	MOVAR	_BPHCON
-	.line	184, "init.c"; 	ABPLCON = 0xff;
+	.line	184, "init.c"; 	ABPLCON = 0xff;			//warming mic GPIO ni pull_dowm
 	MOVIA	0xff
 	MOVAR	_ABPLCON
-	.line	196, "init.c"; 	AWUCON = C_PA4_Wakeup;//C_PA0_Wakeup|C_PA2_Wakeup|C_PA5_Wakeup;
-	MOVIA	0x10
+	.line	196, "init.c"; 	AWUCON = C_PA2_Wakeup;//C_PA0_Wakeup|C_PA2_Wakeup|C_PA5_Wakeup;
+	MOVIA	0x04
 	MOVAR	_AWUCON
 	.line	205, "init.c"; 	BWUCON = C_PB0_Wakeup;
 	MOVIA	0x01
@@ -928,6 +928,6 @@ _system_init:
 
 
 ;	code size estimation:
-;	  249+   16 =   265 instructions (  562 byte)
+;	  247+   16 =   263 instructions (  558 byte)
 
 	end

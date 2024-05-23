@@ -11,6 +11,8 @@
 ;--------------------------------------------------------
 ; external declarations
 ;--------------------------------------------------------
+	extern	_led_dis_loop_func
+	extern	_led_mode_set
 	extern	_charge_check_by_IO
 	extern	_ledRun
 	extern	_Detect_OverCurrent_ByAD
@@ -103,6 +105,7 @@
 	extern	_VolTypeIndex
 	extern	_SmokeState
 	extern	_BatVolLevel
+	extern	_led_mode_flag
 	extern	_SaveHeaterIOStatus
 	extern	_MotorDutySet
 	extern	_NowMotorDuty

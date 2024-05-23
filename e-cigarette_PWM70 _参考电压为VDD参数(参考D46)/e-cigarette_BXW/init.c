@@ -102,15 +102,15 @@ void gpio_init(void)
 	//------------------------------------------------------
 	//	io status, 0:low, 1:high
 	//------------------------------------------------------
-	//PA7 = 1, output, LED_R.
+	//PA7 = 0, output, not used.
 	//PA6 = 0, output, not used.
-	//PA5 = 0, output, 吸烟时暂停充电工作控制IO.
-	//PA4 = 0, input, USB check
+	//PA5 = 0, input, 充满脚CHAR
+	//PA4 = 0, output, PROG充电电流
 	//PA3 = 0, output, not used.
-	//PA2 = 0, input, CHRG
+	//PA2 = 0, input, USB check
 	//PA1 = 0, output, not used.
 	//PA0 = 0, input,ADC,heat插拔公用.
-	PORTA = 0x80;
+	PORTA = 0x00;
 	//xx
 	//xx
 	//PB5 = 0, output, not used.
@@ -124,15 +124,15 @@ void gpio_init(void)
 	//------------------------------------------------------
 	//	io direction, 0:output, 1:input
 	//------------------------------------------------------
-	//IOPA7 = 0, output, LED_R.
+	//IOPA7 = 0, output, not used.
 	//IOPA6 = 0, output, not used.
-	//IOPA5 = 0, output, 吸烟时暂停充电工作控制IO.
-	//IOPA4 = 1, input, USB check
+	//IOPA5 = 1, input, 充满脚CHAR
+	//IOPA4 = 0, output, PROG充电电流
 	//IOPA3 = 0, output, not used.
-	//IOPA2 = 1, input, CHRG
+	//IOPA2 = 1, input, USB check
 	//IOPA1 = 0, output, not used.
 	//IOPA0 = 1, input,ADC,heat插拔公用.
-	IOSTA = 0x15;
+	IOSTA = 0x25;
 	//xx
 	//xx
 	//IOPB5 = 0, output, not used.
@@ -148,16 +148,16 @@ void gpio_init(void)
 	//------------------------------------------------------
 	//PHPA7 = 1,
 	//PHPA6 = 1, 
-	//PLPA5 = 1.
+	//PLPA5 = 0.   //warming 可能影响功耗
 	//PHPA4 = 1.
 	//PHPA3 = 1.
-	//PHPA2 = 0.
+	//PHPA2 = 1.
 	//PHPA1 = 1, 
 	//PHPA0 = 1, 
-	APHCON = 0xfb;
+	APHCON = 0xdf;
 	
 	//PHPA5 = 1						
-	PCONbits.PHPA5 = 1;	
+	// PCONbits.PHPA5 = 1;	   //warming why?
 	
 	//xx
 	//xx
@@ -181,7 +181,7 @@ void gpio_init(void)
 	//PLPA1 = 1.
 	//PLPA0 = 1.
 	//ABPLCON = 0xef;//for test
-	ABPLCON = 0xff;
+	ABPLCON = 0xff;			//warming mic GPIO ni pull_dowm
 	//------------------------------------------------------
 	//	portA and portB wake up, 0:disable, 1:enable
 	//------------------------------------------------------
@@ -193,7 +193,7 @@ void gpio_init(void)
 	//WUPA2 = 1.
 	//WUPA1 = 0.
 	//WUPA0 = 1.
-	AWUCON = C_PA4_Wakeup;//C_PA0_Wakeup|C_PA2_Wakeup|C_PA5_Wakeup;
+	AWUCON = C_PA2_Wakeup;//C_PA0_Wakeup|C_PA2_Wakeup|C_PA5_Wakeup;
 	//xx
 	//xx
 	//WUPB5 = 0.

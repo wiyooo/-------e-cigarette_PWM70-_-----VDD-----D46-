@@ -1094,14 +1094,14 @@ void SmokeFun(void)
 			b_heater_detect_mask = 0;
 			//if(b_get_adc_result)
 			{
-				if(gAdcDataValue >= 3000)//4000
-				{
-					//SetLedFlashParameters(COLOR_GREEN,2,25,2);//吸烟中或前发热丝开路，短路，红灯快闪2次
-					//SetLedFlashParameters(COLOR_RED,6,20,2);//吸烟中或前发热丝开路，短路，红灯闪3次
-					msg = MSG_CURRENT_OVER;
-					b_smoke_init = 0;
-				}
-				else
+				// if(gAdcDataValue >= 3000)//4000
+				// {
+				// 	//SetLedFlashParameters(COLOR_GREEN,2,25,2);//吸烟中或前发热丝开路，短路，红灯快闪2次
+				// 	//SetLedFlashParameters(COLOR_RED,6,20,2);//吸烟中或前发热丝开路，短路，红灯闪3次
+				// 	msg = MSG_CURRENT_OVER;
+				// 	b_smoke_init = 0;
+				// }
+				// else
 				{
 					SmokeState = STATE_SMOKE_PARAM_SET;
 				}
@@ -1123,8 +1123,8 @@ void SmokeFun(void)
 			SmokingKeepTime = 245;//单位1ms 吸烟时长，主要是为了处理在吸烟前0.3秒是否需要全功率输出的问题
 			BaseBatSetPWMValue();
 			//SetLedBreathingParameters();//开始呼吸效果
-			SetLedBreathingParameters2(COLOR_GREEN);//开始白灯呼吸效果
-			LedOff();	
+			// SetLedBreathingParameters2(COLOR_GREEN);//开始白灯呼吸效果
+			// LedOff();	
 			PwmCycleCount = 0;
 			if(f_charging||(C_IO_CHRG == 0)||C_IO_USB_DEC)
 			{
@@ -1156,6 +1156,7 @@ void SmokeFun(void)
 					percent_nun = TargetMotorDuty;
 				}
 			}
+			led_mode_set(2);
 			break;
 
 	}

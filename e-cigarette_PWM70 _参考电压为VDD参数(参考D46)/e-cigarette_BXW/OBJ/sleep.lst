@@ -59,436 +59,439 @@ NYASM 2.41
                                     1-   11     ;--------------------------------------------------------
                                     1-   12     ; external declarations
                                     1-   13     ;--------------------------------------------------------
-                                    1-   14     	extern	_charge_check_by_IO
-                                    1-   15     	extern	_ledRun
-                                    1-   16     	extern	_Detect_OverCurrent_ByAD
-                                    1-   17     	extern	_BaseBatSetPWMValue
-                                    1-   18     	extern	_ADC_Convert_Pre
-                                    1-   19     	extern	_Get_Onetime_Bat_ADCValue
-                                    1-   20     	extern	_Ledbreathing
-                                    1-   21     	extern	_LedOff
-                                    1-   22     	extern	_SetLedColorNormallyOn
-                                    1-   23     	extern	_SetLedBreathingParameters2
-                                    1-   24     	extern	_SetLedBreathingParameters
-                                    1-   25     	extern	_SetLedFlashParameters
-                                    1-   26     	extern	_adc_get
-                                    1-   27     	extern	_F_wait_eoc
-                                    1-   28     	extern	_adc_init4
-                                    1-   29     	extern	_adc3_init
-                                    1-   30     	extern	_adc2_init
-                                    1-   31     	extern	_adc_init
-                                    1-   32     	extern	_Delay_N1ms_16bit
-                                    1-   33     	extern	_delay
-                                    1-   34     	extern	_led_handle
-                                    1-   35     	extern	_led_param_init
-                                    1-   36     	extern	_bat_lvd_check
-                                    1-   37     	extern	_battery_check
-                                    1-   38     	extern	_battery_param_init
-                                    1-   39     	extern	_SmokeFun
-                                    1-   40     	extern	_detect_param_init
-                                    1-   41     	extern	_msg_handle
-                                    1-   42     	extern	_MicScan
-                                    1-   43     	extern	_KeyScan
-                                    1-   44     	extern	_key_param_init
-                                    1-   45     	extern	_isr_param_init
-                                    1-   46     	extern	_common_param_init
-                                    1-   47     	extern	_gpio_init
-                                    1-   48     	extern	_sleep_init
-                                    1-   49     	extern	_system_init
-                                    1-   50     	extern	_clear_ram
-                                    1-   51     	extern	_multi_16b
-                                    1-   52     	extern	_T0MD
-                                    1-   53     	extern	_PCON1
-                                    1-   54     	extern	_CMPCR
-                                    1-   55     	extern	_BODCON
-                                    1-   56     	extern	_PS0CV
-                                    1-   57     	extern	_APHCON
-                                    1-   58     	extern	_IOSTB
-                                    1-   59     	extern	_IOSTA
-                                    1-   60     	extern	_PWM4DUTY
-                                    1-   61     	extern	_P4CR1
-                                    1-   62     	extern	_BZ3CR
-                                    1-   63     	extern	_PS3CV
-                                    1-   64     	extern	_PWM3DUTY
-                                    1-   65     	extern	_T3CR2
-                                    1-   66     	extern	_T3CR1
-                                    1-   67     	extern	_TMR3
-                                    1-   68     	extern	_OSCCR
-                                    1-   69     	extern	_BZ2CR
-                                    1-   70     	extern	_PS2CV
-                                    1-   71     	extern	_PWM2DUTY
-                                    1-   72     	extern	_T2CR2
-                                    1-   73     	extern	_T2CR1
-                                    1-   74     	extern	_TMR2
-                                    1-   75     	extern	_TBHD
-                                    1-   76     	extern	_TBHP
-                                    1-   77     	extern	_IRCR
-                                    1-   78     	extern	_BZ1CR
-                                    1-   79     	extern	_PS1CV
-                                    1-   80     	extern	_PWM1DUTY
-                                    1-   81     	extern	_T1CR2
-                                    1-   82     	extern	_T1CR1
-                                    1-   83     	extern	_TMR1
-                                    1-   84     	extern	_ADD
-                                    1-   85     	extern	_PCHBUF
-                                    1-   86     	extern	_STATUS
-                                    1-   87     	extern	_PCL
-                                    1-   88     	extern	_TMR0
-                                    1-   89     	extern	_disp_delay_time_cnt
-                                    1-   90     	extern	_usb_check_ad_time_cnt
-                                    1-   91     	extern	_now_ch
-                                    1-   92     	extern	_temptimecount
-                                    1-   93     	extern	_battery_low_cnt
-                                    1-   94     	extern	_usb_flag
-                                    1-   95     	extern	_HeatPlugInsert_flag
-                                    1-   96     	extern	_HeatPlugInsertTimeCount
-                                    1-   97     	extern	_HeatCount
-                                    1-   98     	extern	_SmokingKeepTime
-                                    1-   99     	extern	_HeatingKeepTime
-                                    1-  100     	extern	_KeyDowmTimeCount
-                                    1-  101     	extern	_VolTypeIndex
-                                    1-  102     	extern	_SmokeState
-                                    1-  103     	extern	_BatVolLevel
-                                    1-  104     	extern	_SaveHeaterIOStatus
-                                    1-  105     	extern	_MotorDutySet
-                                    1-  106     	extern	_NowMotorDuty
-                                    1-  107     	extern	_TargetMotorDuty
-                                    1-  108     	extern	_gAdcDataValue
-                                    1-  109     	extern	_OverCurrent_adc_value
-                                    1-  110     	extern	_OverCurrent_check_cnt
-                                    1-  111     	extern	_BuleLed_delay_keep_time
-                                    1-  112     	extern	_OverCurrentCount
-                                    1-  113     	extern	_OverCurrentDelayTime
-                                    1-  114     	extern	_led_delay_keep_time
-                                    1-  115     	extern	_led_flash_count
-                                    1-  116     	extern	_led_flash_flag
-                                    1-  117     	extern	_percent_nun
-                                    1-  118     	extern	_PwmCycleCount
-                                    1-  119     	extern	_Led_Breathe_count
-                                    1-  120     	extern	_LedShowKeepTime
-                                    1-  121     	extern	_LedShowStep
-                                    1-  122     	extern	_GroupColourIndex
-                                    1-  123     	extern	_ledRunStarStep
-                                    1-  124     	extern	_ledRunStep
-                                    1-  125     	extern	_nowLedMode
-                                    1-  126     	extern	_CodeSwitchIndex
-                                    1-  127     	extern	_msg
-                                    1-  128     	extern	_INTE2bits
-                                    1-  129     	extern	_TM3RHbits
-                                    1-  130     	extern	_RFCbits
-                                    1-  131     	extern	_ANAENbits
-                                    1-  132     	extern	_TMRHbits
-                                    1-  133     	extern	_INTEDGbits
-                                    1-  134     	extern	_ADJMDbits
-                                    1-  135     	extern	_PACONbits
-                                    1-  136     	extern	_AWUCONbits
-                                    1-  137     	extern	_ADCRbits
-                                    1-  138     	extern	_ADVREFHbits
-                                    1-  139     	extern	_ADRbits
-                                    1-  140     	extern	_ADMDbits
-                                    1-  141     	extern	_INTFbits
-                                    1-  142     	extern	_INTEbits
-                                    1-  143     	extern	_BPHCONbits
-                                    1-  144     	extern	_ABPLCONbits
-                                    1-  145     	extern	_BWUCONbits
-                                    1-  146     	extern	_PCONbits
-                                    1-  147     	extern	_PORTBbits
-                                    1-  148     	extern	_PORTAbits
-                                    1-  150     	extern PSAVE
-                                    1-  151     	extern SSAVE
-                                    1-  152     	extern WSAVE
-                                    1-  153     	extern STK12
-                                    1-  154     	extern STK11
-                                    1-  155     	extern STK10
-                                    1-  156     	extern STK09
-                                    1-  157     	extern STK08
-                                    1-  158     	extern STK07
-                                    1-  159     	extern STK06
-                                    1-  160     	extern STK05
-                                    1-  161     	extern STK04
-                                    1-  162     	extern STK03
-                                    1-  163     	extern STK02
-                                    1-  164     	extern STK01
-                                    1-  165     	extern STK00
-                                    1-  166     ;--------------------------------------------------------
-                                    1-  167     ; global declarations
-                                    1-  168     ;--------------------------------------------------------
-                                    1-  169     	extern	_sys_flag_3
-                                    1-  170     	extern	_sys_flag_2
-                                    1-  171     	extern	_sys_flag_1
-                                    1-  172     	extern	_sys_flag_0
-                                    1-  173     	extern	_INTE2
-                                    1-  174     	extern	_TM3RH
-                                    1-  175     	extern	_RFC
-                                    1-  176     	extern	_ANAEN
-                                    1-  177     	extern	_TMRH
-                                    1-  178     	extern	_INTEDG
-                                    1-  179     	extern	_ADJMD
-                                    1-  180     	extern	_PACON
-                                    1-  181     	extern	_AWUCON
-                                    1-  182     	extern	_ADCR
-                                    1-  183     	extern	_ADVREFH
-                                    1-  184     	extern	_ADR
-                                    1-  185     	extern	_ADMD
-                                    1-  186     	extern	_INTF
-                                    1-  187     	extern	_INTE
-                                    1-  188     	extern	_BPHCON
-                                    1-  189     	extern	_ABPLCON
-                                    1-  190     	extern	_BWUCON
-                                    1-  191     	extern	_PCON
-                                    1-  192     	extern	_PORTB
-                                    1-  193     	extern	_PORTA
-                                    1-  194     	extern	_sleepCnt
-                                    1-  195     	extern	_sleep_delay_keep_time
-                                    1-  196     	extern	_running_keep_time
-                                    1-  197     	extern	_sleep_param_init
-                                    1-  198     	extern	_sleep_handle
-                                    1-  200     ;--------------------------------------------------------
-                                    1-  201     ; global definitions
-                                    1-  202     ;--------------------------------------------------------
-                                    1-  203     .segment "uninit"
-     0000                           1-  204     _running_keep_time:
-                                    1-  205     	.res 2
-                                    1-  208     .segment "uninit"
-     0000                           1-  209     _sleep_delay_keep_time:
-                                    1-  210     	.res 1
-                                    1-  213     .segment "uninit"
-     0000                           1-  214     _sleepCnt:
-                                    1-  215     	.res 1
-                                    1-  218     ;--------------------------------------------------------
-                                    1-  219     ; absolute symbol definitions
-                                    1-  220     ;--------------------------------------------------------
+                                    1-   14     	extern	_led_dis_loop_func
+                                    1-   15     	extern	_led_mode_set
+                                    1-   16     	extern	_charge_check_by_IO
+                                    1-   17     	extern	_ledRun
+                                    1-   18     	extern	_Detect_OverCurrent_ByAD
+                                    1-   19     	extern	_BaseBatSetPWMValue
+                                    1-   20     	extern	_ADC_Convert_Pre
+                                    1-   21     	extern	_Get_Onetime_Bat_ADCValue
+                                    1-   22     	extern	_Ledbreathing
+                                    1-   23     	extern	_LedOff
+                                    1-   24     	extern	_SetLedColorNormallyOn
+                                    1-   25     	extern	_SetLedBreathingParameters2
+                                    1-   26     	extern	_SetLedBreathingParameters
+                                    1-   27     	extern	_SetLedFlashParameters
+                                    1-   28     	extern	_adc_get
+                                    1-   29     	extern	_F_wait_eoc
+                                    1-   30     	extern	_adc_init4
+                                    1-   31     	extern	_adc3_init
+                                    1-   32     	extern	_adc2_init
+                                    1-   33     	extern	_adc_init
+                                    1-   34     	extern	_Delay_N1ms_16bit
+                                    1-   35     	extern	_delay
+                                    1-   36     	extern	_led_handle
+                                    1-   37     	extern	_led_param_init
+                                    1-   38     	extern	_bat_lvd_check
+                                    1-   39     	extern	_battery_check
+                                    1-   40     	extern	_battery_param_init
+                                    1-   41     	extern	_SmokeFun
+                                    1-   42     	extern	_detect_param_init
+                                    1-   43     	extern	_msg_handle
+                                    1-   44     	extern	_MicScan
+                                    1-   45     	extern	_KeyScan
+                                    1-   46     	extern	_key_param_init
+                                    1-   47     	extern	_isr_param_init
+                                    1-   48     	extern	_common_param_init
+                                    1-   49     	extern	_gpio_init
+                                    1-   50     	extern	_sleep_init
+                                    1-   51     	extern	_system_init
+                                    1-   52     	extern	_clear_ram
+                                    1-   53     	extern	_multi_16b
+                                    1-   54     	extern	_T0MD
+                                    1-   55     	extern	_PCON1
+                                    1-   56     	extern	_CMPCR
+                                    1-   57     	extern	_BODCON
+                                    1-   58     	extern	_PS0CV
+                                    1-   59     	extern	_APHCON
+                                    1-   60     	extern	_IOSTB
+                                    1-   61     	extern	_IOSTA
+                                    1-   62     	extern	_PWM4DUTY
+                                    1-   63     	extern	_P4CR1
+                                    1-   64     	extern	_BZ3CR
+                                    1-   65     	extern	_PS3CV
+                                    1-   66     	extern	_PWM3DUTY
+                                    1-   67     	extern	_T3CR2
+                                    1-   68     	extern	_T3CR1
+                                    1-   69     	extern	_TMR3
+                                    1-   70     	extern	_OSCCR
+                                    1-   71     	extern	_BZ2CR
+                                    1-   72     	extern	_PS2CV
+                                    1-   73     	extern	_PWM2DUTY
+                                    1-   74     	extern	_T2CR2
+                                    1-   75     	extern	_T2CR1
+                                    1-   76     	extern	_TMR2
+                                    1-   77     	extern	_TBHD
+                                    1-   78     	extern	_TBHP
+                                    1-   79     	extern	_IRCR
+                                    1-   80     	extern	_BZ1CR
+                                    1-   81     	extern	_PS1CV
+                                    1-   82     	extern	_PWM1DUTY
+                                    1-   83     	extern	_T1CR2
+                                    1-   84     	extern	_T1CR1
+                                    1-   85     	extern	_TMR1
+                                    1-   86     	extern	_ADD
+                                    1-   87     	extern	_PCHBUF
+                                    1-   88     	extern	_STATUS
+                                    1-   89     	extern	_PCL
+                                    1-   90     	extern	_TMR0
+                                    1-   91     	extern	_disp_delay_time_cnt
+                                    1-   92     	extern	_usb_check_ad_time_cnt
+                                    1-   93     	extern	_now_ch
+                                    1-   94     	extern	_temptimecount
+                                    1-   95     	extern	_battery_low_cnt
+                                    1-   96     	extern	_usb_flag
+                                    1-   97     	extern	_HeatPlugInsert_flag
+                                    1-   98     	extern	_HeatPlugInsertTimeCount
+                                    1-   99     	extern	_HeatCount
+                                    1-  100     	extern	_SmokingKeepTime
+                                    1-  101     	extern	_HeatingKeepTime
+                                    1-  102     	extern	_KeyDowmTimeCount
+                                    1-  103     	extern	_VolTypeIndex
+                                    1-  104     	extern	_SmokeState
+                                    1-  105     	extern	_BatVolLevel
+                                    1-  106     	extern	_led_mode_flag
+                                    1-  107     	extern	_SaveHeaterIOStatus
+                                    1-  108     	extern	_MotorDutySet
+                                    1-  109     	extern	_NowMotorDuty
+                                    1-  110     	extern	_TargetMotorDuty
+                                    1-  111     	extern	_gAdcDataValue
+                                    1-  112     	extern	_OverCurrent_adc_value
+                                    1-  113     	extern	_OverCurrent_check_cnt
+                                    1-  114     	extern	_BuleLed_delay_keep_time
+                                    1-  115     	extern	_OverCurrentCount
+                                    1-  116     	extern	_OverCurrentDelayTime
+                                    1-  117     	extern	_led_delay_keep_time
+                                    1-  118     	extern	_led_flash_count
+                                    1-  119     	extern	_led_flash_flag
+                                    1-  120     	extern	_percent_nun
+                                    1-  121     	extern	_PwmCycleCount
+                                    1-  122     	extern	_Led_Breathe_count
+                                    1-  123     	extern	_LedShowKeepTime
+                                    1-  124     	extern	_LedShowStep
+                                    1-  125     	extern	_GroupColourIndex
+                                    1-  126     	extern	_ledRunStarStep
+                                    1-  127     	extern	_ledRunStep
+                                    1-  128     	extern	_nowLedMode
+                                    1-  129     	extern	_CodeSwitchIndex
+                                    1-  130     	extern	_msg
+                                    1-  131     	extern	_INTE2bits
+                                    1-  132     	extern	_TM3RHbits
+                                    1-  133     	extern	_RFCbits
+                                    1-  134     	extern	_ANAENbits
+                                    1-  135     	extern	_TMRHbits
+                                    1-  136     	extern	_INTEDGbits
+                                    1-  137     	extern	_ADJMDbits
+                                    1-  138     	extern	_PACONbits
+                                    1-  139     	extern	_AWUCONbits
+                                    1-  140     	extern	_ADCRbits
+                                    1-  141     	extern	_ADVREFHbits
+                                    1-  142     	extern	_ADRbits
+                                    1-  143     	extern	_ADMDbits
+                                    1-  144     	extern	_INTFbits
+                                    1-  145     	extern	_INTEbits
+                                    1-  146     	extern	_BPHCONbits
+                                    1-  147     	extern	_ABPLCONbits
+                                    1-  148     	extern	_BWUCONbits
+                                    1-  149     	extern	_PCONbits
+                                    1-  150     	extern	_PORTBbits
+                                    1-  151     	extern	_PORTAbits
+                                    1-  153     	extern PSAVE
+                                    1-  154     	extern SSAVE
+                                    1-  155     	extern WSAVE
+                                    1-  156     	extern STK12
+                                    1-  157     	extern STK11
+                                    1-  158     	extern STK10
+                                    1-  159     	extern STK09
+                                    1-  160     	extern STK08
+                                    1-  161     	extern STK07
+                                    1-  162     	extern STK06
+                                    1-  163     	extern STK05
+                                    1-  164     	extern STK04
+                                    1-  165     	extern STK03
+                                    1-  166     	extern STK02
+                                    1-  167     	extern STK01
+                                    1-  168     	extern STK00
+                                    1-  169     ;--------------------------------------------------------
+                                    1-  170     ; global declarations
+                                    1-  171     ;--------------------------------------------------------
+                                    1-  172     	extern	_sys_flag_3
+                                    1-  173     	extern	_sys_flag_2
+                                    1-  174     	extern	_sys_flag_1
+                                    1-  175     	extern	_sys_flag_0
+                                    1-  176     	extern	_INTE2
+                                    1-  177     	extern	_TM3RH
+                                    1-  178     	extern	_RFC
+                                    1-  179     	extern	_ANAEN
+                                    1-  180     	extern	_TMRH
+                                    1-  181     	extern	_INTEDG
+                                    1-  182     	extern	_ADJMD
+                                    1-  183     	extern	_PACON
+                                    1-  184     	extern	_AWUCON
+                                    1-  185     	extern	_ADCR
+                                    1-  186     	extern	_ADVREFH
+                                    1-  187     	extern	_ADR
+                                    1-  188     	extern	_ADMD
+                                    1-  189     	extern	_INTF
+                                    1-  190     	extern	_INTE
+                                    1-  191     	extern	_BPHCON
+                                    1-  192     	extern	_ABPLCON
+                                    1-  193     	extern	_BWUCON
+                                    1-  194     	extern	_PCON
+                                    1-  195     	extern	_PORTB
+                                    1-  196     	extern	_PORTA
+                                    1-  197     	extern	_sleepCnt
+                                    1-  198     	extern	_sleep_delay_keep_time
+                                    1-  199     	extern	_running_keep_time
+                                    1-  200     	extern	_sleep_param_init
+                                    1-  201     	extern	_sleep_handle
+                                    1-  203     ;--------------------------------------------------------
+                                    1-  204     ; global definitions
+                                    1-  205     ;--------------------------------------------------------
+                                    1-  206     .segment "uninit"
+     0000                           1-  207     _running_keep_time:
+                                    1-  208     	.res 2
+                                    1-  211     .segment "uninit"
+     0000                           1-  212     _sleep_delay_keep_time:
+                                    1-  213     	.res 1
+                                    1-  216     .segment "uninit"
+     0000                           1-  217     _sleepCnt:
+                                    1-  218     	.res 1
                                     1-  221     ;--------------------------------------------------------
-                                    1-  222     ; compiler-defined variables
+                                    1-  222     ; absolute symbol definitions
                                     1-  223     ;--------------------------------------------------------
                                     1-  224     ;--------------------------------------------------------
-                                    1-  225     ; initialized data
+                                    1-  225     ; compiler-defined variables
                                     1-  226     ;--------------------------------------------------------
                                     1-  227     ;--------------------------------------------------------
-                                    1-  228     ; initialized absolute data
+                                    1-  228     ; initialized data
                                     1-  229     ;--------------------------------------------------------
                                     1-  230     ;--------------------------------------------------------
-                                    1-  231     ; overlayable items in internal ram 
+                                    1-  231     ; initialized absolute data
                                     1-  232     ;--------------------------------------------------------
-                                    1-  233     ;	udata_ovr
-                                    1-  234     ;--------------------------------------------------------
-                                    1-  235     ; code
-                                    1-  236     ;--------------------------------------------------------
-                                    1-  237     ; code_sleep	code
-                                    1-  238     ;***
-                                    1-  239     ;  pBlock Stats: dbName = C
-                                    1-  240     ;***
-                                    1-  241     ;has an exit
-                                    1-  242     ;functions called:
-                                    1-  243     ;   _sleep_init
-                                    1-  244     ;   _gpio_init
-                                    1-  245     ;   _system_init
-                                    1-  246     ;   _isr_param_init
-                                    1-  247     ;   _key_param_init
-                                    1-  248     ;   _detect_param_init
-                                    1-  249     ;   _led_param_init
-                                    1-  250     ;   _sleep_param_init
-                                    1-  251     ;   _sleep_init
-                                    1-  252     ;   _gpio_init
-                                    1-  253     ;   _system_init
-                                    1-  254     ;   _isr_param_init
-                                    1-  255     ;   _key_param_init
-                                    1-  256     ;   _detect_param_init
-                                    1-  257     ;   _led_param_init
-                                    1-  258     ;   _sleep_param_init
-                                    1-  259     ;; Starting pCode block
-                                    1-  260     .segment "code"; module=sleep, function=_sleep_handle
-     0000                           1-  262     _sleep_handle:
-                                    1-  263     ; 2 exit points
-                                    1-  264     	.line	48, "sleep.c"; 	if(!sleepWakedUpByWDTFlag)
-                                    1-  265     	BANKSEL	_sys_flag_2
+                                    1-  233     ;--------------------------------------------------------
+                                    1-  234     ; overlayable items in internal ram 
+                                    1-  235     ;--------------------------------------------------------
+                                    1-  236     ;	udata_ovr
+                                    1-  237     ;--------------------------------------------------------
+                                    1-  238     ; code
+                                    1-  239     ;--------------------------------------------------------
+                                    1-  240     ; code_sleep	code
+                                    1-  241     ;***
+                                    1-  242     ;  pBlock Stats: dbName = C
+                                    1-  243     ;***
+                                    1-  244     ;has an exit
+                                    1-  245     ;functions called:
+                                    1-  246     ;   _sleep_init
+                                    1-  247     ;   _gpio_init
+                                    1-  248     ;   _system_init
+                                    1-  249     ;   _isr_param_init
+                                    1-  250     ;   _key_param_init
+                                    1-  251     ;   _detect_param_init
+                                    1-  252     ;   _led_param_init
+                                    1-  253     ;   _sleep_param_init
+                                    1-  254     ;   _sleep_init
+                                    1-  255     ;   _gpio_init
+                                    1-  256     ;   _system_init
+                                    1-  257     ;   _isr_param_init
+                                    1-  258     ;   _key_param_init
+                                    1-  259     ;   _detect_param_init
+                                    1-  260     ;   _led_param_init
+                                    1-  261     ;   _sleep_param_init
+                                    1-  262     ;; Starting pCode block
+                                    1-  263     .segment "code"; module=sleep, function=_sleep_handle
+     0000                           1-  265     _sleep_handle:
+                                    1-  266     ; 2 exit points
+                                    1-  267     	.line	48, "sleep.c"; 	if(!sleepWakedUpByWDTFlag)
+                                    1-  268     	BANKSEL	_sys_flag_2
      0000 rrrr                      3-  109 m1      .banksel ram_address
-     0001 0Frr                      1-  266     	BTRSC	_sys_flag_2,6
-                                    1-  267     	MGOTO	_02027_DS_
+     0001 0Frr                      1-  269     	BTRSC	_sys_flag_2,6
+                                    1-  270     	MGOTO	_02027_DS_
      0002 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  268     	.line	52, "sleep.c"; 	if((IN_MIC != 0)||keyPressStatus||(nowLedMode != 0)||led_flash_flag||led_breath_flash_flag||C_IO_USB_DEC||f_charging||b_heater_exist_check||disp_delay_time_cnt)
-     0003 0Crr                      1-  269     	BTRSC	_PORTBbits,0
-                                    1-  270     	MGOTO	_02009_DS_
-     0004 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  271     	BANKSEL	_sys_flag_1
-     0005 rrrr                      3-  109 m1      .banksel ram_address
-     0006 0Err                      1-  272     	BTRSC	_sys_flag_1,4
+                                    1-  271     	.line	52, "sleep.c"; 	if((IN_MIC != 0)||keyPressStatus||(nowLedMode != 0)||led_flash_flag||led_breath_flash_flag||C_IO_USB_DEC||f_charging||b_heater_exist_check||disp_delay_time_cnt)
+     0003 0Crr                      1-  272     	BTRSC	_PORTBbits,0
                                     1-  273     	MGOTO	_02009_DS_
-     0007 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  274     	BANKSEL	_nowLedMode
-     0008 rrrr                      3-  109 m1      .banksel ram_address
-     0009 01rr                      1-  275     	MOVR	_nowLedMode,W
-     000A 0903                      1-  276     	BTRSS	STATUS,2
-                                    1-  277     	MGOTO	_02009_DS_
-     000B 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  278     	BANKSEL	_led_flash_flag
-     000C rrrr                      3-  109 m1      .banksel ram_address
-     000D 01rr                      1-  279     	MOVR	_led_flash_flag,W
-     000E 0903                      1-  280     	BTRSS	STATUS,2
-                                    1-  281     	MGOTO	_02009_DS_
-     000F 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  282     	BANKSEL	_sys_flag_2
-     0010 rrrr                      3-  109 m1      .banksel ram_address
-     0011 0Drr                      1-  283     	BTRSC	_sys_flag_2,2
-                                    1-  284     	MGOTO	_02009_DS_
-     0012 3rrr                      3-   62 m1      LGOTO rom_address
-     0013 0Err                      1-  285     	BTRSC	_PORTAbits,4
-                                    1-  286     	MGOTO	_02009_DS_
-     0014 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  287     	BANKSEL	_sys_flag_0
-     0015 rrrr                      3-  109 m1      .banksel ram_address
-     0016 0Frr                      1-  288     	BTRSC	_sys_flag_0,6
-                                    1-  289     	MGOTO	_02009_DS_
-     0017 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  290     	BANKSEL	_sys_flag_3
-     0018 rrrr                      3-  109 m1      .banksel ram_address
-     0019 0Crr                      1-  291     	BTRSC	_sys_flag_3,0
-                                    1-  292     	MGOTO	_02009_DS_
-     001A 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  293     	BANKSEL	_disp_delay_time_cnt
-     001B rrrr                      3-  109 m1      .banksel ram_address
-     001C 01rr                      1-  294     	MOVR	_disp_delay_time_cnt,W
-     001D 0D03                      1-  295     	BTRSC	STATUS,2
-                                    1-  296     	MGOTO	_00001_DS_
-     001E 3rrr                      3-   62 m1      LGOTO rom_address
-     001F                           1-  297     _02009_DS_:
-                                    1-  298     	.line	55, "sleep.c"; 	sleepCnt = 0;
-                                    1-  299     	BANKSEL	_sleepCnt
-     001F rrrr                      3-  109 m1      .banksel ram_address
-     0020 02rr                      1-  300     	CLRR	_sleepCnt
-     0021                           1-  301     _00001_DS_:
-                                    1-  302     	.line	57, "sleep.c"; 	if(f_sleep_check)//10ms
-                                    1-  303     	BANKSEL	_sys_flag_1
-     0021 rrrr                      3-  109 m1      .banksel ram_address
-     0022 0Brr                      1-  304     	BTRSS	_sys_flag_1,6
-                                    1-  305     	MGOTO	_02023_DS_
-     0023 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  306     	.line	59, "sleep.c"; 	f_sleep_check = 0;
-     0024 1Frr                      1-  307     	BCR	_sys_flag_1,6
-                                    1-  308     ;;unsigned compare: left < lit(0x64=100), size=1
-                                    1-  309     	.line	60, "sleep.c"; 	if(sleepCnt < 100)
-     0025 2164                      1-  310     	MOVIA	0x64
-                                    1-  311     	BANKSEL	_sleepCnt
-     0026 rrrr                      3-  109 m1      .banksel ram_address
-     0027 04rr                      1-  312     	SUBAR	_sleepCnt,W
-     0028 0C03                      1-  313     	BTRSC	STATUS,0
-                                    1-  314     	MGOTO	_02020_DS_
-     0029 3rrr                      3-   62 m1      LGOTO rom_address
-                                    1-  315     	.line	62, "sleep.c"; 	sleepCnt++;
-     002A 05rr                      1-  316     	INCR	_sleepCnt,F
-                                    1-  317     	MGOTO	_02023_DS_
-     002B 3rrr                      3-   62 m1      LGOTO rom_address
-     002C                           1-  318     _02020_DS_:
-                                    1-  319     	.line	66, "sleep.c"; 	sleepCnt = 0;
-                                    1-  320     	BANKSEL	_sleepCnt
-     002C rrrr                      3-  109 m1      .banksel ram_address
-     002D 02rr                      1-  321     	CLRR	_sleepCnt
-                                    1-  322     	.line	67, "sleep.c"; 	isSleep = 1;
-                                    1-  323     	BANKSEL	_sys_flag_1
-     002E rrrr                      3-  109 m1      .banksel ram_address
-     002F 19rr                      1-  324     	BSR	_sys_flag_1,3
-     0030                           1-  325     _02023_DS_:
-                                    1-  326     	.line	70, "sleep.c"; 	if(isSleep == 0)
-                                    1-  327     	BANKSEL	_sys_flag_1
-     0030 rrrr                      3-  109 m1      .banksel ram_address
-     0031 09rr                      1-  328     	BTRSS	_sys_flag_1,3
-                                    1-  329     	.line	71, "sleep.c"; 	return;
-                                    1-  330     	MGOTO	_02028_DS_
-     0032 3rrr                      3-   62 m1      LGOTO rom_address
-     0033                           1-  331     _02027_DS_:
-                                    1-  332     	.line	73, "sleep.c"; 	isSleep = 0;
-                                    1-  333     	BANKSEL	_sys_flag_1
-     0033 rrrr                      3-  109 m1      .banksel ram_address
-     0034 1Drr                      1-  334     	BCR	_sys_flag_1,3
-                                    1-  335     	.line	75, "sleep.c"; 	sleep_init();
-                                    1-  336     	MCALL	_sleep_init
-     0035 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  337     	.line	80, "sleep.c"; 	sleepWakedUpByWDTFlag = 0;
-                                    1-  338     	BANKSEL	_sys_flag_2
-     0036 rrrr                      3-  109 m1      .banksel ram_address
-     0037 1Frr                      1-  339     	BCR	_sys_flag_2,6
-                                    1-  340     	.line	82, "sleep.c"; 	UPDATE_REG(PORTA);		//回读PA口状态
-     0038 01rr                      1-  341     	MOVR	_PORTA,F
-                                    1-  342     	.line	83, "sleep.c"; 	UPDATE_REG(PORTB);		//回读PB口状态	
-     0039 01rr                      1-  343     	MOVR	_PORTB,F
-                                    1-  344     	.line	84, "sleep.c"; 	NOP();
-     003A 0000                      1-  345     	nop
-                                    1-  346     	.line	85, "sleep.c"; 	NOP();
-     003B 0000                      1-  347     	nop
-                                    1-  348     	.line	86, "sleep.c"; 	NOP();
-     003C 0000                      1-  349     	nop
-                                    1-  350     	.line	87, "sleep.c"; 	NOP();
-     003D 0000                      1-  351     	nop
-                                    1-  352     	.line	88, "sleep.c"; 	NOP();
-     003E 0000                      1-  353     	nop
-                                    1-  354     	.line	89, "sleep.c"; 	SLEEP();
-     003F 0001                      1-  355     	sleep
-                                    1-  356     	.line	90, "sleep.c"; 	NOP();
-     0040 0000                      1-  357     	nop
-                                    1-  358     	.line	91, "sleep.c"; 	NOP();
-     0041 0000                      1-  359     	nop
-                                    1-  360     	.line	92, "sleep.c"; 	NOP();
-     0042 0000                      1-  361     	nop
-                                    1-  362     	.line	93, "sleep.c"; 	gpio_init();
-                                    1-  363     	MCALL	_gpio_init
-     0043 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  364     	.line	131, "sleep.c"; 	system_init();	
-                                    1-  365     	MCALL	_system_init
-     0044 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  366     	.line	133, "sleep.c"; 	isr_param_init();
-                                    1-  367     	MCALL	_isr_param_init
-     0045 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  368     	.line	134, "sleep.c"; 	key_param_init();
-                                    1-  369     	MCALL	_key_param_init
-     0046 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  370     	.line	135, "sleep.c"; 	detect_param_init();
-                                    1-  371     	MCALL	_detect_param_init
-     0047 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  372     	.line	139, "sleep.c"; 	led_param_init();
-                                    1-  373     	MCALL	_led_param_init
-     0048 2rrr                      3-   65 m1      LCALL rom_address
-                                    1-  374     	.line	140, "sleep.c"; 	sleep_param_init();
-                                    1-  375     	MCALL	_sleep_param_init
-     0049 2rrr                      3-   65 m1      LCALL rom_address
-     004A                           1-  376     _02028_DS_:
-                                    1-  377     	.line	143, "sleep.c"; 	}
-                                    1-  378     	RETURN	
-     004A 0010                      3-   39 m1      ret
-                                    1-  379     ; exit point of _sleep_handle
-                                    1-  381     ;***
-                                    1-  382     ;  pBlock Stats: dbName = C
-                                    1-  383     ;***
-                                    1-  384     ;has an exit
-                                    1-  385     ;; Starting pCode block
-                                    1-  386     .segment "code"; module=sleep, function=_sleep_param_init
-     0000                           1-  388     _sleep_param_init:
-                                    1-  389     ; 2 exit points
-                                    1-  390     	.line	33, "sleep.c"; 	running_keep_time = RUNNING_KEEP_TIME;
-     0000 2140                      1-  391     	MOVIA	0x40
-                                    1-  392     	BANKSEL	_running_keep_time
-     0001 rrrr                      3-  109 m1      .banksel ram_address
-     0002 00rr                      1-  393     	MOVAR	_running_keep_time
-     0003 2138                      1-  394     	MOVIA	0x38
-     0004 00rr                      1-  395     	MOVAR	(_running_keep_time + 1)
-                                    1-  396     	.line	34, "sleep.c"; 	isSleep = 0;
-                                    1-  397     	BANKSEL	_sys_flag_1
+     0004 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  274     	BANKSEL	_sys_flag_1
      0005 rrrr                      3-  109 m1      .banksel ram_address
-     0006 1Drr                      1-  398     	BCR	_sys_flag_1,3
-                                    1-  399     	.line	35, "sleep.c"; 	sleep_delay_keep_time = 0;
-                                    1-  400     	BANKSEL	_sleep_delay_keep_time
+     0006 0Err                      1-  275     	BTRSC	_sys_flag_1,4
+                                    1-  276     	MGOTO	_02009_DS_
+     0007 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  277     	BANKSEL	_nowLedMode
+     0008 rrrr                      3-  109 m1      .banksel ram_address
+     0009 01rr                      1-  278     	MOVR	_nowLedMode,W
+     000A 0903                      1-  279     	BTRSS	STATUS,2
+                                    1-  280     	MGOTO	_02009_DS_
+     000B 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  281     	BANKSEL	_led_flash_flag
+     000C rrrr                      3-  109 m1      .banksel ram_address
+     000D 01rr                      1-  282     	MOVR	_led_flash_flag,W
+     000E 0903                      1-  283     	BTRSS	STATUS,2
+                                    1-  284     	MGOTO	_02009_DS_
+     000F 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  285     	BANKSEL	_sys_flag_2
+     0010 rrrr                      3-  109 m1      .banksel ram_address
+     0011 0Drr                      1-  286     	BTRSC	_sys_flag_2,2
+                                    1-  287     	MGOTO	_02009_DS_
+     0012 3rrr                      3-   62 m1      LGOTO rom_address
+     0013 0Drr                      1-  288     	BTRSC	_PORTAbits,2
+                                    1-  289     	MGOTO	_02009_DS_
+     0014 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  290     	BANKSEL	_sys_flag_0
+     0015 rrrr                      3-  109 m1      .banksel ram_address
+     0016 0Frr                      1-  291     	BTRSC	_sys_flag_0,6
+                                    1-  292     	MGOTO	_02009_DS_
+     0017 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  293     	BANKSEL	_sys_flag_3
+     0018 rrrr                      3-  109 m1      .banksel ram_address
+     0019 0Crr                      1-  294     	BTRSC	_sys_flag_3,0
+                                    1-  295     	MGOTO	_02009_DS_
+     001A 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  296     	BANKSEL	_disp_delay_time_cnt
+     001B rrrr                      3-  109 m1      .banksel ram_address
+     001C 01rr                      1-  297     	MOVR	_disp_delay_time_cnt,W
+     001D 0D03                      1-  298     	BTRSC	STATUS,2
+                                    1-  299     	MGOTO	_00001_DS_
+     001E 3rrr                      3-   62 m1      LGOTO rom_address
+     001F                           1-  300     _02009_DS_:
+                                    1-  301     	.line	55, "sleep.c"; 	sleepCnt = 0;
+                                    1-  302     	BANKSEL	_sleepCnt
+     001F rrrr                      3-  109 m1      .banksel ram_address
+     0020 02rr                      1-  303     	CLRR	_sleepCnt
+     0021                           1-  304     _00001_DS_:
+                                    1-  305     	.line	57, "sleep.c"; 	if(f_sleep_check)//10ms
+                                    1-  306     	BANKSEL	_sys_flag_1
+     0021 rrrr                      3-  109 m1      .banksel ram_address
+     0022 0Brr                      1-  307     	BTRSS	_sys_flag_1,6
+                                    1-  308     	MGOTO	_02023_DS_
+     0023 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  309     	.line	59, "sleep.c"; 	f_sleep_check = 0;
+     0024 1Frr                      1-  310     	BCR	_sys_flag_1,6
+                                    1-  311     ;;unsigned compare: left < lit(0x64=100), size=1
+                                    1-  312     	.line	60, "sleep.c"; 	if(sleepCnt < 100)
+     0025 2164                      1-  313     	MOVIA	0x64
+                                    1-  314     	BANKSEL	_sleepCnt
+     0026 rrrr                      3-  109 m1      .banksel ram_address
+     0027 04rr                      1-  315     	SUBAR	_sleepCnt,W
+     0028 0C03                      1-  316     	BTRSC	STATUS,0
+                                    1-  317     	MGOTO	_02020_DS_
+     0029 3rrr                      3-   62 m1      LGOTO rom_address
+                                    1-  318     	.line	62, "sleep.c"; 	sleepCnt++;
+     002A 05rr                      1-  319     	INCR	_sleepCnt,F
+                                    1-  320     	MGOTO	_02023_DS_
+     002B 3rrr                      3-   62 m1      LGOTO rom_address
+     002C                           1-  321     _02020_DS_:
+                                    1-  322     	.line	66, "sleep.c"; 	sleepCnt = 0;
+                                    1-  323     	BANKSEL	_sleepCnt
+     002C rrrr                      3-  109 m1      .banksel ram_address
+     002D 02rr                      1-  324     	CLRR	_sleepCnt
+                                    1-  325     	.line	67, "sleep.c"; 	isSleep = 1;
+                                    1-  326     	BANKSEL	_sys_flag_1
+     002E rrrr                      3-  109 m1      .banksel ram_address
+     002F 19rr                      1-  327     	BSR	_sys_flag_1,3
+     0030                           1-  328     _02023_DS_:
+                                    1-  329     	.line	70, "sleep.c"; 	if(isSleep == 0)
+                                    1-  330     	BANKSEL	_sys_flag_1
+     0030 rrrr                      3-  109 m1      .banksel ram_address
+     0031 09rr                      1-  331     	BTRSS	_sys_flag_1,3
+                                    1-  332     	.line	71, "sleep.c"; 	return;
+                                    1-  333     	MGOTO	_02028_DS_
+     0032 3rrr                      3-   62 m1      LGOTO rom_address
+     0033                           1-  334     _02027_DS_:
+                                    1-  335     	.line	73, "sleep.c"; 	isSleep = 0;
+                                    1-  336     	BANKSEL	_sys_flag_1
+     0033 rrrr                      3-  109 m1      .banksel ram_address
+     0034 1Drr                      1-  337     	BCR	_sys_flag_1,3
+                                    1-  338     	.line	75, "sleep.c"; 	sleep_init();
+                                    1-  339     	MCALL	_sleep_init
+     0035 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  340     	.line	80, "sleep.c"; 	sleepWakedUpByWDTFlag = 0;
+                                    1-  341     	BANKSEL	_sys_flag_2
+     0036 rrrr                      3-  109 m1      .banksel ram_address
+     0037 1Frr                      1-  342     	BCR	_sys_flag_2,6
+                                    1-  343     	.line	82, "sleep.c"; 	UPDATE_REG(PORTA);		//回读PA口状态
+     0038 01rr                      1-  344     	MOVR	_PORTA,F
+                                    1-  345     	.line	83, "sleep.c"; 	UPDATE_REG(PORTB);		//回读PB口状态	
+     0039 01rr                      1-  346     	MOVR	_PORTB,F
+                                    1-  347     	.line	84, "sleep.c"; 	NOP();
+     003A 0000                      1-  348     	nop
+                                    1-  349     	.line	85, "sleep.c"; 	NOP();
+     003B 0000                      1-  350     	nop
+                                    1-  351     	.line	86, "sleep.c"; 	NOP();
+     003C 0000                      1-  352     	nop
+                                    1-  353     	.line	87, "sleep.c"; 	NOP();
+     003D 0000                      1-  354     	nop
+                                    1-  355     	.line	88, "sleep.c"; 	NOP();
+     003E 0000                      1-  356     	nop
+                                    1-  357     	.line	89, "sleep.c"; 	SLEEP();
+     003F 0001                      1-  358     	sleep
+                                    1-  359     	.line	90, "sleep.c"; 	NOP();
+     0040 0000                      1-  360     	nop
+                                    1-  361     	.line	91, "sleep.c"; 	NOP();
+     0041 0000                      1-  362     	nop
+                                    1-  363     	.line	92, "sleep.c"; 	NOP();
+     0042 0000                      1-  364     	nop
+                                    1-  365     	.line	93, "sleep.c"; 	gpio_init();
+                                    1-  366     	MCALL	_gpio_init
+     0043 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  367     	.line	131, "sleep.c"; 	system_init();	
+                                    1-  368     	MCALL	_system_init
+     0044 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  369     	.line	133, "sleep.c"; 	isr_param_init();
+                                    1-  370     	MCALL	_isr_param_init
+     0045 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  371     	.line	134, "sleep.c"; 	key_param_init();
+                                    1-  372     	MCALL	_key_param_init
+     0046 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  373     	.line	135, "sleep.c"; 	detect_param_init();
+                                    1-  374     	MCALL	_detect_param_init
+     0047 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  375     	.line	139, "sleep.c"; 	led_param_init();
+                                    1-  376     	MCALL	_led_param_init
+     0048 2rrr                      3-   65 m1      LCALL rom_address
+                                    1-  377     	.line	140, "sleep.c"; 	sleep_param_init();
+                                    1-  378     	MCALL	_sleep_param_init
+     0049 2rrr                      3-   65 m1      LCALL rom_address
+     004A                           1-  379     _02028_DS_:
+                                    1-  380     	.line	143, "sleep.c"; 	}
+                                    1-  381     	RETURN	
+     004A 0010                      3-   39 m1      ret
+                                    1-  382     ; exit point of _sleep_handle
+                                    1-  384     ;***
+                                    1-  385     ;  pBlock Stats: dbName = C
+                                    1-  386     ;***
+                                    1-  387     ;has an exit
+                                    1-  388     ;; Starting pCode block
+                                    1-  389     .segment "code"; module=sleep, function=_sleep_param_init
+     0000                           1-  391     _sleep_param_init:
+                                    1-  392     ; 2 exit points
+                                    1-  393     	.line	33, "sleep.c"; 	running_keep_time = RUNNING_KEEP_TIME;
+     0000 2140                      1-  394     	MOVIA	0x40
+                                    1-  395     	BANKSEL	_running_keep_time
+     0001 rrrr                      3-  109 m1      .banksel ram_address
+     0002 00rr                      1-  396     	MOVAR	_running_keep_time
+     0003 2138                      1-  397     	MOVIA	0x38
+     0004 00rr                      1-  398     	MOVAR	(_running_keep_time + 1)
+                                    1-  399     	.line	34, "sleep.c"; 	isSleep = 0;
+                                    1-  400     	BANKSEL	_sys_flag_1
+     0005 rrrr                      3-  109 m1      .banksel ram_address
+     0006 1Drr                      1-  401     	BCR	_sys_flag_1,3
+                                    1-  402     	.line	35, "sleep.c"; 	sleep_delay_keep_time = 0;
+                                    1-  403     	BANKSEL	_sleep_delay_keep_time
      0007 rrrr                      3-  109 m1      .banksel ram_address
-     0008 02rr                      1-  401     	CLRR	_sleep_delay_keep_time
-                                    1-  402     	.line	36, "sleep.c"; 	sleepCnt = 0;
-                                    1-  403     	BANKSEL	_sleepCnt
+     0008 02rr                      1-  404     	CLRR	_sleep_delay_keep_time
+                                    1-  405     	.line	36, "sleep.c"; 	sleepCnt = 0;
+                                    1-  406     	BANKSEL	_sleepCnt
      0009 rrrr                      3-  109 m1      .banksel ram_address
-     000A 02rr                      1-  404     	CLRR	_sleepCnt
-                                    1-  405     	.line	37, "sleep.c"; 	}
-                                    1-  406     	RETURN	
+     000A 02rr                      1-  407     	CLRR	_sleepCnt
+                                    1-  408     	.line	37, "sleep.c"; 	}
+                                    1-  409     	RETURN	
      000B 0010                      3-   39 m1      ret
-                                    1-  407     ; exit point of _sleep_param_init
-                                    1-  410     ;	code size estimation:
-                                    1-  411     ;	   56+   20 =    76 instructions (  192 byte)
-                                    1-  413     	end
+                                    1-  410     ; exit point of _sleep_param_init
+                                    1-  413     ;	code size estimation:
+                                    1-  414     ;	   56+   20 =    76 instructions (  192 byte)
+                                    1-  416     	end
 
 SYMBOL TABLE            TYPE     VALUE
 __pin_count__           Constant 0000000E
